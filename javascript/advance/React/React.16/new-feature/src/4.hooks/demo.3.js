@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-
+/**
+ * useEffect 相当于是监听useState 的值的改变后要处理的事件
+ */
 function WindowWidth() {
     const [width, setWidth] = useState(window.innerWidth)
 
