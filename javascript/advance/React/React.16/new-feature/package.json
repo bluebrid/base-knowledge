@@ -1,0 +1,31 @@
+{
+  "name": "new-feature",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "node-sass": "^4.11.0",
+    "react": "next",
+    "react-dom": "next",
+    "react-scripts": "2.1.1",
+    "moment": "^2.22.2",
+    "victory": "^30.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^3.0.3"
+  }
+}
