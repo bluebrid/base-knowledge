@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /javascript/advance/React/React.16/new-feature/node_modules
-/javascript/advance/Vue/lib/vue/node_modules
+/javascript/advance/Vue/lib/vuenode_modules
 /.pnp
 .pnp.js
 
