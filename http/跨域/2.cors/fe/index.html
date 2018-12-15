@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="CORS" id="cors" />
+    <div id="result"></div>
+    <script>
+        let API = 'http://localhost:9999/'
+        function ajax(opts = {}) {
+            const TYPES = {
+                JSON: 'json',
+                FORMDATA: 'formadata',
+                TEXT: 'text',
+                WWW: 'www'
+            }
+            let xhr = new XMLHttpRequest()
+            xhr.open(opts.method || 'GET', opts.url)
+            opts.type = opts.type || TYPES.JSON
+            let data
+            switch (opts.type) {
+                case TYPES.FORMDATA:
+                    data = new FormData()
+                    Object.keys(opts.data || {}).forEach(key => {
+                        data.append(key, opts.data[key])
+                    })
+                    data.append('key')
+                    break;
+                case TYPES.JSON:
+                    xhr.setRequestHeader('Content-Type', 'applicaton/json')
+                    data = JSON.stringify(opts.data)
+                    break;
+                case TYPES.TEXT:
+                    data = Object.keys(opts.data || {}).reduce((init, key, i) => {
+                        return (init + (i > 0 ? '&' : '')) + `${key}=${opts.data[key]}`
+                    }, '')
+                    break;
+                case TYPES.WWW:
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    data = Object.keys(opts.data || {}).reduce((init, key, i) => {
+                        return (init + (i > 0 ? '&' : '')) + `${key}=${opts.data[key]}`
+                    }, '')
+                    break;
+            }
+            Object.keys(opts.heads || {}).forEach(key => {
+                xhr.setRequestHeader(key, opts.heads[key])
+            })
+            xhr.withCredentials = opts.withCredentials || false
+            xhr.send(data)
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    opts.success && opts.success(xhr.responseText)
+                }
+            }
+            xhr.oneror = (e) => {
+                opts.fail && opts.fail(e)
+            }
+        }
+        let $btn = document.getElementById('cors')
+        let $result = document.getElementById('result')
+        $btn.addEventListener('click', () => {
+            ajax({
+                url: API,
+                method: 'POST',
+                data: {
+                    name: 'ivan',
+                    age: 18
+                },
+                heads: {
+                    token: 'corsToken',
+                    sesssionId: 'sessionid00001'
+                },
+                type: 'json',
+                success: (data) => {
+                    $result.innerText = data
+                },
+                fail: (e) => {
+                    console.log(e)
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

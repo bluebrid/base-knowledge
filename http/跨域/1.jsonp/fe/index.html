@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="JSONP" id="jsonp" />
+    <div id="result"></div>
+    <script>
+        class JSONP {
+            constructor(url, cb) {
+                this.url = url
+                this.cbName = 'jsonp_' + Date.now()
+                this.cb = cb
+                this.init();
+            }
+            init() {
+                if (this.url.indexOf('?') > 0) {
+                    this.url = this.url + '&callback=' + this.cbName
+                } else {
+                    this.url = this.url + '?callback=' + this.cbName
+                }
+                this.createScript()
+                this.createCallback()
+            }
+            createScript() {
+                let script = document.createElement('script')
+                script.src = this.url
+                document.body.appendChild(script)
+                script.addEventListener('load', () => {
+                    script.remove();
+                    delete window[this.cbName]
+                })
+            }
+            createCallback() {
+                window[this.cbName] = this.cb
+            }
+        }
+        document.getElementById('jsonp').addEventListener('click', () => {
+            let resut = document.getElementById('result')
+            let API = 'http://localhost:9999/'
+            new JSONP(API, (data) => {
+                resut.innerText = JSON.stringify(data)
+            })
+        })
+    </script>
+</body>
+
+</html>
