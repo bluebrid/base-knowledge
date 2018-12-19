@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #registerForm {
+            width: 550px;
+            border: 1px solid gray;
+            padding: 20px;
+        }
+
+        .validata-fail {
+            position: relative;
+        }
+
+        .validata-fail input {
+            border: 1px solid red;
+        }
+
+        .validata-fail:after {
+            content: attr(data-errormsg);
+            display: inline-block;
+            height: 20px;
+            width: 200px;
+            color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="#" method="post" id='registerForm'>
+        <div>
+            <label for="userName"> User Name</label>
+            <input type="text" name="userName">
+        </div>
+        <div>
+            <label for="password"> Pass Word</label>
+            <input type="text" name="password">
+        </div>
+        <div>
+            <label for="phoneNumber"> Phone Number</label>
+            <input type="text" name="phoneNumber">
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+    <script src="./demo.1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+.*.haste_cache.*
+node_modules
+http/缓存/node_modules
+npm-debug.log
+yarn-error.log
+.DS_Store
+*~
+*.swp
+.idea
+TODO
+/pages/out
+/pages/generated
+/gh-pages
+/npm
+/dist
