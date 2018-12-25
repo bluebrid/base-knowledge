@@ -216,14 +216,11 @@ proto.handle = function handle(req, res, out) {
     var route;
 
     while (match !== true && idx < stack.length) {
-      console.log('=======================> 遍历所有的Layer')
       layer = stack[idx++];
       match = matchLayer(layer, path);
-      // 如果match 上， 则跳出循环
       route = layer.route;
 
       if (typeof match !== 'boolean') {
-        // hold on to layerError
         layerError = layerError || match;
       }
 
@@ -232,12 +229,10 @@ proto.handle = function handle(req, res, out) {
       }
 
       if (!route) {
-        // process non-route handlers normally
         continue;
       }
 
       if (layerError) {
-        // routes do not match with a pending error
         match = false;
         continue;
       }
@@ -245,35 +240,29 @@ proto.handle = function handle(req, res, out) {
       var method = req.method;
       var has_method = route._handles_method(method);
 
-      // build up automatic options response
       if (!has_method && method === 'OPTIONS') {
         appendMethods(options, route._options());
       }
 
-      // don't even bother matching route
       if (!has_method && method !== 'HEAD') {
         match = false;
         continue;
       }
     }
 
-    // no match
     if (match !== true) {
       return done(layerError);
     }
 
-    // store route for dispatch on change
     if (route) {
       req.route = route;
     }
 
-    // Capture one-time layer values
     req.params = self.mergeParams
       ? mergeParams(layer.params, parentParams)
       : layer.params;
     var layerPath = layer.path;
 
-    // this should be done for the layer
     self.process_params(layer, paramcalled, req, res, function (err) {
       if (err) {
         return next(layerError || err);

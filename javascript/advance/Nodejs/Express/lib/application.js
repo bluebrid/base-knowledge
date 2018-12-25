@@ -141,8 +141,8 @@ app.lazyrouter = function lazyrouter() {
       strict: this.enabled('strict routing')
     });
 
-    this._router.use(query(this.get('query parser fn')));
-    this._router.use(middleware.init(this));
+    // this._router.use(query(this.get('query parser fn')));
+    // this._router.use(middleware.init(this));
   }
 };
 
@@ -157,14 +157,11 @@ app.lazyrouter = function lazyrouter() {
 
 app.handle = function handle(req, res, callback) {
   var router = this._router;
-
-  // final handler
   var done = callback || finalhandler(req, res, {
     env: this.get('env'),
     onerror: logerror.bind(this)
   });
 
-  // no routes
   if (!router) {
     debug('no routes defined on app');
     done();
@@ -185,47 +182,21 @@ app.handle = function handle(req, res, callback) {
  */
 
 app.use = function use(fn) {
-  console.log('===========================> use')
+  
   var offset = 0;
   var path = '/';
-
-  // default path to '/'
-  // disambiguate app.use([fn])
-  if (typeof fn !== 'function') {
-    var arg = fn;
-
-    while (Array.isArray(arg) && arg.length !== 0) {
-      arg = arg[0];
-    }
-
-    // first arg is the path
-    if (typeof arg !== 'function') {
-      offset = 1;
-      path = fn;
-    }
-  }
-
   var fns = flatten(slice.call(arguments, offset));
-
-  if (fns.length === 0) {
-    throw new TypeError('app.use() requires a middleware function')
-  }
-
-  // setup router
   this.lazyrouter();
   var router = this._router;
 
   fns.forEach(function (fn) {
-    // non-express app
     if (!fn || !fn.handle || !fn.set) {
       return router.use(path, fn);
     }
 
-    debug('.use app under %s', path);
     fn.mountpath = path;
     fn.parent = this;
 
-    // restore .app property on req and res
     router.use(path, function mounted_app(req, res, next) {
       var orig = req.app;
       fn.handle(req, res, function (err) {

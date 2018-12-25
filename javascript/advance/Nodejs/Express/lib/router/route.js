@@ -194,19 +194,9 @@ methods.forEach(function(method){
     var handles = flatten(slice.call(arguments));
 
     for (var i = 0; i < handles.length; i++) {
-      var handle = handles[i];
-
-      if (typeof handle !== 'function') {
-        var type = toString.call(handle);
-        var msg = 'Route.' + method + '() requires a callback function but got a ' + type
-        throw new Error(msg);
-      }
-
-      debug('%s %o', method, this.path)
-
+      var handle = handles[i]; 
       var layer = Layer('/', {}, handle);
       layer.method = method;
-
       this.methods[method] = true;
       this.stack.push(layer);
     }
