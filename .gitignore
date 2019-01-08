@@ -1,6 +1,7 @@
 .*.haste_cache.*
 node_modules
 http/缓存/node_modules
+javascript/advance/Vue/lib/vue/node_modules
 npm-debug.log
 yarn-error.log
 .DS_Store
