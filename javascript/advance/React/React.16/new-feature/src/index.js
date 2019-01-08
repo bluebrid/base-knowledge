@@ -5,7 +5,8 @@ import './index.css';
 // import App from './2.ErrorBoundary/App'
 // import App from './3.Lazy-loading/App'
 // import App from './4.hooks/App'
-import App from './5.portals/App'
+// import App from './5.portals/App'
+import App from './8.lifecycle/App'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
