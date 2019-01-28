@@ -79,6 +79,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
  * the changes are queued using a (macro) task instead of a microtask.
  */
 export function withMacroTask (fn: Function): Function {
+  // return 就是_withTask 的定义， 而不是fn 
   return fn._withTask || (fn._withTask = function () {
     useMacroTask = true
     try {

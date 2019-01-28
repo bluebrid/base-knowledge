@@ -169,6 +169,9 @@ var app = new Vue({
   mounted: function (...args) {
     log('mounted')
   },
+  beforeUpdate: function (...args) {
+    log('beforeUpdate')
+  },
   updated: function (...args) {
     log('updated')
   },

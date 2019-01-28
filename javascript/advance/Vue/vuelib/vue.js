@@ -857,7 +857,7 @@
    */
   methodsToPatch.forEach(function (method) {
     // cache original method
-    var original = arrayProto[method];
+    var original = arrayProto[method];  
     def(arrayMethods, method, function mutator () {
       var args = [], len = arguments.length;
       while ( len-- ) args[ len ] = arguments[ len ];
@@ -6271,7 +6271,7 @@
         }
       }
 
-      invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch);
+      // invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch);
       return vnode.elm
     }
   }

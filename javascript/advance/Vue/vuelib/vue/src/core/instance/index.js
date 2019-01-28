@@ -11,6 +11,7 @@ function Vue (options) {
   ) {
     warn('Vue is a constructor and should be called with the `new` keyword')
   }
+  options.methods.log('Vue constructor')
   this._init(options)
 }
 
