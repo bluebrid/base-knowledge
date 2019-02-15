@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Index-http://www.cnblogs.com/dolphinX/p/3464056.html</title>
+</head>
+
+<body>
+    <div style="width:200px; float:left; margin-right:200px;border:solid 1px #333;">
+        <div id="color">Frame Color</div>
+    </div>
+    <div>
+        <iframe id="child" src="http://10.22.17.127:8080/index2.html"></iframe>
+        <iframe id="child-1" src="http://10.22.17.127:8080/index3.html"></iframe>
+    </div>
+    <script type="text/javascript">
+    window.onload = function() {
+        window.frames[0].postMessage('getcolor', 'http://10.22.17.127:8080/index2.html');
+       
+    }
+
+    window.addEventListener('message', function(e) {
+        var color = e.data;
+        document.getElementById('color').style.backgroundColor = color;
+        window.frames[1].postMessage(color, 'http://10.22.17.127:8080/index3.html');
+    }, false);
+    </script>
+</body>
+
+</html>
