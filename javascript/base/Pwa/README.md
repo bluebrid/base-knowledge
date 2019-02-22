@@ -1,0 +1,1 @@
+https://lzw.me/a/pwa-service-worker.html
