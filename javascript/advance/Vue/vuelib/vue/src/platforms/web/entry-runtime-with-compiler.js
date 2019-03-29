@@ -20,7 +20,7 @@ Vue.prototype.$mount = function (
   hydrating?: boolean
 ): Component {
   el = el && query(el)
-
+ 
   /* istanbul ignore if */
   if (el === document.body || el === document.documentElement) {
     process.env.NODE_ENV !== 'production' && warn(
@@ -31,7 +31,9 @@ Vue.prototype.$mount = function (
 
   const options = this.$options
   // resolve template/el and convert to render function
+  this.log(`挂载${el ? '根组件': `子组件${options._parentVnode.tag}`}`)
   if (!options.render) {
+    // 只有根组件才会进入这个分支
     let template = options.template
     if (template) {
       if (typeof template === 'string') {
@@ -69,6 +71,7 @@ Vue.prototype.$mount = function (
         comments: options.comments
       }, this)
       options.render = render
+      this.log(`生成根组件的render 函数` )
       options.staticRenderFns = staticRenderFns
 
       /* istanbul ignore if */
@@ -78,6 +81,12 @@ Vue.prototype.$mount = function (
       }
     }
   }
+  /**
+   *  Vue.prototype.$mount = function (el, hydrating) {
+    el = el && inBrowser ? query(el) : undefined;
+    return mountComponent(this, el, hydrating);
+  };
+   */
   return mount.call(this, el, hydrating)
 }
 

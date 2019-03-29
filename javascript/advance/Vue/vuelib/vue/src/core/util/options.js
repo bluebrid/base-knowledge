@@ -421,11 +421,12 @@ export function mergeOptions (
  * to assets defined in its ancestor chain.
  */
 export function resolveAsset (
-  options: Object,
-  type: string,
-  id: string,
+  options,// vm.$options
+  type,// components
+  id, // router-link
   warnMissing?: boolean
 ): any {
+  
   /* istanbul ignore if */
   if (typeof id !== 'string') {
     return
@@ -439,6 +440,7 @@ export function resolveAsset (
   if (hasOwn(assets, PascalCaseId)) return assets[PascalCaseId]
   // fallback to prototype chain
   const res = assets[id] || assets[camelizedId] || assets[PascalCaseId]
+  options._base.log(`根据${id}名称查找到全局注册的组件`)
   if (process.env.NODE_ENV !== 'production' && warnMissing && !res) {
     warn(
       'Failed to resolve ' + type.slice(0, -1) + ': ' + id,

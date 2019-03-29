@@ -33,6 +33,7 @@ export function createElement (
   normalizationType: any,
   alwaysNormalize: boolean
 ): VNode | Array<VNode> {
+  context.log(`createElement 元素名称${tag}`)
   if (Array.isArray(data) || isPrimitive(data)) {
     normalizationType = children
     children = data
@@ -50,7 +51,7 @@ export function _createElement (
   data?: VNodeData,
   children?: any,
   normalizationType?: number
-): VNode | Array<VNode> {
+): VNode | Array<VNode> { 
   if (isDef(data) && isDef((data: any).__ob__)) {
     process.env.NODE_ENV !== 'production' && warn(
       `Avoid using observed data object as vnode data: ${JSON.stringify(data)}\n` +
@@ -103,8 +104,10 @@ export function _createElement (
         undefined, undefined, context
       )
     } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
+      context.log(`==========>开始创建子组件${tag}, 但是只是一个Vnode`,'blue' )
       // component
       vnode = createComponent(Ctor, data, context, children, tag)
+      context.log(`==========>结束创建子组件${tag}, 但是只是一个Vnode`,'blue' )
     } else {
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its

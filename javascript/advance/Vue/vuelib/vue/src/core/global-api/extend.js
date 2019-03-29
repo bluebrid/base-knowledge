@@ -16,7 +16,7 @@ export function initExtend (Vue: GlobalAPI) {
   /**
    * Class inheritance
    */
-  Vue.extend = function (extendOptions: Object): Function {
+  Vue.extend = function (extendOptions: Object): Function {    
     extendOptions = extendOptions || {}
     const Super = this
     const SuperId = Super.cid
@@ -33,6 +33,7 @@ export function initExtend (Vue: GlobalAPI) {
     const Sub = function VueComponent (options) {
       this._init(options)
     }
+    this.log('VueComponent 的原型指向Vue, 所以他具有Vue 的所有功能')
     Sub.prototype = Object.create(Super.prototype)
     Sub.prototype.constructor = Sub
     Sub.cid = cid++

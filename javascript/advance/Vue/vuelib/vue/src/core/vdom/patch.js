@@ -68,7 +68,7 @@ function createKeyToOldIdx (children, beginIdx, endIdx) {
 }
 
 export function createPatchFunction (backend) {
-  console.log('createPatchFunction')
+  // console.log('createPatchFunction')
   let i, j
   const cbs = {}
 
@@ -131,7 +131,7 @@ export function createPatchFunction (backend) {
     nested,
     ownerArray,
     index
-  ) {
+  ) {   
     if (isDef(vnode.elm) && isDef(ownerArray)) {
       // This vnode was used in a previous render!
       // now it's used as a new node, overwriting its elm would cause
@@ -142,6 +142,7 @@ export function createPatchFunction (backend) {
     }
 
     vnode.isRootInsert = !nested // for transition enter check
+    vnode.context && vnode.context.log(`遍历创建元素,如果是Component, 则直接去创建组件，跳转到createComponent方法`)
     if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
       return
     }
@@ -212,7 +213,8 @@ export function createPatchFunction (backend) {
     let i = vnode.data
     if (isDef(i)) {
       const isReactivated = isDef(vnode.componentInstance) && i.keepAlive
-      if (isDef(i = i.hook) && isDef(i = i.init)) {
+      if (isDef(i = i.hook) && isDef(i = i.init)) {// 
+        vnode.context && vnode.context.log('执行子组件的钩子函数 init or hook')
         i(vnode, false /* hydrating */)
       }
       // after calling the init hook, if the vnode is a child component
@@ -220,6 +222,7 @@ export function createPatchFunction (backend) {
       // component also has set the placeholder vnode's elm.
       // in that case we can just return the element and be done.
       if (isDef(vnode.componentInstance)) {
+        vnode.context && vnode.context.log('去创建组件')
         initComponent(vnode, insertedVnodeQueue)
         insert(parentElm, vnode.elm, refElm)
         if (isTrue(isReactivated)) {

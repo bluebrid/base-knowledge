@@ -13,6 +13,14 @@ import { extend, mergeOptions, formatComponentName } from '../util/index'
 let uid = 0
 
 export function initMixin (Vue: Class<Component>) {
+
+  function log(name, background='#222', showLog = true, color='#bada55', ) {
+    if (showLog) {
+      console.log(`%c[=======================>${name}]`, `background: ${background}; color: ${color}`)
+    }
+  }
+  Vue.log = log
+  Vue.prototype.log = log
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
     // a uid

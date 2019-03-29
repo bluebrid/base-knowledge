@@ -978,6 +978,7 @@ function defineReactive (
     enumerable: true,
     configurable: true,
     get: function reactiveGetter () {
+      console.log('====================>')
       var value = getter ? getter.call(obj) : val;
       if (Dep.target) {
         dep.depend();
@@ -1485,9 +1486,9 @@ function mergeOptions (
  * to assets defined in its ancestor chain.
  */
 function resolveAsset (
-  options,
-  type,
-  id,
+  options,// vm.$options
+  type,// components
+  id, // router-link
   warnMissing
 ) {
   /* istanbul ignore if */
@@ -1495,6 +1496,8 @@ function resolveAsset (
     return
   }
   var assets = options[type];
+  // assets = options['components']
+
   // check local registration variations first
   if (hasOwn(assets, id)) { return assets[id] }
   var camelizedId = camelize(id);
@@ -2776,7 +2779,7 @@ function mountComponent (
       measure(("vue " + name + " patch"), startTag, endTag);
     };
   } else {
-    updateComponent = function () {
+    updateComponent = function () {      
       vm._update(vm._render(), hydrating);
     };
   }
@@ -4518,6 +4521,7 @@ function createElement (
   normalizationType,
   alwaysNormalize
 ) {
+ 
   if (Array.isArray(data) || isPrimitive(data)) {
     normalizationType = children;
     children = data;
@@ -5054,7 +5058,7 @@ function initAssetRegisters (Vue) {
         }
         if (type === 'directive' && typeof definition === 'function') {
           definition = { bind: definition, update: definition };
-        }
+        }        
         this.options[type + 's'][id] = definition;
         return definition
       }

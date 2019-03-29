@@ -65,7 +65,7 @@ export function parse (
   template: string,
   options: CompilerOptions
 ): ASTElement | void {
-  console.log('sssssssssssss')
+  console.log(`[=======================>Convert HTML string to AST.]`)
   warn = options.warn || baseWarn
 
   platformIsPreTag = options.isPreTag || no

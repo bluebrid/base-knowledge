@@ -30,6 +30,24 @@ export default class Dep {
 
   depend () {
     if (Dep.target) {
+      /**
+       * Dep.target 就是Watch 对象， 是在生成Watcher 对象时，调用get 方法， 执行 pushTarget(this)添加进去的
+       *   Watcher.prototype.addDep = function addDep(dep) {
+            var id = dep.id;
+            if (!this.newDepIds.has(id)) {
+              this.newDepIds.add(id);
+              this.newDeps.push(dep);
+              if (!this.depIds.has(id)) {
+                dep.addSub(this);
+              }
+            }
+          };
+
+        addSub (sub: Watcher) {
+          this.subs.push(sub)
+        }
+          Dep对象又将Watcher 实例添加到subs中
+       */
       Dep.target.addDep(this)
     }
   }

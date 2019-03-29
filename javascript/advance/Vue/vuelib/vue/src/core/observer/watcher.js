@@ -99,6 +99,7 @@ export default class Watcher {
    * Evaluate the getter, and re-collect dependencies.
    */
   get () {
+    this.vm.log('将当前的Watcher 对象，添加到Dep Target属性')
     pushTarget(this)
     let value
     const vm = this.vm
@@ -116,6 +117,7 @@ export default class Watcher {
       if (this.deep) {
         traverse(value)
       }
+      this.vm.log('将当前的Watcher 对象，从Dep Target属性中移除')
       popTarget()
       this.cleanupDeps()
     }
@@ -163,6 +165,10 @@ export default class Watcher {
    */
   update () {
     /* istanbul ignore else */
+    /**
+     * 1. 执行Watcher, 如果是同步的，就立即执行run 方法
+     * 2. 异步的Watcher,则将其添加到队列中，异步执行
+     */
     if (this.lazy) {
       this.dirty = true
     } else if (this.sync) {

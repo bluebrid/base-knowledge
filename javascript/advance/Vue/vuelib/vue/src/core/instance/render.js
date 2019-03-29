@@ -28,6 +28,10 @@ export function initRender (vm: Component) {
   // args order: tag, data, children, normalizationType, alwaysNormalize
   // internal version is used by render functions compiled from templates
   vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
+  vm._c = function (a, b, c, d) { 
+    // vm.log('===============>'+a, '#8470FF')
+    return createElement(vm, a, b, c, d, false); }
+    ;
   // normalization is always applied for the public version, used in
   // user-written render functions.
   vm.$createElement = (a, b, c, d) => createElement(vm, a, b, c, d, true)
@@ -61,7 +65,7 @@ export function renderMixin (Vue: Class<Component>) {
   Vue.prototype._render = function (): VNode {
     const vm: Component = this
     const { render, _parentVnode } = vm.$options
-
+    
     if (_parentVnode) {
       vm.$scopedSlots = _parentVnode.data.scopedSlots || emptyObject
     }
@@ -72,7 +76,13 @@ export function renderMixin (Vue: Class<Component>) {
     // render self
     let vnode
     try {
+      /**
+       * 1. 如果是根组件， render 是一个加工而成的anonymous 匿名函数， 是在Vue.prototype.$mount 中生成的函数
+       * 2. 如果是子组件， render 对应的就是子组件的render函数， 如VueRouter 中link 的render 函数
+       */
+      vm.log(`开始调用_render 方法 去render  ${_parentVnode ? vm.$options._componentTag : ' rootComponent'}`, '#0000CD')
       vnode = render.call(vm._renderProxy, vm.$createElement)
+      vm.log(`结束调用_render 方法 去render  ${_parentVnode ? vm.$options._componentTag : ' rootComponent'}`, '#0000CD') 
     } catch (e) {
       handleError(e, vm, `render`)
       // return error render result,

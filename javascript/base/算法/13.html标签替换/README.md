@@ -1,0 +1,1 @@
+=gabcd, dsadf ==bsssdff=    => <g>abcd, dsadf </g><b>sssdff</b>

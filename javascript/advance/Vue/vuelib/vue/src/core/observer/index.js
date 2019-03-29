@@ -158,8 +158,13 @@ export function defineReactive (
     enumerable: true,
     configurable: true,
     get: function reactiveGetter () {
+      this.log && this.log(`reactiveGetter get ${key}`)
       const value = getter ? getter.call(obj) : val
       if (Dep.target) {
+        /**
+         * 1, dep.depend 方法就是，将Dep.target的Watcher 对象，添加到dep.subs数组中
+         * 2, 在下面的setter 中，调用dep.notify 就是遍历dep.subs，也就是Watcher对象， 然后调用Watcher 的update
+         */
         dep.depend()
         if (childOb) {
           childOb.dep.depend()

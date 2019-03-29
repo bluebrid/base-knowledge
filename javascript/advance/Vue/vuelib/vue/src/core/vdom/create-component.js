@@ -34,6 +34,7 @@ import {
 
 // inline hooks to be invoked on component VNodes during patch
 const componentVNodeHooks = {
+  // init prepatch insert destroy
   init (vnode: VNodeWithData, hydrating: boolean): ?boolean {
     if (
       vnode.componentInstance &&
@@ -48,6 +49,7 @@ const componentVNodeHooks = {
         vnode,
         activeInstance
       )
+      child.log(`子组件调用$mount去挂载组件${child.$vnode.tag}`)
       child.$mount(hydrating ? vnode.elm : undefined, hydrating)
     }
   },
@@ -183,6 +185,15 @@ export function createComponent (
   }
 
   // install component management hooks onto the placeholder node
+  Ctor.prototype.log('创建Component 时，添加Hooks,componentVNodeHooks:init prepatch insert destroy, 其中init 会调用$mount方法，去挂载组件')
+  /**
+   * const child = vnode.componentInstance = createComponentInstanceForVnode(
+        vnode,
+        activeInstance
+      )
+      child.log(`调用$mount去挂载组件${child.$vnode.tag}`)
+      child.$mount(hydrating ? vnode.elm : undefined, hydrating)
+   */
   installComponentHooks(data)
 
   // return a placeholder vnode

@@ -82,6 +82,7 @@ export function createFunctionalComponent (
   contextVm: Component,
   children: ?Array<VNode>
 ): VNode | Array<VNode> | void {
+  
   const options = Ctor.options
   const props = {}
   const propOptions = options.props
@@ -101,7 +102,7 @@ export function createFunctionalComponent (
     contextVm,
     Ctor
   )
-
+  contextVm.log('调用组件的Render function', '#FFFF00')
   const vnode = options.render.call(null, renderContext._c, renderContext)
 
   if (vnode instanceof VNode) {

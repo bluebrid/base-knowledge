@@ -186,8 +186,12 @@ export function mountComponent (
       measure(`vue ${name} patch`, startTag, endTag)
     }
   } else {
+   
     updateComponent = () => {
-      vm.log('updating components', 'red')
+      vm.log(`更新 ${vm.constructor.name === 'Vue' ? '根组件' : `${vm.$options._componentTag} 组件`}`, '#C0FF3E')
+      /**
+       * _update 去创建组件
+       */
       vm._update(vm._render(), hydrating)
     }
   }
@@ -195,6 +199,12 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
+  vm.log(`给${vm.constructor.name === 'Vue' ? '根组件' : `${vm.$options._componentTag}` }创建Watcher对象`, 'red', true)
+  if (vm.constructor.name === 'Vue') {
+    vm.log('Vue.prototype.$mount 调用 mountComponent')
+  } else {
+
+  }
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted) {
