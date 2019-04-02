@@ -37,7 +37,11 @@ export function createCompilerCreator (baseCompile: Function): Function {
           }
         }
       }
-
+      /**
+       * 将template字符串转换成function
+       * baseCompile   vue\src\compiler\index.js
+       * 
+       */
       const compiled = baseCompile(template, finalOptions)
       if (process.env.NODE_ENV !== 'production') {
         errors.push.apply(errors, detectErrors(compiled.ast))

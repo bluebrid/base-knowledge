@@ -12,10 +12,15 @@ import { bindObjectListeners } from './bind-object-listeners'
 import { resolveScopedSlots } from './resolve-slots'
 
 export function installRenderHelpers (target: any) {
+  
+  /**
+   * 重命名不同的Render 方法, 别名
+   */
+  target.log && target.log(`重命名不同的Rendere 方法`)
   target._o = markOnce
   target._n = toNumber
   target._s = toString
-  target._l = renderList
+  target._l = renderList // render list v-or
   target._t = renderSlot
   target._q = looseEqual
   target._i = looseIndexOf
@@ -23,8 +28,9 @@ export function installRenderHelpers (target: any) {
   target._f = resolveFilter
   target._k = checkKeyCodes
   target._b = bindObjectProps
-  target._v = createTextVNode
+  target._v = createTextVNode // render text 
   target._e = createEmptyVNode
   target._u = resolveScopedSlots
   target._g = bindObjectListeners
+  // vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false) vue\src\core\instance\render.js
 }

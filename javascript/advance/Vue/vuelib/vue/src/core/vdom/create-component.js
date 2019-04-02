@@ -50,6 +50,9 @@ const componentVNodeHooks = {
         activeInstance
       )
       child.log(`子组件调用$mount去挂载组件${child.$vnode.tag}`)
+      /**
+       * 创建组件，跟创建根组件一样，都是调用$mount 方法
+       */
       child.$mount(hydrating ? vnode.elm : undefined, hydrating)
     }
   },

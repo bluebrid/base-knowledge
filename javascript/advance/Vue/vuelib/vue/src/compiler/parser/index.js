@@ -125,7 +125,19 @@ export function parse (
       if (isIE && ns === 'svg') {
         attrs = guardIESVGBug(attrs)
       }
-
+      /**
+       * 根据tag , attrs 和currentParent 创建一个Ast
+       *   function createASTElement(tag, attrs, parent) {
+            return {
+              type: 1,
+              tag: tag,
+              attrsList: attrs,
+              attrsMap: makeAttrsMap(attrs),
+              parent: parent,
+              children: []
+            };
+          }
+       */
       let element: ASTElement = createASTElement(tag, attrs, currentParent)
       if (ns) {
         element.ns = ns
@@ -142,6 +154,7 @@ export function parse (
 
       // apply pre-transforms
       for (let i = 0; i < preTransforms.length; i++) {
+        // 对input 的处理
         element = preTransforms[i](element, options) || element
       }
 
@@ -157,6 +170,9 @@ export function parse (
       if (inVPre) {
         processRawAttrs(element)
       } else if (!element.processed) {
+        /**
+         * 对指令的处理，v-for, v-if, v-once
+         */
         // structural directives
         processFor(element)
         processIf(element)
@@ -210,6 +226,7 @@ export function parse (
           const name = element.slotTarget || '"default"'
           ;(currentParent.scopedSlots || (currentParent.scopedSlots = {}))[name] = element
         } else {
+          // 将element 添加到currentParent 也就是parent
           currentParent.children.push(element)
           element.parent = currentParent
         }
@@ -230,6 +247,7 @@ export function parse (
         element.children.pop()
       }
       // pop stack
+      // 删除已经匹配上的一个元素
       stack.length -= 1
       currentParent = stack[stack.length - 1]
       closeElement(element)
@@ -363,8 +381,14 @@ export function processFor (el: ASTElement) {
   let exp
   if ((exp = getAndRemoveAttr(el, 'v-for'))) {
     const res = parseFor(exp)
+    /**
+     * {
+     *  for: "items",
+     *  alias: "item"
+     * }
+     */
     if (res) {
-      extend(el, res)
+      extend(el, res)// 给v-for 指令元素添加for 和alias 属性
     } else if (process.env.NODE_ENV !== 'production') {
       warn(
         `Invalid v-for expression: ${exp}`
@@ -381,6 +405,7 @@ type ForParseResult = {
 };
 
 export function parseFor (exp: string): ?ForParseResult {
+  // forAliasRE : /([\s\S]*?)\s+(?:in|of)\s+([\s\S]*)/, 所以v-for 可以有两种写法： item in items or item of items
   const inMatch = exp.match(forAliasRE)
   if (!inMatch) return
   const res = {}

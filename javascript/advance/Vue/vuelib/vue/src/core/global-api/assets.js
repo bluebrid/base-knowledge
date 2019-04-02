@@ -26,7 +26,7 @@ export function initAssetRegisters (Vue: GlobalAPI) {
         if (type === 'directive' && typeof definition === 'function') {
           definition = { bind: definition, update: definition }
         }
-        this.log(`注册全局组件${id}`)
+        this.log(`注册全局组件${id}, 并可以通过如：this.options['components]['RouterLink']访问`)
         this.options[type + 's'][id] = definition
         return definition
       }

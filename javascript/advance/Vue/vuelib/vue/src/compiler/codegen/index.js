@@ -43,7 +43,11 @@ export function generate (
   ast: ASTElement | void,
   options: CompilerOptions
 ): CodegenResult {
+  /**
+   * 根据AST生成generate render function 
+   */
   const state = new CodegenState(options)
+  console.log('[=======================>根据AST生成generate render function ]')
   const code = ast ? genElement(ast, state) : '_c("div")'
   return {
     render: `with(this){return ${code}}`,
@@ -52,6 +56,9 @@ export function generate (
 }
 
 export function genElement (el: ASTElement, state: CodegenState): string {
+  /**
+   * 将AST转换成可执行的function
+   */
   if (el.parent) {
     el.pre = el.pre || el.parent.pre
   }
@@ -78,7 +85,7 @@ export function genElement (el: ASTElement, state: CodegenState): string {
       if (!el.plain || (el.pre && state.maybeComponent(el))) {
         data = genData(el, state)
       }
-
+      // genChildren 会递归调用genElement
       const children = el.inlineTemplate ? null : genChildren(el, state, true)
       code = `_c('${el.tag}'${
         data ? `,${data}` : '' // data
@@ -205,8 +212,16 @@ export function genFor (
       true /* tip */
     )
   }
-
+  // 避免多次渲染，标识为true, 因为在后面还会调用genElement
   el.forProcessed = true // avoid recursion
+  /**
+   * 1.生成如下字符串表达式：
+   * _l((items), function (item) {
+          return _c('li', [_v("\n          " + _s(item.message) + "\n        ")])
+      })
+   * 2. _l 方法指向的是： target._l = renderList vue\src\core\instance\render-helpers\index.js
+   * 3. vue\src\core\instance\render-helpers\render-list.js
+   */
   return `${altHelper || '_l'}((${exp}),` +
     `function(${alias}${iterator1}${iterator2}){` +
       `return ${(altGen || genElement)(el, state)}` +
@@ -405,7 +420,7 @@ export function genChildren (
       el.for &&
       el.tag !== 'template' &&
       el.tag !== 'slot'
-    ) {
+    ) { // 如果是v-for 元素，进入这个分支
       const normalizationType = checkSkip && state.maybeComponent(el) ? `,1` : ``
       return `${(altGenElement || genElement)(el, state)}${normalizationType}`
     }
@@ -418,7 +433,15 @@ export function genChildren (
     }`
   }
 }
-
+function genNode (node: ASTNode, state: CodegenState): string {
+  if (node.type === 1) {
+    return genElement(node, state) // 递归调用genElement 方法
+  } else if (node.type === 3 && node.isComment) {
+    return genComment(node)
+  } else {
+    return genText(node)
+  }
+}
 // determine the normalization needed for the children array.
 // 0: no normalization needed
 // 1: simple normalization needed (possible 1-level deep nested array)
@@ -450,15 +473,6 @@ function needsNormalization (el: ASTElement): boolean {
   return el.for !== undefined || el.tag === 'template' || el.tag === 'slot'
 }
 
-function genNode (node: ASTNode, state: CodegenState): string {
-  if (node.type === 1) {
-    return genElement(node, state)
-  } else if (node.type === 3 && node.isComment) {
-    return genComment(node)
-  } else {
-    return genText(node)
-  }
-}
 
 export function genText (text: ASTText | ASTExpression): string {
   return `_v(${text.type === 2

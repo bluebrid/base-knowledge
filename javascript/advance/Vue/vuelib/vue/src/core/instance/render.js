@@ -77,7 +77,7 @@ export function renderMixin (Vue: Class<Component>) {
     let vnode
     try {
       /**
-       * 1. 如果是根组件， render 是一个加工而成的anonymous 匿名函数， 是在Vue.prototype.$mount 中生成的函数
+       * 1. 如果是根组件， render 是一个加工而成的anonymous 匿名函数， 是在Vue.prototype.$mount 中生成的函数 src\platforms\web\entry-runtime-with-compiler.js
        * 2. 如果是子组件， render 对应的就是子组件的render函数， 如VueRouter 中link 的render 函数
        */
       vm.log(`开始调用_render 方法 去render  ${_parentVnode ? vm.$options._componentTag : ' rootComponent'}`, '#0000CD')

@@ -52,18 +52,25 @@ function decodeAttr (value, shouldDecodeNewlines) {
 
 export function parseHTML (html, options) {
   const stack = []
-  const expectHTML = options.expectHTML
+  const expectHTML = options.expectHTML 
   const isUnaryTag = options.isUnaryTag || no
   const canBeLeftOpenTag = options.canBeLeftOpenTag || no
   let index = 0
   let last, lastTag
+  /**
+   * 真正将HTML字符串转换成抽象结构树
+   */
+  console.log('[=======================>真正将HTML字符串转换成抽象结构树]')
   while (html) {
     last = html
     // Make sure we're not in a plaintext content element like script/style
     if (!lastTag || !isPlainTextElement(lastTag)) {
       let textEnd = html.indexOf('<')
       if (textEnd === 0) {
-        // Comment:
+        // Comment: ==========================
+        /**
+         * 只是对Comment的处理
+         */
         if (comment.test(html)) {
           const commentEnd = html.indexOf('-->')
 
@@ -92,6 +99,8 @@ export function parseHTML (html, options) {
           advance(doctypeMatch[0].length)
           continue
         }
+        // ============================
+
 
         // End tag:
         const endTagMatch = html.match(endTag)
@@ -99,10 +108,21 @@ export function parseHTML (html, options) {
           const curIndex = index
           advance(endTagMatch[0].length)
           parseEndTag(endTagMatch[1], curIndex, index)
+          // 如果是结束标记，则直接将html 对应的标签给删除
           continue
         }
-
+        
         // Start tag:
+        /**
+         * 找到开始标签
+         * {
+         *  atrs: [],
+         *  end: 40,
+         *  start: 21, 
+         *  tagName: 'ul',
+         *  unarySlash: ''
+         * }
+         */
         const startTagMatch = parseStartTag()
         if (startTagMatch) {
           handleStartTag(startTagMatch)
@@ -181,7 +201,10 @@ export function parseHTML (html, options) {
     html = html.substring(n)
   }
 
-  function parseStartTag () {
+  function parseStartTag () {    
+    /**
+     * 1， 匹配开始标记,如: <div
+     */
     const start = html.match(startTagOpen)
     if (start) {
       const match = {
@@ -189,12 +212,15 @@ export function parseHTML (html, options) {
         attrs: [],
         start: index
       }
+      // advance 将 <div 字符串从html 中删除
       advance(start[0].length)
       let end, attr
+      // 将div 对应的属性相关的字符串从html 中删除
       while (!(end = html.match(startTagClose)) && (attr = html.match(attribute))) {
         advance(attr[0].length)
         match.attrs.push(attr)
       }
+      // 将div 对应的结束符号> 从html 中删除
       if (end) {
         match.unarySlash = end[1]
         advance(end[0].length)
@@ -205,6 +231,7 @@ export function parseHTML (html, options) {
   }
 
   function handleStartTag (match) {
+    // 判断是否是一个元素的开始标记Tag
     const tagName = match.tagName
     const unarySlash = match.unarySlash
 
@@ -291,6 +318,23 @@ export function parseHTML (html, options) {
       if (options.end) {
         options.end(tagName, start, end)
       }
+    } else {
+      // 会出现的问题是，如果出现多个结束标签，则不能识别，如：
+      /**
+       *    <div id="app">
+              <ul id="example-1">
+                <li v-for="item in items">
+                  {{ item.message }}
+                </li>
+                </li> // 出现两个li的结束标签，但是识别不了
+              </ul>     
+            </div>
+            // 其实Vue 的代码都可以只写开始标签，结束标签不写都是work的
+               <div id="app">
+                <ul id="example-1">
+                  <li v-for="item in items">
+                    {{ item.message }}
+       */
     }
   }
 }

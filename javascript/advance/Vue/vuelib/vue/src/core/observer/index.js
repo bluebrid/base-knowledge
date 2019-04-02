@@ -159,7 +159,19 @@ export function defineReactive (
     configurable: true,
     get: function reactiveGetter () {
       this.log && this.log(`reactiveGetter get ${key}`)
-      const value = getter ? getter.call(obj) : val
+      const value = getter ? getter.call(obj) : val;
+      /**
+       * 1, 根组件或者全局组件，　在执行mountComponent　方法，会去创建一个Watcher对象(src\core\instance\lifecycle.js)
+       * 2, Watcher 的第二个参数expOrFn是updateComponent方法， 这里面调用了组件的render 方法
+       * 3, 在执行组件的render 方法的时候，如果组件中调用了一个reactive 的属性，如VueRoute 的link 组件中引用了 const current = this.$route
+       * 4, 就会跳转到reactiveGetter方法中来
+       * 5, 而Dep.target 就是对应的Watcher 对象
+       * 6, 将这个Watcher 对象添加到到Dep subs数组中
+       * 7,如果这个属性，变更时，就会进入下面的reactiveSetter方法中
+       * 8,调用dep.notify()去通知有添加到dep subs 中的Watcher 对象
+       * 9,调用每个Watcher对象的update方法
+       * 10, 然后判断每个每个Watcher 是否是同步，如果是同步，就直接运行Watcher 的run 方法， 否则将对应的Watcher 添加到一个queue数组中，然后用nextTick执行
+       */
       if (Dep.target) {
         /**
          * 1, dep.depend 方法就是，将Dep.target的Watcher 对象，添加到dep.subs数组中

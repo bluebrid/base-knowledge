@@ -25,6 +25,9 @@ export function createCompileToFunctionFn (compile: Function): Function {
     options?: CompilerOptions,
     vm?: Component
   ): CompiledFunctionResult {
+    /**
+     * 将Template 字符串转换成Function(render)
+     */
     options = extend({}, options)
     const warn = options.warn || baseWarn
     delete options.warn
@@ -56,6 +59,10 @@ export function createCompileToFunctionFn (compile: Function): Function {
     }
 
     // compile
+    /**
+     * 1，真正将template 转换成Function 的函数
+     * 2，compile 是\src\compiler\create-compiler.js定义的function
+     */
     const compiled = compile(template, options)
 
     // check compilation errors/tips

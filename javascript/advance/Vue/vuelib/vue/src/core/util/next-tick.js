@@ -9,6 +9,9 @@ const callbacks = []
 let pending = false
 
 function flushCallbacks () {
+  /**
+   * 遍历执行callbacks里面保存的函数
+   */
   pending = false
   const copies = callbacks.slice(0)
   callbacks.length = 0
@@ -87,6 +90,9 @@ export function withMacroTask (fn: Function): Function {
 
 export function nextTick (cb?: Function, ctx?: Object) {
   let _resolve
+  /**
+   * 将nextTick 的参数cb 保存在callbacks 的数组中
+   */
   callbacks.push(() => {
     if (cb) {
       try {
@@ -100,6 +106,9 @@ export function nextTick (cb?: Function, ctx?: Object) {
   })
   if (!pending) {
     pending = true
+    /**
+     * 在nextTick 判断是宏task 还是微task
+     */
     if (useMacroTask) {
       macroTimerFunc()
     } else {

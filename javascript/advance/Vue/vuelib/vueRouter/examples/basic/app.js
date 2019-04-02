@@ -110,10 +110,23 @@ router.afterEach((to, from) => {
 
 new Vue({
   router,
+  data: {
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ],
+    ifShowTitle: false,
+    showTitle: false
+  },
   template: `
     <div id="app">
-      <h1>Basic</h1>
-      <router-link to="/é">/é</router-link>
+    <h1 v-if="ifShowTitle">title</h1>
+    <h2 v-show="showTitle">title 2</h2>
+      <ul id="example-1">
+        <li v-for="item in items">
+          {{ item.message }}
+        </li>
+      </ul>
     </div>
   `,
   beforeCreate: function (...args) {

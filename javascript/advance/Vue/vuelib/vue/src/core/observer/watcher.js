@@ -172,6 +172,9 @@ export default class Watcher {
     if (this.lazy) {
       this.dirty = true
     } else if (this.sync) {
+      /**
+       * 是同步的Watcher 则直接运行run ,不用添加到watcher 队列中去异步执行
+       */
       this.run()
     } else {
       queueWatcher(this)

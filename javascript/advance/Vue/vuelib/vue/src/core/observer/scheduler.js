@@ -132,6 +132,9 @@ export function queueWatcher (watcher: Watcher) {
   if (has[id] == null) {
     has[id] = true
     if (!flushing) {
+      /**
+       * 将Watcher 保存在queue 数组中
+       */
       queue.push(watcher)
     } else {
       // if already flushing, splice the watcher based on its id
@@ -150,6 +153,9 @@ export function queueWatcher (watcher: Watcher) {
         flushSchedulerQueue()
         return
       }
+      /**
+       * 异步执行， 执行nextTick, 可以先理解为setTimeout
+       */
       nextTick(flushSchedulerQueue)
     }
   }

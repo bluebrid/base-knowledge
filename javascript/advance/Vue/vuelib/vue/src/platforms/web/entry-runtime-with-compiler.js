@@ -33,6 +33,12 @@ Vue.prototype.$mount = function (
   // resolve template/el and convert to render function
   this.log(`挂载${el ? '根组件': `子组件${options._parentVnode.tag}`}`)
   if (!options.render) {
+    /**
+     * src\platforms\web\entry-runtime-with-compiler.js
+     * 1， 如果没有设置render 属性，就会进入到这个分支，然后去创建render方法， 根组件一般都是这样处理的，
+     * 2， 如果没有render 属性，就要设置template
+     * 3, 通过template 去生成render 函数
+     */
     // 只有根组件才会进入这个分支
     let template = options.template
     if (template) {
@@ -63,7 +69,9 @@ Vue.prototype.$mount = function (
       if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
         mark('compile')
       }
-
+      /**
+       * 非常重要的一个方法，将template 字符串转换成render函数/compiler/index.js
+       */
       const { render, staticRenderFns } = compileToFunctions(template, {
         shouldDecodeNewlines,
         shouldDecodeNewlinesForHref,
