@@ -64,6 +64,7 @@ export class History {
   transitionTo (location: RawLocation, onComplete?: Function, onAbort?: Function) {
     const route = this.router.match(location, this.current)
     this.confirmTransition(route, () => {
+      // 去更新路由
       this.updateRoute(route)
       onComplete && onComplete(route)
       this.ensureURL()
@@ -101,7 +102,10 @@ export class History {
       isSameRoute(route, current) &&
       // in the case the route map has been dynamically appended to
       route.matched.length === current.matched.length
-    ) {
+    ) { 
+      /**
+       * 如果是相同的路由，就直接中断不会再往下执行
+       */
       this.ensureURL()
       return abort()
     }
@@ -187,6 +191,17 @@ export class History {
     const prev = this.current
     this.current = route
     this.router.app.log('VueRouter updateRoute', 'green')
+    /**
+     * cb 就是如下调用listen 的回调函数
+     *   history.listen(route => {
+          this.apps.forEach((app) => {
+            app.log('VueRouter updateRoute Done', 'green')
+            app._route = route
+          })
+        })
+        cb 会去设置_route 的值， 而_route 是一个Reactive 对象， 在install.js 中的beforeCreate中处理的
+        Vue.util.defineReactive(this, '_route', this._router.history.current)
+     */
     this.cb && this.cb(route)
     this.router.afterHooks.forEach(hook => {
       hook && hook(route, prev)

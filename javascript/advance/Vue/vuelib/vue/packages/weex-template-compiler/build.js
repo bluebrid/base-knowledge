@@ -4306,7 +4306,7 @@ function genDefaultModel (
   var trim = ref.trim;
   var number = ref.number;
   var event = lazy ? 'change' : 'input';
-
+  
   var valueExpression = "$event.target.attr.value" + (trim ? '.trim()' : '');
   if (number) {
     valueExpression = "_n(" + valueExpression + ")";

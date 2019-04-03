@@ -60,7 +60,7 @@ export function parseHTML (html, options) {
   /**
    * 真正将HTML字符串转换成抽象结构树
    */
-  console.log('[=======================>真正将HTML字符串转换成抽象结构树]')
+  window.log('真正将HTML字符串转换成抽象结构树')
   while (html) {
     last = html
     // Make sure we're not in a plaintext content element like script/style
@@ -329,7 +329,7 @@ export function parseHTML (html, options) {
                 </li> // 出现两个li的结束标签，但是识别不了
               </ul>     
             </div>
-            // 其实Vue 的代码都可以只写开始标签，结束标签不写都是work的
+            // 其实Vue 的代码都可以只写开始标签，结束标签不写都是work的,如果下
                <div id="app">
                 <ul id="example-1">
                   <li v-for="item in items">

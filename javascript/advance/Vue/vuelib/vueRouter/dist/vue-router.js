@@ -1883,6 +1883,7 @@ History.prototype.transitionTo = function transitionTo (location, onComplete, on
 
   var route = this.router.match(location, this.current);
   this.confirmTransition(route, function () {
+    // 去更新路由
     this$1.updateRoute(route);
     onComplete && onComplete(route);
     this$1.ensureURL();
@@ -1922,7 +1923,10 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     isSameRoute(route, current) &&
     // in the case the route map has been dynamically appended to
     route.matched.length === current.matched.length
-  ) {
+  ) { 
+    /**
+     * 如果是相同的路由，就直接中断不会再往下执行
+     */
     this.ensureURL();
     return abort()
   }
@@ -2007,6 +2011,17 @@ History.prototype.updateRoute = function updateRoute (route) {
   var prev = this.current;
   this.current = route;
   this.router.app.log('VueRouter updateRoute', 'green');
+  /**
+   * cb 就是如下调用listen 的回调函数
+   * history.listen(route => {
+        this.apps.forEach((app) => {
+          app.log('VueRouter updateRoute Done', 'green')
+          app._route = route
+        })
+      })
+      cb 会去设置_route 的值， 而_route 是一个Reactive 对象， 在install.js 中的beforeCreate中处理的
+      Vue.util.defineReactive(this, '_route', this._router.history.current)
+   */
   this.cb && this.cb(route);
   this.router.afterHooks.forEach(function (hook) {
     hook && hook(route, prev);
@@ -2164,7 +2179,7 @@ var HTML5History = /*@__PURE__*/(function (History$$1) {
     var initLocation = getLocation(this.base);
     window.addEventListener('popstate', function (e) {
       var current = this$1.current;
-      this$1.router.app.log('browser popstate 事件', 'red');
+      this$1.router.app.log('browser popstate 事件', '#7EC0EE');
       // Avoiding first `popstate` event dispatched in some browsers but first
       // history route not updated since async guard at the same time.
       var location = getLocation(this$1.base);

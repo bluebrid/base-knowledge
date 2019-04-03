@@ -65,7 +65,7 @@ export function parse (
   template: string,
   options: CompilerOptions
 ): ASTElement | void {
-  console.log(`[=======================>Convert HTML string to AST.]`)
+  window.log(`Convert HTML string to AST.`)
   warn = options.warn || baseWarn
 
   platformIsPreTag = options.isPreTag || no
@@ -178,6 +178,10 @@ export function parse (
         processIf(element)
         processOnce(element)
         // element-scope stuff
+        /**
+         * 处理元素的属性，如input 添加v-model, @model, :model 属性，会添加directives:
+         * {name: "model", rawName: "v-model", value: "name", arg: null, modifiers: undefined} 
+         */
         processElement(element, options)
       }
 
@@ -558,6 +562,9 @@ function processAttrs (el) {
       // mark element as dynamic
       el.hasBindings = true
       // modifiers
+      /**
+       * 转换修饰符 ，如trim, number, v-model.trim.number
+       */
       modifiers = parseModifiers(name)
       if (modifiers) {
         name = name.replace(modifierRE, '')

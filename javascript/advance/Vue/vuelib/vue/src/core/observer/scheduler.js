@@ -147,6 +147,10 @@ export function queueWatcher (watcher: Watcher) {
     }
     // queue the flush
     if (!waiting) {
+      /**
+       * 如果一个值变更了， 但是着值dep.subs 有多个watcher ， 但是只会执行一次nextTick,
+       * 因为在flushSchedulerQueue中会去遍历queue
+       */
       waiting = true
 
       if (process.env.NODE_ENV !== 'production' && !config.async) {

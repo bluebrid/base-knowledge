@@ -50,7 +50,7 @@ const router = new VueRouter({
     {
       path: '/foo',
       component: Foo,
-      beforeEnter(to, from, next) {
+      beforeEnter (to, from, next) {
         // console.log('Config beforeEnter', to, from)
         next()
       }
@@ -86,28 +86,29 @@ router.afterEach((to, from) => {
 // 4. Create and mount root instance.
 // Make sure to inject the router.
 // Route components will be rendered inside <router-view>.
-// new Vue({
-//   router,
-//   template: `
-//     <div id="app">
-//       <h1>Basic</h1>
-//       <ul>
-//         <li><router-link to="/">/</router-link></li>
-//         <li><router-link to="/foo">/foo</router-link></li>
-//         <li><router-link to="/bar">/bar</router-link></li>
-//         <router-link tag="li" to="/bar" :event="['mousedown', 'touchstart']">
-//           <a>/bar</a>
-//         </router-link>
-//         <li><router-link to="/é">/é</router-link></li>
-//       </ul>
-//       <router-view class="view" name="test"></router-view>
-//     </div>
-//   `,
-//   beforeCreate: function (...args) {
-//     this.log('App beforeCreate')
-//   }
-// }).$mount('#app')
 
+new Vue({
+  router,
+  template: `
+    <div id="app">
+      <ul>
+        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/foo">/foo</router-link></li>
+        <li><router-link to="/bar">/bar</router-link></li>
+        <router-link tag="li" to="/bar" :event="['mousedown', 'touchstart']">
+          <a>/bar</a>
+        </router-link>
+        <li><router-link to="/é">/é</router-link></li>
+      </ul>
+      <router-view class="view" name="test"></router-view>
+    </div>
+  `,
+  beforeCreate: function (...args) {
+    this.log('App beforeCreate')
+  }
+}).$mount('#app')
+
+/*
 new Vue({
   router,
   data: {
@@ -133,3 +134,21 @@ new Vue({
     this.log('App beforeCreate')
   }
 }).$mount('#app')
+*/
+/*
+new Vue({
+  router,
+  data: {
+    age: 11
+  },
+  methods: {
+    changeAge: function (el) {
+      this.log(this.age)
+    }
+  },
+  template: `<input v-model.trim.number="age" @change="changeAge" />`, // v-model, @model, :model
+  beforeCreate: function (...args) {
+    this.log('App beforeCreate')
+  }
+}).$mount('#app')
+*/

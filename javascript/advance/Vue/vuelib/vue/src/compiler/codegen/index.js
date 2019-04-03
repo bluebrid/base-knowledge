@@ -47,7 +47,10 @@ export function generate (
    * 根据AST生成generate render function 
    */
   const state = new CodegenState(options)
-  console.log('[=======================>根据AST生成generate render function ]')
+  window.log({
+    context: '根据AST生成generate render function',
+    background: '#8B1A1A'
+  })
   const code = ast ? genElement(ast, state) : '_c("div")'
   return {
     render: `with(this){return ${code}}`,

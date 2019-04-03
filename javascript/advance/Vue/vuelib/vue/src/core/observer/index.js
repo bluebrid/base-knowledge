@@ -159,7 +159,7 @@ export function defineReactive (
     configurable: true,
     get: function reactiveGetter () {
       this.log && this.log(`reactiveGetter get ${key}`)
-      const value = getter ? getter.call(obj) : val;
+      const value = getter ? getter.call(obj) : val;  
       /**
        * 1, 根组件或者全局组件，　在执行mountComponent　方法，会去创建一个Watcher对象(src\core\instance\lifecycle.js)
        * 2, Watcher 的第二个参数expOrFn是updateComponent方法， 这里面调用了组件的render 方法
@@ -185,6 +185,9 @@ export function defineReactive (
           }
         }
       }
+      // if(key === '_route') {
+      //   debugger
+      // }
       return value
     },
     set: function reactiveSetter (newVal) {

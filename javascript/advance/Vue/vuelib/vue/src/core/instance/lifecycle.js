@@ -199,7 +199,7 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
-  vm.log(`给${vm.constructor.name === 'Vue' ? '根组件' : `${vm.$options._componentTag}` }创建Watcher对象`, 'red', true)
+  vm.log(`给${vm.constructor.name === 'Vue' ? '根组件' : `${vm.$options._componentTag}` }创建Watcher对象`, 'red')
   if (vm.constructor.name === 'Vue') {
     vm.log('Vue.prototype.$mount 调用 mountComponent')
   } else {

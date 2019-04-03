@@ -32,7 +32,8 @@ export default function model (
       )
     }
   }
-
+  // 根据不同的组件类型进行单独处理
+  console.log('===============================> 根据不同的组件类型进行单独处理')
   if (el.component) {
     genComponentModel(el, value, modifiers)
     // component v-model doesn't need extra runtime
@@ -128,6 +129,7 @@ function genDefaultModel (
   modifiers: ?ASTModifiers
 ): ?boolean {
   const type = el.attrsMap.type
+  console.log('===============================> 处理指令的修饰符')
 
   // warn if v-bind:value conflicts with v-model
   // except for inputs with v-bind:type
