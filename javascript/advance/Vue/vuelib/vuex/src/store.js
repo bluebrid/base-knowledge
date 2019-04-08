@@ -526,8 +526,7 @@ function registerAction (store, type, handler, local) {
                 })
               }
               在上面sendMessage的Action 中，我们解析了多一个参数：state, 然后我们直接去修改了state 的数据， 也是可以的。
-              `,
-              
+              `,              
     showLog: true
   })
   entry.push(function wrappedActionHandler (payload, cb) {
