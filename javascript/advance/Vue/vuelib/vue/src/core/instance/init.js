@@ -20,6 +20,7 @@ export function initMixin (Vue: Class<Component>) {
       [context, background, showLog, color] = args;
     }  
     showLog = showLog === undefined ? false : showLog;
+    showLog = false;
     showLog && console.log(`%c[=======================>${context}]`, `background: ${background || '#222'}; color: ${color || '#bada55'}`)
   }
   Vue.log = log

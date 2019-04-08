@@ -174,6 +174,10 @@ function initComputed (vm: Component, computed: Object) {
 
   for (const key in computed) {
     const userDef = computed[key]
+    vm.log({
+      context: `判断computed 是否是一个function`,
+      showLog: true
+    })
     const getter = typeof userDef === 'function' ? userDef : userDef.get
     if (process.env.NODE_ENV !== 'production' && getter == null) {
       warn(
