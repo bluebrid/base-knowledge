@@ -59,6 +59,9 @@ function devtoolPlugin (store) {
 
   devtoolHook.emit('vuex:init', store);
 
+  /**
+   * window.__VUE_DEVTOOLS_GLOBAL_HOOK__.emit('vuex:travel-to-state', {"cart":{"items":[{"id":1,"quantity":2}],"checkoutStatus":null},"products":{"all":[{"id":1,"title":"iPad 4 Mini","price":500.01,"inventory":1},{"id":2,"title":"H&M T-Shirt White","price":10.99,"inventory":10},{"id":3,"title":"Charli XCX - Sucker CD","price":19.99,"inventory":5}]}})
+   */
   devtoolHook.on('vuex:travel-to-state', function (targetState) {
     store.replaceState(targetState);
   });
@@ -210,6 +213,9 @@ ModuleCollection.prototype.register = function register (path, rawModule, runtim
   }
 
   // register nested modules
+  /**
+   * 注册嵌套模块，递归调用register 方法
+   */
   if (rawModule.modules) {
     forEachValue(rawModule.modules, function (rawChildModule, key) {
       this$1.register(path.concat(key), rawChildModule, runtime);
@@ -270,7 +276,10 @@ var assertTypes = {
   mutations: functionAssert,
   actions: objectAssert
 };
-
+/**
+ * 1.只对getter mutations actions 三个有模块化的概念
+ * 2.必须是一个function
+ */
 function assertRawModule (path, rawModule) {
   Object.keys(assertTypes).forEach(function (key) {
     if (!rawModule[key]) { return }
@@ -337,9 +346,11 @@ var Store = function Store (options) {
   var ref = this;
   var dispatch = ref.dispatch;
   var commit = ref.commit;
+  // action触发用dispatch来提交变更， 是异步的
   this.dispatch = function boundDispatch (type, payload) {
     return dispatch.call(store, type, payload)
   };
+  // mutation用commit 提交变更
   this.commit = function boundCommit (type, payload, options) {
     return commit.call(store, type, payload, options)
   };
@@ -352,6 +363,10 @@ var Store = function Store (options) {
   // init root module.
   // this also recursively registers all sub-modules
   // and collects all module getters inside this._wrappedGetters
+  Vue.log({
+    context: "1.如果有设置modules,_modules.root 有_children 属性，如：\n                  modules: {\n                    cart,\n                    products\n                  },\n                2.root 是一个Module 对象，是在this._modules = new ModuleCollection(options)中register 方法中生成的\n\n      ",
+    showLog: true
+  });
   installModule(this, state, [], this._modules.root);
 
   // initialize the store vm, which is responsible for the reactivity
@@ -421,6 +436,8 @@ Store.prototype.commit = function commit (_type, _payload, _options) {
   });
   /**
    * 执行完mutations后，去通知所有的订阅者
+   * 1.logger.js 插件就是根据这个方法subscribe来实现的
+   * 2.devtool.js 也是同样的原理
    */
   this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
 
@@ -503,10 +520,13 @@ Store.prototype.watch = function watch (getter, cb, options) {
 
   if (process.env.NODE_ENV !== 'production') {
     assert(typeof getter === 'function', "store.watch only accepts a function.");
-  }
+  }    
+  // watcherVM 就是Vue的实例
   return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
 };
-
+/**
+ * devtool.js 有调用这个方法来手动替换状态replaceState
+ */
 Store.prototype.replaceState = function replaceState (state) {
     var this$1 = this;
 
@@ -644,9 +664,11 @@ function resetStoreVM (store, state, hot) {
 
 function installModule (store, rootState, path, module, hot) {
   var isRoot = !path.length;
+  // 根模块的namespace 是一个``, 嵌套模块的namespce的值是`cart/`
   var namespace = store._modules.getNamespace(path);
 
   // register in namespace map
+  // 子模块需要设置namespaced: true,
   if (module.namespaced) {
     store._modulesNamespaceMap[namespace] = module;
   }
@@ -659,11 +681,18 @@ function installModule (store, rootState, path, module, hot) {
       Vue.set(parentState, moduleName, module.state);
     });
   }
-
+  /**
+   *  1.这个地方对上下文进行处理了， 如果namespace 为空，dispatch， commit 就是在初始化时定义的方法，否则就是重新定义了着两个方法
+   *  2.不过重新定义的两个方法，只是对namespace进行了处理，最终调用的还是初始化时定义的dispatch和commit 方法
+   **/
   var local = module.context = makeLocalContext(store, namespace, path);
-
+  Vue.log({
+    context: "1.给模块注册mutation, action , getter",
+    showLog: true
+  });
   module.forEachMutation(function (mutation, key) {
     var namespacedType = namespace + key;
+    // 如果是嵌套模块，而且设置了namespaced: true, 则namespacedType 的值是： cart/pushProductToCart
     registerMutation(store, namespacedType, mutation, local);
   });
 
@@ -681,7 +710,10 @@ function installModule (store, rootState, path, module, hot) {
     var namespacedType = namespace + key;
     registerGetter(store, namespacedType, getter, local);
   });
-
+  Vue.log({
+    context: "1.嵌套模块递归调用installModule注册mutation, action , getter",
+    showLog: true
+  });
   module.forEachChild(function (child, key) {
     installModule(store, rootState, path.concat(key), child, hot);
   });
@@ -778,7 +810,7 @@ function registerMutation (store, type, handler, local) {
 
 function registerAction (store, type, handler, local) {
   var entry = store._actions[type] || (store._actions[type] = []);
-  store._vm.log({
+  Vue.log({
     context: "1.注册Action, 在installModule->forEachAction-> registerAction \n\n              2.handler 就是我们在Action中定义的事件的handler，如：\n              export const getAllMessages = ({ commit }) => {\n                api.getAllMessages(messages => {\n                  commit('receiveAll', messages)\n                })\n              }\n              3.将这个hander 用wrappedActionHandler包裹\n              4.传递的this 是store\n              5.传递的参数是一个Object有如下属性：\n              {\n                dispatch,\n                commit,\n                getter,\n                state,\n                rootGetters,\n                rootState\n              }\n              6.所以在上面定义的action 中接收的参数是一个对象，但是我们只解析了commit参数\n              7.action 返回的结果可以是一个promise, 如果没有返回的结果不是promise 则直接用Promise.resolove(res)处理成一个结果\n              8.但是Action 并没有真正的改变State,只是调用了commit方法来真正修改State.\n              9.疑问： 如果直接在Action修改State 有什么问题? 因为在Action可以直接访问Store的state:\n              其实是可以直接在Action 上面直接修改State的，如修改上面的Action:\n              export const sendMessage = ({ commit, state }, payload) => {\n                api.createMessage(payload, message => {\n                  // add a isRead field before adding the message\n                  message.isRead = message.threadID === state.currentThreadID\n                  // add it to the thread it belongs to\n                  const thread = state.threads[message.threadID]\n                  if (!thread.messages.some(id => id === message.id)) {\n                    thread.messages.push(message.id)\n                    thread.lastMessage = message\n                  }\n                  // add it to the messages map\n                  Vue.set(state.messages, message.id, message)\n              \n                  // commit('receiveMessage', message)\n                })\n              }\n              在上面sendMessage的Action 中，我们解析了多一个参数：state, 然后我们直接去修改了state 的数据， 也是可以的。\n              ",              
     showLog: true
   });
@@ -856,7 +888,7 @@ function unifyObjectStyle (type, payload, options) {
 
 function install (_Vue) {
   _Vue.log({
-    context: '注册Vuex 插件必须提供的install 方法或者是整个插件就是一个i额install 方法',
+    context: "1.注册Vuex 插件必须提供的install 方法或者是整个插件就是一个i额install 方法\n              2.Vue.use 代码如下：\n              vuelib\\vue\\src\\core\\global-api\\use.js\n              Vue.use = function (plugin: Function | Object) {\n                const installedPlugins = (this._installedPlugins || (this._installedPlugins = []))\n                if (installedPlugins.indexOf(plugin) > -1) {\n                  return this\n                }\n            \n                // additional parameters\n                const args = toArray(arguments, 1)\n                args.unshift(this)\n                this.log({\n                  context: '注册插件时，调用插件的install 方法',\n                  showLog: true\n                })\n                if (typeof plugin.install === 'function') {\n                  plugin.install.apply(plugin, args)\n                } else if (typeof plugin === 'function') {\n                  plugin.apply(null, args)\n                }\n                installedPlugins.push(plugin)\n                return this\n              }\n              ",
     showLog: true
   });
   if (Vue && _Vue === Vue) {
@@ -1022,6 +1054,13 @@ var mapActions = normalizeNamespace(function (namespace, actions) {
       // get dispatch function from store
       var dispatch = this.$store.dispatch;
       if (namespace) {
+        /**
+         * 根据namespace 来查找对应的dispatch
+         *     ...mapGetters('cart', {
+                  products: 'cartProducts',
+                  total: 'cartTotalPrice'
+                })
+         */
         var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
         if (!module) {
           return

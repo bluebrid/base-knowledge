@@ -20,3 +20,7 @@ npm run dev ` 启动demo
 
 npm run dev:dist `实时检测Vuex源码
 
+===================
+cd d/private/bluebrid/base-knowledge/javascript/advance/Vue/vuelib/iview
+
+npm run dev ` 启动iView 项目

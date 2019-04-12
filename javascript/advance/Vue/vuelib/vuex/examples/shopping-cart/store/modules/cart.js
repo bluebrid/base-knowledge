@@ -49,12 +49,13 @@ const actions = {
     commit('setCheckoutStatus', null)
     if (product.inventory > 0) {
       const cartItem = state.items.find(item => item.id === product.id)
-      if (!cartItem) {
+      if (!cartItem) {        
         commit('pushProductToCart', { id: product.id })
       } else {
         commit('incrementItemQuantity', cartItem)
       }
       // remove 1 item from stock
+      // 因为跨模块调用，需要添加模块名称来调用
       commit('products/decrementProductInventory', { id: product.id }, { root: true })
     }
   }

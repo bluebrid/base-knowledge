@@ -136,6 +136,13 @@ export const mapActions = normalizeNamespace((namespace, actions) => {
       // get dispatch function from store
       let dispatch = this.$store.dispatch
       if (namespace) {
+        /**
+         * 根据namespace 来查找对应的dispatch
+         *     ...mapGetters('cart', {
+                  products: 'cartProducts',
+                  total: 'cartTotalPrice'
+                })
+         */
         const module = getModuleByNamespace(this.$store, 'mapActions', namespace)
         if (!module) {
           return

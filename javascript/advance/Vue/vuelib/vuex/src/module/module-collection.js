@@ -39,6 +39,9 @@ export default class ModuleCollection {
     }
 
     // register nested modules
+    /**
+     * 注册嵌套模块，递归调用register 方法
+     */
     if (rawModule.modules) {
       forEachValue(rawModule.modules, (rawChildModule, key) => {
         this.register(path.concat(key), rawChildModule, runtime)
@@ -100,7 +103,10 @@ const assertTypes = {
   mutations: functionAssert,
   actions: objectAssert
 }
-
+/**
+ * 1.只对getter mutations actions 三个有模块化的概念
+ * 2.必须是一个function
+ */
 function assertRawModule (path, rawModule) {
   Object.keys(assertTypes).forEach(key => {
     if (!rawModule[key]) return

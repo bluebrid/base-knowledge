@@ -45,9 +45,11 @@ export class Store {
     // bind commit and dispatch to self
     const store = this
     const { dispatch, commit } = this
+    // action触发用dispatch来提交变更， 是异步的
     this.dispatch = function boundDispatch (type, payload) {
       return dispatch.call(store, type, payload)
     }
+    // mutation用commit 提交变更
     this.commit = function boundCommit (type, payload, options) {
       return commit.call(store, type, payload, options)
     }
@@ -60,6 +62,17 @@ export class Store {
     // init root module.
     // this also recursively registers all sub-modules
     // and collects all module getters inside this._wrappedGetters
+    Vue.log({
+      context: `1.如果有设置modules,_modules.root 有_children 属性，如：
+                  modules: {
+                    cart,
+                    products
+                  },
+                2.root 是一个Module 对象，是在this._modules = new ModuleCollection(options)中register 方法中生成的
+
+      `,
+      showLog: true
+    })
     installModule(this, state, [], this._modules.root)
 
     // initialize the store vm, which is responsible for the reactivity
@@ -133,6 +146,8 @@ export class Store {
     })
     /**
      * 执行完mutations后，去通知所有的订阅者
+     * 1.logger.js 插件就是根据这个方法subscribe来实现的
+     * 2.devtool.js 也是同样的原理
      */
     this._subscribers.forEach(sub => sub(mutation, this.state))
 
@@ -212,10 +227,13 @@ export class Store {
   watch (getter, cb, options) {
     if (process.env.NODE_ENV !== 'production') {
       assert(typeof getter === 'function', `store.watch only accepts a function.`)
-    }
+    }    
+    // watcherVM 就是Vue的实例
     return this._watcherVM.$watch(() => getter(this.state, this.getters), cb, options)
   }
-
+  /**
+   * devtool.js 有调用这个方法来手动替换状态replaceState
+   */
   replaceState (state) {
     this._withCommit(() => {
       this._vm._data.$$state = state
@@ -346,9 +364,11 @@ function resetStoreVM (store, state, hot) {
 
 function installModule (store, rootState, path, module, hot) {
   const isRoot = !path.length
+  // 根模块的namespace 是一个``, 嵌套模块的namespce的值是`cart/`
   const namespace = store._modules.getNamespace(path)
 
   // register in namespace map
+  // 子模块需要设置namespaced: true,
   if (module.namespaced) {
     store._modulesNamespaceMap[namespace] = module
   }
@@ -361,11 +381,18 @@ function installModule (store, rootState, path, module, hot) {
       Vue.set(parentState, moduleName, module.state)
     })
   }
-
+  /**
+   *  1.这个地方对上下文进行处理了， 如果namespace 为空，dispatch， commit 就是在初始化时定义的方法，否则就是重新定义了着两个方法
+   *  2.不过重新定义的两个方法，只是对namespace进行了处理，最终调用的还是初始化时定义的dispatch和commit 方法
+   **/
   const local = module.context = makeLocalContext(store, namespace, path)
-
+  Vue.log({
+    context: `1.给模块注册mutation, action , getter`,
+    showLog: true
+  })
   module.forEachMutation((mutation, key) => {
     const namespacedType = namespace + key
+    // 如果是嵌套模块，而且设置了namespaced: true, 则namespacedType 的值是： cart/pushProductToCart
     registerMutation(store, namespacedType, mutation, local)
   })
 
@@ -390,7 +417,10 @@ function installModule (store, rootState, path, module, hot) {
     const namespacedType = namespace + key
     registerGetter(store, namespacedType, getter, local)
   })
-
+  Vue.log({
+    context: `1.嵌套模块递归调用installModule注册mutation, action , getter`,
+    showLog: true
+  })
   module.forEachChild((child, key) => {
     installModule(store, rootState, path.concat(key), child, hot)
   })
@@ -485,7 +515,7 @@ function registerMutation (store, type, handler, local) {
 
 function registerAction (store, type, handler, local) {
   const entry = store._actions[type] || (store._actions[type] = [])
-  store._vm.log({
+  Vue.log({
     context: `1.注册Action, 在installModule->forEachAction-> registerAction \n
               2.handler 就是我们在Action中定义的事件的handler，如：
               export const getAllMessages = ({ commit }) => {
@@ -612,7 +642,31 @@ function unifyObjectStyle (type, payload, options) {
 
 export function install (_Vue) {
   _Vue.log({
-    context: '注册Vuex 插件必须提供的install 方法或者是整个插件就是一个i额install 方法',
+    context: `1.注册Vuex 插件必须提供的install 方法或者是整个插件就是一个i额install 方法
+              2.Vue.use 代码如下：
+              vuelib\\vue\\src\\core\\global-api\\use.js
+              Vue.use = function (plugin: Function | Object) {
+                const installedPlugins = (this._installedPlugins || (this._installedPlugins = []))
+                if (installedPlugins.indexOf(plugin) > -1) {
+                  return this
+                }
+            
+                // additional parameters
+                const args = toArray(arguments, 1)
+                args.unshift(this)
+                this.log({
+                  context: '注册插件时，调用插件的install 方法',
+                  showLog: true
+                })
+                if (typeof plugin.install === 'function') {
+                  plugin.install.apply(plugin, args)
+                } else if (typeof plugin === 'function') {
+                  plugin.apply(null, args)
+                }
+                installedPlugins.push(plugin)
+                return this
+              }
+              `,
     showLog: true
   })
   if (Vue && _Vue === Vue) {

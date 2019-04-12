@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from '../../../../vue/dist/vue'
+import Vuex from '../../../dist/vuex.common'
 import cart from './modules/cart'
 import products from './modules/products'
 import createLogger from '../../../src/plugins/logger'
