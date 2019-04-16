@@ -1,0 +1,7 @@
+{
+  "plugins": [
+    ["./plugin.7", {
+      "targetName": "a"
+    }]
+  ]
+}
