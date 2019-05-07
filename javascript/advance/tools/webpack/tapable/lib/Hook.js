@@ -172,6 +172,26 @@ class Hook {
 		this.taps[i] = item;
 	}
 }
+/**
+ * 在Hook.prototype 上面挂载了_call, _callAsync, _promise 三个属性
+ */
+Object.defineProperties(Hook.prototype, {
+	_call: {
+		value: createCompileDelegate("call", "sync"),
+		configurable: true,
+		writable: true
+	},
+	_callAsync: {
+		value: createCompileDelegate("callAsync", "async"),
+		configurable: true,
+		writable: true
+	},
+	_promise: {
+		value: createCompileDelegate("promise", "promise"),
+		configurable: true,
+		writable: true
+	}
+});
 
 function createCompileDelegate(name, type) {
 	return function lazyCompileHook(...args) {
@@ -194,8 +214,7 @@ function createCompileDelegate(name, type) {
 				return factory.create(options);
 			}
 		 */
-		this[name] = this._createCall(type);	
-		
+		this[name] = this._createCall(type);
 		/**
 		 * this._createCall 
 		 * (function anonymous(
@@ -223,28 +242,21 @@ function createCompileDelegate(name, type) {
 				console.log('WarningLampPlugin')
 			);
 		 */
+		/**
+		 * this[name]:
+		 * (function anonymous(newSpeed
+			) {
+			"use strict";
+			var _context;
+			var _x = this._x;
+			var _fn0 = _x[0];
+			_fn0(newSpeed);
+
+			})
+		 */
 		return this[name](...args);
 	};
 }
-/**
- * 在Hook.prototype 上面挂载了_call, _callAsync, _promise 三个属性
- */
-Object.defineProperties(Hook.prototype, {
-	_call: {
-		value: createCompileDelegate("call", "sync"),
-		configurable: true,
-		writable: true
-	},
-	_callAsync: {
-		value: createCompileDelegate("callAsync", "async"),
-		configurable: true,
-		writable: true
-	},
-	_promise: {
-		value: createCompileDelegate("promise", "promise"),
-		configurable: true,
-		writable: true
-	}
-});
+
 
 module.exports = Hook;

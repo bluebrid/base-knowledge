@@ -8,7 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Tapable Launch Program",
-            "program": "${workspaceFolder}/demo/Myplugin.js"
+            // "program": "${workspaceFolder}/demo/Myplugin.js"
+            "program": "${workspaceFolder}/demo/6.AsyncParallelBailHook/demo.1.js"
         }
     ]
 }

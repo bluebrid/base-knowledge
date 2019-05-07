@@ -40,6 +40,22 @@ class SyncHook extends Hook {
 		   => 
 		 */
 		factory.setup(this, options);
+		/**
+		 * 	 fn = new Function(
+					this.args(),
+					'"use strict";\n' +
+						this.header() +
+						this.content({
+							onError: err => `throw ${err};\n`,
+							onResult: result => `return ${result};\n`,
+							onDone: () => "",
+							rethrowIfPossible: true
+						})
+				);
+				break;
+		
+		 */
+		// factory.create 返回的是一个fn
 		return factory.create(options);
 	}
 }

@@ -1,12 +1,13 @@
 const {
     SyncHook,
+    SyncBailHook,
     AsyncParallelHook
 } = require('../lib');
 
 class Compiler {
     constructor(options) {
         this.hooks = {
-            accelerate: new SyncHook(["newSpeed"]), // newSpeed 表示要在调用call 需要传递的参数
+            accelerate: new SyncBailHook(["newSpeed"]), // newSpeed 表示要在调用call 需要传递的参数
             break: new SyncHook(),
             calculateRoutes: new AsyncParallelHook(["source", "target", "routesList"])
         };
@@ -18,20 +19,20 @@ class Compiler {
             plugins.forEach(plugin => plugin.apply(this));
         }
     }
-    run(){
+    run() {
         console.time('cost');
         this.accelerate('10000000')
         this.break()
         this.calculateRoutes('i', 'like', 'tapable')
     }
-    accelerate(param){
+    accelerate(param) {
         // 这里的call , callAsync, call 是在Hook.js _resetCompilation 定义的
         this.hooks.accelerate.call(param);
     }
-    break(){
+    break() {
         this.hooks.break.call();
     }
-    calculateRoutes(){
+    calculateRoutes() {
         const args = Array.from(arguments)
         this.hooks.calculateRoutes.callAsync(...args, err => {
             console.timeEnd('cost');

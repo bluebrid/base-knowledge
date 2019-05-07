@@ -23,7 +23,7 @@ class HookCodeFactory {
 						this.content({
 							onError: err => `throw ${err};\n`,
 							onResult: result => `return ${result};\n`,
-							onDone: () => "",
+							onDone: () => "", // 根据taps 生成函数内容，完成执行这个函数
 							rethrowIfPossible: true
 						})
 				);
