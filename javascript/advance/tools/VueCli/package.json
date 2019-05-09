@@ -1,20 +1,6 @@
 {
   
-  "description": "Command line interface for rapid Vue.js development",
-  "bin": {
-    "vue": "bin/vue.js"
-  },
-  "scripts": {
-    "debug": "node bin/vue.js"
-  },
-  "keywords": [
-    "vue",
-    "cli"
-  ], 
-  
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Command line interface for rapid Vue.js development1111",
   "dependencies": {
     "@vue/cli-shared-utils": "^3.5.1",
     "@vue/cli-ui": "^3.5.5",
