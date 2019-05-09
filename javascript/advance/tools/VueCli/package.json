@@ -8,20 +8,12 @@
   "scripts": {
     "debug": "node bin/vue.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vuejs/vue-cli.git",
-    "directory": "packages/@vue/cli"
-  },
   "keywords": [
     "vue",
     "cli"
   ],
   "author": "Evan You",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vuejs/vue-cli/issues"
-  },
   "homepage": "https://cli.vuejs.org/",
   "publishConfig": {
     "access": "public"
