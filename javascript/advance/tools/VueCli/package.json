@@ -1,6 +1,5 @@
 {
-  "name": "@vue/cli",
-  "version": "3.5.5",
+  
   "description": "Command line interface for rapid Vue.js development",
   "bin": {
     "vue": "bin/vue.js"
@@ -11,10 +10,8 @@
   "keywords": [
     "vue",
     "cli"
-  ],
-  "author": "Evan You",
-  "license": "MIT",
-  "homepage": "https://cli.vuejs.org/",
+  ], 
+  
   "publishConfig": {
     "access": "public"
   },
@@ -53,6 +50,6 @@
   },
   "engines": {
     "node": ">=8.9"
-  },
-  "gitHead": "0dc793497281718762a5477a3de4a7ee439cdda6"
+  }
+   
 }
