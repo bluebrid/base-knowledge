@@ -1,6 +1,6 @@
 {
-  
   "description": "Command line interface for rapid Vue.js development1111",
+  "version": "3.5.5",
   "dependencies": {
     "@vue/cli-shared-utils": "^3.5.1",
     "@vue/cli-ui": "^3.5.5",
@@ -37,5 +37,4 @@
   "engines": {
     "node": ">=8.9"
   }
-   
 }

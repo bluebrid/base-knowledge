@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Vue-cli",
+            "name": "Debug  Demo Vue-cli",
             "args": [
                 "create", "demo-2"
             ],
