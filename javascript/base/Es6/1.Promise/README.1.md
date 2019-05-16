@@ -750,9 +750,311 @@ MyPromise.race(promises2).then(
 ## catch
 
 我们上面已经写好了一个我们自己的`Promise` ,但是`Promise` 还有一个实例方法`catch`,
-1. 首先`catch` 的
+我们先看下`catch` 的如下七个使用范例以及对应的输出来进行分析：
+```javascript
+// Demo 1
+new Promise((resolve, reject) => {
+    throw Error('throw a error')
+}) 
+// 输出:
+// 没有任何的输出，直接报JS错误
 
+// Demo 2
+new Promise((resolve, reject) => {
+    throw Error('throw a error')
+})
+.then(
+    msg => console.log('onResolve:' + msg))
+// 输出：
+// 没有任何的输出，直接报JS错误
+
+// Demo 3
+new Promise((resolve, reject) => {
+    throw Error('throw a error')
+}) 
+.then(
+    msg => console.log('onResolve:' + msg),
+    err => console.log('onReject:' + err))
+// 输出：
+// onReject:Error: throw a error
+
+// Demo 4
+new Promise((resolve, reject) => {
+    throw Error('throw a error')
+})
+.catch(err => console.log('onCatch:'+ err))
+.then(
+    msg => console.log('onResolve:' + msg),
+    err => console.log('onReject:' + err))
+// 输出：
+// onCatch: Error: throw a error
+// onResolve:undefined
+
+// Demo 5
+new Promise((resolve, reject) => {
+    throw Error('throw a error')
+})
+.then(
+    msg => console.log('onResolve:' + msg),
+    err => console.log('onReject:' + err))
+.catch(err => console.log('onCatch:'+ err))
+// 输出：
+// onReject: Error: throw a error
+ 
+// Demo 6
+new Promise((resolve, reject) => {
+    throw Error('throw a error')
+})
+.then(
+    msg => console.log('onResolve:' + msg))
+.catch(err => console.log('onCatch:'+ err))
+// 输出:
+// onCatch:Error: throw a error
+
+// Demo 7
+new Promise((resolve, reject) => {
+   reject(1)
+})
+.catch(err => console.log('onCatch:'+ err))
+.then(
+    msg => console.log('onResolve:' + msg),
+    err => console.log('onReject:' + err))
+// 输出：
+// onCatch: 1
+// onResolve:undefined
+
+// Demo 8
+new Promise((resolve, reject) => {
+   resolve(1)
+})
+.catch(err => console.log('onCatch:'+ err))
+.then(
+    msg => console.log('onResolve:' + msg),
+    err => console.log('onReject:' + err))
+// 输出：
+// onReject: 1
+
+```
+上面的所有的Demo 1 到　Demo 6 我们都是先在`Promise` 的`executor`(构造函数的参数),中直接抛出了一个`Error`：
+1. 在Demo 1 中，我们只是创建了一个`Promise`的对象，没有再调用任何的方法，执行的结果是直接报JS错误
+2. 在Demo 2 中，我们`链式调用` 了`then` 方法，但是我们没有传递`onReject` 方法，执行的结果也是直接报JS错误
+3. 在Demo 3 中，我们`链式调用` 了`then` 方法，而且传递了`onReject` 方法，执行的结果是运行了`onReject` 方法
+4. 在Demo 4 中，我们`链式调用` 了`catch` -> `then` 方法, 而且`then` 传递了`onResolve` 和`onReject`, 
+执行的结果是： 首先输出了`catch` 方法，然后执行了`then`的`onResove` 方法，但是`msg` 是`undefined`,是因为在`throw` 中没有`return` 任何的值
+5. 在Demo 5 中，我们`链式调用` 了`then` -> `catch` 方法， 而且在`then` 中传递了`onResove`和`onReject`,
+执行的结果是: 只执行了`then` 中的`onReject` 方法，　`catch` 方法没有执行
+6. 在Demo 6 中，我们`链式调用` 了`then` -> `catch` 方法，但是在`then` 中没有传递`onReject`，　
+执行的结果是: 只执行了`catch`方法
+7. 在Demo 7 中，我们在`executor` 中直接执行`reject`, 然后`链式调用`了`catch` -> `then` ,并且在`then` 中传递了`onReject`,
+执行的结果是: 执行`catch` 和`then`中的`onResove`
+8. 在Demo 8 中，我们在`executor` 中直接执行了`resolve`, 然后链式调用le`catch` -> `then`, 并且在`then`中传递了`onReject`,
+执行的结果是： 没有执行`catch`, 直接执行了`then` 的`onResolve` 方法, 并且`resovle`传递的值也被`then` 中的`onResove` 接收.
+
+所以我们从上面的分析可知：
+1. `catch` 可以`链式调用`，说明`catch` 是一个`实例方法`，而且返回的也是一个`新的Promise`
+2. `executor` 会抛出错误，所以我们在执行`executor`时需要`try` `catch`, 并且在`catch` 中要执行`onReject`, 将状态变更成`rejected`
+3. `executor` 抛出错误或者执行`reject`, 如果直接调用`catch` 都是会执行的，所以可以认为如果当前状态是`rejected`, 直接调用`catch` 都会执行的
+```javascript
+function createNewPromise(onResolve, onReject) {
+    function resolvePromise(value, resolve, reject) {
+      if (value instanceof MyPromise) {
+        value.then.call(
+          value,
+          function onResolve(data) {
+            resolve(data)
+          },
+          function onReject(err) {
+            reject(err)
+          })
+      } else {
+        resolve(value)
+      }
+    }
+  let promise2 = new MyPromise((resolve, reject) => {
+    this.onResovleCallbacks = []
+    this.onRejectedCallbacks = []
+    let newValue
+    if (this.currentState === this.STATUS.FULFILLED) {
+      try {
+        newValue = onResolve && onResolve(this.value)
+        resolvePromise(newValue, resolve, reject)
+      } catch (err) {
+        reject(err)
+      }
+
+    } else if (this.currentState === this.STATUS.REJECTED) {
+      try {
+        newValue = onReject(this.reason)
+        this.error = null;
+        resolvePromise(newValue, resolve, reject)
+      } catch (err) {
+        reject(err)
+      }
+
+    } else if (this.currentState === this.STATUS.PENDING) {
+      this.onResovleCallbacks.push(() => {
+        try {
+          newValue = onResolve(this.value)
+          resolvePromise(newValue, resolve, reject)
+        } catch (err) {
+          reject(err)
+        }
+
+      })
+      this.onRejectedCallbacks.push(() => {
+        try {
+          newValue = onReject(this.reason)
+          resolvePromise(newValue, resolve, reject)
+        } catch (err) {
+          reject(err)
+        }
+      })
+    }
+  })
+  return promise2
+}
+class MyPromise {
+  constructor(executor) {
+    this.STATUS = {
+      PENDING: 'pending',
+      FULFILLED: 'fulfilled',
+      REJECTED: 'rejected'
+    }
+    this.error = null;
+    this.currentState = this.STATUS.PENDING
+    let resolve = msg => {
+      if (this.currentState === this.STATUS.PENDING) {
+        this.currentState = this.STATUS.FULFILLED
+        this.value = msg
+        this.onResovleCallbacks.forEach(cb => this.value = cb(this.value))
+      }
+
+    }
+
+    let reject = err => {
+      if (this.currentState === this.STATUS.PENDING) {
+        this.currentState = this.STATUS.REJECTED
+        this.reason = err
+        this.onRejectedCallbacks.forEach(cb => this.value = cb(this.reason))
+      }
+    }
+    this.value = undefined
+    this.reason = undefined
+    this.onResovleCallbacks = []
+    this.onRejectedCallbacks = []
+    try {
+      executor(resolve, reject)
+    } catch (e) {
+      reject(e)
+      this.error = e
+    }
+
+  }
+
+  then(onResolve, onReject) {
+    return createNewPromise.call(this, onResolve, onReject);
+  }
+
+  catch(onCatch) {
+    return createNewPromise.call(this, null, onCatch);
+  }
+
+}
+// 修改的代码：
+MyPromise.resolve = (data) => {
+  return new MyPromise((resolve, reject) => {
+    resolve(data)
+  })
+}
+
+MyPromise.reject = (err) => {
+  return new MyPromise((resolve, reject) => {
+    reject(err)
+  })
+}
+
+MyPromise.all = (promises) => {
+    if (!Array.isArray(promises)) {
+        promises = [promises]
+    }
+    let results = []
+    let promise2 = new Promise((resolve, reject) => {
+        promises.forEach(p => {
+            p.then(msg => {
+               results.push(msg) 
+            },
+            err => {
+                reject(err)
+            })
+        })
+        resolve(results)
+    })
+    return promise2
+}
+
+MyPromise.race = (promises) => {
+    if (!Array.isArray(promises)) {
+        promises = [promises]
+    }
+    let results = []
+    let promise2 = new Promise((resolve, reject) => {
+        promises.forEach(p => {
+            p.then(msg => {
+               resolve(msg) 
+            },
+            err => {
+              reject(err)
+            })
+        })
+        resolve(results)
+    })
+    return promise2
+}
+```
+<font size=5 color=red>问题:</font>
+
+上面的代码已经基本实现了`catch` 功能，但是如果我们在`executor` 抛出异常，而且在`then` 方法中，没有传递`onReject` 方法， 应该报JS错误的，但是还没有实现
 
 ## finally
+`finally`方法用于指定不管 `Promise` 对象最后状态如何，都会执行的操作。该方法是 ES2018 引入标准的。
+我们先看下使用的方式如下：
+
+```javascript
+// Demo 1
+Promise.resolve(1)
+.finally(() => {
+    console.log('finally')
+})
+.then(msg => console.log(msg)) 
+// 输出
+// finally
+// 1
+
+// Demo 2
+Promise.resolve(1)
+.finally(() => {
+    console.log('finally')
+    return 'finally'
+})
+.then(msg => console.log(msg)) 
+// 输出
+// finally
+// 1
+// Demo 3
+Promise.resolve(1)
+.then(() => {
+    console.log('then')
+    return 'then'
+})
+.then(msg => console.log(msg)) 
+// 输出
+// then
+// then
+```
+从上面的范例我们可以分析得知：
+
+1. 不管`Promise` 对象的最后状态如何，都会执行`finally`
+2. 
+
 
 ## 静态方法try
