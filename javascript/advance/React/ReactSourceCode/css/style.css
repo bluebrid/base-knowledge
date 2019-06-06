@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-display: swap;
+  font-family: "Lato", sans-serif;
+  height: 400px;
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 .5rem;
+}
+.app .react-app-code {
+  width: 100%;
+  border-radius: 4px;
+  padding: .5rem .25rem;
+  margin-bottom: 0;
+}
+button {
+  background: #002219;
+  /* outline: none; */
+  border: none;
+}
+@media (min-width: 500px) {
+  .app .react-app-code {
+    padding: .5rem 1rem;
+  }
+}
+.app .language-jsx {
+  font-size: 89%;
+}
+@media (min-width: 500px) {
+  .app .language-jsx {
+    font-size: 100%;
+  }
+}
+
+.react-app {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 1rem;
+  background: #002219;
+  color: white;
+}
+.react-app :first-child {
+  font-size: 3rem;
+}
+.react-app > * {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-weight: 300;
+  font-size: 2rem;
+}
+.react-app > * + * {
+  margin-top: 1rem;
+}

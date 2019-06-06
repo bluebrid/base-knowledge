@@ -13,7 +13,13 @@
     "dev6": "webpack-dev-server --inline --progress --config build/webpack.demo.6.conf.js",
     "dev7": "webpack-dev-server --inline --progress --config build/webpack.demo.7.conf.js",
     "dev8": "webpack-dev-server --inline --progress --config build/webpack.demo.8.conf.js",
-    "dev9": "webpack-dev-server --inline --progress --config build/webpack.demo.9.conf.js"
+    "dev9": "webpack-dev-server --inline --progress --config build/webpack.demo.9.conf.js",
+    "dev10": "webpack --config build/webpack.demo.10.conf.js",
+    "dev11": "webpack --config build/webpack.demo.11.conf.js",
+    "dev12": "webpack --config build/webpack.demo.12.conf.js",
+    "dev13": "webpack --config build/webpack.demo.13.conf.js",
+    "dev14": "webpack --config build/webpack.demo.14.conf.js",
+    "dev15": "webpack --config build/webpack.demo.15.conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +29,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^2.0.2",
     "react-loadable": "^5.5.0",
     "react-router-dom": "^5.0.0",
     "webpack": "^4.31.0",
