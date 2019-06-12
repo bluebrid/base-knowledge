@@ -2649,6 +2649,7 @@ function useContext(Context, unstable_observedBits) {
 }
 
 function useState(initialState) {
+  log(`(useState) 开始执行useState`)
   var dispatcher = resolveDispatcher();
   return dispatcher.useState(initialState);
 }

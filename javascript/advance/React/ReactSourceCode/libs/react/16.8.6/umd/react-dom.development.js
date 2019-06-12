@@ -25,8 +25,20 @@
  * The invariant message will be stripped in production, but the invariant
  * will remain to ensure logic does not differ in production.
  */
-const log = (context= '', background ='#222', color='#bada55') => {
- // console.log(`%c[Dom] %c[=======================> ${context}]`, `background: red; color: blue`, `background: ${background || '#222'}; color: ${color || '#bada55'}`)
+const log = (context= '', subTitle = 'Render', background ='#222', color='#bada55') => {
+  console.log(`%c[Dom](${subTitle}) %c[=======================> ${context}]`, `background: red; color: blue`, `background: ${background || '#222'}; color: ${color || '#bada55'}`)
+}
+const logHooks = (context= '', background ='#009ACD', color='#bada55') => {
+  log(context, 'Hooks', background, color)
+}
+const logSetState = (context= '', background ='#8B0000', color='#bada55') => {
+  log(context, 'SetState', background, color)
+}
+const logRender = (context= '', background ='#C6E2FF', color='#bada55') => {
+  log(context, 'Hooks', background, color)
+}
+const logRegisterEvent = (context= '', background ='#0000CD', color='#bada55') => {
+  log(context, 'RegisterEvent', background, color)
 }
 var validateFormat = function () {};
 
@@ -505,7 +517,7 @@ var warningWithoutStack = function () {};
 
       // We intentionally don't use spread (or .apply) directly because it
       // breaks IE9: https://github.com/facebook/react/issues/13610
-      Function.prototype.apply.call(console.error, console, argsWithFormat);
+      Function.prototype.apply.call(error, console, argsWithFormat);
     }
     try {
       // --- Welcome to debugging React ---
@@ -571,7 +583,7 @@ function executeDispatchesInOrder(event) {
   
   var dispatchListeners = event._dispatchListeners;
   var dispatchInstances = event._dispatchInstances;
-  console.log(`(executeDispatchesInOrder)获取click 真正注册的事件handler->dispatchListeners `)
+  log(`(executeDispatchesInOrder)获取click 真正注册的事件handler->dispatchListeners `)
   log(`(executeDispatchesInOrder)获取click 真正注册的事件handler->dispatchListeners `)
   {
     validateEventDispatches(event);
@@ -766,13 +778,13 @@ function getListener(inst, registrationName) {
   // TODO: shouldPreventMouseEvent is DOM-specific and definitely should not
   // live here; needs to be moved to a better place soon
   var stateNode = inst.stateNode;
-  console.log(`(getListener) 在inst(FiberNode 的stateNode 保存的是对应的Dom 对象，是一个[object HTMLButtonElement])`)
+  log(`(getListener) 在inst(FiberNode 的stateNode 保存的是对应的Dom 对象，是一个[object HTMLButtonElement])`)
   if (!stateNode) {
     // Work in progress (ex: onload events in incremental mode).
     return null;
   }
   var props = getFiberCurrentPropsFromNode(stateNode);
-  console.log(`(getListener), stateNode 是对应的Dom 节点，如： 是一个[object HTMLButtonElement]对象，
+  log(`(getListener), stateNode 是对应的Dom 节点，如： 是一个[object HTMLButtonElement]对象，
   绑定了一个类型的stateNode["__reactEventHandlers$l7hkzdggela"]属性，这个属性是一个Object: {
     onClick: fn(),
     children: 'Click Me(1)'
@@ -833,7 +845,7 @@ function runEventsInBatch(events) {
 
 function runExtractedEventsInBatch(topLevelType, targetInst, nativeEvent, nativeEventTarget) {
   var events = extractEvents(topLevelType, targetInst, nativeEvent, nativeEventTarget);
-  console.log(`(runExtractedEventsInBatch)根据topLevelType , targetInst, nativeEvent, nativeEventTarget 获取一个events 对象， events._dispatchListeners 指向的就是我们注册click 事件的handler`)
+  log(`(runExtractedEventsInBatch)根据topLevelType , targetInst, nativeEvent, nativeEventTarget 获取一个events 对象， events._dispatchListeners 指向的就是我们注册click 事件的handler`)
   log(`(runExtractedEventsInBatch)根据topLevelType , targetInst, nativeEvent, nativeEventTarget 获取一个events 对象， events._dispatchListeners 指向的就是我们注册click 事件的handler`)
   runEventsInBatch(events);
 }
@@ -931,7 +943,7 @@ function getFiberCurrentPropsFromNode$1(node) {
 }
 
 function updateFiberProps(node, props) {
-  console.log(`(updateFiberProps) 给对应的Dom 添加类似__reactEventHandlers$lu9c3vpftoq的属性， 并且将props 保存在上面`)
+  log(`(updateFiberProps) 给对应的Dom 添加类似__reactEventHandlers$lu9c3vpftoq的属性， 并且将props 保存在上面`)
   node[internalEventHandlersKey] = props;
 }
 
@@ -1093,7 +1105,7 @@ function accumulateDirectionalDispatches(inst, phase, event) {
     !inst ? warningWithoutStack$1(false, 'Dispatching inst must not be null') : void 0;
   }
   var listener = listenerAtPhase(inst, event, phase);
-  console.log(`(accumulateDirectionalDispatches) 获取到了对应的listener后， 将其绑定在event上，后面会直接根据这个event 来进行处理`)
+  log(`(accumulateDirectionalDispatches) 获取到了对应的listener后， 将其绑定在event上，后面会直接根据这个event 来进行处理`)
   if (listener) {
     event._dispatchListeners = accumulateInto(event._dispatchListeners, listener);
     event._dispatchInstances = accumulateInto(event._dispatchInstances, inst);
@@ -3135,7 +3147,7 @@ var printWarning = function() {};
   printWarning = function(text) {
     var message = 'Warning: ' + text;
     if (typeof console !== 'undefined') {
-      console.error(message);
+      error(message);
     }
     try {
       // --- Welcome to debugging React ---
@@ -4974,7 +4986,7 @@ function isEnabled() {
  * @internal
  */
 function trapBubbledEvent(topLevelType, element) {
-  console.log('====================>注册冒泡事件')
+  log('====================>注册冒泡事件')
   if (!element) {
     return null;
   }
@@ -4998,7 +5010,7 @@ function trapBubbledEvent(topLevelType, element) {
  * @internal
  */
 function trapCapturedEvent(topLevelType, element) {
-  console.log('===================>注册捕获事件')
+  log('===================>注册捕获事件')
   if (!element) {
     return null;
   }
@@ -8909,7 +8921,7 @@ function createInstance(type, props, rootContainerInstance, hostContext, interna
     parentNamespace = hostContextDev.namespace;
   }
   var domElement = createElement(type, props, rootContainerInstance, parentNamespace);
-  console.log(`(createInstance), 创建一个Dom 元素`)
+  log(`(createInstance), 创建一个Dom 元素`)
   precacheFiberNode(internalInstanceHandle, domElement);
   updateFiberProps(domElement, props);
   return domElement;
@@ -10137,7 +10149,7 @@ function FiberNode(tag, pendingProps, key, mode) {
    * mode
    */
   // Instance
-  console.log(`(FiberNode) 创建FiberNode对象节点: tag: ${tag}, pendingProps: ${pendingProps}, key: ${key}, mode: ${mode}`)
+  log(`(FiberNode) 创建FiberNode对象节点: tag: ${tag}, pendingProps: ${pendingProps}, key: ${key}, mode: ${mode}`)
   this.tag = tag;
   this.key = key;
   this.elementType = null;
@@ -10660,7 +10672,7 @@ function createFiberRoot(containerInfo, isConcurrent, hydrate) {
  * Forked from fbjs/warning:
  * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
  *
- * Only change is we use console.warn instead of console.error,
+ * Only change is we use warn instead of error,
  * and do nothing when 'console' is not supported.
  * This really simplifies the code.
  * ---
@@ -10683,7 +10695,7 @@ var lowPriorityWarning = function () {};
       return args[argIndex++];
     });
     if (typeof console !== 'undefined') {
-      console.warn(message);
+      warn(message);
     }
     try {
       // --- Welcome to debugging React ---
@@ -11407,7 +11419,7 @@ var classComponentUpdater = {
     //     if (key === 'callback') {
     //       debugger
     //     }
-    //     console.log(`getting ${key}!`);
+    //     log(`getting ${key}!`);
     //     return Reflect.get(target, key, receiver);
     //   }
     // })
@@ -13445,6 +13457,15 @@ function updateReducer(reducer, initialArg, init) {
 
   // The last update in the entire queue
   var last = queue.last;
+  logHooks(`(updateReducer) last 是如下一个对象：
+  {
+    expirationTime: 1073741823,
+    action: 3, // action 有最新的state
+    eagerReducer: null, 
+    eagerState: null, 
+    next: null
+  }
+  `)
   // The last update that is part of the base state.
   var baseUpdate = hook.baseUpdate;
   var baseState = hook.baseState;
@@ -13493,6 +13514,7 @@ function updateReducer(reducer, initialArg, init) {
         } else {
           var _action2 = _update.action;
           _newState = reducer(_newState, _action2);
+         
         }
       }
       prevUpdate = _update;
@@ -13518,6 +13540,7 @@ function updateReducer(reducer, initialArg, init) {
   }
 
   var dispatch = queue.dispatch;
+  logHooks(`(updateReducer),返回一个更新的state`)
   return [hook.memoizedState, dispatch];
 }
 
@@ -13531,11 +13554,14 @@ function mountState(initialState) {
     last: null,
     dispatch: null,
     lastRenderedReducer: basicStateReducer,
-    lastRenderedState: initialState
+    lastRenderedState: initialState // 在queue 中保存了初始化的值：initialState
   };
   var dispatch = queue.dispatch = dispatchAction.bind(null,
   // Flow doesn't know this is non-null, but we do.
   currentlyRenderingFiber$1, queue);
+  logHooks(`(dispatch) ,dispatchAction调用bind 方法，已经传递了两个参数， currentlyRenderingFiber$1, queue`)
+  logHooks(`(mountState) 执行useState 返回一个数组对象，总共两个元素， 第一个元素是初始化值， 第二个元素是一个dispatch 的函数，
+  对应的是dispatchAction 函数， useState 的用法是： const [count, setCount] = React.useState(0)`)
   return [hook.memoizedState, dispatch];
 }
 
@@ -13742,6 +13768,8 @@ var shouldWarnForUnbatchedSetState = false;
 }
 
 function dispatchAction(fiber, queue, action) {
+  // setCount(count + 1)
+  logHooks(`(dispatchAction) setCount(count + 1), 这个setCount 就是这个dispatchAction 函数，action 是新的值(count + 1)`)
   !(numberOfReRenders < RE_RENDER_LIMIT) ? invariant(false, 'Too many re-renders. React limits the number of renders to prevent an infinite loop.') : void 0;
 
   {
@@ -13941,6 +13969,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
       var prevDispatcher = ReactCurrentDispatcher$1.current;
       ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
       try {
+        logHooks(`(useState) 执行ReactDom 中的useState， 调用mountState 方法`)
         return mountState(initialState);
       } finally {
         ReactCurrentDispatcher$1.current = prevDispatcher;
@@ -16683,7 +16712,7 @@ function callCallback(callback, context) {
        this.setState({
         count: this.state.count + 1
       }, () => {
-      console.log('setState Done!')
+      log('setState Done!')
       })
    */
   log(`(callCallback) 就是setState 的第二个参数也就是回调函数`)
@@ -17312,7 +17341,7 @@ function shouldCaptureSuspense(workInProgress) {
 }
 
 // This module is forked in different environments.
-// By default, return `true` to log errors to the console.
+// By default, return `true` to log errors to the 
 // Forks can return `false` if this isn't desirable.
 function showErrorDialog(capturedError) {
   return true;
@@ -17321,7 +17350,7 @@ function showErrorDialog(capturedError) {
 function logCapturedError(capturedError) {
   var logError = showErrorDialog(capturedError);
 
-  // Allow injected showErrorDialog() to prevent default console.error logging.
+  // Allow injected showErrorDialog() to prevent default error logging.
   // This enables renderers like ReactNative to better manage redbox behavior.
   if (logError === false) {
     return;
@@ -17350,7 +17379,7 @@ function logCapturedError(capturedError) {
       // been accidental, we'll surface it anyway.
       // However, the browser would have silenced the original error
       // so we'll print it first, and then print the stack addendum.
-      console.error(error);
+      error(error);
       // For a more detailed description of this block, see:
       // https://github.com/facebook/react/pull/13384
     }
@@ -17374,7 +17403,7 @@ function logCapturedError(capturedError) {
     // We don't include the original error message and JS stack because the browser
     // has already printed it. Even if the application swallows the error, it is still
     // displayed by the browser thanks to the DEV-only fake event trick in ReactErrorUtils.
-    console.error(combinedMessage);
+    error(combinedMessage);
   }
 }
 
@@ -17413,7 +17442,7 @@ function logError(boundary, errorInfo) {
     logCapturedError(capturedError);
   } catch (e) {
     // This method must not throw, or React internal state will get messed up.
-    // If console.error is overridden, or logCapturedError() shows a dialog that throws,
+    // If error is overridden, or logCapturedError() shows a dialog that throws,
     // we want to report this error outside of the normal stack as a last resort.
     // https://github.com/facebook/react/issues/13188
     setTimeout(function () {
@@ -18880,7 +18909,7 @@ if (true && replayFailedUnitOfWorkWithInvokeGuardedCallback) {
     } else {
       // If the begin phase did not fail the second time, set this pointer
       // back to the original value.
-      console.log('1111111111')
+      log('1111111111')
       nextUnitOfWork = failedUnitOfWork;
     }
   };
@@ -20404,7 +20433,7 @@ function requestWork(root, expirationTime) {
   if (expirationTime === Sync) {
     log('============================================> 原生事件', '#32CD32')
     log(`(requestWork)performSyncWork, 原生事件在requestWork里走的是expirationTime === Sync分支，
-    并没有被return, 所以会直接更新， 因此你可以在原生事件中console.log中直接拿到更新后的值`)
+    并没有被return, 所以会直接更新， 因此你可以在原生事件中log中直接拿到更新后的值`)
     performSyncWork();
   } else {
     
@@ -20695,7 +20724,7 @@ function performWorkOnRoot(root, expirationTime, isYieldy) {
         } else {
           // There's no time left. Mark this root as complete. We'll come
           // back and commit it later.
-          console.log(`(completeRoot) 给root.finishedWork 赋值`)
+          log(`(completeRoot) 给root.finishedWork 赋值`)
           root.finishedWork = _finishedWork;
         }
       }
@@ -20718,7 +20747,7 @@ function completeRoot(root, finishedWork, expirationTime) {
       // This root is blocked from committing by a batch. Unschedule it until
       // we receive another update.
       root.finishedWork = finishedWork;
-      console.log(`(completeRoot) 给root.finishedWork 赋值`)
+      log(`(completeRoot) 给root.finishedWork 赋值`)
       root.expirationTime = NoWork;
       return;
     }
@@ -20844,7 +20873,7 @@ function requestWork(root, expirationTime) {
   if (expirationTime === Sync) {
     log('============================================> 原生事件', '#32CD32')
     log(`(requestWork)performSyncWork, 原生事件在requestWork里走的是expirationTime === Sync分支，
-    并没有被return, 所以会直接更新， 因此你可以在原生事件中console.log中直接拿到更新后的值`)
+    并没有被return, 所以会直接更新， 因此你可以在原生事件中log中直接拿到更新后的值`)
     performSyncWork();
   } else {
     
@@ -21659,7 +21688,7 @@ var foundDevTools = injectIntoDevTools({
       var protocol = window.location.protocol;
       // Don't warn in exotic cases like chrome-extension://.
       if (/^(https?|file):$/.test(protocol)) {
-        console.info('%cDownload the React DevTools ' + 'for a better development experience: ' + 'https://fb.me/react-devtools' + (protocol === 'file:' ? '\nYou might need to use a local HTTP server (instead of file://): ' + 'https://fb.me/react-devtools-faq' : ''), 'font-weight:bold');
+        info('%cDownload the React DevTools ' + 'for a better development experience: ' + 'https://fb.me/react-devtools' + (protocol === 'file:' ? '\nYou might need to use a local HTTP server (instead of file://): ' + 'https://fb.me/react-devtools-faq' : ''), 'font-weight:bold');
       }
     }
   }
