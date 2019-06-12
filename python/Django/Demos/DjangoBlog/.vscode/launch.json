@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Python: Django Blog",
-            "type": "pythonExperimental",
+            "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}\\manage.py",
             "args": [
