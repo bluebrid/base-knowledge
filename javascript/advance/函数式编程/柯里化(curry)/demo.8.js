@@ -43,6 +43,7 @@ var list = [
   { value: 'B', tag: 'letter' },
   { value: 2, tag: 'number' }
 ];
+
 console.log(groupBy('tag')(list));
 
 var list2 = [
@@ -53,5 +54,4 @@ var list2 = [
 ];
 
 var getKey = function (item) { return item.age < 40 ? 'under40' : 'over40'; };
-
 console.log(groupBy(getKey)(list2));
