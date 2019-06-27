@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
+    #'blog.middleware.MiddlewareDemo',
     'blog.middleware.OnlineMiddleware'
 ]
 
@@ -264,7 +265,13 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': False,
-        }
+        },
+        
+        # 'django.db.backends': {
+        #     'handlers': ['console'],
+        #     'propagate': True,
+        #     'level':'DEBUG',
+        # },
     }
 }
 

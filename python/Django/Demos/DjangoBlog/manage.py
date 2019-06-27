@@ -4,6 +4,8 @@ import sys
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DjangoBlog.settings")
+    if len(sys.argv) > 2:
+        os.environ.setdefault("ENV_MODE", sys.argv[2])   
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
@@ -18,5 +20,5 @@ if __name__ == "__main__":
                 "available on your PYTHONPATH environment variable? Did you "
                 "forget to activate a virtual environment?"
             )
-        raise
+        raise    
     execute_from_command_line(sys.argv)

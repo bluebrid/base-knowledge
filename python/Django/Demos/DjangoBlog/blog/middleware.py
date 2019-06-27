@@ -18,7 +18,16 @@ from ipware.ip import get_real_ip
 from DjangoBlog.utils import cache
 from blog.documents import ELASTICSEARCH_ENABLED, ElaspedTimeDocumentManager
 
-
+# class MiddlewareDemo(object):
+#     def __init__(self, get_response=None):
+#         self.get_response = get_response
+#         super().__init__()
+#     def __call__(self, request):
+#         print('MiddlewareDemo Start:')
+#         response = self.get_response(request)
+#         print('MiddlewareDemo End;')
+#         print(response)
+#         return response
 class OnlineMiddleware(object):
     def __init__(self, get_response=None):
         self.get_response = get_response

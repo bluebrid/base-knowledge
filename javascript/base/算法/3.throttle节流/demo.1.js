@@ -29,7 +29,8 @@ function throttle(fn, delay) {
 }
 
 addBtn.addEventListener('click', throttle(() => {
-    nameInput.value = +(nameInput.value) + 1;
+    let value = +(nameInput.value) + 1;
+    nameInput.value = value;
 }, 1000 * 3))
 
 minusBtn.addEventListener('click', throttle(() => {
