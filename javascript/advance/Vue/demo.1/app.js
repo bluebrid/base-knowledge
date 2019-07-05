@@ -87,7 +87,7 @@ var app = new Vue({
   // note there's no DOM manipulation here at all.
   methods: {
     log: function(name, background='#FFF', color='#000') {
-     log(name, background, color)
+     // log(name, background, color)
     },
     addTodo: function () {
       var value = this.newTodo && this.newTodo.trim()

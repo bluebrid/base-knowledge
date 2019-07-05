@@ -22,6 +22,18 @@ let uid = 0
  * A watcher parses an expression, collects dependencies,
  * and fires callback when the expression value changes.
  * This is used for both the $watch() api and directives.
+ * 创建Watcher对象 的几种情况：
+ * 1. 配置了watch 属性，如：
+ * watch: {
+    todos: {
+      handler: function (todos) {
+        todoStorage.save(todos)
+      },
+      deep: true
+      }
+    },
+    而且每一个属性都会创建一个Watcher对象
+    2. 
  */
 export default class Watcher {
   vm: Component;
@@ -49,8 +61,19 @@ export default class Watcher {
     options?: ?Object,
     isRenderWatcher?: boolean
   ) {
+    
     this.vm = vm
     if (isRenderWatcher) {
+      // \src\core\instance\lifecycle.js mountComponent 方法 中创建的Watcher 对象才会传递`isRenderWatcher` 属性
+      /*
+          new Watcher(vm, expOrFn, noop, {
+            before () {
+              if (vm._isMounted) {
+                callHook(vm, 'beforeUpdate')
+              }
+            }
+          }, true )// isRenderWatcher )
+      */
       vm._watcher = this
     }
     vm._watchers.push(this)
@@ -77,8 +100,59 @@ export default class Watcher {
       : ''
     // parse expression for getter
     if (typeof expOrFn === 'function') {
+      // computed 会走这个分支, 会立即执行对应的方法
+      // this.getter.call(vm, vm)
+      /**
+       *   computed: {
+            filteredTodos: function () {
+              return filters[this.visibility](this.todos)
+            },
+            remaining: function () {
+              return filters.active(this.todos).length
+            },
+            allDone: {
+              get: function () {
+                return this.remaining === 0
+              },
+              set: function (value) {
+                this.todos.forEach(function (todo) {
+                  todo.completed = value
+                })
+              }
+            }
+          },
+       */
       this.getter = expOrFn
     } else {
+      // watch 属性都是走这个分支
+      /*
+      watch: {
+        todos: {
+          handler: function (todos) {
+            todoStorage.save(todos)
+          },
+          deep: true
+        }
+      },*/
+      /**
+       *vuelib\vue\src\core\util\lang.js
+        const bailRE = /[^\w.$]/
+        export function parsePath (path: string): any {
+          if (bailRE.test(path)) {
+            return
+          }
+          const segments = path.split('.')
+          return function (obj) {
+            for (let i = 0; i < segments.length; i++) {
+              if (!obj) return
+              obj = obj[segments[i]]
+            }
+            return obj
+          }
+        }
+
+        this.getter.call(vm, vm)
+       */
       this.getter = parsePath(expOrFn)
       if (!this.getter) {
         this.getter = noop

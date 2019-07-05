@@ -21,7 +21,7 @@ export function initMixin (Vue: Class<Component>) {
     }  
     showLog = showLog === undefined ? false : showLog;
     showLog = false;
-    showLog && console.log(`%c[=======================>${context}]`, `background: ${background || '#222'}; color: ${color || '#bada55'}`)
+    // showLog && console.log(`%c[=======================>${context}]`, `background: ${background || '#222'}; color: ${color || '#bada55'}`)
   }
   Vue.log = log
   Vue.prototype.log = log

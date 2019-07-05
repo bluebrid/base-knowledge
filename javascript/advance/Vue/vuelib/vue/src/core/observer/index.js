@@ -172,6 +172,21 @@ export function defineReactive (
        * 9,调用每个Watcher对象的update方法
        * 10, 然后判断每个每个Watcher 是否是同步，如果是同步，就直接运行Watcher 的run 方法， 否则将对应的Watcher 添加到一个queue数组中，然后用nextTick执行
        */
+      /**
+       * 1. 在第一次渲染时， 会执行render 方法时，也就匿名函数， 会进入到reactiveGetter 方法中，
+       * 此时的Dep.target 还是vue\src\core\instance\lifecycle.js 中mountComponent方法生成的Watcher 
+       * 2. 所以只要任意属性在template 引用过的，值再次变更时，都会重新渲染UI
+       *   new Watcher(vm, expOrFn, noop, {
+            before () {
+              if (vm._isMounted) {
+                callHook(vm, 'beforeUpdate')
+              }
+            }
+          }, true )
+       */
+      // if (key === 'title') {
+      //   debugger
+      // }
       if (Dep.target) {
         /**
          * 1, dep.depend 方法就是，将Dep.target的Watcher 对象，添加到dep.subs数组中

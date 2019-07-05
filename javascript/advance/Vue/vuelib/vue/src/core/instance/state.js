@@ -49,7 +49,7 @@ export function initState (vm: Component) {
   vm._watchers = []
   const opts = vm.$options
   if (opts.props) initProps(vm, opts.props)
-  if (opts.methods) initMethods(vm, opts.methods)
+  if (opts.methods) initMethods(vm, opts.methods) // initMethods 就是将Method 上面的方法直接挂在在vm上
   if (opts.data) {
     initData(vm)
   } else {
@@ -144,6 +144,7 @@ function initData (vm: Component) {
         vm
       )
     } else if (!isReserved(key)) {
+      // 将所有的属性都挂载在_data上面
       proxy(vm, `_data`, key)
     }
   }
@@ -319,7 +320,10 @@ function createWatcher (
   }
   return vm.$watch(expOrFn, handler, options)
 }
-
+/**
+ * 在index.js 中执行了这个方法，挂载了$set,$delete, $watch 在vue 的实例上面
+ *  
+ */
 export function stateMixin (Vue: Class<Component>) {
   // flow somehow has problems with directly declared definition object
   // when using Object.defineProperty, so we have to procedurally build up

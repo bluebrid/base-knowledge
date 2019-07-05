@@ -206,7 +206,7 @@ function genConfig (name) {
     enumerable: false,
     value: name
   })
-
+  console.log(config)
   return config
 }
 

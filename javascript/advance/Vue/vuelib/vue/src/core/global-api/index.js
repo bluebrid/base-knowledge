@@ -29,7 +29,6 @@ export function initGlobalAPI (Vue: GlobalAPI) {
     }
   }
   Object.defineProperty(Vue, 'config', configDef)
-
   // exposed util methods.
   // NOTE: these are not considered part of the public API - avoid relying on
   // them unless you are aware of the risk.

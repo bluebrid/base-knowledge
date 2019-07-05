@@ -160,6 +160,7 @@ export function queueWatcher (watcher: Watcher) {
       /**
        * 异步执行， 执行nextTick, 可以先理解为setTimeout
        */
+      debugger
       nextTick(flushSchedulerQueue)
     }
   }

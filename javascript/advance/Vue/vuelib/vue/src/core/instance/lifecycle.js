@@ -61,6 +61,7 @@ export function lifecycleMixin (Vue: Class<Component>) {
     const prevEl = vm.$el
     const prevVnode = vm._vnode
     const restoreActiveInstance = setActiveInstance(vm)
+    // 将生成的vnode 保存在vm（Vue实例）对象, 在后面更新的时候， 会取vm._vnode 和重新生成的vnode 进行比较
     vm._vnode = vnode
     // Vue.prototype.__patch__ is injected in entry points
     // based on the rendering backend used.
@@ -205,7 +206,8 @@ export function mountComponent (
   } else {
 
   }
-  new Watcher(vm, updateComponent, noop, {
+  var expOrFn = updateComponent;
+  new Watcher(vm, expOrFn, noop, {
     before () {
       if (vm._isMounted) {
         callHook(vm, 'beforeUpdate')
