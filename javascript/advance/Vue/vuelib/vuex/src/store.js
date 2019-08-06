@@ -40,6 +40,7 @@ export class Store {
     this._modules = new ModuleCollection(options)
     this._modulesNamespaceMap = Object.create(null)
     this._subscribers = []
+    // 创建一个没有参数的Vue, 
     this._watcherVM = new Vue()
 
     // bind commit and dispatch to self
@@ -168,12 +169,48 @@ export class Store {
       showLog: true
     })
     // check object-style dispatch
+    /**
+     * function unifyObjectStyle (type, payload, options) {
+        if (isObject(type) && type.type) {
+          options = payload
+          payload = type
+          type = type.type
+        }
+
+        if (process.env.NODE_ENV !== 'production') {
+          assert(typeof type === 'string', `expects string as the type, but found ${typeof type}.`)
+        }
+
+        return { type, payload, options }
+      }
+     */
+    /**
+     * dispatch 可以使用如下两种方式：
+     * 1. this.$store.dispatch('addTodo', text);
+     * 2. this.$store.dispatch({type: 'addTodo, payload: text});
+     */
     const {
       type,
       payload
     } = unifyObjectStyle(_type, _payload)
 
     const action = { type, payload }
+    /**
+     * action：
+     * {
+        addTodo ({ commit }, text) {
+          commit('addTodo', {
+            text,
+            done: false
+          })
+        },
+
+        removeTodo ({ commit }, todo) {
+          commit('removeTodo', todo)
+        },
+        ...
+      }
+     */
     const entry = this._actions[type]
     if (!entry) {
       if (process.env.NODE_ENV !== 'production') {

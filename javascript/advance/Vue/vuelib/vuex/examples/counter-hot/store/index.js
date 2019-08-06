@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from '../../../../vue/dist/vue'
 import Vuex from 'vuex'
 import * as getters from './getters'
 import * as actions from './actions'

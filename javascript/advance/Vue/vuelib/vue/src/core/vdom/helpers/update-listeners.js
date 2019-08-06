@@ -73,11 +73,38 @@ export function updateListeners (
       )
     } else if (isUndef(old)) {
       if (isUndef(cur.fns)) {
+        // cur 就是我们在render里面的函数
+        /**
+         *  function ($event) {
+                    if (!('button' in $event) && _k($event.keyCode, "enter", 13,
+                            $event.key, "Enter")) return null;
+                    return addTodo($event)
+                }
+         */
+        /**
+          export function createFnInvoker (fns: Function | Array<Function>): Function {
+            function invoker () {
+              const fns = invoker.fns
+              if (Array.isArray(fns)) {
+                const cloned = fns.slice()
+                for (let i = 0; i < cloned.length; i++) {
+                  cloned[i].apply(null, arguments)
+                }
+              } else {
+                // return handler return value for single handlers
+                return fns.apply(null, arguments)
+              }
+            }
+            invoker.fns = fns
+            return invoker
+          }
+         */
         cur = on[name] = createFnInvoker(cur)
       }
       if (isTrue(event.once)) {
         cur = on[name] = createOnceHandler(event.name, cur, event.capture)
       }
+      // 添加事件 src\platforms\web\runtime\modules\events.js
       add(event.name, cur, event.capture, event.passive, event.params)
     } else if (cur !== old) {
       old.fns = cur

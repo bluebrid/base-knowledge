@@ -43,7 +43,8 @@ var app = new Vue({
     todos: todoStorage.fetch(),
     newTodo: '',
     editedTodo: null,
-    visibility: 'all'
+    visibility: 'all',
+    title: 'todos'
   },
 
   // watch todos change for localStorage persistence
@@ -64,6 +65,9 @@ var app = new Vue({
     },
     remaining: function () {
       return filters.active(this.todos).length
+    },
+    computeTitle: function() {
+      return this.title + '-' + this.newTodo
     },
     allDone: {
       get: function () {

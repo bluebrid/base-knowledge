@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from '../../../vue/dist/vue'
 import store from './store'
 import CounterControls from './CounterControls.vue'
 

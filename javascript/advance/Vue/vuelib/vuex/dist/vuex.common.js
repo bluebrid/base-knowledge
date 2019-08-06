@@ -276,6 +276,7 @@ var assertTypes = {
   mutations: functionAssert,
   actions: objectAssert
 };
+
 /**
  * 1.只对getter mutations actions 三个有模块化的概念
  * 2.必须是一个function
@@ -339,6 +340,7 @@ var Store = function Store (options) {
   this._modules = new ModuleCollection(options);
   this._modulesNamespaceMap = Object.create(null);
   this._subscribers = [];
+  // 创建一个没有参数的Vue, 
   this._watcherVM = new Vue();
 
   // bind commit and dispatch to self
@@ -460,11 +462,47 @@ Store.prototype.dispatch = function dispatch (_type, _payload) {
     showLog: true
   });
   // check object-style dispatch
+  /**
+   * function unifyObjectStyle (type, payload, options) {
+      if (isObject(type) && type.type) {
+        options = payload
+        payload = type
+        type = type.type
+      }
+
+      if (process.env.NODE_ENV !== 'production') {
+        assert(typeof type === 'string', `expects string as the type, but found ${typeof type}.`)
+      }
+
+      return { type, payload, options }
+    }
+   */
+  /**
+   * dispatch 可以使用如下两种方式：
+   * 1. this.$store.dispatch('addTodo', text);
+   * 2. this.$store.dispatch({type: 'addTodo, payload: text});
+   */
   var ref = unifyObjectStyle(_type, _payload);
     var type = ref.type;
     var payload = ref.payload;
 
   var action = { type: type, payload: payload };
+  /**
+   * action：
+   * {
+      addTodo ({ commit }, text) {
+        commit('addTodo', {
+          text,
+          done: false
+        })
+      },
+
+      removeTodo ({ commit }, todo) {
+        commit('removeTodo', todo)
+      },
+      ...
+    }
+   */
   var entry = this._actions[type];
   if (!entry) {
     if (process.env.NODE_ENV !== 'production') {

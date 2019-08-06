@@ -69,7 +69,7 @@ Vue.prototype.$mount = function (
         mark('compile')
       }
       /**
-       * 非常重要的一个方法，将template 字符串转换成render函数/compiler/index.js
+       * 非常重要的一个方法，将template 字符串转换成render函数 \vue\src\compiler\index.js createCompiler
        */
       const { render, staticRenderFns } = compileToFunctions(template, {
         shouldDecodeNewlines,

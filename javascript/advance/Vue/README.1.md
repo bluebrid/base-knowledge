@@ -333,8 +333,47 @@ function createElm (
 最终通过递归调用，将根据Vnode生成的Dom 都`append`到第一次执行的`parentElm`上， 添加插入到refElm上面。
 
 ## Vue 事件机制
+ `vue\src\core\vdom\patch.js` 执行`createElm` 方法执行`invokeCreateHooks` 方法是绑定事件的入口
 
 ## 更新阶段
+同步:
+input 事件 -> reactiveSetter -> dep.notify -> Watcher.update -> nextTik(flushSchedulerQueue) -> 
+异步:
+flushSchedulerQueue -> watcher.run -> get -> getter -> _update -> 
+一般更新阶段都是通过事件触发的，执行事件,
+比如`input` 事件：
+```javascript
+function ($event) {
+    if ($event.target.composing) return;
+    newTodo = $event.target.value
+}
+```
+会给`newTodo`赋值，
+然后会进入`reactiveSetter` 方法，然后通过`dep.notify()` 去通知所有的`Watcher`, 
+
+我们在第一次渲染的时候，执行`mountComponent`(src\core\instance\lifecycle.js)的方法时候，创建的`Watcher`对象：
+```javascript
+  new Watcher(vm, expOrFn, noop, {
+    before () {
+      if (vm._isMounted) {
+        callHook(vm, 'beforeUpdate')
+      }
+    }
+  }, true /* isRenderWatcher */)
+```
+是在执行`render` 方法之前， 
+所以这个`Watcher` 对象，基本会被所有的被监听的属性绑定，
+所以上面的`input` 事件，也会触发重新渲染，也就是上面的`Watcher` 的`expOrFn`,也就是：
+```javascript
+  updateComponent = () => {
+      vm.log(`更新 ${vm.constructor.name === 'Vue' ? '根组件' : `${vm.$options._componentTag} 组件`}`, '#C0FF3E')
+      /**
+       * _update 去创建组件
+       */
+      vm._update(vm._render(), hydrating)
+    }
+```
+
 在更新阶段，同样也会进入到`patch` 方法，
 不过会进入如下分支：
 ```javascript
@@ -370,11 +409,56 @@ if (!isRealElement && sameVnode(oldVnode, vnode)) {
     }
 ```
 
+## render方法
+我们在执行`Vue.prototype.$mount`(`src\platforms\web\entry-runtime-with-compiler.js`)方法时， 会执行：
+```javascript
+      const { render, staticRenderFns } = compileToFunctions(template, {
+        shouldDecodeNewlines,
+        shouldDecodeNewlinesForHref,
+        delimiters: options.delimiters,
+        comments: options.comments
+      }, this)
+```
+
+而`compileToFunctions`方法最终指向的是(`vue\src\compiler\index.js`)：
+```javascript
+export const createCompiler = createCompilerCreator(function baseCompile (
+  template: string,
+  options: CompilerOptions
+): CompiledResult {
+  /**
+   * baseCompile 函数
+   * 1, parse 方法，将字符串转换成抽象结构树
+   */
+  const ast = parse(template.trim(), options)
+  if (options.optimize !== false) {
+    optimize(ast, options)
+  }
+  /**
+   * 1. generate 将抽象结构树转换成函数
+   */
+  const code = generate(ast, options)
+  return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns
+  }
+})
+```
+这个方法返回了一个对象，最重要的就是根据`template`返回了`render`方法。
+这个方法分成两个部分：
+1. `parse` 方法，根据`template` 字符串转换成抽象结构树`ast`
+2. 将`ast` 转换成一个`render` 函数。
+
+### parse函数
+下面我们来分析下parse函数(`\src\compiler\parser\index.js`)
 
 
 
 
 ## 卸载阶段
+
+
 
 
 

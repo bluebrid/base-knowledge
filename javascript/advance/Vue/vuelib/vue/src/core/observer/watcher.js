@@ -260,7 +260,19 @@ export default class Watcher {
    * Will be called by the scheduler.
    */
   run () {
+    // src\core\observer\scheduler.js 的 flushSchedulerQueue 方法会调用run 方法
     if (this.active) {
+      // run 主要就是调用get()方法，get 方法主要是运行value = this.getter.call(vm, vm)， 而getter 是创建Watcher对象传递的expOrFn
+      /**
+       *   var expOrFn = updateComponent;
+            new Watcher(vm, expOrFn, noop, {
+              before () {
+                if (vm._isMounted) {
+                  callHook(vm, 'beforeUpdate')
+                }
+              }
+            }, true )
+       */
       const value = this.get()
       if (
         value !== this.value ||

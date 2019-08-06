@@ -122,6 +122,7 @@ export function parseHTML (html, options) {
          *  tagName: 'ul',
          *  unarySlash: ''
          * }
+         * {tagName: "section", attrs: Array(1), start: 0, unarySlash: "", end: 25}
          */
         const startTagMatch = parseStartTag()
         if (startTagMatch) {

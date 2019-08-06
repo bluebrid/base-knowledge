@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import TodoItem from './TodoItem.vue'
 
 const filters = {
@@ -76,9 +76,15 @@ export default {
     filteredTodos () {
       return filters[this.visibility](this.todos)
     },
-    remaining () {
-      return this.todos.filter(todo => !todo.done).length
-    }
+    // remaining () {
+    //   return this.todos.filter(todo => !todo.done).length
+    // },
+    //  remaining () {
+    //   return this.$store.getters.remainTodos
+    // }
+    ...mapGetters([
+      'remaining',
+    ])
   },
   methods: {
     ...mapActions([

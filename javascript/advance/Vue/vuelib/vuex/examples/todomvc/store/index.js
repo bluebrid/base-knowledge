@@ -1,8 +1,9 @@
-import Vue from 'vue'
+import Vue from '../../../../vue/dist/vue'
 import Vuex from 'vuex'
 import { mutations, STORAGE_KEY } from './mutations'
 import actions from './actions'
 import plugins from './plugins'
+import getters from './getter'
 
 Vue.use(Vuex)
 
@@ -12,5 +13,6 @@ export default new Vuex.Store({
   },
   actions,
   mutations,
-  plugins
+  plugins,
+  getters
 })

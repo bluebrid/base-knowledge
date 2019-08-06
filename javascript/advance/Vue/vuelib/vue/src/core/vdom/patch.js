@@ -221,6 +221,7 @@ export function createPatchFunction(backend) {
         // 创建children 递归调用createElm方法， 第四个参数ref是为null,所以在调用insert方法时是不会真正插入到真实的DOM中
         createChildren(vnode, children, insertedVnodeQueue)
         if (isDef(data)) {
+          // 绑定事件
           invokeCreateHooks(vnode, insertedVnodeQueue)
         }
         /*        
@@ -351,6 +352,19 @@ export function createPatchFunction(backend) {
 
   function invokeCreateHooks(vnode, insertedVnodeQueue) {
     for (let i = 0; i < cbs.create.length; ++i) {
+      /**
+       *0: ƒ updateAttrs(oldVnode, vnode)
+        1: ƒ updateClass(oldVnode, vnode)
+        2: ƒ updateDOMListeners(oldVnode, vnode) // 添加事件
+        3: ƒ updateDOMProps(oldVnode, vnode)
+        4: ƒ updateStyle(oldVnode, vnode)
+        5: ƒ _enter(_, vnode)
+        6: ƒ create(_, vnode)
+        7: ƒ updateDirectives(oldVnode, vnode)
+        length: 8
+        __proto__: Array(0)
+
+       */
       cbs.create[i](emptyNode, vnode)
     }
     i = vnode.data.hook // Reuse variable

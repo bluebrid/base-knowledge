@@ -103,6 +103,7 @@ const assertTypes = {
   mutations: functionAssert,
   actions: objectAssert
 }
+
 /**
  * 1.只对getter mutations actions 三个有模块化的概念
  * 2.必须是一个function

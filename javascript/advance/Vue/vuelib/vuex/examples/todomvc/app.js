@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import Vue from 'vue'
+import Vue from '../../../vue/dist/vue'
 import store from './store'
 import App from './components/App.vue'
 

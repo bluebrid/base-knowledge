@@ -44,9 +44,34 @@ function add (
   capture: boolean,
   passive: boolean
 ) {
-  handler = withMacroTask(handler)
+  // 开始给元素绑定事件
+  handler = withMacroTask(handler) // 'core/util/index'
+  /**
+   * export function withMacroTask (fn: Function): Function {
+      // return 就是_withTask 的定义， 而不是fn 
+      return fn._withTask || (fn._withTask = function () {
+        useMacroTask = true
+        try {
+          return fn.apply(null, arguments)
+        } finally {
+          useMacroTask = false    
+        }
+      })
+    }
+   */
+  /**
+   * handler: 
+   * function () {
+      useMacroTask = true;
+      try {
+        return fn.apply(null, arguments)
+      } finally {
+        useMacroTask = false;    
+      }
+    }
+   */
   target.addEventListener(
-    event,
+    event, // keyup ,input etc.  eventType 
     handler,
     supportsPassive
       ? { capture, passive }
@@ -75,6 +100,7 @@ function updateDOMListeners (oldVnode: VNodeWithData, vnode: VNodeWithData) {
   const oldOn = oldVnode.data.on || {}
   target = vnode.elm
   normalizeEvents(on)
+  // 添加事件 'core/vdom/helpers/index'
   updateListeners(on, oldOn, add, remove, createOnceHandler, vnode.context)
   target = undefined
 }
