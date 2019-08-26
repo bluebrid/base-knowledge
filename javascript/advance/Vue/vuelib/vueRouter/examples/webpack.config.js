@@ -52,7 +52,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue': path.join(__dirname, '../..', 'vue/dist/vue.js'),
-      'vue-router': path.join(__dirname, '..', 'src')
+      'vue-router': path.join(__dirname, '..', 'src'),
+      'vueFunctionApi': path.join(__dirname, '../..', 'composition-api/dist/vue-composition-api.module.js'),
     }
   },
 
