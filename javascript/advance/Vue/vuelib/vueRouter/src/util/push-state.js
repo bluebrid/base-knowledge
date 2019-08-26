@@ -41,6 +41,8 @@ export function pushState (url?: string, replace?: boolean) {
   saveScrollPosition()
   // try...catch the pushState call to get around Safari
   // DOM Exception 18 where it limits to 100 pushState calls
+  // pushState和replaceState是一个HTML5的新接口，他们的作用非常大，可以做到改变网址却不需要刷新页面
+  // 也不会触发popstate 事件
   const history = window.history
   try {
     if (replace) {

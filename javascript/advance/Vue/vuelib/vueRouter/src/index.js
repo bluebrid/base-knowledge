@@ -39,6 +39,7 @@ export default class VueRouter {
     this.beforeHooks = []
     this.resolveHooks = []
     this.afterHooks = []
+    // 根据传递进来的routes 创建一个matcher 对象
     this.matcher = createMatcher(options.routes || [], this)
 
     let mode = options.mode || 'hash'
@@ -49,6 +50,7 @@ export default class VueRouter {
     if (!inBrowser) {
       mode = 'abstract'
     }
+    // 根据传递
     this.mode = mode
     switch (mode) {
       case 'history':
@@ -72,6 +74,7 @@ export default class VueRouter {
     current?: Route,
     redirectedFrom?: Location
   ): Route {
+    // matcher 是在初始化VueRouter 的时候创建的this.matcher = createMatcher(options.routes || [], this)
     return this.matcher.match(raw, current, redirectedFrom)
   }
 
@@ -85,14 +88,14 @@ export default class VueRouter {
       `not installed. Make sure to call \`Vue.use(VueRouter)\` ` +
       `before creating root instance.`
     )
-
+    // app 也就是一个Vue实例， 是我们在执行Vue.use时，在insall方法时，执行beforeCreate钩子函数注入进来的
     this.apps.push(app)
 
     // main app already initialized.
     if (this.app) {
       return
     }
-
+    // 在VueRouter 实例中，可以直接通过this.app访问Vue实例
     this.app = app
 
     const history = this.history
@@ -100,16 +103,27 @@ export default class VueRouter {
     if (history instanceof HTML5History) {
       history.transitionTo(history.getCurrentLocation())
     } else if (history instanceof HashHistory) {
+      // hash 会走这个分支
       const setupHashListener = () => {
         history.setupListeners()
       }
+      /**
+       * 1. history.getCurrentLocation(),获取当前的URL ,如：/bar
+       */
       history.transitionTo(
         history.getCurrentLocation(),
         setupHashListener,
         setupHashListener
       )
     }
-
+    /**
+     * 1. 监听路由的变化，然后去变更对应的Vue实例的`_route`属性，这也就是路由变化了，会去重新Render不同的视图的根本原因
+     * 2. listen方法就是将对应的回调函数保存在对应的history 实例的cb 属性中src\history\base.js
+     * 3. 我们在路由变化时(src\history\base.js 中的updateRoute函数)会去执行cb函数
+     * listen (cb: Function) {
+        this.cb = cb
+      }
+     */
     history.listen(route => {
       this.apps.forEach((app) => {
         app.log('VueRouter updateRoute Done', 'green')

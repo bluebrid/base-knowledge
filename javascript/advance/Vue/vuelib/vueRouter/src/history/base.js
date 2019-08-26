@@ -34,6 +34,7 @@ export class History {
     this.router = router
     this.base = normalizeBase(base)
     // start with a route object that stands for "nowhere"
+    // 设置默认的current 的路由
     this.current = START
     this.pending = null
     this.ready = false
@@ -62,9 +63,11 @@ export class History {
   }
 
   transitionTo (location: RawLocation, onComplete?: Function, onAbort?: Function) {
+    // 根据location: /bar 去匹配对应的路由
+    // match定义在/src/index 中
     const route = this.router.match(location, this.current)
     this.confirmTransition(route, () => {
-      // 去更新路由
+      // 去更新路由, 其实主要是更新Vue实例上的_route属性
       this.updateRoute(route)
       onComplete && onComplete(route)
       this.ensureURL()
@@ -115,30 +118,85 @@ export class History {
       deactivated,
       activated
     } = resolveQueue(this.current.matched, route.matched)
-
+    // 获取所有的守护函数
     const queue: Array<?NavigationGuard> = [].concat(
       // 组件内的Leave 守护(beforeRouteLeave)
+      /*
+       const Foo = {
+        data () {
+          return { saved: false }
+        },
+        template: `
+          <div>
+            <p>baz ({{ saved ? 'saved' : 'not saved' }})</p>
+            <button @click="saved = true">save</button>
+          </div>
+        `,
+        beforeRouteLeave (to, from, next) {
+          if (this.saved || window.confirm('Not saved, are you sure you want to navigate away?')) {
+            next()
+          } else {
+            next(false)
+          }
+        }
+      }
+       */
       extractLeaveGuards(deactivated),
       // 全局的beforeEach守护
+      /*
+       router.beforeEach((to, from, next) => {
+        console.log('beforeEach', to, from)
+        next()
+      })
+       */
       this.router.beforeHooks,
       // 组件内的Update 守护(beforeRouteUpdate)
       extractUpdateHooks(updated),
       // 在配置中的beforeEnter守护
+      /*
+       const router = new VueRouter({
+          mode: 'history',
+          base: __dirname,
+          linkActiveClass: 'active-link',
+          routes: [
+            {
+              path: '/foo',
+              component: Foo,
+              beforeEnter (to, from, next) {
+                console.log('Config beforeEnter', to, from)
+                next()
+              }
+            },
+            { path: '/bar', component: Bar },
+            { path: '/é', component: Unicode }
+          ]
+        })
+       */
       activated.map(m => m.beforeEnter),
       // async components
       // VueRouter 内置的守护
       resolveAsyncComponents(activated)
     )
-
+    // 将要到达的route 保存在pending 中
     this.pending = route
     const iterator = (hook: NavigationGuard, next) => {
+      // 如果pending 不等于route 直接执行abort函数， 执行完所有的hook后，就会将pedding 给置为null,也就是在
       if (this.pending !== route) {
         return abort()
       }
       try {
+        // 执行指定的守护函数
         hook(route, current, (to: any) => {
           if (to === false || isError(to)) {
             // next(false) -> abort navigation, ensure current URL
+            /**
+             * 1. 如果在执行守护的时候，传递的是false, 则中断导航
+             * 2. 下面的next 就是我们上面执行 hook(route, current, (to: any) => {}), 传递的第三个参数(函数)
+             *  router.beforeEach((to, from, next) => {
+                  console.log('beforeEach', to, from)
+                  next(false)
+                })
+             */
             this.ensureURL(true)
             abort(to)
           } else if (
@@ -164,11 +222,67 @@ export class History {
         abort(e)
       }
     }
+    // 运行所有的队列
+    /**
+     * export function runQueue (queue: Array<?NavigationGuard>, fn: Function, cb: Function) {
+        const step = index => {
+          if (index >= queue.length) {
+            cb() // 递归调用执行完成所有的queue后执行回调函数
+          } else {
+            if (queue[index]) {
+              fn(queue[index], () => { // 通过iterator 函数来运行queue
+                step(index + 1)
+              })
+            } else {
+              step(index + 1)
+            }
+          }
+        }
+        step(0) // 执行第一个
+      }
 
+     */
     runQueue(queue, iterator, () => {
       const postEnterCbs = []
       const isValid = () => this.current === route
       // 组件内Enter的守护(beforeRouteEnter)
+      /**
+       const Foo = {
+        data () {
+          return { saved: false }
+        },
+        template: `
+          <div>
+            <p>baz ({{ saved ? 'saved' : 'not saved' }})</p>
+            <button @click="saved = true">save</button>
+          </div>
+        `,
+        beforeRouteEnter(to, from, next) { // const enterGuards = extractEnterGuards(activated, postEnterCbs, isValid) 执行的是这个守护
+          // 在渲染该组件的对应路由被 confirm 前调用
+          // 不！能！获取组件实例 `this`
+          // 因为当守卫执行前，组件实例还没被创建
+          // 导航离开该组件的对应路由时调用
+          // 可以访问组件实例 `this`
+          next();
+        },
+        beforeRouteUpdate(to, from, next) {
+          // 在当前路由改变，但是该组件被复用时调用
+          // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+          // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+          // 可以访问组件实例 `this`
+          next();
+        },
+        beforeRouteLeave(to, from, next) {
+          // 导航离开该组件的对应路由时调用
+          // 可以访问组件实例 `this`
+          if (this.saved || window.confirm('Not saved, are you sure you want to navigate away?')) {
+            next()
+          } else {
+            next(false)
+          }
+        }
+      }
+       */
       const enterGuards = extractEnterGuards(activated, postEnterCbs, isValid)
       // 全局的resolveHooks 守护
       const queue = enterGuards.concat(this.router.resolveHooks)
@@ -177,7 +291,7 @@ export class History {
           return abort()
         }
         this.pending = null
-        onComplete(route)
+        onComplete(route) // 会去执行下面的pdateRoute 
         if (this.router.app) {
           // this.router.app.$nextTick(() => {
           //   postEnterCbs.forEach(cb => { cb() })
@@ -203,6 +317,12 @@ export class History {
         Vue.util.defineReactive(this, '_route', this._router.history.current)
      */
     this.cb && this.cb(route)
+    // 执行VueRouter 的守护钩子函数afterHooks(afterEach)
+    /**
+     *router.afterEach((to, from) => {
+        console.log('afterEach', to, from)
+      })
+     */
     this.router.afterHooks.forEach(hook => {
       hook && hook(route, prev)
     })

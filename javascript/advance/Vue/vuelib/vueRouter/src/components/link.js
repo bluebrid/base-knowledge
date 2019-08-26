@@ -31,8 +31,14 @@ export default {
   render (h: Function) {
     //  vm.$createElement = function (a, b, c, d) { return createElement(vm, a, b, c, d, true); };
     // h => ƒ (a, b, c, d) { return createElement(vm, a, b, c, d, true); }
-    this.log('渲染RouterLink', 'red')
+    // this.log('渲染RouterLink', 'red')
+    /**
+     * 1. this.$router 是我们在初始化Vue时传递给Vue({router})的router 对象，也即是整个VueRouter的配置对象
+     * 2. this.$route 保存的是当前的Route
+     * 3. 根据this.to, current, 在router 找到当前Link匹配的路由
+     */
     const router = this.$router
+    
     const current = this.$route
     const { location, route, href } = router.resolve(this.to, current, this.append)
 
@@ -62,11 +68,11 @@ export default {
       : isIncludedRoute(current, compareTarget)
 
     const handler = e => {
-      if (guardEvent(e)) {
+      if (guardEvent(e)) { // 在guardEvent 中阻止了默认事件
         if (this.replace) {
-          router.replace(location)
+          router.replace(location) // H5 replaceState 
         } else {
-          router.push(location)
+          router.push(location) // H5 pushState
         }
       }
     }
@@ -118,7 +124,7 @@ function guardEvent (e) {
     if (/\b_blank\b/i.test(target)) return
   }
   // this may be a Weex event which doesn't have this method
-  if (e.preventDefault) {
+  if (e.preventDefault) { // 阻止默认事件
     e.preventDefault()
   }
   return true

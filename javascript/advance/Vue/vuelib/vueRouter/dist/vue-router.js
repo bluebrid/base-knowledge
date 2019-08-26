@@ -80,7 +80,7 @@ var View = {
     if (inactive) {
       return h(cache[name], data, children)
     }
-
+    // 根据当前的路由找到匹配的组件， 然后渲染不同的组件UI
     var matched = route.matched[depth];
     // render empty node if no matched route
     if (!matched) {
@@ -414,8 +414,14 @@ var Link = {
 
     //  vm.$createElement = function (a, b, c, d) { return createElement(vm, a, b, c, d, true); };
     // h => ƒ (a, b, c, d) { return createElement(vm, a, b, c, d, true); }
-    this.log('渲染RouterLink', 'red');
+    // this.log('渲染RouterLink', 'red')
+    /**
+     * 1. this.$router 是我们在初始化Vue时传递给Vue({router})的router 对象，也即是整个VueRouter的配置对象
+     * 2. this.$route 保存的是当前的Route
+     * 3. 根据this.to, current, 在router 找到当前Link匹配的路由
+     */
     var router = this.$router;
+    
     var current = this.$route;
     var ref = router.resolve(this.to, current, this.append);
     var location = ref.location;
@@ -448,11 +454,11 @@ var Link = {
       : isIncludedRoute(current, compareTarget);
 
     var handler = function (e) {
-      if (guardEvent(e)) {
+      if (guardEvent(e)) { // 在guardEvent 中阻止了默认事件
         if (this$1.replace) {
-          router.replace(location);
+          router.replace(location); // H5 replaceState 
         } else {
-          router.push(location);
+          router.push(location); // H5 pushState
         }
       }
     };
@@ -504,7 +510,7 @@ function guardEvent (e) {
     if (/\b_blank\b/i.test(target)) { return }
   }
   // this may be a Weex event which doesn't have this method
-  if (e.preventDefault) {
+  if (e.preventDefault) { // 阻止默认事件
     e.preventDefault();
   }
   return true
@@ -546,7 +552,26 @@ function install (Vue) {
     beforeCreate: function beforeCreate () {     
       if (isDef(this.$options.router)) {
         this._routerRoot = this;
+        /**
+         * 1. Vue在初始化的时候， 会将传入的所有的对象参数都挂载在this.$options上
+         * 2. this.$options.router 是我们在创建Vue示例的时候传递进入的
+         * 3. 我们在初始化Vue的时候，必须传递router参数，而且参数名称必须是router
+          new Vue({
+            router,
+            beforeCreate: function (...args) {
+              this.log('App beforeCreate')
+            }
+            }).$mount('#app')
+            
+         */
+        // Vue实例可以直接通过this._router访问this.$options.router
         this._router = this.$options.router;
+        /**
+         * 1. 我们在app.js 中初始化了VueRouter对象，传递了一个对象参数, mode默认值是hash, 也就是初始化了HashHistory， 也就是`./history/hash` 定义的对象
+         * 2. 执行init方法,在init 方法中最主要是执行了history.listen，去监听route的变化， 然后去变更对应的Vue实例的`_route`属性
+         * 3. 我们在下面执行了`Vue.util.defineReactive(this, '_route', this._router.history.current)`, 让Vue实例的`_route`属性变成可观察对象
+         * 4. 所以我们的路由如果发送了变化,也就是`_route`发送了变化，Vue就会观察到，然后去渲染相应的组件
+         */
         this._router.init(this);
         Vue.util.defineReactive(this, '_route', this._router.history.current);
       } else {
@@ -566,7 +591,7 @@ function install (Vue) {
   Object.defineProperty(Vue.prototype, '$route', {
     get: function get () { return this._routerRoot._route }
   });
-
+  // 定义了Vue中的两个全局组件router-view, router-link
   Vue.component('RouterView', View);
   Vue.component('RouterLink', Link);
 
@@ -1700,6 +1725,8 @@ function pushState (url, replace) {
   saveScrollPosition();
   // try...catch the pushState call to get around Safari
   // DOM Exception 18 where it limits to 100 pushState calls
+  // pushState和replaceState是一个HTML5的新接口，他们的作用非常大，可以做到改变网址却不需要刷新页面
+  // 也不会触发popstate 事件
   var history = window.history;
   try {
     if (replace) {
@@ -1851,6 +1878,7 @@ var History = function History (router, base) {
   this.router = router;
   this.base = normalizeBase(base);
   // start with a route object that stands for "nowhere"
+  // 设置默认的current 的路由
   this.current = START;
   this.pending = null;
   this.ready = false;
@@ -1881,9 +1909,11 @@ History.prototype.onError = function onError (errorCb) {
 History.prototype.transitionTo = function transitionTo (location, onComplete, onAbort) {
     var this$1 = this;
 
+  // 根据location: /bar 去匹配对应的路由
+  // match定义在/src/index 中
   var route = this.router.match(location, this.current);
   this.confirmTransition(route, function () {
-    // 去更新路由
+    // 去更新路由, 其实主要是更新Vue实例上的_route属性
     this$1.updateRoute(route);
     onComplete && onComplete(route);
     this$1.ensureURL();
@@ -1935,30 +1965,85 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     var updated = ref.updated;
     var deactivated = ref.deactivated;
     var activated = ref.activated;
-
+  // 获取所有的守护函数
   var queue = [].concat(
     // 组件内的Leave 守护(beforeRouteLeave)
+    /*
+     const Foo = {
+      data () {
+        return { saved: false }
+      },
+      template: `
+        <div>
+          <p>baz ({{ saved ? 'saved' : 'not saved' }})</p>
+          <button @click="saved = true">save</button>
+        </div>
+      `,
+      beforeRouteLeave (to, from, next) {
+        if (this.saved || window.confirm('Not saved, are you sure you want to navigate away?')) {
+          next()
+        } else {
+          next(false)
+        }
+      }
+    }
+     */
     extractLeaveGuards(deactivated),
     // 全局的beforeEach守护
+    /*
+     router.beforeEach((to, from, next) => {
+      console.log('beforeEach', to, from)
+      next()
+    })
+     */
     this.router.beforeHooks,
     // 组件内的Update 守护(beforeRouteUpdate)
     extractUpdateHooks(updated),
     // 在配置中的beforeEnter守护
+    /*
+     const router = new VueRouter({
+        mode: 'history',
+        base: __dirname,
+        linkActiveClass: 'active-link',
+        routes: [
+          {
+            path: '/foo',
+            component: Foo,
+            beforeEnter (to, from, next) {
+              console.log('Config beforeEnter', to, from)
+              next()
+            }
+          },
+          { path: '/bar', component: Bar },
+          { path: '/é', component: Unicode }
+        ]
+      })
+     */
     activated.map(function (m) { return m.beforeEnter; }),
     // async components
     // VueRouter 内置的守护
     resolveAsyncComponents(activated)
   );
-
+  // 将要到达的route 保存在pending 中
   this.pending = route;
   var iterator = function (hook, next) {
+    // 如果pending 不等于route 直接执行abort函数， 执行完所有的hook后，就会将pedding 给置为null,也就是在
     if (this$1.pending !== route) {
       return abort()
     }
     try {
+      // 执行指定的守护函数
       hook(route, current, function (to) {
         if (to === false || isError(to)) {
           // next(false) -> abort navigation, ensure current URL
+          /**
+           * 1. 如果在执行守护的时候，传递的是false, 则中断导航
+           * 2. 下面的next 就是我们上面执行 hook(route, current, (to: any) => {}), 传递的第三个参数(函数)
+           *router.beforeEach((to, from, next) => {
+                console.log('beforeEach', to, from)
+                next(false)
+              })
+           */
           this$1.ensureURL(true);
           abort(to);
         } else if (
@@ -1984,11 +2069,67 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
       abort(e);
     }
   };
+  // 运行所有的队列
+  /**
+   * export function runQueue (queue: Array<?NavigationGuard>, fn: Function, cb: Function) {
+      const step = index => {
+        if (index >= queue.length) {
+          cb() // 递归调用执行完成所有的queue后执行回调函数
+        } else {
+          if (queue[index]) {
+            fn(queue[index], () => { // 通过iterator 函数来运行queue
+              step(index + 1)
+            })
+          } else {
+            step(index + 1)
+          }
+        }
+      }
+      step(0) // 执行第一个
+    }
 
+   */
   runQueue(queue, iterator, function () {
     var postEnterCbs = [];
     var isValid = function () { return this$1.current === route; };
     // 组件内Enter的守护(beforeRouteEnter)
+    /**
+     const Foo = {
+      data () {
+        return { saved: false }
+      },
+      template: `
+        <div>
+          <p>baz ({{ saved ? 'saved' : 'not saved' }})</p>
+          <button @click="saved = true">save</button>
+        </div>
+      `,
+      beforeRouteEnter(to, from, next) { // const enterGuards = extractEnterGuards(activated, postEnterCbs, isValid) 执行的是这个守护
+        // 在渲染该组件的对应路由被 confirm 前调用
+        // 不！能！获取组件实例 `this`
+        // 因为当守卫执行前，组件实例还没被创建
+        // 导航离开该组件的对应路由时调用
+        // 可以访问组件实例 `this`
+        next();
+      },
+      beforeRouteUpdate(to, from, next) {
+        // 在当前路由改变，但是该组件被复用时调用
+        // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+        // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+        // 可以访问组件实例 `this`
+        next();
+      },
+      beforeRouteLeave(to, from, next) {
+        // 导航离开该组件的对应路由时调用
+        // 可以访问组件实例 `this`
+        if (this.saved || window.confirm('Not saved, are you sure you want to navigate away?')) {
+          next()
+        } else {
+          next(false)
+        }
+      }
+    }
+     */
     var enterGuards = extractEnterGuards(activated, postEnterCbs, isValid);
     // 全局的resolveHooks 守护
     var queue = enterGuards.concat(this$1.router.resolveHooks);
@@ -1997,7 +2138,7 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
         return abort()
       }
       this$1.pending = null;
-      onComplete(route);
+      onComplete(route); // 会去执行下面的pdateRoute 
       if (this$1.router.app) {
         // this.router.app.$nextTick(() => {
         // postEnterCbs.forEach(cb => { cb() })
@@ -2023,6 +2164,7 @@ History.prototype.updateRoute = function updateRoute (route) {
       Vue.util.defineReactive(this, '_route', this._router.history.current)
    */
   this.cb && this.cb(route);
+  // 执行VueRouter 的守护钩子函数afterHooks(afterEach)
   this.router.afterHooks.forEach(function (hook) {
     hook && hook(route, prev);
   });
@@ -2177,7 +2319,12 @@ var HTML5History = /*@__PURE__*/(function (History$$1) {
     }
 
     var initLocation = getLocation(this.base);
-    window.addEventListener('popstate', function (e) {
+   
+    window.addEventListener('popstate', function (e) { // 监听不到pushState和replaceState
+      /**
+       * 1. 监听不了history的pushState和replaceState事件
+       * 2. 监听浏览器的前进，后退， window.history.go 事件
+       */
       var current = this$1.current;
       this$1.router.app.log('browser popstate 事件', '#7EC0EE');
       // Avoiding first `popstate` event dispatched in some browsers but first
@@ -2186,7 +2333,7 @@ var HTML5History = /*@__PURE__*/(function (History$$1) {
       if (this$1.current === START && location === initLocation) {
         return
       }
-
+      // 处理VueRouter的真正跳转
       this$1.transitionTo(location, function (route) {
         if (supportsScroll) {
           handleScroll(router, route, current, true);
@@ -2209,6 +2356,8 @@ var HTML5History = /*@__PURE__*/(function (History$$1) {
     var ref = this;
     var fromRoute = ref.current;
     this.transitionTo(location, function (route) {
+      //  pushState和replaceState是一个HTML5的新接口，他们的作用非常大，可以做到改变网址却不需要刷新页面， 所以可以控制不刷新页面，但是可以URL跳转
+      // 只是视觉上实现了URL跳转，而页面的渲染，是Vue根据`_route`的变化来实现的
       pushState(cleanPath(this$1.base + route.fullPath));
       handleScroll(this$1.router, route, fromRoute, false);
       onComplete && onComplete(route);
@@ -2227,10 +2376,10 @@ var HTML5History = /*@__PURE__*/(function (History$$1) {
     }, onAbort);
   };
 
-  HTML5History.prototype.ensureURL = function ensureURL (push) {
-    if (getLocation(this.base) !== this.current.fullPath) {
-      var current = cleanPath(this.base + this.current.fullPath);
-      push ? pushState(current) : replaceState(current);
+  HTML5History.prototype.ensureURL = function ensureURL (push) {// 确保跳转到一个安全的URL，如/
+    if (getLocation(this.base) !== this.current.fullPath) { // 判断当前的URL和需要跳转的URL是否相等
+      var current = cleanPath(this.base + this.current.fullPath); // 获取主页的URL(根URL)
+      push ? pushState(current) : replaceState(current); // \src\util\push-state.js, 直接跳转到根URL
     }
   };
 
@@ -2457,6 +2606,7 @@ var VueRouter = function VueRouter (options) {
   this.beforeHooks = [];
   this.resolveHooks = [];
   this.afterHooks = [];
+  // 根据传递进来的routes 创建一个matcher 对象
   this.matcher = createMatcher(options.routes || [], this);
 
   var mode = options.mode || 'hash';
@@ -2467,6 +2617,7 @@ var VueRouter = function VueRouter (options) {
   if (!inBrowser) {
     mode = 'abstract';
   }
+  // 根据传递
   this.mode = mode;
   switch (mode) {
     case 'history':
@@ -2492,6 +2643,7 @@ VueRouter.prototype.match = function match (
   current,
   redirectedFrom
 ) {
+  // matcher 是在初始化VueRouter 的时候创建的this.matcher = createMatcher(options.routes || [], this)
   return this.matcher.match(raw, current, redirectedFrom)
 };
 
@@ -2507,14 +2659,14 @@ VueRouter.prototype.init = function init (app /* Vue component instance */) {
     "not installed. Make sure to call `Vue.use(VueRouter)` " +
     "before creating root instance."
   );
-
+  // app 也就是一个Vue实例， 是我们在执行Vue.use时，在insall方法时，执行beforeCreate钩子函数注入进来的
   this.apps.push(app);
 
   // main app already initialized.
   if (this.app) {
     return
   }
-
+  // 在VueRouter 实例中，可以直接通过this.app访问Vue实例
   this.app = app;
 
   var history = this.history;
@@ -2522,16 +2674,27 @@ VueRouter.prototype.init = function init (app /* Vue component instance */) {
   if (history instanceof HTML5History) {
     history.transitionTo(history.getCurrentLocation());
   } else if (history instanceof HashHistory) {
+    // hash 会走这个分支
     var setupHashListener = function () {
       history.setupListeners();
     };
+    /**
+     * 1. history.getCurrentLocation(),获取当前的URL ,如：/bar
+     */
     history.transitionTo(
       history.getCurrentLocation(),
       setupHashListener,
       setupHashListener
     );
   }
-
+  /**
+   * 1. 监听路由的变化，然后去变更对应的Vue实例的`_route`属性，这也就是路由变化了，会去重新Render不同的视图的根本原因
+   * 2. listen方法就是将对应的回调函数保存在对应的history 实例的cb 属性中src\history\base.js
+   * 3. 我们在路由变化时(src\history\base.js 中的updateRoute函数)会去执行cb函数
+   * listen (cb: Function) {
+      this.cb = cb
+    }
+   */
   history.listen(function (route) {
     this$1.apps.forEach(function (app) {
       app.log('VueRouter updateRoute Done', 'green');

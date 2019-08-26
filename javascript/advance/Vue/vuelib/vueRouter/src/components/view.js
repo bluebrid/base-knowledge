@@ -41,7 +41,7 @@ export default {
     if (inactive) {
       return h(cache[name], data, children)
     }
-
+    // 根据当前的路由找到匹配的组件， 然后渲染不同的组件UI
     const matched = route.matched[depth]
     // render empty node if no matched route
     if (!matched) {

@@ -18,7 +18,12 @@ export class HTML5History extends History {
     }
 
     const initLocation = getLocation(this.base)
-    window.addEventListener('popstate', e => {
+   
+    window.addEventListener('popstate', e => { // 监听不到pushState和replaceState
+      /**
+       * 1. 监听不了history的pushState和replaceState事件
+       * 2. 监听浏览器的前进，后退， window.history.go 事件
+       */
       const current = this.current
       this.router.app.log('browser popstate 事件', '#7EC0EE')
       // Avoiding first `popstate` event dispatched in some browsers but first
@@ -27,7 +32,7 @@ export class HTML5History extends History {
       if (this.current === START && location === initLocation) {
         return
       }
-
+      // 处理VueRouter的真正跳转
       this.transitionTo(location, route => {
         if (supportsScroll) {
           handleScroll(router, route, current, true)
@@ -43,6 +48,8 @@ export class HTML5History extends History {
   push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
     const { current: fromRoute } = this
     this.transitionTo(location, route => {
+      //  pushState和replaceState是一个HTML5的新接口，他们的作用非常大，可以做到改变网址却不需要刷新页面， 所以可以控制不刷新页面，但是可以URL跳转
+      // 只是视觉上实现了URL跳转，而页面的渲染，是Vue根据`_route`的变化来实现的
       pushState(cleanPath(this.base + route.fullPath))
       handleScroll(this.router, route, fromRoute, false)
       onComplete && onComplete(route)
@@ -58,10 +65,10 @@ export class HTML5History extends History {
     }, onAbort)
   }
 
-  ensureURL (push?: boolean) {
-    if (getLocation(this.base) !== this.current.fullPath) {
-      const current = cleanPath(this.base + this.current.fullPath)
-      push ? pushState(current) : replaceState(current)
+  ensureURL (push?: boolean) {// 确保跳转到一个安全的URL，如/
+    if (getLocation(this.base) !== this.current.fullPath) { // 判断当前的URL和需要跳转的URL是否相等
+      const current = cleanPath(this.base + this.current.fullPath) // 获取主页的URL(根URL)
+      push ? pushState(current) : replaceState(current) // \src\util\push-state.js, 直接跳转到根URL
     }
   }
 

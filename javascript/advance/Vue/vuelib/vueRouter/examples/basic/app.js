@@ -1,4 +1,5 @@
-import Vue from '../../../vue/dist/vue'
+// import Vue from '../../../vue/dist/vue'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 1. Use plugin.
@@ -15,22 +16,47 @@ const Home1 = {
   template: '<div>Home1</div>'
 }
 const Foo = {
-  template: '<div>foo</div>'
-
-  // beforeRouteEnter(to, from, next) {
-  //   console.log('beforeRouteEnter', to, from)
-  //   next()
-  // },
-  // beforeRouteUpdate(to, from, next) {
-  //   console.log('beforeRouteUpdate', to, from)
-  //   next()
-  // },
-  // beforeRouteLeave(to, from, next) {
-  //   console.log('beforeRouteLeave  ', to, from)
-  //   next()
-  // }
+  data () {
+    return { saved: false }
+  },
+  template: `
+    <div>
+      <p>baz ({{ saved ? 'saved' : 'not saved' }})</p>
+      <button @click="saved = true">save</button>
+    </div>
+  `,
+  beforeRouteEnter(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+    next();
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.saved || window.confirm('Not saved, are you sure you want to navigate away?')) {
+      next()
+    } else {
+      next(false)
+    }
+  }
 }
-const Bar = { template: '<div>bar</div>' }
+const Bar = { 
+  data () {
+    return {
+      prevId: 0
+    }
+  },
+  template: '<div>bar</div>',
+  beforeRouteUpdate (to, from, next) {
+    this.prevId = from.params.id
+    next()
+  }
+ }
 const Unicode = { template: '<div>unicode</div>' }
 
 // 3. Create the router
@@ -51,7 +77,7 @@ const router = new VueRouter({
       path: '/foo',
       component: Foo,
       beforeEnter (to, from, next) {
-        // console.log('Config beforeEnter', to, from)
+        console.log('Config beforeEnter', to, from)
         next()
       }
     },
@@ -59,11 +85,12 @@ const router = new VueRouter({
     { path: '/é', component: Unicode }
   ]
 })
-/*
+
 router.beforeEach((to, from, next) => {
   console.log('beforeEach', to, from)
   next()
 })
+/*
 router.beforeResolve((to, from, next) => {
   console.log('beforeResolve', to, from)
   next()
@@ -100,7 +127,7 @@ new Vue({
         </router-link>
         <li><router-link to="/é">/é</router-link></li>
       </ul>
-      <router-view class="view" name="test"></router-view>
+      <router-view class="view"></router-view>
     </div>
   `,
   beforeCreate: function (...args) {
