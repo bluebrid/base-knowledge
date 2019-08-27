@@ -24,6 +24,14 @@ function createLifeCycles(lifeCyclehooks: string[], name: string) {
 function injectHookOption(Vue: VueConstructor, vm: ComponentInstance, hook: string, val: Function) {
   const options = vm.$options as any;
   const mergeFn = Vue.config.optionMergeStrategies[hook];
+  // 只是将Vue的生命周期放在setup中维护.
+  /**
+   * 1. val 就是我们在setup 中调用对应生命周期函数传递的回调函数：
+   *  onMounted(() => {
+      console.log('component is mounted!')
+    })
+     2. 将setup 中对应的生命周期函数进行合并
+   */
   options[hook] = mergeFn(options[hook], val);
 }
 

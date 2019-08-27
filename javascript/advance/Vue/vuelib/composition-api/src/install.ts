@@ -41,7 +41,15 @@ export function install(Vue: VueConstructor, _install: (Vue: VueConstructor) => 
     }
     return;
   }
-
+  // 在初始化Vue的时候， 会执行Vue.prototype._init -> mergeOptions -> mergeField -> 
+  /**
+   *  var strats = config.optionMergeStrategies;
+   *  
+    function mergeField(key) {
+      var strat = strats[key] || defaultStrat;
+      options[key] = strat(parent[key], child[key], vm, key);
+    }
+   */
   Vue.config.optionMergeStrategies.setup = function(parent: Function, child: Function) {
     return function mergedSetupFn(props: any, context: any) {
       return mergeData(
@@ -50,7 +58,15 @@ export function install(Vue: VueConstructor, _install: (Vue: VueConstructor) => 
       );
     };
   };
-
+  /**
+   * 1. 将当前的Vue对象保存在全局变量中 runtimeContext.ts
+   * 2. 每次 ensureCurrentVMInFn 获取的就是在这里保存的Vue对象
+  */
   setCurrentVue(Vue);
+  // 执行_install 函数， 
+  /**
+   * _install 是在index.ts 传递的const _install = (Vue: VueConstructor) => install(Vue, mixin);
+   * 相当于执行mixin (import { mixin } from './setup';)
+   */
   _install(Vue);
 }

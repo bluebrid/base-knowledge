@@ -9,7 +9,11 @@ declare module 'vue/types/options' {
     setup?: SetupFunction<Data, Data>;
   }
 }
-
+/**
+ * 
+ * @param Vue 
+ * 将mixin 作为install 第二个参数: export function install(Vue: VueConstructor, _install: (Vue: VueConstructor) => void) {
+ */
 const _install = (Vue: VueConstructor) => install(Vue, mixin);
 const plugin = {
   install: _install,

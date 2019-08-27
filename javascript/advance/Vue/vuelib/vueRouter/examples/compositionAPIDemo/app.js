@@ -1,10 +1,11 @@
 import Vue from 'vue';
-import install, {reactive, computed, watch} from 'vueFunctionApi';
+import install, {reactive, computed, watch, onMounted} from 'vueFunctionApi';
 
 Vue.config.productionTip = false;
 Vue.use(install);
 
 new Vue({
+  name: 'initVueObj',
   template: `
     <div>
     <button @click="increment">
@@ -27,7 +28,10 @@ new Vue({
     watch(() => {
       state.msg = `count is ${state.count}`;
     });
-    
+  
+    onMounted(() => {
+      console.log('component is mounted!')
+    })
     return {
       state,
       increment

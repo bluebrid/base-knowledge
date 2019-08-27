@@ -51,6 +51,7 @@ function setupAccessControl(target: AnyObject): void {
   }
   const keys = Object.keys(target);
   for (let i = 0; i < keys.length; i++) {
+    //重新定义了getter 和setter
     defineAccessControl(target, keys[i]);
   }
 }
@@ -64,6 +65,9 @@ export function defineAccessControl(target: AnyObject, key: any, val?: any) {
   let getter: (() => any) | undefined;
   let setter: ((x: any) => void) | undefined;
   const property = Object.getOwnPropertyDescriptor(target, key);
+  /**
+   * 1. 先取出对应的属性的getter 和setter , 其都是在创建Vue实例的时候， 初始化data的时候给每个属性设置的getter 和setter
+   */
   if (property) {
     if (property.configurable === false) {
       return;
@@ -110,9 +114,10 @@ export function defineAccessControl(target: AnyObject, key: any, val?: any) {
 function observe<T>(obj: T): T {
   const Vue = getCurrentVue();
   let observed: T;
-  if (Vue.observable) {
+  if (Vue.observable) { // Vue 新的方法， 
     observed = Vue.observable(obj);
   } else {
+    // 老版本的方法就是创建一个新的Vue实例， 将对应的obj,作为创建Vue实例的data 属性， 对应的obj 就是一个可观察对象
     const vm = createComponentInstance(Vue, {
       data: {
         $$state: obj,

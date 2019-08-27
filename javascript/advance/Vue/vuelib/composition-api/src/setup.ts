@@ -84,6 +84,9 @@ function activateCurrentInstance(
 }
 
 export function mixin(Vue: VueConstructor) {
+  /**
+   * 1. 利用mixin配置了beforeCreate: functionApiInit
+   */
   Vue.mixin({
     beforeCreate: functionApiInit,
     mounted(this: ComponentInstance) {
@@ -125,6 +128,10 @@ export function mixin(Vue: VueConstructor) {
 
     const { data } = $options;
     // wrapper the data option, so we can invoke setup before data get resolved
+    /**
+     * 1. 给$options 配置了一个data. 在初始化Vue的时候，  Vue.prototype._init -> initData -> initData 就会执行到这里
+     * 2. 执行initSetUp
+     */
     $options.data = function wrappedData() {
       initSetup(vm, vm.$props);
       return typeof data === 'function' ? data.call(vm, vm) : data || {};
@@ -132,11 +139,22 @@ export function mixin(Vue: VueConstructor) {
   }
 
   function initSetup(vm: ComponentInstance, props: Record<any, any> = {}) {
+    /**
+     * 1. setup 指向的是 install.ts  的Vue.config.optionMergeStrategies.setup 
+     */
     const setup = vm.$options.setup!;
     const ctx = createSetupContext(vm);
     let binding: ReturnType<SetupFunction<Data, Data>> | undefined | null;
     activateCurrentInstance(vm, () => {
-      binding = setup(props, ctx);
+      /**
+       * 1. 执行到每一个组件对应的setup 函数
+       * 2. binding 就是setup 返回的对象，也可以是一个函数
+       *    return {
+              state,
+              increment
+            };
+       */
+      binding = setup(props, ctx); 
     });
 
     if (!binding) return;
@@ -150,6 +168,12 @@ export function mixin(Vue: VueConstructor) {
     }
 
     if (isPlainObject(binding)) {
+      /**
+       * 1. binding 已经是一个可观察的对象了
+       * 2. vm是当前的Vue实例
+       * 3. 将bingding的每个属性都挂载在当前的vm实例上。asVmProperty(vm, name, bindingValue);
+       * 4. 如果每个一个属性的值发生变化， 
+       */
       const bindingObj = binding;
       vmStateManager.set(vm, 'rawBindings', binding);
       Object.keys(binding).forEach(name => {

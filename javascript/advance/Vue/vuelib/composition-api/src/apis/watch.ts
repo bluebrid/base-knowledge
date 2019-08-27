@@ -64,6 +64,7 @@ function queueFlushJob(vm: any, fn: () => void, mode: Exclude<FlushMode, 'sync'>
         flushQueue(vm, WatcherPreFlushQueueKey);
       }
       if (vm[WatcherPostFlushQueueKey].length) {
+        // 执行
         flushQueue(vm, WatcherPostFlushQueueKey);
       }
     });
@@ -126,7 +127,27 @@ function createWatcher(
     let hasEnded: boolean = false;
     const doWatch = () => {
       if (hasEnded) return;
-
+      /**
+       *     Vue.prototype.$watch = function (expOrFn, cb, options) {
+              var vm = this;
+              if (isPlainObject(cb)) {
+                return createWatcher(vm, expOrFn, cb, options);
+              }
+              options = options || {};
+              options.user = true;
+              var watcher = new Watcher(vm, expOrFn, cb, options);
+              if (options.immediate) {
+                try {
+                  cb.call(vm, watcher.value);
+                } catch (error) {
+                  handleError(error, vm, "callback for immediate watcher \"" + watcher.expression + "\"");
+                }
+              }
+              return function unwatchFn() {
+                watcher.teardown();
+              };
+            };
+       */
       stopRef = vm.$watch(getter, noopFn, {
         immediate: false,
         deep: options.deep,
@@ -139,6 +160,7 @@ function createWatcher(
     if (vm === fallbackVM) {
       vm.$nextTick(doWatch);
     } else {
+      // 执行queueFlushJob
       queueFlushJob(vm, doWatch, flushMode);
     }
 
@@ -214,6 +236,11 @@ export function watch(
   cb?: Partial<WatcherOption> | WatcherCallBack<any>,
   options?: Partial<WatcherOption>
 ): StopHandle {
+  /**
+   * watch(() => {
+      state.msg = `count is ${state.count}`;
+    });
+   */
   let callback: WatcherCallBack<unknown> | null = null;
   if (typeof cb === 'function') {
     // source watch
@@ -239,6 +266,14 @@ export function watch(
     }
     vm = fallbackVM;
   } else if (!hasWatchEnv(vm)) {
+    /**
+     * function installWatchEnv(vm: any) {
+        vm[WatcherPreFlushQueueKey] = [];
+        vm[WatcherPostFlushQueueKey] = [];
+        vm.$on('hook:beforeUpdate', flushPreQueue);
+        vm.$on('hook:updated', flushPostQueue);
+      }
+     */
     installWatchEnv(vm);
   }
 
