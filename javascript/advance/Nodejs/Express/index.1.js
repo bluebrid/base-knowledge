@@ -16,7 +16,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 // middleware
 app.use(express.static(path.join(__dirname, 'public'), {
-  etag: true
+  etag: true,
+  maxAge: 1000
 }))
 
 app.use(express.urlencoded({ extended: false }))

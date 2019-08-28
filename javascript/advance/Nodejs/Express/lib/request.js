@@ -18,7 +18,7 @@ var deprecate = require('depd')('express');
 var isIP = require('net').isIP;
 var typeis = require('type-is');
 var http = require('http');
-var fresh = require('fresh');
+var fresh = require('./fresh');
 var parseRange = require('range-parser');
 var parse = require('parseurl');
 var proxyaddr = require('proxy-addr');
@@ -430,6 +430,10 @@ defineGetter(req, 'hostname', function hostname(){
 
   if (!host || !trust(this.connection.remoteAddress, 0)) {
     host = this.get('Host');
+  } else if (host.indexOf(',') !== -1) {
+    // Note: X-Forwarded-Host is normally only ever a
+    //       single value, but this is to be safe.
+    host = host.substring(0, host.indexOf(',')).trimRight()
   }
 
   if (!host) return;

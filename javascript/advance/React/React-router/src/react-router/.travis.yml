@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+node_js:
+  - "9"
+before_script:
+  - npm run build
+cache:
+  directories:
+    - packages/react-router/node_modules
+    - packages/react-router-dom/node_modules
+    - packages/react-router-native/node_modules
+    - packages/react-router-config/node_modules
+    - packages/react-router-redux/node_modules
+    - website/node_modules
+branches:
+  only:
+    - master
+    - next

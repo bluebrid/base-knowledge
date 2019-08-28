@@ -23,6 +23,16 @@ var res = require('./response');
 
 /**
  * Expose `createApplication()`.
+ * 1. 直接将exports 赋值给module.exports ，然后直接指向createApplication
+ * 2. exports.static = require('serve-static'); 则相当于createApplication.static =  require('serve-static')
+ *
+  var express = require('./lib/express'); 
+  var app = module.exports = express(); 
+
+  // middleware
+  app.use(express.static(path.join(__dirname, 'public'), {
+    etag: true
+  })) 
  */
 
 exports = module.exports = createApplication;
@@ -42,10 +52,12 @@ function createApplication() {
   mixin(app, EventEmitter.prototype, false);
   mixin(app, proto, false);
 
+  // expose the prototype that will get set on requests
   app.request = Object.create(req, {
     app: { configurable: true, enumerable: true, writable: true, value: app }
   })
 
+  // expose the prototype that will get set on responses
   app.response = Object.create(res, {
     app: { configurable: true, enumerable: true, writable: true, value: app }
   })
@@ -75,7 +87,9 @@ exports.Router = Router;
 
 exports.json = bodyParser.json
 exports.query = require('./middleware/query');
-exports.static = require('serve-static');
+exports.raw = bodyParser.raw
+exports.static = require('./serve-static');
+exports.text = bodyParser.text
 exports.urlencoded = bodyParser.urlencoded
 
 /**
