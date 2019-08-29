@@ -37,7 +37,14 @@ function Layer(path, options, fn) {
 
   debug('new %o', path)
   var opts = options || {};
-
+  /**
+   * 1. 每个Layer 实例都有一个handle属性，保存的就是对应的中间件的函数, 如下面的customAMiddleware函数
+   * app.use('/a', function customAMiddleware(req, res, next){
+      console.log(req.path);
+      next();
+    }) 
+    2. 在如下的Layer.prototype.handle_request方法会执行对应的中间件
+   */
   this.handle = fn;
   this.name = fn.name || '<anonymous>';
   this.params = undefined;
@@ -84,8 +91,26 @@ Layer.prototype.handle_error = function handle_error(error, req, res, next) {
  */
 
 Layer.prototype.handle_request = function handle(req, res, next) {
+  /**
+   * 1. next 是router中传递过来的函数
+   * 2. 如果是router 的中间件， 对应的fn 是route.dispatch
+   */
   var fn = this.handle;
+  /**
+   * proto.route = function route(path) {
+      var route = new Route(path);
+      var layer = new Layer(path, {
+        sensitive: this.caseSensitive,
+        strict: this.strict,
+        end: true
+      }, route.dispatch.bind(route));
 
+      layer.route = route;
+
+      this.stack.push(layer);
+      return route;
+    };
+   */
   if (fn.length > 3) {
     // not a standard request handler
     return next();

@@ -764,10 +764,12 @@ SendStream.prototype.sendFile = function sendFile (path) {
   /**
    * 1. fs.stat 是一个异步接口， 用来获取文件信息
    * 2. 获取文件后， 才调用self.send 接口去发送文件
+   * 3. 如果获取的不是一个文件，而是一个接口， 会进入next(err)
    */
   fs.stat(path, function onstat (err, stat) {
     if (err && err.code === 'ENOENT' && !extname(path) && path[path.length - 1] !== sep) {
       // not found, check extensions
+      // 请求的资源不存在，如请求的是接口
       return next(err)
     }
     if (err) return self.onStatError(err)
@@ -945,9 +947,9 @@ SendStream.prototype.setHeader = function setHeader (path, stat) {
 
   if (this._etag && !res.getHeader('ETag')) {
     var val = etag(stat)
-    debug.enabled = true
+    // debug.enabled = true
     debug('etag %s', val)
-    debug.enabled = false
+    // debug.enabled = false
     res.setHeader('ETag', val)
   }
 }

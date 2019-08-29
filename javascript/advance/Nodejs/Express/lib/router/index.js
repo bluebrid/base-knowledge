@@ -149,6 +149,7 @@ proto.handle = function handle(req, res, out) {
   var options = [];
 
   // middleware and routes
+  // 获取所有的中间件
   var stack = self.stack;
 
   // manage inter-router variables
@@ -172,7 +173,12 @@ proto.handle = function handle(req, res, out) {
   req.originalUrl = req.originalUrl || req.url;
 
   next();
-
+  /**
+   * 
+   * @param {} err 
+   * 1. next 如果没有传递参数，则会继续执行下一个中间件
+   * 2. 如果传递的是一个字符串`router` 
+   */
   function next(err) {
     var layerError = err === 'route'
       ? null
@@ -214,9 +220,17 @@ proto.handle = function handle(req, res, out) {
     var layer;
     var match;
     var route;
-
+    // idx 在方法最开始缓存了结果
     while (match !== true && idx < stack.length) {
       layer = stack[idx++];
+      debug.enabled = true
+      debug('Layer name %s', layer.name)
+      debug.enabled = false
+      /**
+       * 1. 根据正则来匹配， 当前中间件是否match:  match = this.regexp.exec(path)
+       * 2. 在生成Layer对象的时候， 会生成this.regexp属性
+       * 3. 可以通过模糊匹配,如: /a[12]b => 匹配: /a1b , /a2b, /a*b => 将匹配a(人一个其他字符串)b
+       */
       match = matchLayer(layer, path);
       route = layer.route;
 
@@ -253,7 +267,7 @@ proto.handle = function handle(req, res, out) {
         match = false;
         continue;
       }
-    }
+    } // 已经退出了while 循环
 
     // no match
     if (match !== true) {
@@ -277,10 +291,10 @@ proto.handle = function handle(req, res, out) {
         return next(layerError || err);
       }
 
-      if (route) {
+      if (route) { // 如果匹配对应的route 则就执行对应的route
         return layer.handle_request(req, res, next);
       }
-
+      // 如果匹配的不是路由中间件， 则执行trim_prefix ， 也就是常规中间件
       trim_prefix(layer, layerError, layerPath, path);
     });
   }
@@ -314,6 +328,7 @@ proto.handle = function handle(req, res, out) {
     if (layerError) {
       layer.handle_error(layerError, req, res, next);
     } else {
+      // 将next 给传递过去
       layer.handle_request(req, res, next);
     }
   }
@@ -460,7 +475,10 @@ proto.use = function use(fn) {
 
     // add the middleware
     debug('use %o %s', path, fn.name || '<anonymous>')
-
+    /**
+     * 1. 将每一个中间件都加工成一个Layer对象
+     * 2. 将对应的Layer 对象保存在router的stack 属性中
+     */
     var layer = new Layer(path, {
       sensitive: this.caseSensitive,
       strict: false,
@@ -468,7 +486,7 @@ proto.use = function use(fn) {
     }, fn);
 
     layer.route = undefined;
-
+    // this,指向的是app.router 属性
     this.stack.push(layer);
   }
 
@@ -490,7 +508,10 @@ proto.use = function use(fn) {
 
 proto.route = function route(path) {
   var route = new Route(path);
-
+  /**
+   * 1. route.dispatch.bind(route) 作为Layer 的handler 
+   * 2. route.stack 保存了对应路由的handler 
+   */
   var layer = new Layer(path, {
     sensitive: this.caseSensitive,
     strict: this.strict,

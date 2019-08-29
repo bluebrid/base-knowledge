@@ -143,7 +143,10 @@ function serveStatic (root, options) {
         next(err)
         return
       }
-
+      /**
+       * 1. 如果请求的是接口，而不是文件， 就会进入error事件，然后执行next
+       * 2. next就是router 中传递进来的
+       */
       next()
     })
 

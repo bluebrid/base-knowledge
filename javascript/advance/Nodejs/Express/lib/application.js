@@ -140,7 +140,9 @@ app.lazyrouter = function lazyrouter() {
       caseSensitive: this.enabled('case sensitive routing'),
       strict: this.enabled('strict routing')
     });
-
+    /**
+     * 1. 设置两个内置的中间件
+     */
     this._router.use(query(this.get('query parser fn')));
     this._router.use(middleware.init(this));
   }
@@ -185,6 +187,12 @@ app.handle = function handle(req, res, callback) {
  */
 
 app.use = function use(fn) {
+  /**
+   * 1. use第一个参数可以是path字符串
+   * 2. use可以一次接受多个函数作为中间件
+   * 3. 如果第一个参数是path字符串， 则对应的中间件只对对应的path的请求生效
+   * 4. path 默认的是根路径/
+   */
   var offset = 0;
   var path = '/';
 
@@ -211,12 +219,41 @@ app.use = function use(fn) {
   }
 
   // setup router
+  /**
+   * 1. 延时初始化_router
+   * app.lazyrouter = function lazyrouter() {
+      if (!this._router) {
+        this._router = new Router({
+          caseSensitive: this.enabled('case sensitive routing'),
+          strict: this.enabled('strict routing')
+        });
+
+        this._router.use(query(this.get('query parser fn')));
+        this._router.use(middleware.init(this));
+      }
+    };
+   * 2. 并且给_router 初始化连个中间件。
+   */
   this.lazyrouter();
   var router = this._router;
-
+  /**
+   * 1. 将第三方的中间件挂载在router上面
+   * app.use(express.static(path.join(__dirname, 'public'), {
+      etag: true,
+      maxage: 1000,
+      lastModified: true,  // Just being explicit about the default.
+      setHeaders: (res, path) => {
+        if (path.endsWith('.html')) {
+          // 设置HTML 文件不缓存， 其他的默认的是no-cache
+          res.setHeader('Cache-Control', 'no-store');
+        }
+      },
+    })) 
+   */
   fns.forEach(function (fn) {
     // non-express app
     if (!fn || !fn.handle || !fn.set) {
+      // 正常的跑这个分支
       return router.use(path, fn);
     }
 
@@ -477,6 +514,63 @@ methods.forEach(function(method){
     }
 
     this.lazyrouter();
+    /**
+     * 1. 请求的每一个方法都会创建一个对应的中间件Layer
+     * app.get('/a', (req, res) => {
+        const config = app.get('config')
+        console.log(config)
+        res.end('==============>a')
+      })
+      proto.route = function route(path) {
+        var route = new Route(path);
+
+        var layer = new Layer(path, {
+          sensitive: this.caseSensitive,
+          strict: this.strict,
+          end: true
+        }, route.dispatch.bind(route));
+
+        layer.route = route;
+
+        this.stack.push(layer);
+        return route;
+      };
+
+       
+        // 1. 针对路由对应的中间件， 在对应的Route对象中同样创建了一个Layer 保存在stack上
+       
+        Route.prototype[method] = function(){
+          var handles = flatten(slice.call(arguments));
+
+          for (var i = 0; i < handles.length; i++) {
+            var handle = handles[i];
+
+            if (typeof handle !== 'function') {
+              var type = toString.call(handle);
+              var msg = 'Route.' + method + '() requires a callback function but got a ' + type
+              throw new Error(msg);
+            }
+
+            debug('%s %o', method, this.path)
+
+            var layer = Layer('/', {}, handle);
+            layer.method = method;
+
+            this.methods[method] = true;
+            
+            this.stack.push(layer);
+          }
+
+          return this;
+  };
+     */
+  /**
+   * 1. route.dispatch.bind(route) 作为Layer 的handler 
+   * 2. route.stack 保存了对应路由的handler 
+   * 3. 当执行路由对应的中间件的handler 其实执行的是route.dispatch
+   * 4. 每个route 的stack属性，保存了其对应的中间件，其实也就是我么路由的回调函数
+   * 5. 在执行route.dispatch 的时候，会去遍历执行对应的路由对应的中间件
+   */
 
     var route = this._router.route(path);
     route[method].apply(route, slice.call(arguments, 1));

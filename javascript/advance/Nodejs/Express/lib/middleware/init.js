@@ -28,6 +28,7 @@ var setPrototypeOf = require('setprototypeof')
 exports.init = function(app){
   return function expressInit(req, res, next){
     if (app.enabled('x-powered-by')) res.setHeader('X-Powered-By', 'Express');
+    // 将req和res 互相绑定
     req.res = res;
     res.req = req;
     req.next = next;

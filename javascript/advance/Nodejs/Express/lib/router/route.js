@@ -208,6 +208,9 @@ methods.forEach(function(method){
       layer.method = method;
 
       this.methods[method] = true;
+      /**
+       * 1. 针对路由对应的中间件， 在对应的Route对象中同样创建了一个Layer 保存在stack上
+       */
       this.stack.push(layer);
     }
 

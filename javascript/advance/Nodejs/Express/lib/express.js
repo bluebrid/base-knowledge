@@ -48,6 +48,15 @@ function createApplication() {
   var app = function(req, res, next) {
     app.handle(req, res, next);
   };
+  /**
+   * 1. 利用http.createServer创建一个nodejs 的server, 其参数函数就是请求的拦截器，任何请求都会进入这个函数
+   * 2. this 值得就是上面定义的app函数
+   * 3. 所以任何的请求都会进入app.handle(application.js)
+   * app.listen = function listen() {
+      var server = http.createServer(this);
+      return server.listen.apply(server, arguments);
+    };
+   */
 
   mixin(app, EventEmitter.prototype, false);
   mixin(app, proto, false);

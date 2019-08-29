@@ -15,7 +15,33 @@ app.use(express.static(path.join(__dirname, 'public'), {
     }
   },
 })) 
-
+app.use('/a*{1}b', function customAMiddleware(req, res, next){
+  console.log(req.path);
+  next();
+}) 
+app.set('config', {
+  url: 'http://localhost:8080',
+  userInfo: {
+    name: 'ivan fan',
+    age: 18
+  }
+})
+app.get('/', (req, res) => {
+  res.end('hello world')
+})
+app.get('/a', (req, res, next) => {
+  const config = app.get('config')
+  console.log(config)
+  res.end('==============>a')
+  next();
+}, (req, res) => {
+  console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+})
+app.get('/b', (req, res) => {
+  const config = app.get('config')
+  console.log(config)
+  res.end('==============>b')
+})
 /* istanbul ignore next */
 if (!module.parent) {
   app.listen(3000);
