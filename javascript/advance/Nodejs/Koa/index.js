@@ -1,5 +1,5 @@
 const Koa = require('./lib/application');
-const serve = require('koa-static');
+const serve = require('./lib/koa-static/index');
 const path = require('path');
 const router = require('koa-router')();
 const app = new Koa();
