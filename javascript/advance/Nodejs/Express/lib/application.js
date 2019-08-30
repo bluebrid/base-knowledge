@@ -388,7 +388,7 @@ app.param = function param(name, fn) {
 
 app.set = function set(setting, val) {
   if (arguments.length === 1) {
-    // app.get(setting)
+    //    (setting)
     return this.settings[setting];
   }
 
@@ -708,6 +708,7 @@ app.render = function render(name, options, callback) {
  */
 
 app.listen = function listen() {
+  // app.listen(3000);
   var server = http.createServer(this);
   return server.listen.apply(server, arguments);
 };

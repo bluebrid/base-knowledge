@@ -38,9 +38,12 @@ app.get('/a', (req, res, next) => {
   console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 })
 app.get('/b', (req, res) => {
+  // get 方法和路由get的get是同一个方法
   const config = app.get('config')
   console.log(config)
-  res.end('==============>b')
+  // res.end(JSON.stringify(config))
+  // json 最终还是用end 去发送结果
+  res.json(config)
 })
 /* istanbul ignore next */
 if (!module.parent) {

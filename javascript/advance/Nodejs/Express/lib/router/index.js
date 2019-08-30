@@ -232,6 +232,7 @@ proto.handle = function handle(req, res, out) {
        * 3. 可以通过模糊匹配,如: /a[12]b => 匹配: /a1b , /a2b, /a*b => 将匹配a(人一个其他字符串)b
        */
       match = matchLayer(layer, path);
+      // 只有路由请求的中间件才会在layer 上面挂载route
       route = layer.route;
 
       if (typeof match !== 'boolean') {
@@ -517,7 +518,7 @@ proto.route = function route(path) {
     strict: this.strict,
     end: true
   }, route.dispatch.bind(route));
-
+  // 只有路由创建的中间件， 在Layer 对象上绑定了route
   layer.route = route;
 
   this.stack.push(layer);
