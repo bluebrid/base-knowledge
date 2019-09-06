@@ -27,7 +27,7 @@ function compose (middleware) {
    * @return {Promise}
    * @api public
    */
-
+  // compose 返回的就是一个函数
   return function (context, next) {
     // last called middleware #
     let index = -1
@@ -39,6 +39,14 @@ function compose (middleware) {
       if (i === middleware.length) fn = next
       if (!fn) return Promise.resolve()
       try {
+        /**
+         * 1. 执行中间件， 中间件的写法如下：
+         * function async (ctx, next) {
+         *  await next()
+         * }
+         * 2. next 其实其实就是这个的dispatch 方法，(dispatch.bind(null, i + 1)))
+         * 3. 返回一个Promise(用Promise.resolve包裹)
+         */
         return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
       } catch (err) {
         return Promise.reject(err)

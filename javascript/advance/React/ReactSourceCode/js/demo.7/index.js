@@ -6,9 +6,13 @@ const $root = document.querySelector("#root");
  
 function App() {
     const [count, setCount] = React.useState(0)
+    const [count1, setCount1] = React.useState(100)
     return (
-      <button onClick={() => setCount(count + 1)}>
-          Click me ({count})
+      <button onClick={() => {
+        setCount(count + 1)
+        setCount1(count1 + 100)
+      }}>
+          Click me ({count}) -({count1})
       </button>
     )
 }

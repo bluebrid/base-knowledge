@@ -39,7 +39,8 @@ class Container extends Component {
     setStateClick = () => {
         this.setState({
             count: this.state.count + 1,
-            updateByState: true
+            updateByState: true,
+            getDerivedState: false
         })
     }
 
@@ -58,9 +59,11 @@ class Container extends Component {
         if (nextProps.count !== preState.count) {
             return {
                 count: preState.updateByState ? preState.count : nextProps.count, // 因为同时存在通过setState 和props 去更新state, 所以需要去判断到底是哪个在更新状态， 所以其实更适用与state只根据props 来更新的情况
-                updateByState: false
+                updateByState: false,
+                getDerivedState: true
             }
         }
+        // 如果返回一个null or undefined , 则会取之前计算好的state
         return null
     }
 

@@ -20,7 +20,7 @@ class App extends Component {
         theme:
           state.theme === themes.red
             ? themes.green
-            : themes.red,
+            : themes.red
       }));
     };
     this.state = {

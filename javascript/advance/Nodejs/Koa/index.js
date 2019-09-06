@@ -5,11 +5,22 @@ const router = require('./lib/koa-router/router')();
 const app = new Koa();
 const posts = [];
 
-app.use(serve(path.join(__dirname, 'public')));
+app.use(serve(path.join(__dirname, 'public'), {
+  etag: true,
+  maxage: 1000,
+  lastModified: true,  // Just being explicit about the default.
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      // 设置HTML 文件不缓存， 其他的默认的是no-cache
+      res.setHeader('Cache-Control', 'no-store');
+    }
+  },
+}));
 
 app.use(async (ctx, next) => {
-  console.log('111111111111111111111')
-  next()
+  console.log('start===================')
+  await next()
+  console.log('end===================')
 });
 
 router

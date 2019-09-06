@@ -7,7 +7,7 @@
 
 const isGeneratorFunction = require('is-generator-function');
 const debug = require('debug')('koa:application');
-const onFinished = require('on-finished');
+const onFinished = require('./on-finished');
 const response = require('./response');
 const compose = require('./koa-compose');
 const isJSON = require('koa-is-json');
@@ -71,6 +71,9 @@ module.exports = class Application extends Emitter {
    */
 
   listen(...args) {
+    /**
+     * 1. this.callback() 就是所有的请求的拦截函数
+     */
     debug('listen');
     const server = http.createServer(this.callback());
     return server.listen(...args);
@@ -135,11 +138,15 @@ module.exports = class Application extends Emitter {
    */
 
   callback() {
+    /**
+     * 1. 获取所有的中间件
+     */
     const fn = compose(this.middleware);
 
     if (!this.listenerCount('error')) this.on('error', this.onerror);
 
     const handleRequest = (req, res) => {
+      // 首先创建一个上下文
       const ctx = this.createContext(req, res);
       return this.handleRequest(ctx, fn);
     };
@@ -159,6 +166,7 @@ module.exports = class Application extends Emitter {
     const onerror = err => ctx.onerror(err);
     const handleResponse = () => respond(ctx);
     onFinished(res, onerror);
+    // fnMiddleware 就是compose 执行的中间件
     return fnMiddleware(ctx).then(handleResponse).catch(onerror);
   }
 

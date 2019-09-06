@@ -4,7 +4,7 @@ const TextInput = React.forwardRef((props, ref) => (
     <input type="text" placeholder="Hello forwardRef" ref={ref} />
 ))
 
-const inputRef = React.createRef()
+// const inputRef = React.createRef()
 
 class Demo1 extends React.Component {
     constructor(props) {
@@ -15,13 +15,13 @@ class Demo1 extends React.Component {
     handleSubmit = event => {
         event.preventDefault()
 
-        alert('input value is:' + inputRef.current.value)
+        alert('input value is:' + this.myRef.current.value)
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <TextInput ref={inputRef} />
+                <TextInput ref={this.myRef} />
                 <button type="submit">Submit</button>
             </form>
         )
