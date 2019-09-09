@@ -47,24 +47,26 @@ class App extends React.Component {
   render() {
     const { selectedStock, stocks } = this.state;
     return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <StockTable
-          stocks={stocks}
-          onSelect={selectedStock => this.setState({ selectedStock })}
-        />
-        {selectedStock && (
-          <StockChart
-            stock={selectedStock}
-            onClose={() => this.setState({ selectedStock: false })}
+      <div class="section" data-title="3 lazy loading">
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <StockTable
+            stocks={stocks}
+            onSelect={selectedStock => this.setState({ selectedStock })}
           />
-        )}
-        {/* Preload <StockChart/> */}
-        <React.Suspense fallback={null}>
-          <div hidden={true}>
-            <StockChart stock={stocks[0]} />
-          </div>
+          {selectedStock && (
+            <StockChart
+              stock={selectedStock}
+              onClose={() => this.setState({ selectedStock: false })}
+            />
+          )}
+          {/* Preload <StockChart/> */}
+          <React.Suspense fallback={null}>
+            <div hidden={true}>
+              <StockChart stock={stocks[0]} />
+            </div>
+          </React.Suspense>
         </React.Suspense>
-      </React.Suspense>
+      </div>
     );
   }
 }
