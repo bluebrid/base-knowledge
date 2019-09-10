@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App1 from './1.newContext/App';
-// import App from './2.ErrorBoundary/App'
+import App2 from './2.ErrorBoundary/App'
 import App3 from './3.Lazy-loading/App'
 import App4 from './4.hooks/App'
 import App5 from './5.portals/App'
@@ -11,12 +11,14 @@ import App7 from './7.memo/App'
 import App8 from './8.lifecycle/App'
 import App10 from './10.useCallback/App'
 import App11 from './11.useReducer/App'
+import App1101 from './11.useReducer-todoMvc/App'
 import App12 from './12.useMemo/App'
 import App13 from './13.customHooks/App'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<div>
-  <App1 />
+  {/* <App1 />
+  <App2 />
   <App3 />
   <App4 />
   <App5 />
@@ -24,9 +26,10 @@ ReactDOM.render(<div>
   <App7 />
   <App8 />
   <App10 />
-  <App11 />
-  <App12 />
-  <App13 />
+  <App11 /> */}
+  <App1101 />
+  {/* <App12 />
+  <App13 /> */}
 </div>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

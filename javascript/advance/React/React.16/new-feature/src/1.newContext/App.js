@@ -34,7 +34,7 @@ class App extends Component {
     // 在外部使用时使用来自 state 里面的 theme
     // 默认 dark theme
     return (
-      <div class="section" data-title="1 newcontext">
+      <div className="section" data-title="1 newcontext">
         <ThemeContext.Provider value={this.state}>
           <Toolbar />
         </ThemeContext.Provider>

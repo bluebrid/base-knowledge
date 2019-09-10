@@ -7,7 +7,7 @@ function App() {
   const [name, setName] = useState('名称');
   const [content, setContent] = useState('内容');
   return (
-      <div class="section" data-title="12 hooks: useMemo">
+      <div className="section" data-title="12 hooks: useMemo">
         <button onClick={() => setName(new Date().getTime())}>name</button>
         <button onClick={() => setContent(new Date().getTime())}>content</button>
         <Button1 name={name}>{content}</Button1>

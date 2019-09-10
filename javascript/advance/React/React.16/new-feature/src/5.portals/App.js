@@ -17,7 +17,7 @@ function Button(props) {
 function App() {
   const [open, setOpen] = useState(false)
   return (
-    <div class="section" data-title="5 portals">
+    <div className="section" data-title="5 portals">
       <Button click={() => setOpen(!open)} textValue={'open'} />
       <div className='content'>  Content </div>
       {

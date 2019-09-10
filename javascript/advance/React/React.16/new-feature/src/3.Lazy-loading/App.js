@@ -47,7 +47,7 @@ class App extends React.Component {
   render() {
     const { selectedStock, stocks } = this.state;
     return (
-      <div class="section" data-title="3 lazy loading">
+      <div className="section" data-title="3 lazy loading">
         <React.Suspense fallback={<div>Loading...</div>}>
           <StockTable
             stocks={stocks}

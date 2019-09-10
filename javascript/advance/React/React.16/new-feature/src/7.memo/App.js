@@ -12,16 +12,16 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        date: new Date()
-      })
-    }, 1000)
+    // setInterval(() => {
+    //   this.setState({
+    //     date: new Date()
+    //   })
+    // }, 1000)
   }
 
   render() {
     return (
-      <div class="section" data-title="7 memo组件">
+      <div className="section" data-title="7 memo组件">
         <Child seconds={1} />
         <div>{this.state.date.toString()}</div>
       </div>

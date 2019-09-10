@@ -13,7 +13,7 @@ function useNumCalc(num) {
 function App() {
   const [num, numPlus, numMinus] = useNumCalc(1);
   return (
-    <div class="section" data-title="13 custom hooks">
+    <div className="section" data-title="13 custom hooks">
       <div>num: {num}</div>
       <div>
         <button onClick={numPlus}>numPlus</button>

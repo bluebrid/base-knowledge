@@ -6,7 +6,7 @@ import Home3 from './demo.3/home'
 
 function App() {
   return (
-    <div class="section" data-title="10 hooks: useCallback">
+    <div className="section" data-title="10 hooks: useCallback">
        <Home/>
        <Home2/>
        <Home3/>
