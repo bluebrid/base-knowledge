@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const { Tapable, SyncWaterfallHook, SyncHook } = require("tapable");
+const { Tapable, SyncWaterfallHook, SyncHook } = require("../../tapable");
 
 /** @typedef {import("webpack-sources").Source} Source */
 /** @typedef {import("./Module")} Module */

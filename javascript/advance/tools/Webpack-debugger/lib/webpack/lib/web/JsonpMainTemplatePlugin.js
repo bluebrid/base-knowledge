@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const { SyncWaterfallHook } = require("tapable");
+const { SyncWaterfallHook } = require("../../../tapable");
 const Template = require("../Template");
 
 class JsonpMainTemplatePlugin {

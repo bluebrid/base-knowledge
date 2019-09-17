@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const { Tapable, SyncHook, MultiHook } = require("tapable");
+const { Tapable, SyncHook, MultiHook } = require("../../tapable");
 const asyncLib = require("neo-async");
 const MultiWatching = require("./MultiWatching");
 const MultiStats = require("./MultiStats");

@@ -10,7 +10,7 @@ const {
 	moduleContextFromModuleAST
 } = require("@webassemblyjs/helper-module-context");
 
-const { Tapable } = require("tapable");
+const { Tapable } = require("../../../tapable");
 const WebAssemblyImportDependency = require("../dependencies/WebAssemblyImportDependency");
 const WebAssemblyExportImportedDependency = require("../dependencies/WebAssemblyExportImportedDependency");
 

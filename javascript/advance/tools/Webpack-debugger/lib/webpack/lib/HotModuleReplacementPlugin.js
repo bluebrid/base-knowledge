@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const { SyncBailHook } = require("tapable");
+const { SyncBailHook } = require("../../tapable");
 const { RawSource } = require("webpack-sources");
 const Template = require("./Template");
 const ModuleHotAcceptDependency = require("./dependencies/ModuleHotAcceptDependency");

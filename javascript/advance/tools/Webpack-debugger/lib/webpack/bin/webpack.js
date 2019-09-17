@@ -150,7 +150,7 @@ if (installedClis.length === 0) {
 } else if (installedClis.length === 1) {
 	const path = require("path");
 	
-	const pkgPath = require.resolve(`${installedClis[0].package}/package.json`);
+	const pkgPath = require.resolve(`../../${installedClis[0].package}/package.json`);
 	// eslint-disable-next-line node/no-missing-require
 	const pkg = require(pkgPath);
 	// eslint-disable-next-line node/no-missing-require

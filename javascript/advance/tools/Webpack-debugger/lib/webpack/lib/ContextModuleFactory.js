@@ -11,7 +11,7 @@ const {
 	Tapable,
 	AsyncSeriesWaterfallHook,
 	SyncWaterfallHook
-} = require("tapable");
+} = require("../../tapable");
 const ContextModule = require("./ContextModule");
 const ContextElementDependency = require("./dependencies/ContextElementDependency");
 

@@ -13,7 +13,7 @@ const {
 	SyncBailHook,
 	SyncHook,
 	HookMap
-} = require("tapable");
+} = require("../../tapable");
 const NormalModule = require("./NormalModule");
 const RawModule = require("./RawModule");
 const RuleSet = require("./RuleSet");

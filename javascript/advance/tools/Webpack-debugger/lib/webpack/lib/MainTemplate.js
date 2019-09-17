@@ -15,7 +15,7 @@ const {
 	SyncWaterfallHook,
 	SyncHook,
 	SyncBailHook
-} = require("tapable");
+} = require("../../tapable");
 const Template = require("./Template");
 
 /** @typedef {import("webpack-sources").ConcatSource} ConcatSource */

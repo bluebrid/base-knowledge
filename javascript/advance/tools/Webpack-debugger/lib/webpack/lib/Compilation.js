@@ -13,7 +13,7 @@ const {
 	SyncBailHook,
 	SyncWaterfallHook,
 	AsyncSeriesHook
-} = require("tapable");
+} = require("../../tapable");
 const EntryModuleNotFoundError = require("./EntryModuleNotFoundError");
 const ModuleNotFoundError = require("./ModuleNotFoundError");
 const ModuleDependencyWarning = require("./ModuleDependencyWarning");

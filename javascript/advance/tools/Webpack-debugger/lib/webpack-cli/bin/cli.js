@@ -10,9 +10,10 @@
 
 	const importLocal = require("import-local");
 	// Prefer the local installation of webpack-cli
-	if (importLocal(__filename)) {
-		return;
-	}
+	// 注释这个代码块，不然还是会执行node_modules 里面安装的webpack_cli
+	// if (importLocal(__filename)) {
+	// 	return;
+	// }
 
 	require("v8-compile-cache");
 
@@ -406,7 +407,7 @@ For more information, see https://webpack.js.org/api/cli/.`);
 				outputOptions.buildDelimiter = value;
 			});
 
-			const webpack = require("webpack");
+			const webpack = require("../../webpack");
 
 			let lastHash = null;
 			let compiler;

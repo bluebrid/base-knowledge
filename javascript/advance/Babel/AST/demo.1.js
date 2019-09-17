@@ -6,9 +6,9 @@ var recast = require("recast");
 var code =
   `
   function add(a, b) {
-    return a +
+    return a +b
       // 有什么奇怪的东西混进来了
-      b,
+      // b,
   }
   `
 // 用螺丝刀解析机器

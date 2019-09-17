@@ -15,12 +15,14 @@ module.exports = function ({ types: t }) {
                 const targetName = state.opts.targetName || 'x'
                 const updateParamNameVisitor = {
                     Identifier(path) {
+                        console.log(path.node.name)
                         if (path.node.name === this.paramName) {
                             path.node.name = targetName;
                         }
                     }
                 };
                 const param = path.node.params[0];
+                console.log('===============> paramName:' + param.name)
                 // 先获取初始化的名称
                 paramName = param.name;                
                 param.name = targetName;

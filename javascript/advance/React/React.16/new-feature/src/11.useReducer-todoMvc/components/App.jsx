@@ -6,12 +6,22 @@ import { TodoProvider } from '../TodoProvider';
 import Mock from 'mockjs';
 import axios from 'axios';
 
+// Mock.mock(/todos/, {
+//   'list|1-1': [
+//     {
+//       'text': '@csentence(2, 5)',
+//       'completed|1': [true, false],
+//       'id|+1': 1
+//     }
+//   ]
+// });
+
 Mock.mock(/todos/, {
-  'list|1-10': [
+  'list': [
     {
-      'text': '@csentence(2, 5)',
-      'completed|1': [true, false],
-      'id|+1': 1
+      'text': 'Todo 1',
+      'completed': true,
+      'id': 1
     }
   ]
 });
@@ -25,9 +35,10 @@ const App = () => {
   useEffect(() => {
     axios.get('/todos')
       .then(res => {
-        setInitialState(initialState.todos = res.data.list);
+        initialState.todos = res.data.list;
+        setInitialState(initialState);
       });
-  }, [initialState]);
+  }, [initialState.todos.length]);
 
   return (
     <TodoProvider initialState={initialState} reducer={reducer}>

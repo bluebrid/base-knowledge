@@ -9,11 +9,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AutoExternalPlugin = require('./plugins/AutoExternalPlugin');
 const MyPlugin = require('./plugins/MyPlugin')
 const CustomLogerPlugin = require('./plugins/BeforeRunPlugin')
-const BannerPlugin = require('webpack').BannerPlugin;
-const DefinePlugin = require('webpack').DefinePlugin;
+const BannerPlugin = require('./lib/webpack').BannerPlugin;
+const DefinePlugin = require('./lib/webpack').DefinePlugin;
 module.exports = {
     entry: './src/index.js',
     mode: 'development',
+    // mode: 'production',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
@@ -21,7 +22,7 @@ module.exports = {
     externals: {
         jquery: 'jQuery'
     },
-    // watch: true,
+    watch: true,
     plugins: [
         // new DonePlugin(),
         // new OptimizePlugin(),
@@ -35,28 +36,29 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css'
         }),
-        new MyPlugin(),
+        // new MyPlugin(),
         new CustomLogerPlugin(),
         // new InlinePlugin({
         //     test:/\.(js|css)$/
         // })
-        new AutoExternalPlugin({
-            jquery: {
-                varName: 'jQuery',
-                url: 'https://cdn.bootcss.com/jquery/3.1.0/jquery.js'
-            }
-        }),
-        new BannerPlugin({
-            banner: "hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]"
-        }),
+        // new AutoExternalPlugin({
+        //     jquery: {
+        //         varName: 'jQuery',
+        //         url: 'https://cdn.bootcss.com/jquery/3.1.0/jquery.js'
+        //     }
+        // }),
+     
         new DefinePlugin({
-            PRODUCTION: JSON.stringify(true),
+            PRODUCTION: JSON.stringify(process.env.NODE_ENV),
             VERSION: JSON.stringify('5fa3b9'),
             BROWSER_SUPPORTS_HTML5: true,
             TWO: '1+1',
             // 'typeof window': JSON.stringify('object'),
             // 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-          })
+          }),
+          new BannerPlugin({
+            banner: "版权所有，翻版必究: hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]"
+        }),
     ],
     module: {
         rules: [
@@ -83,5 +85,10 @@ module.exports = {
 
             }
         ]
-    }
+    },
+    resolve: {
+        alias: {
+          'tapable': path.join(__dirname, './', 'lib/tapable')          
+        }
+      },
 }

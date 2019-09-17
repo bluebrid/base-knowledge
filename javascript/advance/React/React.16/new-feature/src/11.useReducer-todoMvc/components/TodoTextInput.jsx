@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export const TodoTextInput = ({
+export const TodoTextInput = React.memo(({
   todoText,
   placeholder,
   editing,
@@ -47,7 +47,7 @@ export const TodoTextInput = ({
       onKeyDown={handleSubmit}
     />
   );
-};
+});
 
 TodoTextInput.propTypes = {
   onSave: PropTypes.func.isRequired,

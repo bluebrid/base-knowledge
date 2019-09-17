@@ -6,7 +6,7 @@
 
 const Template = require("./Template");
 const HotUpdateChunk = require("./HotUpdateChunk");
-const { Tapable, SyncWaterfallHook, SyncHook } = require("tapable");
+const { Tapable, SyncWaterfallHook, SyncHook } = require("../../tapable");
 
 module.exports = class HotUpdateChunkTemplate extends Tapable {
 	constructor(outputOptions) {

@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const { Tapable } = require("tapable");
+const { Tapable } = require("../../tapable");
 const DllModule = require("./DllModule");
 
 class DllModuleFactory extends Tapable {

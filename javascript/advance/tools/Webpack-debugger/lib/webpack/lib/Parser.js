@@ -8,7 +8,7 @@
 
 const acorn = require("acorn");
 const acornDynamicImport = require("acorn-dynamic-import").default;
-const { Tapable, SyncBailHook, HookMap } = require("tapable");
+const { Tapable, SyncBailHook, HookMap } = require("../../tapable");
 const util = require("util");
 const vm = require("vm");
 const BasicEvaluatedExpression = require("./BasicEvaluatedExpression");

@@ -15,7 +15,7 @@ const {
 	SyncBailHook,
 	AsyncParallelHook,
 	AsyncSeriesHook
-} = require("tapable");
+} = require("../../tapable");
 
 const Compilation = require("./Compilation");
 const Stats = require("./Stats");
@@ -600,12 +600,12 @@ class Compiler extends Tapable {
 		compilation.name = this.name;
 		compilation.records = this.records;
 		compilation.compilationDependencies = params.compilationDependencies;
-		this.log({
+		this.log && this.log({
 			type: 'HOOKS',
 			msg: 'thisCompilation'
 		})
 		this.hooks.thisCompilation.call(compilation, params);
-		this.log({
+		this.log && this.log({
 			type: 'HOOKS',
 			msg: 'compilation'
 		})

@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const { SyncBailHook } = require("tapable");
+const { SyncBailHook } = require("../../../tapable");
 const HarmonyImportSideEffectDependency = require("./HarmonyImportSideEffectDependency");
 const HarmonyImportSpecifierDependency = require("./HarmonyImportSpecifierDependency");
 const HarmonyAcceptImportDependency = require("./HarmonyAcceptImportDependency");

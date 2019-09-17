@@ -4,7 +4,7 @@
  */
 "use strict";
 
-const { Tapable, HookMap, SyncHook, SyncWaterfallHook } = require("tapable");
+const { Tapable, HookMap, SyncHook, SyncWaterfallHook } = require("../../tapable");
 const Factory = require("enhanced-resolve").ResolverFactory;
 
 /** @typedef {import("enhanced-resolve").Resolver} Resolver */

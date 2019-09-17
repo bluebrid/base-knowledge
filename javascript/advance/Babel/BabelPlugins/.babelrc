@@ -1,7 +1,13 @@
 {
   "plugins": [
-    ["./plugin.7", {
-      "targetName": "a"
+    ["./src/plugins/plugin.7", {
+      // 参数会最为ArrowFunctionExpression 的第二个参数state传递
+      "targetName": "x", // plugin 7, 用来替换参数的新的名称
+      "spec": true,
+      "disable": false
     }]
+    // ["@babel/plugin-transform-classes", {
+    //   "loose": true
+    // }]
   ]
 }
