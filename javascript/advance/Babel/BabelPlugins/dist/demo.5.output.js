@@ -1,17 +1,14 @@
-function _newArrowCheck(innerThis, boundThis) { if (innerThis !== boundThis) { throw new TypeError("Cannot instantiate an arrow function"); } }
+function _newArrowCheck(x, boundThis) { if (x !== boundThis) { throw new TypeError("Cannot instantiate an arrow function"); } }
 
+// var add = (a, b) => a + b
+// console.log(add())
 // const add = (a, b) => {
 //     return a + b
 // }
-const add = function (a, b) {
+// var a = 1;
+// var b = 2;
+var add = function () {
   _newArrowCheck(this, this);
 
-  return a + b;
-}.bind(this); // var a = 1;
-// var b = 2;
-// var add = () => {
-//     return this.a + this.b
-// }
-
-
-console.log(add());
+  return this.a + this.b;
+}.bind(this);

@@ -31,6 +31,7 @@ function Person(name, age) {
 */
 module.exports = function ({ types: t }) {
     return {
+        name: 'ES 6 Class 转换成Es5 function',
         visitor: {
             ClassDeclaration(path) {
                 //拿到老的AST节点

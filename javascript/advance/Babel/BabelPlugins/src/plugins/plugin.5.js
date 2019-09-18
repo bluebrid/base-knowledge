@@ -58,6 +58,7 @@ module.exports = function (_ref) {
           path.get("body").unshiftContainer("body", t.expressionStatement(t.callExpression(state.addHelper("newArrowCheck"), [t.thisExpression(), boundThis])));
 
           path.replaceWith(t.callExpression(t.memberExpression(node, t.identifier("bind")), [t.thisExpression()]));
+          // path.replaceWith(node)
         } else {
           path.arrowFunctionToShadowed();
         }
