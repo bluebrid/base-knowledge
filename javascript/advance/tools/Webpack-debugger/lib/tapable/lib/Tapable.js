@@ -8,7 +8,6 @@ const util = require("util");
 const SyncBailHook = require("./SyncBailHook");
 
 function Tapable() {
-	console.log('*************************************************Tapable')
 	this._pluginCompat = new SyncBailHook(["options"]);
 	this._pluginCompat.tap(
 		{

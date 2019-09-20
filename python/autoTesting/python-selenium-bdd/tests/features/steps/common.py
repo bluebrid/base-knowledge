@@ -2,7 +2,7 @@ from behave import given, when, then
 from framework.webapp import webapp
 
 
-@given(u'I load the website')
+@given(u'加载登录页面')
 def step_impl_load_website(context):
     webapp.load_website()
 
@@ -13,7 +13,6 @@ def step_impl_goto_page(context, page):
     webapp.goto_page(page)
 
 
-@then(u'I see this component "{component}"')
+@then(u'检查元素："{component}"')
 def step_impl_verify_component(context, component):
-    print('component =============>', component)
-    webapp.verify_component_exists(component)
+    webapp.verify_component_exists_by_id(component)

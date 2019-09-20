@@ -1,64 +1,21 @@
 Feature: Dashboard
-
-    Scenario Outline: Components
-        Given I load the website
-        When I go to "Dashboard" page
-        Then I see this component "<rows>"
+    Scenario Outline: 验证邮箱登录页面
+        Given 加载登录页面
+        When 点击密码登录
+        Then 输入帐号密码
+        Then 点击登录按钮
+        # Then 检查首页元素："<elements>"
+        # Examples:
+        #     | elements   |
+        #     | frame-head |
+        Then 点击已发送
+        #Then 查看发件箱
+        Then 点击写信按钮
+        Then 编写邮件：地址"<address>",主题"<title>",内容"<content>"
+        Then 检查发送结果
+        #Then 查看发件箱
         Examples:
-            | rows              |
-            | Status            |
-            | Detector Settings |
-            | Battery           |
-            | GPS               |
-
-    Scenario Outline: Status
-        Given I load the website
-        When I go to "Dashboard" page
-        Then Dashboard Status shows correct values for row "<rows>"
-        Examples:
-            | rows                    |
-            | Status                  |
-            | White Reference Count   |
-            | Collect Reference Count |
-            | Dark Reference Count    |
-            | Last White Reference    |
-            | Last Optimize           |
-            | Last Dark Reference     |
-            | Last Wavelength Check   |
-
-    Scenario: Status Refresh
-        Given I load the website
-        When I go to "Dashboard" page
-        Then Clicking on Status Refresh should refresh status component
-
-    Scenario: Battery
-        Given I load the website
-        When I go to "Dashboard" page
-        Then Dashboard Battery shows Battery or AC Power with correct icon.
-
-    Scenario: Battery Refresh
-        Given I load the website
-        When I go to "Dashboard" page
-        Then Clicking on Battery Refresh should refresh battery component
-
-    Scenario Outline: Detector Settings
-        Given I load the website
-        When I go to "Dashboard" page
-        Then Dashboard Detector Settings shows correct values for row "<rows>"
-        Examples:
-            | rows  |
-            | VNIR  |
-            | SWIR1 |
-            | SWIR2 |
-
-    Scenario Outline: GPS
-        Given I load the website
-        When I go to "Dashboard" page
-        Then Dashboard GPS shows correct values for row "<rows>"
-        Examples:
-            | rows     |
-            | Fix      |
-            | Location |
-            | Altitude |
-            | Format   |
-
+            |address|title|content|
+            |594774261@qq.com|Title1|Content1|
+            # |594774261@qq.com|Title2|Content2|
+        
