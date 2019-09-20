@@ -1,0 +1,8 @@
+Feature: Step Data
+
+  Scenario: Scenario with step contains text data
+    Given simple passed step with text data
+        '''
+        Some text in step
+        '''
+      And simple passed step

@@ -1,0 +1,14 @@
+Feature: Scenario Outline
+
+  Scenario Outline: Scenario outline with many examples table
+    Given simple passed step with params "<parameter one> <parameter two>"
+
+    Examples: first table
+    | parameter one | parameter two |
+    | Peter         | I             |
+    | Catherine     | II            |
+
+    Examples: second table
+    | parameter one | parameter two |
+    | Richard       | the Lionheart |
+    | Alexander     | the Great     |

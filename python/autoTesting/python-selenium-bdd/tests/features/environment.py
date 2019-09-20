@@ -40,6 +40,6 @@ def before_scenario(context, scenario):
     print("====================================before_scenario")
 
 def after_all(context):
-    #context.driver.quit()
+    context.driver.quit()
     print("====================================after_all")
     

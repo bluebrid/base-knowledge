@@ -1,0 +1,8 @@
+Feature: Tags filtering
+
+@tag
+Scenario: Scenario with tag
+  Given simple passed step
+
+Scenario: Scenario without tag
+  Given simple passed step

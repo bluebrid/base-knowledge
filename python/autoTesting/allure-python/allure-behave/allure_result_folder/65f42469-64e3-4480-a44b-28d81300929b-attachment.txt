@@ -1,0 +1,5 @@
+@uno @due @tre
+Feature: Tags
+
+Scenario: Scenario in feature with tags
+  Given simple passed step

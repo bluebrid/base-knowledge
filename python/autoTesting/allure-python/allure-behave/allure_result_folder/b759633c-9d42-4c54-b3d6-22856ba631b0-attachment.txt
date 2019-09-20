@@ -1,0 +1,3 @@
+Feature: Hook
+  Scenario: Scenario with "before_feature" hook and attachment
+    Given simple passed step

@@ -14,3 +14,8 @@ Read more about how to use this repository in the medium article: [BDD, Cucumber
 > cd features
 
 > behave dashboard.feature
+
+**添加allure**
+>1. allure_behave.formatter:AllureFormatter -o allure_result_folder ./tests/features
+
+>2. allure serve allure_result_folder

@@ -1,0 +1,4 @@
+Feature: Step Data
+
+  Scenario: Scenario with step that attached data
+    Given passed step with attachment

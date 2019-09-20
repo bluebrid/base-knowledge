@@ -1,0 +1,4 @@
+Feature: Scenario
+
+Scenario: Scenario with passed step
+  Given passed step

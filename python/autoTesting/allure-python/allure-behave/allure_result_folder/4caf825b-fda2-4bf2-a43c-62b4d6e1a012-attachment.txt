@@ -1,0 +1,7 @@
+Feature: Description
+
+  Scenario: Scenario with description
+    Scenario description.
+    Yep, multi-line description!
+
+    Given simple passed step

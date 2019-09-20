@@ -1,0 +1,8 @@
+@tag_for_hook
+Feature: Hook
+
+  Scenario: Scenario with "before tag" hook
+    Given simple passed step
+
+  Scenario: Another scenario with "before tag" hook
+    Given simple passed step

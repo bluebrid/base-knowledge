@@ -2,9 +2,10 @@ from selenium import webdriver
 from data.config import settings
 from urllib.parse import urljoin
 from webdriver_manager.chrome import ChromeDriverManager
+import unittest #https://docs.python.org/zh-cn/3/library/unittest.html#test-cases
 import time
 
-class WebApp:
+class WebApp(unittest.TestCase):
     instance = None
 
     @classmethod
@@ -61,9 +62,12 @@ class WebApp:
     def verify_component_exists_by_id(self, component):
         assert self.driver.find_element_by_id(component), \
             "Component {} not found on page".format(component)
+    def execute_script(self, js):
+        self.driver.execute_script(js)
 
     def verify_component_exists_by_class(self, component):
-        assert self.driver.find_elements_by_class_name(component), \
-            "Component {} not found on page".format(component)
+        self.assertIsNone(self.driver.find_elements_by_class_name(component), msg="{}不应该为空".format(component))
+        # assert self.driver.find_elements_by_class_name(component), \
+        #     "Component {} not found on page".format(component)
         #self.driver.quit()
 webapp = WebApp.get_instance()

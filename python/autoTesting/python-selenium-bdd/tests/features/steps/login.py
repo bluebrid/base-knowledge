@@ -29,9 +29,14 @@ def click_write_email_btn(context):
 # def step_impl(context, address, title, content):
 #      print(address, title, content)
 
-@then(u'编写邮件：地址"{address}",主题"{title}",内容"{content}"')
-def write_email(context, address, title, content):
-    login.write_email(address, title, content)
+@then(u'编写邮件')
+def write_email(context):
+    login.write_email(context.table)
+    # for row in context.table:
+        
+    #     time.sleep(4)
+    #     login.check_result()
+    #     login.click_re_write_email()
 
 @then(u'检查发送结果')
 def check_result(context):

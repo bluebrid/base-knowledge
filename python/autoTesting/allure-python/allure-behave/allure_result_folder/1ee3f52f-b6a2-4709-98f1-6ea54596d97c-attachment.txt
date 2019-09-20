@@ -1,0 +1,6 @@
+@allure.link.homepage:http://qameta.io
+Feature: Step status
+
+  @allure.issue:http://example.com
+  Scenario: Scenario with passed step
+      Given simple passed step

@@ -1,0 +1,9 @@
+Feature: Step Data
+
+  Scenario: Scenario with step contains table data
+    Given simple passed step with table data
+        | name | value |
+        | e    | 2     |
+        | e    | 4     |
+
+      And simple passed step

@@ -1,0 +1,5 @@
+Feature: Step status
+
+  @allure.label.owner:me
+  Scenario: Scenario with passed step
+      Given simple passed step

@@ -1,0 +1,6 @@
+Feature: Scenario
+
+Scenario: Scenario with failed step in chain
+  Given passed step
+  Given failed step
+  Given broken step
