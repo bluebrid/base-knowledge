@@ -1,8 +1,9 @@
 from framework.webapp import webapp
 import time
+from .base_page_object import BasePage
 from data.config import settings
 
-class Login():
+class Login(BasePage):
     instance = None
 
     @classmethod

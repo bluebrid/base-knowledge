@@ -1,7 +1,7 @@
 function getHTMLTagText(htmlStr, tagName) {
-    let regx = new RegExp(`(<${tagName}>)(^\\1*)</${tageName}>`, 'g')
+    let regx = new RegExp(`(<${tagName}>)(^\\1*)</${tagName}>`, 'g')
     let texts = [];
-    html.replace(regx, function(match, $1, $2) {
+    htmlStr.replace(regx, function(match, $1, $2) {
         texts.push($2)
     })
     return texts;

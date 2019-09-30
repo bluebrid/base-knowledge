@@ -8,7 +8,7 @@ function func() {
   var a = 15;
   console.log(a);
 }
-//func();
+func();
 
 //等价于：
 function func01() {

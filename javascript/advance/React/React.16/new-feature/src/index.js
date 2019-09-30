@@ -18,7 +18,7 @@ import App14 from './14.useLayoutEffect/App'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<div>
-  {/* <App1 />
+  <App1 />
   <App2 />
   <App3 />
   <App4 />
@@ -30,7 +30,7 @@ ReactDOM.render(<div>
   <App11 />
   <App1101 />
   <App12 />
-  <App13 /> */}
+  <App13 />
   <App14 />
 </div>, document.getElementById('root'));
 
