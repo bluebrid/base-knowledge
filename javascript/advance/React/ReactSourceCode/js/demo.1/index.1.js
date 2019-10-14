@@ -5,7 +5,7 @@ React.createElement("p", { key: "2" }, "Render array of elements")];
 
 ReactDOM.render(
 React.createElement(App, null),
-document.querySelector("#root"));
+document.querySelector("#root1_1"));
 
 
 

@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>
+      跨域请求 -site2
+    </title>
+  </head>
+
+  <body>
+      <pre>http-server -p 3000</pre>
+      来自site1的消息:<span id="message"></span>
+  </body>
+</html>
+
+<script>
+  window.addEventListener(
+    "message",
+    function(e) {
+      //通过监听message事件，可以监听对方发送的消息。
+      document.getElementById('message').innerText = e.data
+      console.log(e.data);
+    },
+    false
+  );
+</script>

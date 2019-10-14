@@ -1,7 +1,7 @@
 /**
  * 添加componentDidMount生命周期函数
  */
-const $root = document.querySelector("#root");
+const $root = document.querySelector("#root4");
 class App extends React.Component {
   constructor(props) {
     super()

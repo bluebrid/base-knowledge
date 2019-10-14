@@ -29,10 +29,13 @@
                 this.createCallback()
             }
             createScript() {
+                // mdn 又说 script 标签不受同源策略的限制. 那么, 我们尝试一下用 script 标签引入 http://localhost:8888/ 试试
                 let script = document.createElement('script')
                 script.src = this.url
                 document.body.appendChild(script)
-                script.addEventListener('load', () => {
+                // 请求完成后，返回的是： jsonp_1570523960057({"name":"ivan fan","age":18})
+                // jsonp_1570523960057 就是this.cbName , window['jsonp_1570523960057'] 就是这个这个函数，然后有指向的是this.cb, 也就是我们的回调函数
+                script.addEventListener('load', () => { // 这个是异步的， 后与createCallback执行
                     script.remove();
                     delete window[this.cbName]
                 })

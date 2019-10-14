@@ -24,22 +24,24 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
 .app .react-app-code {
   width: 100%;
   border-radius: 4px;
-  padding: .5rem .25rem;
+  padding: 0.5rem 0.25rem;
   margin-bottom: 0;
 }
 button {
-  background: #002219;
-  /* outline: none; */
-  border: none;
+  /* background: #002219; */
+  outline: none; 
+  border: 1px solid gray;
+  padding: 4px !important;
+  border-radius: 4px;
 }
 @media (min-width: 500px) {
   .app .react-app-code {
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
   }
 }
 .app .language-jsx {
@@ -59,8 +61,8 @@ button {
   align-items: center;
   border-radius: 4px;
   padding: 1rem;
-  background: #002219;
-  color: white;
+  background: rgba(0, 34, 25, 0.2);
+  color: black;
 }
 .react-app :first-child {
   font-size: 3rem;
@@ -74,4 +76,24 @@ button {
 }
 .react-app > * + * {
   margin-top: 1rem;
+}
+
+.react-app {
+  border: 1px solid gray;
+  margin: 10px;
+  margin-top: 20px;
+  padding: 20px;
+  position: relative;
+}
+.react-app::before {
+  content: attr(data-title);
+  display: block;
+  height: 22px;
+  background: gray;
+  position: absolute;
+  top: -11px;
+  left: 6px;
+  border-radius: 5px;
+  padding: 0px 4px;
+  color: white;
 }

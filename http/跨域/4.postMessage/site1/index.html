@@ -1,0 +1,25 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>
+      跨域请求 -site1
+    </title>
+  </head>
+
+  <body>
+    
+    <input type="input" id="message">
+    <input type="button" value="发送" onclick="run()" />
+    <iframe src="http://localhost:3000/index.html" id="frm"></iframe>
+  </body>
+</html>
+
+<script>
+  function run() {
+    var frm = document.getElementById("frm");
+    var msg = document.getElementById('message').value;
+    // postMessage方法的第一个参数是具体的信息内容，第二个参数是接收消息的窗口的源（origin），即"协议 + 域名 + 端口"。也可以设为 *，表示不限制域名，向所有窗口发送。
+    frm.contentWindow.postMessage(msg, "http://localhost:3000");
+  }
+</script>

@@ -1,4 +1,4 @@
-const $root = document.querySelector("#root");
+const $root = document.querySelector("#root1");
 const App = props =>
   React.createElement("h1", { key: "1" }, "1");
 

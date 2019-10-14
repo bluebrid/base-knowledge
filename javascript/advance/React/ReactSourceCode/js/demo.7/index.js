@@ -2,7 +2,7 @@
  * hooks
  */
 
-const $root = document.querySelector("#root");
+const $root = document.querySelector("#root7");
  
 function App() {
     const [count, setCount] = React.useState(0)
