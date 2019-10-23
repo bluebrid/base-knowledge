@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-display: swap;
   font-family: "Lato", sans-serif;
-  height: 400px;
+  /* height: 400px; */
   min-height: 100%;
   min-height: 100vh;
   display: flex;

@@ -1942,6 +1942,14 @@ var ReactElement = function (type, key, ref, self, source, owner, props) {
  * See https://reactjs.org/docs/react-api.html#createelement
  */
 function createElement(type, config, children) {
+  /**
+   * ReactDOM.render(
+  React.createElement(App, null),
+  $root,
+  () => {
+    console.log('render done')
+  });
+   */
   var propName = void 0;
 
   // Reserved names are extracted
@@ -2008,6 +2016,20 @@ function createElement(type, config, children) {
       }
     }
   }
+  /**
+   * ReactElement 返回的就是一个Object：
+     {
+        $$typeof: Symbol(react.element)
+        key: null
+        props: {}
+        ref: null
+        type: ƒ App(props)
+        _owner: null
+        _store: {validated: false}
+        _self: null
+        _source: null
+     }
+   */
   return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
 }
 
@@ -2995,6 +3017,7 @@ function validateFragmentProps(fragment) {
 }
 
 function createElementWithValidation(type, props, children) {
+  // React.createElement 指向的是： createElementWithValidation, 
   var validType = isValidElementType(type);
 
   // We warn in this case but don't throw. We expect the element creation to
