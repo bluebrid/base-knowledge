@@ -3,7 +3,7 @@ import Context from './store';
 import A from './components/a';
 import reducer from './store/reducer';
 import wrapperDispatch from './store/action';
-import 'todomvc-app-css/index.css';
+// import 'todomvc-app-css/index.css';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, { value: 0, loading: false });

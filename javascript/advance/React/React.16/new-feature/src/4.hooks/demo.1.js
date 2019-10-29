@@ -17,7 +17,7 @@ class Demo1 extends React.Component {
             <div>
                 <p>You clicked {this.state.count} times</p>
                 <button onClick={this.clickBtn}>
-                    Click me
+                    Click me(Class Component setState)
                 </button>
             </div>
         )

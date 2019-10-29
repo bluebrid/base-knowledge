@@ -1,5 +1,5 @@
 /**
- * 自定义Hooks, 其实就是想hooks 的代码抽离出来
+ * 自定义Hooks, 其实就是将hooks 的代码抽离出来
  */
 
  import React , {useState, useEffect} from 'react'

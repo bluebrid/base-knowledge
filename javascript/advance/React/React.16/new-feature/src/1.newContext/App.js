@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import { ThemeContext, themes } from './context/theme-context';
 import ThemedButton from './components/themed-button';
+import ThemedButton2 from './components/themed-button2';
 
 // 一个使用到ThemedButton组件的中间组件
 function Toolbar(props) {
   return (
-    <ThemedButton>
-      Change Theme
-    </ThemedButton>
+    <>
+    <ThemedButton />
+    <ThemedButton2 />
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ export default {
   components: { comArticle },
   data() {
     return {
-      articleList: ['红楼梦', '西游记', '三国演义']
+      articleList:  ['红楼梦', '西游记', '三国演义']
     }
   }
 }

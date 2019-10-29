@@ -34,7 +34,7 @@ body {
 }
 button {
   /* background: #002219; */
-  outline: none; 
+  outline: none;
   border: 1px solid gray;
   padding: 4px !important;
   border-radius: 4px;
@@ -64,8 +64,12 @@ button {
   background: rgba(0, 34, 25, 0.2);
   color: black;
 }
-.react-app :first-child {
+/* .react-app :first-child {
   font-size: 3rem;
+} */
+.demo-14,
+.demo-14:first-child {
+  font-size: 16px;
 }
 .react-app > * {
   margin: 0;
@@ -96,4 +100,17 @@ button {
   border-radius: 5px;
   padding: 0px 4px;
   color: white;
+}
+
+.animate {
+  height: 100px;
+  background: green;
+  margin-bottom: 10px;
+}
+
+.animate .square {
+  height: 100px;
+  width: 100px;
+  background: red;
+  font-size: 16px;
 }

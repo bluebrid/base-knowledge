@@ -13519,7 +13519,17 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
     }
    */
   var children = Component(props, refOrContext);
-
+  children = new Proxy(children, {
+    get: function(target, key, receiver) {
+      // if (key === 'props') {
+      //   debugger
+      // }
+      return Reflect.get(target, key, receiver);
+    },
+    set: function(target, key, receiver) {
+      return Reflect.set(target, key, receiver);
+    }
+  });
   if (didScheduleRenderPhaseUpdate) {
     do {
       didScheduleRenderPhaseUpdate = false;
@@ -13550,7 +13560,20 @@ function renderWithHooks(current, workInProgress, Component, props, refOrContext
   // We can assume the previous dispatcher is always this one, since we set it
   // at the beginning of the render phase and there's no re-entrancy.
   ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
-
+  /**
+   * 1. 在执行useState 的mountState 方法时，首先执行的var hook = mountWorkInProgressHook(); 方法， 
+   *    在这个方法中：  firstWorkInProgressHook = workInProgressHook = hook;  firstWorkInProgressHook 指向了 hook;
+   * 2. 在mountState 方法中， 主要是针对hook 的处理
+   * 3. 给  hook.memoizedState = hook.baseState = initialState; 
+   * 4. 所有下面的： renderedWork.memoizedState = firstWorkInProgressHook;则renderedWork 的值为:
+   *  {
+      baseState: 0
+      baseUpdate: null
+      memoizedState: 0
+      next: {memoizedState: 0, baseState: 0, queue: {…}, baseUpdate: null, next: null}
+      queue: null
+  }
+   */
   var renderedWork = currentlyRenderingFiber$1;
 
   renderedWork.memoizedState = firstWorkInProgressHook;
@@ -13867,10 +13890,41 @@ function updateReducer(reducer, initialArg, init) {
 }
 
 function mountState(initialState) {
+  /**
+    function mountWorkInProgressHook() {
+      var hook = {
+        memoizedState: null,
+
+        baseState: null,
+        queue: null,
+        baseUpdate: null,
+
+        next: null
+      };
+
+      if (workInProgressHook === null) { // 走的是if 分支
+        // This is the first hook in the list
+        firstWorkInProgressHook = workInProgressHook = hook;
+      } else {
+        // Append to the end of the list
+        workInProgressHook = workInProgressHook.next = hook;
+      }
+      return workInProgressHook;
+    }
+   */
+  /**
+   * function renderWithHooks(current, workInProgress, Component, props, refOrContext, nextRenderExpirationTime) {
+      renderExpirationTime = nextRenderExpirationTime;
+      currentlyRenderingFiber$1 = workInProgress;
+   */
+  // firstWorkInProgressHook
+  // hook 指向的是workInProgressHook
   var hook = mountWorkInProgressHook();
   if (typeof initialState === 'function') {
     initialState = initialState();
   }
+  // 给hook 赋值memoizedState
+  // hook.memoizedState 指向了useState 对应的状态值。
   hook.memoizedState = hook.baseState = initialState;
   var queue = hook.queue = {
     last: null,
@@ -13878,12 +13932,27 @@ function mountState(initialState) {
     lastRenderedReducer: basicStateReducer,
     lastRenderedState: initialState // 在queue 中保存了初始化的值：initialState
   };
+  // 给绑定dispatch 函数
+  
+  currentlyRenderingFiber$1 = new Proxy(currentlyRenderingFiber$1, {
+    set: function (target, key, value, receiver) {
+      console.log(`setting ${key}!`);
+      return Reflect.set(target, key, value, receiver);
+    },
+    get: function (target, key, receiver) {
+      console.log(`getting ${key}!`);
+      return Reflect.get(target, key, receiver);
+  },
+  })
   var dispatch = queue.dispatch = dispatchAction.bind(null,
   // Flow doesn't know this is non-null, but we do.
   currentlyRenderingFiber$1, queue);
+  // currentlyRenderingFiber$1 会
   logHooks(`(dispatch) ,dispatchAction调用bind 方法，已经传递了两个参数， currentlyRenderingFiber$1, queue`)
   logHooks(`(mountState) 执行useState 返回一个数组对象，总共两个元素， 第一个元素是初始化值， 第二个元素是一个dispatch 的函数，
   对应的是dispatchAction 函数， useState 的用法是： const [count, setCount] = React.useState(0)`)
+  // 返回对应的state 和一个dispatch 函数
+  // 在renderWithHooks 方法中， 执行完成组件初始化后， 会将firstWorkInProgressHook 的值赋值给currentlyRenderingFiber$1.memoizedState 上
   return [hook.memoizedState, dispatch];
 }
 
@@ -13903,6 +13972,25 @@ function pushEffect(tag, create, destroy, deps) {
   if (componentUpdateQueue === null) {
     componentUpdateQueue = createFunctionComponentUpdateQueue();
     componentUpdateQueue.lastEffect = effect.next = effect;
+    /**
+     * 在renderWithHooks方法中：将componentUpdateQueue 赋值给renderWork.updateQueue 上
+     *  var renderedWork = currentlyRenderingFiber$1;
+
+        renderedWork.memoizedState = firstWorkInProgressHook;
+        renderedWork.expirationTime = remainingExpirationTime;
+        renderedWork.updateQueue = componentUpdateQueue;
+        renderedWork.effectTag |= sideEffectTag;
+     */
+    componentUpdateQueue = new Proxy(componentUpdateQueue, {
+      set: function (target, key, value, receiver) {
+        console.log(`setting ${key}!`);
+        return Reflect.set(target, key, value, receiver);
+      },
+      get: function (target, key, receiver) {
+        console.log(`getting ${key}!`);
+        return Reflect.get(target, key, receiver);
+      },
+    })
   } else {
     var _lastEffect = componentUpdateQueue.lastEffect;
     if (_lastEffect === null) {
@@ -13933,10 +14021,52 @@ function updateRef(initialValue) {
 }
 
 function mountEffectImpl(fiberEffectTag, hookEffectTag, create, deps) {
+  /***
+   * function mountWorkInProgressHook() {
+  var hook = {
+    memoizedState: null,
+
+    baseState: null,
+    queue: null,
+    baseUpdate: null,
+
+    next: null
+  };
+
+  if (workInProgressHook === null) {
+    // This is the first hook in the list
+    firstWorkInProgressHook = workInProgressHook = hook;
+  } else { // 走的是这个分支， 因为useState已经初始化了hook 
+    // Append to the end of the list
+    workInProgressHook = workInProgressHook.next = hook;
+  }
+  return workInProgressHook;
+}
+   */
   var hook = mountWorkInProgressHook();
   var nextDeps = deps === undefined ? null : deps;
   sideEffectTag |= fiberEffectTag;
   hook.memoizedState = pushEffect(hookEffectTag, create, undefined, nextDeps);
+  hook.memoizedState = new Proxy(hook.memoizedState, {
+    set: function (target, key, value, receiver) {
+      console.log(`setting ${key}!`);
+      return Reflect.set(target, key, value, receiver);
+    },
+    get: function (target, key, receiver) {
+      console.log(`getting ${key}!`);
+      return Reflect.get(target, key, receiver);
+  },
+  })
+   /**
+    * hook.memoizedState:
+      {
+        create: ƒ ()
+        deps: [526]
+        destroy: undefined
+        next: {tag: 192, destroy: undefined, deps: Array(1), next: {…}, create: ƒ}
+        tag: 192
+      }
+    */
 }
 
 function updateEffectImpl(fiberEffectTag, hookEffectTag, create, deps) {
@@ -13949,6 +14079,7 @@ function updateEffectImpl(fiberEffectTag, hookEffectTag, create, deps) {
     destroy = prevEffect.destroy;
     if (nextDeps !== null) {
       var prevDeps = prevEffect.deps;
+      // 会去判断两次的值是否相等， 如果相等
       if (areHookInputsEqual(nextDeps, prevDeps)) {
         pushEffect(NoEffect$1, create, destroy, nextDeps);
         return;
@@ -14090,6 +14221,9 @@ var shouldWarnForUnbatchedSetState = false;
 }
 
 function dispatchAction(fiber, queue, action) {
+  console.log(`useState 对应的dispatch 函数的调用， 其实也就是:  const [count, setCount] = React.useState(0) 中setCount 对应的函数`)
+  // var dispatch = queue.dispatch = dispatchAction.bind(null,currentlyRenderingFiber$1, queue); 这个dispatch 是一个bind过的函数， 已经传递了两个参数： 当前的FiberNode, 和queue
+  // action 是从组件传递过来的新的状态值
   // setCount(count + 1)
   logHooks(`(dispatchAction) setCount(count + 1), 这个setCount 就是这个dispatchAction 函数，action 是新的值(count + 1)`)
   !(numberOfReRenders < RE_RENDER_LIMIT) ? invariant(false, 'Too many re-renders. React limits the number of renders to prevent an infinite loop.') : void 0;
@@ -14099,6 +14233,7 @@ function dispatchAction(fiber, queue, action) {
   }
 
   var alternate = fiber.alternate;
+  // 走的是else 分支逻辑
   if (fiber === currentlyRenderingFiber$1 || alternate !== null && alternate === currentlyRenderingFiber$1) {
     // This is a render phase update. Stash it in a lazily-created map of
     // queue -> linked list of updates. After this render pass, we'll restart
@@ -14126,6 +14261,7 @@ function dispatchAction(fiber, queue, action) {
       lastRenderPhaseUpdate.next = update;
     }
   } else {
+    // 走的是这个分支
     flushPassiveEffects();
 
     var currentTime = requestCurrentTime();
@@ -14140,6 +14276,14 @@ function dispatchAction(fiber, queue, action) {
     };
 
     // Append the update to the end of the list.
+    /**
+     *  var queue = hook.queue = {
+          last: null, // 首次渲染的时候， last 值为null, 后面的渲染值指向的_update2
+          dispatch: null,
+          lastRenderedReducer: reducer,
+          lastRenderedState: initialState
+        };
+     */
     var _last = queue.last;
     if (_last === null) {
       // This is the first update. Create a circular list.
@@ -14150,14 +14294,18 @@ function dispatchAction(fiber, queue, action) {
         // Still circular.
         _update2.next = first;
       }
-      _last.next = _update2;
+      _last.next = _update2; // queue.last.next = _update2 指向的是最新的状态值
     }
-    queue.last = _update2;
+    // 将last 也给赋值Wie_update2
+    // 上面的else 逻辑感觉没任何的意义
+    queue.last = _update2; // queue.last 指向了最新的状态值
+    // fiber.memoizedState.queue.last 也就是指向了_update2
 
     if (fiber.expirationTime === NoWork && (alternate === null || alternate.expirationTime === NoWork)) {
       // The queue is currently empty, which means we can eagerly compute the
       // next state before entering the render phase. If the new state is the
       // same as the current state, we may be able to bail out entirely.
+      // 处理useReducer 
       var _lastRenderedReducer = queue.lastRenderedReducer;
       if (_lastRenderedReducer !== null) {
         var prevDispatcher = void 0;
@@ -14166,15 +14314,35 @@ function dispatchAction(fiber, queue, action) {
           ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
         }
         try {
+          // 取出当前的状态值： state = 0
           var currentState = queue.lastRenderedState;
+          /**
+           * // setCount 也可以是一个函数， 传递当前的状态值， 返回一个新的状态值
+           * function basicStateReducer(state, action) {
+                return typeof action === 'function' ? action(state) : action;
+              }
+           */
+          // useReducer 中_lastRenderedReducer 对应的就是reducer
           var _eagerState = _lastRenderedReducer(currentState, action);
+          /**
+           *  * 4. setCount 的参数也可以是一个函数或者是一个新的状态值： 
+            *    setCount(count + 1)
+            *    setCount((currentValue) => currentValue + 1) // 这样可以灵活做很多事情
+           */
           // Stash the eagerly computed state, and the reducer used to compute
           // it, on the update object. If the reducer hasn't changed by the
           // time we enter the render phase, then the eager state can be used
           // without calling the reducer again.
           _update2.eagerReducer = _lastRenderedReducer;
+          // 将最新的状态值保存在update2中
           _update2.eagerState = _eagerState;
-          if (is(_eagerState, currentState)) {
+          /**
+            function is(x, y) {
+              return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y // eslint-disable-line no-self-compare
+              ;
+            }
+           */
+          if (is(_eagerState, currentState)) { // 判断当前的状态和新的状态是否相等，如果相等， 则不渲染组件，否则直接渲
             // Fast path. We can bail out without scheduling React to re-render.
             // It's still possible that we'll need to rebase this update later,
             // if the component re-renders for a different reason and by that
@@ -14195,6 +14363,7 @@ function dispatchAction(fiber, queue, action) {
         warnIfNotCurrentlyBatchingInDev(fiber);
       }
     }
+    // 最终通过scheduleWork 来处理渲染
     scheduleWork(fiber, _expirationTime);
   }
 }
@@ -14286,6 +14455,7 @@ var InvalidNestedHooksDispatcherOnUpdateInDEV = null;
       return mountRef(initialValue);
     },
     useState: function (initialState) {
+      console.log('执行： useState')
       currentHookNameInDev = 'useState';
       mountHookTypesDev();
       var prevDispatcher = ReactCurrentDispatcher$1.current;
@@ -16136,6 +16306,7 @@ function updateContextProvider(current$$1, workInProgress, renderExpirationTime)
 var hasWarnedAboutUsingContextAsConsumer = false;
 
 function updateContextConsumer(current$$1, workInProgress, renderExpirationTime) {
+  // 更新Context.Consumer 组件
   var context = workInProgress.type;
   // The logic below for Context differs depending on PROD or DEV mode. In
   // DEV mode, we create a separate object for Context.Consumer that acts
@@ -16160,18 +16331,38 @@ function updateContextConsumer(current$$1, workInProgress, renderExpirationTime)
     }
   }
   var newProps = workInProgress.pendingProps;
-  var render = newProps.children;
+  var render = newProps.children; 
+  /**
+   * 在下面的demo 中, children 是{({ theme, toggleTheme }) => ( ...., 
+   * 是一个函数， 参数是一个对象， 
+   * function ThemedButton2(props) {
+      return (
+        <ThemeContext.Consumer>
+          {({ theme, toggleTheme }) => (
+            <button
+              onClick={toggleTheme}
+              style={{ backgroundColor: theme.background }}
+            >
+              Toggle Theme 2
+            </button>
+          )}
+        </ThemeContext.Consumer>
+      );
+    }
+   */
 
   {
     !(typeof render === 'function') ? warningWithoutStack$1(false, 'A context consumer was rendered with multiple children, or a child ' + "that isn't a function. A context consumer expects a single child " + 'that is a function. If you did pass a function, make sure there ' + 'is no trailing or leading whitespace around it.') : void 0;
   }
 
   prepareToReadContext(workInProgress, renderExpirationTime);
+  // newValue 读取的是context._currentValue 
   var newValue = readContext(context, newProps.unstable_observedBits);
   var newChildren = void 0;
   {
     ReactCurrentOwner$3.current = workInProgress;
     setCurrentPhase('render');
+    // 执行render 创建子组件
     newChildren = render(newValue);
     setCurrentPhase(null);
   }
@@ -20386,11 +20577,11 @@ function workLoop(isYieldy, root) {
     // root.current.alternate.firstEffect.child.stateNode
     //  nextUnitOfWork = createWorkInProgress(nextRoot.current, null, nextRenderExpirationTime);
     while (nextUnitOfWork !== null) {
-      if (index === 5) {
-        debugger
-      }
+      // if (index === 5) {
+      //   debugger
+      // }
       index ++;
-      console.log(`======================================================循环:${index}'(nextUnitOfWork.elementType:${nextUnitOfWork.elementType}, nextUnitOfWork.type: ${nextUnitOfWork.type})`)
+      // console.log(`======================================================循环:${index}'(nextUnitOfWork.elementType:${nextUnitOfWork.elementType}, nextUnitOfWork.type: ${nextUnitOfWork.type})`)
       
       // 循环调用performUnitOfWork 方法， 在这个方法中， 会判断next 是否为null , 如果为null 则执行运行 next = completeUnitOfWork(workInProgress);去渲染真实的Dom
       nextUnitOfWork = performUnitOfWork(nextUnitOfWork);

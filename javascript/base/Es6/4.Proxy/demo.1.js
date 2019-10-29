@@ -15,5 +15,5 @@ Object.defineProperty(numericDataStore, 'count', {
         return value
     }
 })
-numericDataStore.count = 111
+numericDataStore.count = '111'
 console.log(numericDataStore.count)

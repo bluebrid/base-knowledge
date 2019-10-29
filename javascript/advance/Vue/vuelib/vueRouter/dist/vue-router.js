@@ -2165,6 +2165,11 @@ History.prototype.updateRoute = function updateRoute (route) {
    */
   this.cb && this.cb(route);
   // 执行VueRouter 的守护钩子函数afterHooks(afterEach)
+  /**
+   *router.afterEach((to, from) => {
+      console.log('afterEach', to, from)
+    })
+   */
   this.router.afterHooks.forEach(function (hook) {
     hook && hook(route, prev);
   });

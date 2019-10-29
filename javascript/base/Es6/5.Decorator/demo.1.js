@@ -1,6 +1,7 @@
 "use strict"
-let request = require("request");
-function promisify(target, key, descriptor) {
+// https://jsfiddle.net/IvanFan/dnovs3jm/3/
+// let request = require("request");
+function promisify(target, key, descriptor) { // 方法的装饰器会传递按个三个参数，第一个就是对应的
     var func = target[key];
     target[key] = function (...args) {
         return new Promise((resolve, reject) => {
@@ -17,13 +18,18 @@ function promisify(target, key, descriptor) {
     return target[key];
 }
 
-function url(url) {
+function url(url) { 
     return function (Site) {
         Site.prototype.url = url;
         return Site;
     }
 }
-
+function request(url, callback) {
+    setTimout(() => {
+        console.log('request URL is : '+ url)
+        callback();
+    })
+}
 class Site {
     @promisify
     getData(callback) {
