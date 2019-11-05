@@ -20739,6 +20739,19 @@ function renderRoot(root, isYieldy) {
       //  root.current.alternate.firstEffect.child.stateNode 就是对应生成的DOM tree
       workLoop(isYieldy, root);
     } catch (thrownValue) {
+      // 在render 中抛出错误， 会在这里捕获
+      /**
+       *   render() {
+            if (this.state.releaseBugs) {
+              throw new Error("I crashed!");
+            }
+            return (
+              <button className="btn" onClick={this.handleClick}>
+                {"Scary Button!"}
+              </button>
+            );
+          }
+       */
       resetContextDependences();
       resetHooks();
 

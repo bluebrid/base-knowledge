@@ -1,5 +1,6 @@
 // https://ivweb.io/article.html?_id=100344
 // http://www.ayqy.net/blog/react-suspense/
+// https://segmentfault.com/a/1190000017483690?utm_source=tag-newest
 import React from "react";
 import StockTable from "./StockTable";
 import './App.scss'
