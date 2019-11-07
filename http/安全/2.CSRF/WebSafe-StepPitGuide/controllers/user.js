@@ -17,8 +17,11 @@ exports.doLogin = async function(ctx, next){
 		// 	username = '${data.username}'
 		// 	and password = '${data.password}'`
 		// );
+		// const results = await query(
+		// 	`select * from user where username = '${data.username}'	and password = '${data.password}'`
+		// );
 		const results = await query(
-			`select * from user where username = '${data.username}'	and password = '${data.password}'`
+			"select * from user where username = '"+ data.username +"'	and password = '"+ data.password +"'"
 		);
 		if(results.length){
 			let user = results[0];
