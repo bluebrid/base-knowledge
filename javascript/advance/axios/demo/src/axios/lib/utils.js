@@ -1,5 +1,3 @@
-'use strict';
-
 var bind = require('./helpers/bind');
 var isBuffer = require('is-buffer');
 

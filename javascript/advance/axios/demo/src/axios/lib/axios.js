@@ -1,5 +1,3 @@
-'use strict';
-
 var utils = require('./utils');
 var bind = require('./helpers/bind');
 var Axios = require('./core/Axios');

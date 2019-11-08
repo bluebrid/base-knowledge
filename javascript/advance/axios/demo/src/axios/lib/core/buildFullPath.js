@@ -1,4 +1,3 @@
-'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
 var combineURLs = require('../helpers/combineURLs');

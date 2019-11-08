@@ -1,4 +1,3 @@
-'use strict';
 
 var enhanceError = require('./enhanceError');
 

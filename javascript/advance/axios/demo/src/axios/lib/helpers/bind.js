@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function bind(fn, thisArg) {
   return function wrap() {
     var args = new Array(arguments.length);

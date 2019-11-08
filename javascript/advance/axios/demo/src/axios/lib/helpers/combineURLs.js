@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Creates a new URL by combining the specified URLs
  *

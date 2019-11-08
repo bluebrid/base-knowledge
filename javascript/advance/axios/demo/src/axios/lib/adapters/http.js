@@ -1,5 +1,3 @@
-'use strict';
-
 var utils = require('./../utils');
 var settle = require('./../core/settle');
 var buildFullPath = require('../core/buildFullPath');

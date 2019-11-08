@@ -1,5 +1,3 @@
-'use strict';
-
 var utils = require('./utils');
 var normalizeHeaderName = require('./helpers/normalizeHeaderName');
 

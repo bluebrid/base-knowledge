@@ -1,5 +1,3 @@
-'use strict';
-
 var utils = require('./../utils');
 
 // Headers whose duplicates are ignored by node

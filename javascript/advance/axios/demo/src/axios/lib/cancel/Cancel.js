@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * A `Cancel` is an object that is thrown when an operation is canceled.

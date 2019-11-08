@@ -1,4 +1,5 @@
 import axios from "./axios/lib/axios";
+import retryInterceptor from 'axios-retry-interceptor';
 
 var ISO_8601 = /(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})Z/;
 function formatDate(d) {
@@ -6,7 +7,8 @@ function formatDate(d) {
 }
 
 axios.interceptors.request.use(
-  function(config) {// 只会接收config参数， 一般是对config配置进行加工
+  function(config) {
+    // 只会接收config参数， 一般是对config配置进行加工
     return config;
     // return Promise.reject('customReject');
   },
@@ -16,7 +18,8 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(
-  function(response) {// 只会接收response 参数，一般是对response的数据进行加工
+  function(response) {
+    // 只会接收response 参数，一般是对response的数据进行加工
     return response;
   },
   function(error) {
@@ -47,3 +50,31 @@ axios
       res.data.updated_at
     );
   });
+
+let source = axios.CancelToken.source();
+// retryInterceptor(axios, {
+//   maxAttempts: 3,
+//   waitTime: 1000
+// });
+/**
+ * return {
+    token: token,
+    cancel: cancel
+  };
+ */
+document.getElementById("send").addEventListener("click", () => {
+  source = axios.CancelToken.source();
+  axios.get("/users", {
+    cancelToken: source.token,
+    // timeout: 1000 * 2,
+    onUploadProgress: function (e) {
+      console.log(e)
+    }
+  }).then(res => {
+    alert(JSON.stringify(res.data));
+  });
+});
+
+document.getElementById("cancel").addEventListener("click", () => {
+  source.cancel('用户撤销了请求');
+});

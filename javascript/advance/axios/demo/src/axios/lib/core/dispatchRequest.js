@@ -1,4 +1,3 @@
-'use strict';
 
 var utils = require('./../utils');
 var transformData = require('./transformData');
@@ -53,7 +52,8 @@ module.exports = function dispatchRequest(config) {
     throwIfCancellationRequested(config);
 
     // Transform response data
-    // 对数据进行清洗, 也就是执行transformResponse方法， 这个方法会传递两个参数： response.data 和headers
+    // 1.对数据进行清洗, 也就是执行transformResponse方法， 这个方法会传递两个参数： response.data 和headers
+    // 2.返回一个加工过的数据
     /**
      * module.exports = function transformData(data, headers, fns) {
         utils.forEach(fns, function transform(fn) {

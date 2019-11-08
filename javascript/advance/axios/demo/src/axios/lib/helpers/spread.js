@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Syntactic sugar for invoking a function and expanding an array for arguments.
  *
