@@ -105,6 +105,12 @@ module.exports = function(proxy, allowedHost) {
           res.end(JSON.stringify(users));
         }, 1000 * 5);
       });
+    },
+    setup(app) {
+      console.log('============>setup')
+    },
+    after(app) {
+      console.log('============>after')
     }
   };
 };

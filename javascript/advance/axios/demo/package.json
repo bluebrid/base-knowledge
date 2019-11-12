@@ -1,5 +1,5 @@
 {
-  "name": "mobx-learnging",
+  "name": "axios-learnging",
   "version": "1.0.0",
   "description": "",
   "main": "index.2.js",
@@ -132,5 +132,14 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8080", 
+      "changeOrigin": true,
+      "pathRewrite" : {
+        "^/api" : ""
+    }
+    }
   }
 }

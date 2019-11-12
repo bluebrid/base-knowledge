@@ -18,14 +18,29 @@ function CancelToken(executor) {
   });
 
   var token = this;
-  executor(function cancel(message) {
+  executor(function cancel(message) { // 这个cancel 其实就是真正的cancel函数
     if (token.reason) {
       // Cancellation has already been requested
       return;
     }
 
     token.reason = new Cancel(message);
-    resolvePromise(token.reason);
+    resolvePromise(token.reason); // 这是一个promise 的onResolve 方法， 在xhr 中会去监听
+    /**
+     *    if (config.cancelToken) {
+            // Handle cancellation
+            config.cancelToken.promise.then(function onCanceled(cancel) {
+              if (!request) {
+                return;
+              }
+
+              request.abort();
+              reject(cancel);
+              // Clean up request
+              request = null;
+            });
+          }
+     */
   });
 }
 
