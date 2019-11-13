@@ -83,6 +83,7 @@ choosePort(HOST, DEFAULT_PORT)
      */
     const urls = prepareUrls(protocol, HOST, port);
     // Create a webpack compiler that is configured with custom messages.
+    // compiler = webpack(config, handleCompile);
     let compiler = createCompiler(webpack, config, appName, urls, useYarn);
     // Load proxy config
     /**

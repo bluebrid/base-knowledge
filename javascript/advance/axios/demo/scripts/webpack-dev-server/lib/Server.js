@@ -511,6 +511,32 @@ function Server(compiler, options) {
 
     this.listeningApp = spdy.createServer(options.https, app);
   } else {
+    // 通过http.createServer 来创建一个server ,并将Express 实例app 作为回调函数
+    /**
+     * const app = this.app = new express(); // eslint-disable-line
+     * function createApplication() {
+        var app = function(req, res, next) {
+          app.handle(req, res, next);
+        };
+
+        mixin(app, EventEmitter.prototype, false);
+        mixin(app, proto, false);
+
+        // expose the prototype that will get set on requests
+        app.request = Object.create(req, {
+          app: { configurable: true, enumerable: true, writable: true, value: app }
+        })
+
+        // expose the prototype that will get set on responses
+        app.response = Object.create(res, {
+          app: { configurable: true, enumerable: true, writable: true, value: app }
+        })
+
+        app.init();
+        return app;
+      }
+     */
+    // http.createServer 返回的是http.server实例
     this.listeningApp = http.createServer(app);
   }
 
@@ -594,8 +620,9 @@ Server.prototype.checkHost = function (headers) {
 Server.prototype.listen = function (port, hostname, fn) {
   this.listenHostname = hostname;
   // eslint-disable-next-line
-
+  // 在监听的时候， 直接调用的是http.listen
   const returnValue = this.listeningApp.listen(port, hostname, (err) => {
+    // 在监听的时候创建一个sock
     const sockServer = sockjs.createServer({
       // Use provided up-to-date sockjs-client
       sockjs_url: '/__webpack_dev_server__/sockjs.bundle.js',
@@ -614,6 +641,7 @@ Server.prototype.listen = function (port, hostname, fn) {
         conn.close();
         return;
       }
+      // 将连接都保存在this.sockets数组中
       this.sockets.push(conn);
 
       conn.on('close', () => {

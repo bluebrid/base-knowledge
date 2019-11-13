@@ -16,6 +16,8 @@
 // that looks similar to our console output. The error overlay is inspired by:
 // https://github.com/glenjamin/webpack-hot-middleware
 
+
+// 会在webpack.config.dev.js 的entry 中注入这个文件
 var SockJS = require('sockjs-client');
 var stripAnsi = require('strip-ansi');
 var url = require('url');
@@ -58,7 +60,9 @@ if (module.hot && typeof module.hot.dispose === 'function') {
 }
 
 // Connect to WebpackDevServer via a socket.
+// 客户端连接sock,
 var connection = new SockJS(
+  // url.format 返回的是： "http://localhost:3000/sockjs-node"
   url.format({
     protocol: window.location.protocol,
     hostname: window.location.hostname,
@@ -202,9 +206,12 @@ connection.onmessage = function(e) {
       break;
     case 'content-changed':
       // Triggered when a file from `contentBase` changed.
+      // 当contentBase 里面的文件改变了， 就直接重新加载文件
       window.location.reload();
       break;
     case 'warnings':
+      // 文件更新发布的消息是warnings 
+      // 接收到websocket 的消息， 然后会执行 handleWarnings-> tryApplyUpdates ->   module.hot.check
       handleWarnings(message.data);
       break;
     case 'errors':
@@ -257,9 +264,98 @@ function tryApplyUpdates(onHotUpdateSuccess) {
     }
   }
 
-  // https://webpack.github.io/docs/hot-module-replacement.html#check
+  // https://webpack.github.io/docs/hot-module-replacement.html#
+  
   var result = module.hot.check(/* autoApply */ true, handleApplyUpdates);
-
+  /**
+     	function hotCheck(apply) {
+        if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
+        hotApplyOnUpdate = apply;
+        hotSetStatus("check");
+        // D:\private\bluebrid\base-knowledge\javascript\advance\tools\webpack\lib\web\JsonpMainTemplatePlugin.js
+        // JsonpMainTemplate.runtime.js 的方法
+        return hotDownloadManifest(hotRequestTimeout).then(function(update) {
+          if(!update) {
+            hotSetStatus("idle");
+            return null;
+          }
+          hotRequestedFilesMap = {};
+          hotWaitingFilesMap = {};
+          hotAvailableFilesMap = update.c;
+          hotUpdateNewHash = update.h; // 跟新最新的hash 值
+      
+          hotSetStatus("prepare");
+          var promise = new Promise(function(resolve, reject) {
+            hotDeferred = {
+              resolve: resolve,
+              reject: reject
+            };
+          });
+          hotUpdate = {};
+          var chunkId = 0;
+          { // eslint-disable-line no-lone-blocks
+            
+            hotEnsureUpdateChunk(chunkId); // 这个方法是从新加载对应的文件，通过script 脚本来加载 
+          }
+          if(hotStatus === "prepare" && hotChunksLoading === 0 && hotWaitingFiles === 0) {
+            hotUpdateDownloaded();
+          }
+          return promise;
+        });
+      }
+    // 发起一个ajax 请求, 这里请求的文件是在HotModuleReplacementPlugin.js 中生成的。
+ 	 	function hotDownloadManifest(requestTimeout) { // eslint-disable-line no-unused-vars
+      requestTimeout = requestTimeout || 10000;
+      return new Promise(function(resolve, reject) {
+        if(typeof XMLHttpRequest === "undefined")
+          return reject(new Error("No browser support"));
+        try {
+          var request = new XMLHttpRequest();
+          var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
+          request.open("GET", requestPath, true);
+          request.timeout = requestTimeout;
+          request.send(null);
+        } catch(err) {
+          return reject(err);
+        }
+        request.onreadystatechange = function() {
+          if(request.readyState !== 4) return;
+          if(request.status === 0) {
+            // timeout
+            reject(new Error("Manifest request to " + requestPath + " timed out."));
+          } else if(request.status === 404) {
+            // no update available
+            resolve();
+          } else if(request.status !== 200 && request.status !== 304) {
+            // other failure
+            reject(new Error("Manifest request to " + requestPath + " failed."));
+          } else {
+            // success
+            try {
+              var update = JSON.parse(request.responseText);
+            } catch(e) {
+              reject(e);
+              return;
+            }
+            resolve(update);
+          }
+        };
+      });
+   }
+      // 相当于重新请求了一个新的js 文件，从而达到不用刷新页面就会更新
+      function hotDownloadUpdateChunk(chunkId) { // eslint-disable-line no-unused-vars
+        
+        var head = document.getElementsByTagName("head")[0];
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.charset = "utf-8";
+        script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
+        ;
+        head.appendChild(script);
+      }
+   */
+  // HotModuleReplacementPlugin.js 中生成了对应的：hash.hot-update.js|json
+  //  new webpack.HotModuleReplacementPlugin(),
   // // Webpack 2 returns a Promise instead of invoking a callback
   if (result && result.then) {
     result.then(
