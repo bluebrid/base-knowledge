@@ -81,6 +81,7 @@ module.exports = function(proxy, allowedHost) {
     },
     public: allowedHost,
     proxy,
+    progress: true,
     before(app) {
       // This lets us open files from the runtime error overlay.
       app.use(errorOverlayMiddleware());
@@ -106,11 +107,11 @@ module.exports = function(proxy, allowedHost) {
         }, 1000 * 5);
       });
     },
-    setup(app) {
-      console.log('============>setup')
-    },
-    after(app) {
-      console.log('============>after')
-    }
+    // setup(app) {
+    //   console.log('============>setup')
+    // },
+    // after(app) {
+    //   console.log('============>after')
+    // }
   };
 };
