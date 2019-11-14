@@ -1,0 +1,12 @@
+{
+  "name": "sockjs",
+  "version": "0.0.0",
+  "decription": "websocket demo",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Ivan Fan <15813849613@126.com> (https://github.com/bluebrid)",
+  "license": "ISC",
+  "devDependencies": {
+    "ws": "^7.2.0"
+  }
+}

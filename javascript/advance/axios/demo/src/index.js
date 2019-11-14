@@ -118,7 +118,7 @@ document.getElementById("cancelProxy").addEventListener("click", () => {
   source.cancel("用户撤销了请求");
 });
 document.getElementById("cancelProxy").style.border="1px solid green"
-document.getElementById("cancelProxy").style.background="red"
+document.getElementById("cancelProxy").style.background="green"
 /*热更新*/
 /**
  * 1. 每一个文件都是一个module
