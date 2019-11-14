@@ -8,7 +8,7 @@ Then:
 
 const http = require("http");
 const fs = require("fs");
-const ws = new require("ws");
+const ws = new require("./ws");
 
 const wss = new ws.Server({ noServer: true });
 
@@ -22,7 +22,7 @@ function accept(req, res) {
     // 可以是 Connection: keep-alive, Upgrade
     req.headers.connection.match(/\bupgrade\b/i)
   ) {
-    wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
+    // wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
   } else if (req.url == "/") {
     // index.html
     fs.createReadStream("./index.html").pipe(res);
@@ -38,10 +38,10 @@ function onSocketConnect(ws) {
   log(`new connection`);
 
   ws.on("message", function(message) {
-    log(`message received: ${message}`);
+    log(`监听message事件 received: ${message}`);
 
     message = message.slice(0, 50); // 最大消息长度为 50
-
+    message = message === "ping" ? "pong" : message;
     for (let client of clients) {
       client.send(message);
     }
@@ -56,7 +56,12 @@ function onSocketConnect(ws) {
 let log;
 if (!module.parent) {
   log = console.log;
-  http.createServer(accept).listen(8080);
+  http
+    .createServer(accept)
+    .on("upgrade", function upgrade(req, socket, head) {
+      wss.handleUpgrade(req, socket, head, onSocketConnect);
+    })
+    .listen(8080);
 } else {
   // 嵌入 javascript.info
   log = function() {};

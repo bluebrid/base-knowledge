@@ -1,39 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
+<header>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</header>
 <form name="publish">
-  <input type="text" name="message" maxlength="50"/>
-  <input type="submit" value="Send"/>
+  <input type="text" name="message" maxlength="50" />
+  <input type="submit" value="Send" />
 </form>
 
 <div id="messages"></div>
 
 <script>
-let url = location.host == 'localhost' ?
-  'ws://localhost:8080/ws' : location.host == 'javascript.local' ?
-  `ws://javascript.local/article/websocket/chat/ws` : // dev integration with local site
-  `wss://javascript.info/article/websocket/chat/ws`; // prod integration with javascript.info
+  class WebsocketClient {
+    constructor(options) {
+      this.url = options.url || "ws://localhost:8080/ws";
+      this.onOpen = options.onOpen;
+      this.onMessage = options.onMessage;
+      this.onClose = options.onClose;
+      this.reconnectLimit = options.reconnectLimit || 10;
+      this.reconnectTimes = 0;
+      this.pingTime = options.pingTime || 1000
+      this._open();
+      this._initEventHandle();
+    }
 
-let socket = new WebSocket(url);
+    _open() {
+      this.socket = new WebSocket(this.url);
+      this.socket.onopen = msg => {
+        if (this.onOpen) {
+          this.onOpen(msg);
+        } else {
+          console.log("Connect successfylly!");
+        } 
+        this._restHeartCheck()._startHeartCheck();
+      };
+      this.socket.onerror = error => {
+        this._reconnect();
+      };
+    }
 
-// 从表单发送消息
-document.forms.publish.onsubmit = function() {
-  let outgoingMessage = this.message.value;
+    _initEventHandle() {
+      this.socket.onmessage = event => {
+        let incomingMessage = event.data;
+        if (incomingMessage === 'pong') {
+          console.log('心跳连接成功')
+          this._restHeartCheck()._startHeartCheck();
+        } else {
+          this.onMessage && this.onMessage(incomingMessage);
+        }
+      };
+      this.socket.onclose = error => {
+        this.onClose && this.onClose(error);
+        this._reconnect();
+      };
+    }
 
-  socket.send(outgoingMessage);
-  return false;
-};
+    send(outgoingMessage) {
+      this.socket.send(outgoingMessage);
+    }
 
-// 处理传入消息
-socket.onmessage = function(event) {
-  let incomingMessage = event.data;
-  showMessage(incomingMessage);
-};
+    _reconnect() {
+      if (this.reconnecting) return;
+      this.reconnecting = true;
+      if (this.reconnectTimes < this.reconnectLimit) {
+        this.reconnectTimes++;
+        this._open();
+        this.reconnecting = false;
+      } else {
+        console.log("连接断开!");
+      }
+    }
+    _restHeartCheck () {
+      clearTimeout(this.timeoutHandler)
+      return this;
+    }
+    _startHeartCheck() {
+      this.timeoutHandler = setTimeout(() => {
+        console.log('开始心跳检测')
+        // this.send('ping')
+      },this.pingTime)
+    }
+  }
 
-socket.onclose = event => console.log(`Closed ${event.code}`);
+  let socket = new WebsocketClient({
+    onMessage: msg => {
+      showMessage(msg);
+    },
+    onClose: err => {
+      console.log("Close Connection.");
+    }
+  });
 
-// 在 div#messages 节点上显示消息
-function showMessage(message) {
-  let messageElem = document.createElement('div');
-  messageElem.textContent = message;
-  document.getElementById('messages').prepend(messageElem);
-}
+  // 从表单发送消息
+  document.forms.publish.onsubmit = function() {
+    let outgoingMessage = this.message.value;
+    socket.send(outgoingMessage);
+    return false;
+  };
+
+  // 在 div#messages 节点上显示消息
+  function showMessage(message) {
+    let messageElem = document.createElement("div");
+    messageElem.textContent = message;
+    document.getElementById("messages").prepend(messageElem);
+  }
 </script>
