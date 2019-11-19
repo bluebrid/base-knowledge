@@ -1,9 +1,9 @@
 'use strict';
 
-const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
-const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
-const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
-const ignoredFiles = require('react-dev-utils/ignoredFiles');
+const errorOverlayMiddleware = require('../scripts/react-dev-utils/errorOverlayMiddleware');
+const evalSourceMapMiddleware = require('../scripts/react-dev-utils/evalSourceMapMiddleware');
+const noopServiceWorkerMiddleware = require('../scripts/react-dev-utils/noopServiceWorkerMiddleware');
+const ignoredFiles = require('../scripts/react-dev-utils/ignoredFiles');
 const paths = require('./paths');
 const fs = require('fs');
 const { colors } = require('webpack-log');
@@ -112,7 +112,8 @@ module.exports = function(proxy, allowedHost) {
       // We do this in development to avoid hitting the production cache if
       // it used the same host and port.
       // https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
-      app.use(noopServiceWorkerMiddleware());
+      // 在develop 环境下， 自动生成一个service-worker.js 文件
+      // app.use(noopServiceWorkerMiddleware());
       app.get('/users', (req, res) => {
         const users = [
           {
