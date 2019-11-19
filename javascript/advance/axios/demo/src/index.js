@@ -113,7 +113,6 @@ document.getElementById("sendProxy").addEventListener("click", () => {
       alert(JSON.stringify(res.data));
     });
 });
-
 document.getElementById("cancelProxy").addEventListener("click", () => {
   source.cancel("用户撤销了请求");
 });

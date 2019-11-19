@@ -11,7 +11,8 @@
             "request": "launch",
             "name": "Axios Learning Launch Program",
             "program": "${workspaceFolder}\\scripts\\start.js",
-            "console":"integratedTerminal",
+            // "program": "${workspaceFolder}\\scripts\\build.js",
+            // "console":"integratedTerminal",
             "args": [
                 "p1", "--p2", "p3"
              ],
