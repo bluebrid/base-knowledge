@@ -36,7 +36,7 @@ class MainPageState extends State<MainPage> {
       return new Text(appBarTitles[curIndex],
           style: new TextStyle(color: Color(AppTheme.mainColor)));
     } else {
-      print(appBarTitles[curIndex]);
+      // print(appBarTitles[curIndex]);
       return new Text(appBarTitles[curIndex],
           style: new TextStyle(color: const Color(0xdd888888)));
     }

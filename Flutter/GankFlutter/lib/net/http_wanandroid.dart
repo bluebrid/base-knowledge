@@ -75,7 +75,7 @@ class HttpWanAndroid {
     }
 
     if (debug) {
-      print('<net url>------$uri');
+      print('<net url>------$baseUrl$uri');
       print('<net params>------$data');
     }
 

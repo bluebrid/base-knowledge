@@ -5,6 +5,7 @@ import 'package:flutter_gank/gank/CommonComponent.dart';
 import 'package:flutter_gank/models/DailyInfo.dart';
 import 'package:flutter_gank/models/GankInfo.dart';
 import 'package:flutter_gank/net/api_gank.dart';
+import 'dart:async';
 
 class DailyPage extends StatefulWidget {
   DailyPage({Key key, this.title}) : super(key: key);
@@ -44,7 +45,10 @@ class DailyPageState extends State<DailyPage> {
 
   List<Widget> _showAllList() {
     var l = List<Widget>();
-    var top = new Container(
+    if (_dailyInfo.category.length < 1) {
+      return l;
+    }
+    var top = new Container( // 显示顶部的图片(将福利的数据，显示作为头部展示，美女图片)
       child: new GestureDetector(
         onTap: () {
           showPhoto(contexts, GankInfo.fromJson(_dailyInfo.results["福利"][0]));
@@ -62,10 +66,10 @@ class DailyPageState extends State<DailyPage> {
       ),
     );
     l.add(top);
-    _dailyInfo.category.remove("福利");
-    _dailyInfo.category.forEach((f) => {
+    _dailyInfo.category.remove("福利"); // 将福利从category 删除
+    _dailyInfo.category.forEach((f) => {// 显示下面的的列表
         l.addAll(_showList(GankInfo.fromJson(
-        _dailyInfo.results[f][_dailyInfo.results[f].length - 1])))
+        _dailyInfo.results[f][_dailyInfo.results[f].length - 1])))// 显示每一个category 的最后一条记录
   });
     return l;
   }
@@ -104,6 +108,9 @@ class DailyPageState extends State<DailyPage> {
     GankApi.getDailyInfo(widget.title.replaceAll("-", "/"))
         .then((DailyInfo info) {
       isLoading = false;
+      // var timer = Timer(Duration(seconds: 3), () => setState(() {
+      //   _dailyInfo = info;
+      // }));
       setState(() {
         _dailyInfo = info;
       });

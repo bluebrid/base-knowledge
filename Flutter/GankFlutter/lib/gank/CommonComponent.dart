@@ -133,7 +133,7 @@ class HomeListWidget extends StatelessWidget {
         onTap: () {
           Navigator.push(contexts == null ? context : contexts,
               new MaterialPageRoute(builder: (context) {
-            return new WebPage(url: info.url, title: info.desc);
+            return new WebPage(url: info.url, title: info.desc);// 跳转到对应的页面上去
           }));
         },
         child: new Padding(
@@ -217,7 +217,7 @@ class HistoryListWidget extends StatelessWidget {
             color: Color(0xFFDFDFDF),
             child: new Stack(
               children: <Widget>[
-                new Container(
+                new Container( // 显示图片
                   child: new CachedNetworkImage(
                     fit: BoxFit.cover,
                     imageUrl: imageUrl,
@@ -230,7 +230,7 @@ class HistoryListWidget extends StatelessWidget {
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      new Text(
+                      new Text( // 显示发布日期
                         info.publishedAt.substring(0, 10),
                         style: TextStyle(
                             color: Colors.white,
@@ -240,7 +240,7 @@ class HistoryListWidget extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 5.0),
                       ),
-                      new Text(
+                      new Text(// 显示title
                         info.title,
                         maxLines: 3,
                         style: TextStyle(color: Colors.white, fontSize: 15),

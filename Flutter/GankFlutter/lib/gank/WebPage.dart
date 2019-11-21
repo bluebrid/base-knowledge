@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
+// https://www.jianshu.com/p/c0aee0207be1
 class WebPage extends StatefulWidget {
   WebPage({Key key, this.url, this.title}) : super(key: key);
 
