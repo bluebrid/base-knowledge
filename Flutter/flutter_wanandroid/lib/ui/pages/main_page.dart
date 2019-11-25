@@ -35,8 +35,8 @@ class MainPage extends StatelessWidget {
               ),
             ),
             centerTitle: true,
-            title: new TabLayout(),
-            actions: <Widget>[
+            title: new TabLayout(),// 显示真正的tab列表
+            actions: <Widget>[ // 显示搜索等的按钮
               new IconButton(
                   icon: new Icon(Icons.search),
                   onPressed: () {

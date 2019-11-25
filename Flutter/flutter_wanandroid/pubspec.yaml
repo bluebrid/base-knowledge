@@ -43,7 +43,8 @@ dependencies:
   lpinyin: ^1.0.7
   # Dart 常用工具类库 https://github.com/Sky24n/common_utils
 #  common_utils: ^1.1.1
-  # Flutter 常用工具类库 https://github.com/Sky24n/flustars
+  # Flutter 常用工具类库 https://github.com/Sky24n/flustars 因为在上面的base_library 中已经已经暴露出了flustars的库，所以在这里不需要再次引入这个库
+  #https://github.com/Sky24n/FlutterRepos/blob/master/base_library/lib/src/util/index.dart
 #  flustars: ^0.2.5+1
   # Flutter 国际化/多语言库 https://github.com/Sky24n/fluintl
 #  fluintl: ^0.1.3

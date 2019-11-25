@@ -6,6 +6,9 @@ import 'package:flutter_wanandroid/ui/pages/main_page.dart';
 import 'package:flutter_wanandroid/ui/pages/page_index.dart';
 import 'package:auto_size/auto_size.dart';
 
+// material: C:\src\flutter\flutter_windows_v1.7.3-dev\flutter\packages\flutter\lib\src\material
+// widgets:  C:\src\flutter\flutter_windows_v1.7.3-dev\flutter\packages\flutter\lib\src\widgets
+// C:\src\flutter\flutter_windows_v1.7.3-dev\flutter\packages\flutter\lib\src\widgets\framework.dart
 void main() => runAutoSizeApp(BlocProvider<ApplicationBloc>(
       bloc: ApplicationBloc(),
       child: BlocProvider(child: MyApp(), bloc: MainBloc()),
