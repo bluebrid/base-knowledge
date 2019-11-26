@@ -34,7 +34,7 @@ const preventDoublePress = {
   lastPressTime: 1,
   onPress(callback) {
     const curTime = new Date().getTime();
-    if (curTime - this.lastPressTime > 500) {
+    if (curTime - this.lastPressTime > 500) { // 通过时间间隔来控制是否是双击
       this.lastPressTime = curTime;
       callback();
     }

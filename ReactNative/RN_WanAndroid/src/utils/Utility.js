@@ -1,7 +1,9 @@
-import {Platform, ToastAndroid} from 'react-native';
+import {Platform, ToastAndroid, NativeModules } from 'react-native';
 import {getRealDP as dp, getStatusBarHeight, isAndroid} from './screenUtil';
 import Color from './Color';
 import LanguageUtil from './LanguageUtil';
+
+const ToastExample = NativeModules.ToastExample;
 
 /**
  * 吐司方法
@@ -9,8 +11,14 @@ import LanguageUtil from './LanguageUtil';
  * @return
  */
 export function showToast(info) {
+  
   if (isAndroid) {
-    return ToastAndroid.show(info, ToastAndroid.SHORT);
+    return ToastExample.show(info, ToastExample.SHORT, (err) => {
+      console.log('errorCallback:', err)
+    }, (message, duration) => {
+        console.log('successCallback:', message, duration)
+    });
+    // return ToastAndroid.show(info, ToastAndroid.SHORT);
   }
   if (!global.toast) {
     return;

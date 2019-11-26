@@ -69,6 +69,7 @@ class DrawerScreen extends PureComponent {
       case 'md-trending-up': // 我的积分
         if (!isLogin) {
           navigation.navigate('Login');
+          // return NativeModules.ToastExample.show("Awesome", ToastExample.SHORT);
           return showToast(i18n('please-login-first'));
         }
         navigation.navigate('CoinDetail');
