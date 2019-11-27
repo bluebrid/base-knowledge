@@ -25,6 +25,7 @@ import CollectScreen from './screen/drawer/CollectScreen';
 import CoinDetailScreen from './screen/drawer/CoinDetailScreen';
 import SettingScreen from './screen/drawer/SettingScreen';
 import LanguageScreen from './screen/drawer/LanguageScreen';
+import Demo from './demos/day1.js';
 
 const TabScreens = createBottomTabNavigator(
   {
@@ -80,6 +81,7 @@ const RootStack = createStackNavigator(
     CoinDetail: CoinDetailScreen,
     Setting: SettingScreen,
     Language: LanguageScreen,
+    Demo: Demo
   },
   {
     initialRouteName: 'Home',

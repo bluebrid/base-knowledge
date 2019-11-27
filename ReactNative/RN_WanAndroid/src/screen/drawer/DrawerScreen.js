@@ -104,6 +104,9 @@ class DrawerScreen extends PureComponent {
           {cancelable: false},
         );
         break;
+      case 'md-albums':
+          navigation.navigate('Demo');
+      break;
       default:
         break;
     }

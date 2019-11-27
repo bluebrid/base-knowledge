@@ -17,14 +17,16 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
         @Override
-        public boolean getUseDeveloperSupport() {
+        public boolean getUseDeveloperSupport() {//  配置是否开启调试
           return BuildConfig.DEBUG;
         }
 
         @Override
-        protected List<ReactPackage> getPackages() {
+        protected List<ReactPackage> getPackages() {// 配置要加载的模块
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
+          System.out.print("==========================");
+          System.out.print(packages.size());
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           packages.add(new CustomToastPackage()); // <-- 添加这一行，类名替换成你的Package类的名字 name.
@@ -32,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
-        protected String getJSMainModuleName() {
+        protected String getJSMainModuleName() {//  配置js模块的入口文件名
           return "index";
         }
       };
@@ -42,6 +44,11 @@ public class MainApplication extends Application implements ReactApplication {
     return mReactNativeHost;
   }
 
+  /**
+   * 函数说明：当应用程序开始时，被调用。根据Application类的说明，该方法在任何Activity、Service、Receiver对象（除了Content provider）之前被创建执行。
+
+     可以理解为是应用程序的入口函数！！继承Application的子类，必须重写该方法。
+   */
   @Override
   public void onCreate() {
     super.onCreate();

@@ -112,6 +112,7 @@ export function getDrawerData() {
     {iconName: 'md-share', title: i18n('share-app')},
     {iconName: 'md-settings', title: i18n('settings')},
     {iconName: 'md-power', title: i18n('logout')},
+    {iconName: 'md-albums', title: 'Demo'},
   ];
 }
 
