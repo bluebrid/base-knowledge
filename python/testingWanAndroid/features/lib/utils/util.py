@@ -26,8 +26,8 @@ class Utils(object):
                 continue
             row = dict(zip_longest(header_row, [ c.internal_value for c in row ]))
             lst.append(row)
-        for ele in lst:
-            print('UserName:{}, Password:{}'.format(ele["username"],ele["password"]))
+        # for ele in lst:
+        #     print('UserName:{}, Password:{}'.format(ele["username"],ele["password"]))
         return lst
 
     def writeExcel(self, filename, row):

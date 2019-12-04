@@ -15,24 +15,14 @@ def step_impl(context):
     assert page.registerBtn.text == "注册", "button 应该是'注册',但是显示的是'{}'".format(page.registerBtn.text)
     assert page.toLoginDialogBtn.text == "去登录", "连接 应该是'去登录',但是显示的是'{}'".format(page.toLoginDialogBtn.text)
 
-@then('用户名为"([^"]*)"的情况下点击注册按钮')
-def step_impl(context, username):
-    page = RegisterPage(context)
-    page.register(username)
-    assert page.warnMsg.text == "用户名最少3位", "用户名'{}'， 错误消息应该为'{}', 但是显示的是'{}'".format(username, '用户名最少3位', page.warnMsg.text)
-
-@then('用户名为"([^"]*)",密码为"([^"]*)"的情况下点击注册按钮')
-def step_impl(context, username, password):
-    page = RegisterPage(context)
-    page.register(username, password)
-    assert page.warnMsg.text == "密码至少 6 位", "用户名'{}',密码为'{}', 错误消息应该为'{}', 但是显示的是'{}'".format(username, password, '密码至少 6 位', page.warnMsg.text)
-
-@then(u'用户名为"([^"]*)",密码为"([^"]*)",确认密码为"([^"]*)"的情况下点击注册按钮')
-def step_impl(context, username, password, repassword):
-    page = RegisterPage(context)
-    page.register(username, password, repassword)
-    assert page.warnMsg.text == "确认密码与密码不符", "用户名'{}',密码为'{}', 确认密码为'{}', 错误消息应该为'{}', 但是显示的是'{}'".format(username, password, repassword, '确认密码与密码不符', page.warnMsg.text)
-
+@then(u'验证注册失败错误信息')
+def step_impl(context):
+     page = RegisterPage(context)
+     for row in context.table:
+         page.register(row["username"], row["password"], row["repassword"])
+         assert page.warnMsg.text == row["errorMsg"], row["assertMsg"].format(row["username"], row["password"], row["repassword"], row["errorMsg"], page.warnMsg.text)
+         time.sleep(1)
+ 
 @then(u'随机生成用户名,随机生成密码,点击注册按钮，注册成功')
 def step_impl(context):
     page = RegisterPage(context)
