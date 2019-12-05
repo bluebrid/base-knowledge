@@ -12,12 +12,12 @@ class BasePage(object):
         self.base_url = base_url
         #print(self.base_url)
         self.browser = context.browser
-        self.timeout = 60
+        self.timeout = 30
 
     #   js = 'document.querySelector(".nui-tree-item-text[title=已发送]").click()'
-    #     webapp.execute_script(js)
-    def execute_script(self, js):
-        self.browser.runJS(js)
+    #     webapp.runJs(js)
+    def runJs(self, js):
+        self.browser.execute_script(js)
         
     def find_element(self, *loc):
         return self.browser.find_element(*loc)
@@ -28,6 +28,14 @@ class BasePage(object):
     def switch_to_frame(self, iframe):
         self.browser.switch_to_frame(iframe)
         time.sleep(5)
+
+    def switchToNewWindow(self):
+        window_after  = self.browser.window_handles[1]
+        self.browser.switch_to_window(window_after)
+
+    def click(self, element):
+        # ActionChains(self.browser).move_to_element(element).perform()
+        ActionChains(self.browser).click(element).perform()
 
     def hover(self,element):
             ActionChains(self.browser).move_to_element(element).perform()
@@ -43,6 +51,7 @@ class BasePage(object):
                     )
                 except(TimeoutException,StaleElementReferenceException):
                     traceback.print_exc()
+                    print(self.locator_dictionary[what])
 
                 try:
                     element = WebDriverWait(self.browser,self.timeout).until(
@@ -50,7 +59,9 @@ class BasePage(object):
                     )
                 except(TimeoutException,StaleElementReferenceException):
                     traceback.print_exc()
+                    self.locator_dictionary[what]
                 # I could have returned element, however because of lazy loading, I am seeking the element before return
+                #print(self.locator_dictionary[what].size())
                 return self.find_element(*self.locator_dictionary[what])
         except AttributeError:
             super(BasePage, self).__getattribute__("method_missing")(what)

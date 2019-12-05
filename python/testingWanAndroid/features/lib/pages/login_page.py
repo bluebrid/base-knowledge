@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 class LoginPage(BasePage):
     def __init__(self, context):
         BasePage.__init__(self, context)
+    sheetName = "usersiInfo"
     locator_dictionary = {
         "loginDialog": (By.ID, "loginDialog"),
         "dialogTitle": (By.CSS_SELECTOR, "#loginDialog .title span"),

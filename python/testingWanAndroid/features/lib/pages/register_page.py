@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 class RegisterPage(BasePage):
     def __init__(self, context):
         BasePage.__init__(self, context)
+    sheetName = "usersiInfo"
     locator_dictionary = {
         "registerDialog": (By.ID, "registerDialog"),
         "dialogTitle": (By.CSS_SELECTOR, "#registerDialog .title span"),

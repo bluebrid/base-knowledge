@@ -3,6 +3,7 @@ import string
 from behave import *
 from openpyxl import Workbook
 from openpyxl import load_workbook
+from config.config import settings
 #http://zetcode.com/python/openpyxl/
 #https://pynative.com/python-generate-random-string/
 from itertools import zip_longest
@@ -15,9 +16,9 @@ class Utils(object):
         letters = string.ascii_lowercase
         return ''.join(random.choice(letters) for i in range(stringLength))
 
-    def readExcel(self,filename):
-        wb = load_workbook(filename)
-        ws = wb.active
+    def readExcel(self, sheetName):
+        wb = load_workbook(settings["excel"])
+        ws = wb.get_sheet_by_name(sheetName)
         lst = []
         header_row = None
         for i, row in enumerate(ws.iter_rows()):
@@ -30,9 +31,9 @@ class Utils(object):
         #     print('UserName:{}, Password:{}'.format(ele["username"],ele["password"]))
         return lst
 
-    def writeExcel(self, filename, row):
-        wb = load_workbook(filename)
-        ws = wb.active
+    def writeExcel(self,sheetName, row):
+        wb = load_workbook(settings["excel"])
+        ws = wb.get_sheet_by_name(sheetName)
         ws.append(row)
-        wb.save(filename)
+        wb.save(settings["excel"])
         

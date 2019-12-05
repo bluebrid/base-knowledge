@@ -31,8 +31,8 @@ def step_impl(context):
     page.register(username, password, repassword)
     context.username = username
     utils = Utils()
-    utils.writeExcel('usersInfo.xlsx', (username, password))
-    utils.readExcel('usersInfo.xlsx')
+    utils.writeExcel(page.sheetName, (username, password))
+    utils.readExcel(page.sheetName)
     
 
     

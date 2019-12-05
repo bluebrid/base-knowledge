@@ -34,3 +34,9 @@ def step_impl(context):
     page = HomePage(context)
     page.hover(page.userAccountInfo)
     page.logoutBtn.click()
+
+@then(u'点击"待办清单"按钮')
+def step_impl(context):
+    page = HomePage(context)
+    page.click(page.todoBtn)
+    page.switchToNewWindow()

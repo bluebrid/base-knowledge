@@ -8,5 +8,6 @@ class HomePage(BasePage):
         "loginBtn": (By.LINK_TEXT, "登录"),
         "registerBtn": (By.LINK_TEXT,  "注册"),
         "userAccountInfo": (By.CSS_SELECTOR, '.userNav .account > a'),
-        "logoutBtn": (By.LINK_TEXT, "退出登录")
+        "logoutBtn": (By.LINK_TEXT, "退出登录"),
+        "todoBtn": (By.CSS_SELECTOR, ".user_opt .btn:nth-child(2) span"),
     }

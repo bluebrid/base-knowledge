@@ -27,7 +27,7 @@ def step_impl(context):
 def step_impl(context):
     utils = Utils()
     page = LoginPage(context)
-    users = utils.readExcel('usersInfo.xlsx')
+    users = utils.readExcel(page.sheetName)
     username = users[0]['username']
     password = users[0]['password']    
     page.login(username, password)
