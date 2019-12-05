@@ -28,7 +28,7 @@ def step_impl(context):
 def step_impl(context):
     page = TodoPage(context)
     time.sleep(5)
-    doneBtns = page.find_elements(By.CSS_SELECTOR, ".undoList .doneBtn")
+    doneBtns = page.find_elements(By.CSS_SELECTOR, ".undoList .doneBtn", True)
     lenSize = len(doneBtns)
     while len(doneBtns) > 0:
         #print('---------------------------', doneBtns[0].get_property('title'))
@@ -41,7 +41,7 @@ def step_impl(context):
 def step_impl(context):
     page = TodoPage(context)
     time.sleep(5)
-    doneBtns = page.find_elements(By.CSS_SELECTOR, ".doneList .revertBtn")
+    doneBtns = page.find_elements(By.CSS_SELECTOR, ".doneList .revertBtn", True)
     lenSize = len(doneBtns)
     while len(doneBtns) > 0:
         #print('---------------------------', doneBtns[0].get_property('title'))
@@ -84,7 +84,6 @@ def step_impl(context):
 
 @then(u'检查是待办事项添加成功')
 def step_impl(context):
-    print('------------------')
     page = TodoPage(context)
     allTodos = page.find_elements(By.CSS_SELECTOR, ".undoList li")
     newTodos = context.todos
@@ -94,7 +93,7 @@ def step_impl(context):
 @then(u'删除第一个已完成的待办事项')
 def step_impl(context):
     page = TodoPage(context)
-    doneBtns = page.find_elements(By.CSS_SELECTOR, ".doneList .delete")
+    doneBtns = page.find_elements(By.CSS_SELECTOR, ".doneList .delete", True)
     doneSize = len(doneBtns)
     page.click(doneBtns[0])
     time.sleep(1)

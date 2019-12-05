@@ -16,7 +16,7 @@
           },
           "name": "\u6253\u5f00\u7f51\u7ad9",
           "result": {
-            "duration": 2.529860496520996,
+            "duration": 1.7933869361877441,
             "status": "passed"
           },
           "step_type": "when"
@@ -30,7 +30,7 @@
           },
           "name": "\u70b9\u51fb\u767b\u5f55\u6309\u94ae",
           "result": {
-            "duration": 0.11608433723449707,
+            "duration": 0.10706686973571777,
             "status": "passed"
           },
           "step_type": "when"
@@ -44,7 +44,7 @@
           },
           "name": "\u4eceexcel\u83b7\u53d6\u767b\u5f55\u7528\u6237\u540d\u548c\u5bc6\u7801\u8fdb\u884c\u767b\u5f55",
           "result": {
-            "duration": 0.3827798366546631,
+            "duration": 0.37776827812194824,
             "status": "passed"
           },
           "step_type": "then"
@@ -58,7 +58,7 @@
           },
           "name": "\u70b9\u51fb\"\u5f85\u529e\u6e05\u5355\"\u6309\u94ae",
           "result": {
-            "duration": 2.343076229095459,
+            "duration": 2.1202142238616943,
             "status": "passed"
           },
           "step_type": "then"
@@ -76,7 +76,7 @@
           },
           "name": "\u68c0\u67e5\u9ed8\u8ba4\u7684\u6e05\u5355\u7c7b\u578b\u662f\u5426\u4e3a\"\u53ea\u7528\u8fd9\u4e00\u4e2a\"",
           "result": {
-            "duration": 1.067967414855957,
+            "duration": 1.0755290985107422,
             "status": "passed"
           },
           "step_type": "then"
@@ -90,7 +90,7 @@
           },
           "name": "\u5148\u5220\u9664\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
           "result": {
-            "duration": 3.728050708770752,
+            "duration": 14.229109764099121,
             "status": "passed"
           },
           "step_type": "then"
@@ -104,7 +104,7 @@
           },
           "name": "\u70b9\u51fb\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879\u6309\u94ae",
           "result": {
-            "duration": 0.5588357448577881,
+            "duration": 0.5657227039337158,
             "status": "passed"
           },
           "step_type": "then"
@@ -118,7 +118,7 @@
           },
           "name": "\u9a8c\u8bc1\u6dfb\u52a0\u4e8b\u9879\u5931\u8d25\u4fe1\u606f",
           "result": {
-            "duration": 7.138891220092773,
+            "duration": 6.947004318237305,
             "status": "passed"
           },
           "step_type": "then",
@@ -178,7 +178,7 @@
           },
           "name": "\u4eceexcel\u8bfb\u53d6\u6570\u636e\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879",
           "result": {
-            "duration": 11.09713888168335,
+            "duration": 11.124005317687988,
             "status": "passed"
           },
           "step_type": "then"
@@ -192,7 +192,7 @@
           },
           "name": "\u68c0\u67e5\u662f\u5f85\u529e\u4e8b\u9879\u6dfb\u52a0\u6210\u529f",
           "result": {
-            "duration": 0.02401590347290039,
+            "duration": 0.010007143020629883,
             "status": "passed"
           },
           "step_type": "then"
@@ -206,7 +206,7 @@
           },
           "name": "\u5b8c\u6210\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
           "result": {
-            "duration": 7.658154726028442,
+            "duration": 7.667593240737915,
             "status": "passed"
           },
           "step_type": "then"
@@ -220,7 +220,7 @@
           },
           "name": "\u5220\u9664\u7b2c\u4e00\u4e2a\u5df2\u5b8c\u6210\u7684\u5f85\u529e\u4e8b\u9879",
           "result": {
-            "duration": 1.5333287715911865,
+            "duration": 1.551079273223877,
             "status": "passed"
           },
           "step_type": "then"
@@ -234,7 +234,7 @@
           },
           "name": "\u8fd8\u539f\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
           "result": {
-            "duration": 7.129327058792114,
+            "duration": 7.128624677658081,
             "status": "passed"
           },
           "step_type": "then"
@@ -248,7 +248,7 @@
           },
           "name": "\u8df3\u8f6c\u5230\u9996\u9875",
           "result": {
-            "duration": 2.092816114425659,
+            "duration": 2.075901985168457,
             "status": "passed"
           },
           "step_type": "then"
@@ -262,7 +262,7 @@
           },
           "name": "\u9000\u51fa\u767b\u5f55",
           "result": {
-            "duration": 6.268583297729492,
+            "duration": 6.665855169296265,
             "status": "passed"
           },
           "step_type": "then"

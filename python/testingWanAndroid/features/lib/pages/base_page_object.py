@@ -22,8 +22,15 @@ class BasePage(object):
     def find_element(self, *loc):
         return self.browser.find_element(*loc)
 
-    def find_elements(self, *loc):
-        return self.browser.find_elements(*loc)
+    def find_elements(self, locType, selector, isNeedWatie = False):
+        if isNeedWatie:
+            try:
+                element = WebDriverWait(self.browser,self.timeout).until(
+                    EC.presence_of_element_located((locType, selector))
+                )
+            except(TimeoutException,StaleElementReferenceException):
+                traceback.print_exc()
+        return self.browser.find_elements(locType, selector)
 
     def visit(self):
         self.browser.get(self.base_url)
