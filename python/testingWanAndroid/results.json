@@ -3,6 +3,328 @@
   "elements": [
     {
       "keyword": "Scenario",
+      "location": "features/Login.feature:3",
+      "name": "\u767b\u5f55\u529f\u80fd",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "When",
+          "location": "features/Login.feature:4",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:6"
+          },
+          "name": "\u6253\u5f00\u7f51\u7ad9",
+          "result": {
+            "duration": 2.559938907623291,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "And",
+          "location": "features/Login.feature:5",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:16"
+          },
+          "name": "\u70b9\u51fb\u767b\u5f55\u6309\u94ae",
+          "result": {
+            "duration": 0.10007309913635254,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Login.feature:6",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/loginSteps.py:7"
+          },
+          "name": "\u9a8c\u8bc1\u767b\u5f55\u5f39\u51fa\u6846",
+          "result": {
+            "duration": 0.2571878433227539,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Login.feature:7",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/loginSteps.py:18"
+          },
+          "name": "\u9a8c\u8bc1\u767b\u5f55\u5931\u8d25\u9519\u8bef\u4fe1\u606f",
+          "result": {
+            "duration": 6.387204647064209,
+            "status": "passed"
+          },
+          "step_type": "then",
+          "table": {
+            "headings": [
+              "username",
+              "password",
+              "errorMsg",
+              "assertMsg"
+            ],
+            "rows": [
+              [
+                "",
+                "",
+                "\u7528\u6237\u540d\u81f3\u5c11 3 \u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "ab",
+                "",
+                "\u7528\u6237\u540d\u81f3\u5c11 3 \u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "",
+                "\u5bc6\u7801\u81f3\u5c11 6 \u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "123",
+                "\u5bc6\u7801\u81f3\u5c11 6 \u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "aaaaaaa",
+                "\u8d26\u53f7\u5bc6\u7801\u4e0d\u5339\u914d\uff01",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ]
+            ]
+          }
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Login.feature:14",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/loginSteps.py:26"
+          },
+          "name": "\u4eceexcel\u83b7\u53d6\u767b\u5f55\u7528\u6237\u540d\u548c\u5bc6\u7801\u8fdb\u884c\u767b\u5f55",
+          "result": {
+            "duration": 0.3147292137145996,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Login.feature:15",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:27"
+          },
+          "name": "\u9a8c\u8bc1\u767b\u5f55\u6210\u529f",
+          "result": {
+            "duration": 1.410090684890747,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Login.feature:16",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:32"
+          },
+          "name": "\u9000\u51fa\u767b\u5f55",
+          "result": {
+            "duration": 6.429958820343018,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "features/Login.feature:1",
+  "name": "\u6d4b\u8bd5\u767b\u5f55\u529f\u80fd",
+  "status": "passed",
+  "tags": []
+},
+
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
+      "location": "features/Register.feature:3",
+      "name": "\u6ce8\u518c\u529f\u80fd",
+      "status": "passed",
+      "steps": [
+        {
+          "keyword": "When",
+          "location": "features/Register.feature:4",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:6"
+          },
+          "name": "\u6253\u5f00\u7f51\u7ad9",
+          "result": {
+            "duration": 3.720768451690674,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "And",
+          "location": "features/Register.feature:5",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:11"
+          },
+          "name": "\u70b9\u51fb\u6ce8\u518c\u6309\u94ae",
+          "result": {
+            "duration": 0.1035757064819336,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Register.feature:6",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/registerSteps.py:7"
+          },
+          "name": "\u9a8c\u8bc1\u6ce8\u518c\u5f39\u51fa\u6846",
+          "result": {
+            "duration": 0.28422021865844727,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Register.feature:7",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/registerSteps.py:18"
+          },
+          "name": "\u9a8c\u8bc1\u6ce8\u518c\u5931\u8d25\u9519\u8bef\u4fe1\u606f",
+          "result": {
+            "duration": 6.9090416431427,
+            "status": "passed"
+          },
+          "step_type": "then",
+          "table": {
+            "headings": [
+              "username",
+              "password",
+              "repassword",
+              "errorMsg",
+              "assertMsg"
+            ],
+            "rows": [
+              [
+                "",
+                "",
+                "",
+                "\u7528\u6237\u540d\u6700\u5c113\u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u786e\u8ba4\u5bc6\u7801:'{}' \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "ab",
+                "",
+                "",
+                "\u7528\u6237\u540d\u6700\u5c113\u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u786e\u8ba4\u5bc6\u7801:'{}' \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "",
+                "",
+                "\u5bc6\u7801\u81f3\u5c11 6 \u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u786e\u8ba4\u5bc6\u7801:'{}' \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "123",
+                "",
+                "\u5bc6\u7801\u81f3\u5c11 6 \u4f4d",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u786e\u8ba4\u5bc6\u7801:'{}' \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "123456",
+                "123457",
+                "\u786e\u8ba4\u5bc6\u7801\u4e0e\u5bc6\u7801\u4e0d\u7b26",
+                "\u7528\u6237\u540d:'{}', \u5bc6\u7801:'{}', \u786e\u8ba4\u5bc6\u7801:'{}' \u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ]
+            ]
+          }
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Register.feature:14",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/registerSteps.py:26"
+          },
+          "name": "\u968f\u673a\u751f\u6210\u7528\u6237\u540d,\u968f\u673a\u751f\u6210\u5bc6\u7801,\u70b9\u51fb\u6ce8\u518c\u6309\u94ae\uff0c\u6ce8\u518c\u6210\u529f",
+          "result": {
+            "duration": 2.524541139602661,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Register.feature:15",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:22"
+          },
+          "name": "\u9a8c\u8bc1\u6ce8\u518c\u6210\u529f",
+          "result": {
+            "duration": 0.05804276466369629,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Register.feature:16",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:32"
+          },
+          "name": "\u9000\u51fa\u767b\u5f55",
+          "result": {
+            "duration": 6.821632385253906,
+            "status": "passed"
+          },
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "features/Register.feature:1",
+  "name": "\u6d4b\u8bd5\u6ce8\u518c\u529f\u80fd",
+  "status": "passed",
+  "tags": []
+},
+
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
       "location": "features/Todo.feature:3",
       "name": "\u5f85\u529e\u6e05\u5355\u529f\u80fd",
       "status": "passed",
@@ -16,7 +338,7 @@
           },
           "name": "\u6253\u5f00\u7f51\u7ad9",
           "result": {
-            "duration": 2.0553033351898193,
+            "duration": 2.495847702026367,
             "status": "passed"
           },
           "step_type": "when"
@@ -30,7 +352,7 @@
           },
           "name": "\u70b9\u51fb\u767b\u5f55\u6309\u94ae",
           "result": {
-            "duration": 0.09256815910339355,
+            "duration": 0.09757328033447266,
             "status": "passed"
           },
           "step_type": "when"
@@ -44,7 +366,7 @@
           },
           "name": "\u4eceexcel\u83b7\u53d6\u767b\u5f55\u7528\u6237\u540d\u548c\u5bc6\u7801\u8fdb\u884c\u767b\u5f55",
           "result": {
-            "duration": 0.3552854061126709,
+            "duration": 0.3537561893463135,
             "status": "passed"
           },
           "step_type": "then"
@@ -58,7 +380,7 @@
           },
           "name": "\u70b9\u51fb\"\u5f85\u529e\u6e05\u5355\"\u6309\u94ae",
           "result": {
-            "duration": 3.9236061573028564,
+            "duration": 2.7287046909332275,
             "status": "passed"
           },
           "step_type": "then"
@@ -76,7 +398,7 @@
           },
           "name": "\u68c0\u67e5\u9ed8\u8ba4\u7684\u6e05\u5355\u7c7b\u578b\u662f\u5426\u4e3a\"\u53ea\u7528\u8fd9\u4e00\u4e2a\"",
           "result": {
-            "duration": 1.0689811706542969,
+            "duration": 1.1313626766204834,
             "status": "passed"
           },
           "step_type": "then"
@@ -90,7 +412,7 @@
           },
           "name": "\u70b9\u51fb\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879\u6309\u94ae",
           "result": {
-            "duration": 0.0840616226196289,
+            "duration": 0.09306836128234863,
             "status": "passed"
           },
           "step_type": "then"
@@ -104,7 +426,7 @@
           },
           "name": "\u9a8c\u8bc1\u6dfb\u52a0\u4e8b\u9879\u5931\u8d25\u4fe1\u606f",
           "result": {
-            "duration": 12.102729558944702,
+            "duration": 12.480054140090942,
             "status": "passed"
           },
           "step_type": "then",
@@ -164,7 +486,7 @@
           },
           "name": "\u751f\u6210\u968f\u673a\u5b57\u7b26\u4e32\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879",
           "result": {
-            "duration": 1.4121379852294922,
+            "duration": 1.391801118850708,
             "status": "passed"
           },
           "step_type": "then"
