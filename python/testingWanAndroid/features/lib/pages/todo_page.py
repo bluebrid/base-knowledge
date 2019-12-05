@@ -29,7 +29,7 @@ class TodoPage(BasePage):
 
     def saveTodo(self, title='', detail='', date=''):
         self.reset()
-        print(title, detail, date)
+        #print(title, detail, date)
         self.titleInput.send_keys(title)
         self.contentInput.send_keys(detail)
         self.dateInput.send_keys(date)  

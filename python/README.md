@@ -6,6 +6,9 @@ http://www.seleniumframework.com/python-basic/what-is-python/
 
 http://www.seleniumframework.com/python-intermediate/test-data-with-excel/
 
+https://docs.python.org/zh-cn/3/library/unittest.html#test-cases
+
+https://pynative.com/python-generate-random-string/
 
 **添加allure**
 先运行下面的脚本生成报告

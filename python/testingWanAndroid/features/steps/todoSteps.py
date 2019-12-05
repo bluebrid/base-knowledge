@@ -7,7 +7,7 @@ use_step_matcher("re")
 @then(u'检查默认的清单类型是否为"([^"]*)"')
 def step_impl(context, defalutType):
     page = TodoPage(context)
-    assert page.onlyOneType.get_attribute('class') == 'active', "默认的清单类型应该是:'{}'".format(defalutType)
+    page.assertEqual(page.onlyOneType.get_attribute('class') , 'active', "默认的清单类型应该是:'{}'".format(defalutType))
 
 @then(u'点击添加待办事项按钮')
 def step_impl_click_addBtn(context):
@@ -19,7 +19,7 @@ def step_impl(context):
     page = TodoPage(context)
     for row in context.table:
         page.saveTodo(row["title"], row["detail"], row["date"])
-        assert page.warnMsg.text == row["errorMsg"], row["assertMsg"].format(row["title"], row["detail"], row["date"], row["errorMsg"], page.warnMsg.text)
+        page.assertEqual(page.warnMsg.text , row["errorMsg"], row["assertMsg"].format(row["title"], row["detail"], row["date"], row["errorMsg"], page.warnMsg.text))
         time.sleep(1)
 
 @then(u'生成随机字符串添加待办事项')

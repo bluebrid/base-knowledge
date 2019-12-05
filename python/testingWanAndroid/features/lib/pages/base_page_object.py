@@ -42,6 +42,13 @@ class BasePage(object):
             # I don't like this but hover is sensitive and needs some sleep time
             time.sleep(5)
 
+    def assertEqual(self, one, two, message):
+        assert one == two, message
+        # try:
+        #     assert one == two, message
+        # except Exception as e:
+        #     print(str(e))
+
     def __getattr__(self, what):
         try:
             if what in self.locator_dictionary.keys():
