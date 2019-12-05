@@ -40,3 +40,8 @@ def step_impl(context):
     page = HomePage(context)
     page.click(page.todoBtn)
     page.switchToNewWindow()
+
+@then(u'跳转到首页')
+def step_impl(context):
+    page = HomePage(context)
+    page.click(page.logoImg)

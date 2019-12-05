@@ -10,4 +10,5 @@ class HomePage(BasePage):
         "userAccountInfo": (By.CSS_SELECTOR, '.userNav .account > a'),
         "logoutBtn": (By.LINK_TEXT, "退出登录"),
         "todoBtn": (By.CSS_SELECTOR, ".user_opt .btn:nth-child(2) span"),
+        "logoImg": (By.CSS_SELECTOR, ".header .logo img")
     }

@@ -22,6 +22,9 @@ class BasePage(object):
     def find_element(self, *loc):
         return self.browser.find_element(*loc)
 
+    def find_elements(self, *loc):
+        return self.browser.find_elements(*loc)
+
     def visit(self):
         self.browser.get(self.base_url)
 
@@ -34,8 +37,12 @@ class BasePage(object):
         self.browser.switch_to_window(window_after)
 
     def click(self, element):
-        # ActionChains(self.browser).move_to_element(element).perform()
-        ActionChains(self.browser).click(element).perform()
+        try:
+           ActionChains(self.browser).click(element).perform()
+        except Exception as e:
+            print(str(e))
+            pass
+        
 
     def hover(self,element):
             ActionChains(self.browser).move_to_element(element).perform()
