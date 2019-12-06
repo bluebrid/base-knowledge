@@ -61,31 +61,34 @@ def before_scenario(context, scenario):
 
 
 def after_scenario(context, scenario):
-    print(scenario)
-    #print("scenario status" + scenario.status)
-    # if scenario.status == "failed":
-    #     if not os.path.exists("failed_scenarios_screenshots"):
-    #         os.makedirs("failed_scenarios_screenshots")
-    #     os.chdir("failed_scenarios_screenshots")
-    #     context.browser.save_screenshot(scenario.name + "_failed.png")
-    #context.browser.quit()
+    #失败进行截图
+    print("scenario status" + scenario.status.name)
+    if scenario.status.name == "failed":
+        if not os.path.exists("failed_scenarios_screenshots"):
+            os.makedirs("failed_scenarios_screenshots")
+        os.chdir("failed_scenarios_screenshots")
+        context.browser.save_screenshot(scenario.name + "_failed.png")
+        # 需要返回上一级目录，不然找不到failed_scenarios_screenshots， 因为当前的路径是在failed_scenarios_screenshots里面了
+        os.chdir('../')
+    context.browser.quit()
 
 def after_feature(context, feature):
             print("\nAfter Feature")
 
 def after_all(context):
+    # 打包截图
     print("User data:", context.config.userdata)
     # behave -D ARCHIVE=Yes
     if 'ARCHIVE' in context.config.userdata.keys():
-        if os.path.exists("failed_scenarios_screenshots"):
-            os.rmdir("failed_scenarios_screenshots")
-            os.makedirs("failed_scenarios_screenshots")
+        # if os.path.exists("failed_scenarios_screenshots"):
+        #     os.rmdir("failed_scenarios_screenshots")
+        #     os.makedirs("failed_scenarios_screenshots")
         if context.config.userdata['ARCHIVE'] == "Yes":
             shutil.make_archive(
     time.strftime("%d_%m_%Y"),
     'zip',
      "failed_scenarios_screenshots")
-            #os.rmdir("failed_scenarios_screenshots")
+            shutil.rmtree("failed_scenarios_screenshots")
             print("Executing after all")
 
 
