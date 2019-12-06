@@ -3,6 +3,7 @@ from selenium import webdriver
 # from colorama import init
 # init()
 from features.lib.utils import *
+from config.config import settings
 import os
 # import zipfile
 import shutil
@@ -79,16 +80,28 @@ def after_all(context):
     # 打包截图
     print("User data:", context.config.userdata)
     # behave -D ARCHIVE=Yes
+    reportName = time.strftime("%d_%m_%Y")
     if 'ARCHIVE' in context.config.userdata.keys():
         # if os.path.exists("failed_scenarios_screenshots"):
         #     os.rmdir("failed_scenarios_screenshots")
         #     os.makedirs("failed_scenarios_screenshots")
         if context.config.userdata['ARCHIVE'] == "Yes":
             shutil.make_archive(
-    time.strftime("%d_%m_%Y"),
+    reportName,
     'zip',
      "failed_scenarios_screenshots")
             shutil.rmtree("failed_scenarios_screenshots")
             print("Executing after all")
+    # 发送邮件报告
+    m = SendMail(
+        username= settings["email"]["username"],
+        passwd= settings["email"]["password"],
+        recv= settings["email"]["receivers"],
+        title= settings["email"]["emailTitle"].format(reportName),
+        content= settings["email"]["emailContent"],
+        file=r'{}.zip'.format(reportName),
+        ssl=True,
+    )
+    m.send_mail()
 
 

@@ -1,3 +1,10 @@
 {
-    "excel": "datas.xlsx"    
+    "excel": "datas.xlsx",
+    "email": {
+        "username": "123@qq.com",
+        "password": "ncgwgviarqhbbegb",
+        "receivers": ["abc@126.com", "bcd@qq.com"],
+        "emailTitle": "测试报告-{}",
+        "emailContent": "测试报告内容"
+    }    
 }
