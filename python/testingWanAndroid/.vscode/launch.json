@@ -13,7 +13,7 @@
             "args": [
                 // -f allure_behave.formatter:AllureFormatter -o allure_result_folder ./features
                 // "${workspaceFolder}\\features\\Todo.feature", "-D", "ARCHIVE=Yes"
-                "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./features"
+                "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./featuresDemos"
             ]
         }
     ]

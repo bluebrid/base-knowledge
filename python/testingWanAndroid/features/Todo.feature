@@ -1,3 +1,5 @@
+@skip
+@tag2
 Feature: 测试待办清单功能
 
   Scenario: 待办清单功能
