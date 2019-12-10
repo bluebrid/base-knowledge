@@ -21,7 +21,7 @@ module.exports = {
         (obj, args, context) => {
           return pubsub.asyncIterator(TODOS_CHANGED);
         },
-        (payload, variables) => payload.clientID !== variables.filter
+        (payload, variables) => payload.clientID !== variables.filter // 只有是不同的clientId 才会进行广播，否则不广播， 节约性能
       )
     }
   },

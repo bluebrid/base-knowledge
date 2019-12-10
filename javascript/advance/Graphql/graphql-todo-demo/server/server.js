@@ -49,15 +49,46 @@ mongo
       console.log("Server on port", process.env.PORT);
       console.log("Mongo on port: ", process.env.DBPORT);
       // Set up the WebSocket for handling GraphQL subscriptions
+      // function SubscriptionServer(options, socketOptionsOrServer) {
       new SubscriptionServer(
         {
           execute,
           subscribe,
           schema
         },
-        {
+        {// this.wsServer = new WebSocket.Server(socketOptionsOrServer || {}); 通过webSocket 库创建一个连接
+          /**
+           * if (this._server) {
+              this._removeListeners = addListeners(this._server, {
+                listening: this.emit.bind(this, 'listening'),
+                error: this.emit.bind(this, 'error'),
+                upgrade: (req, socket, head) => { // 监听upgrade 事件
+                  this.handleUpgrade(req, socket, head, (ws) => {
+                    this.emit('connection', ws, req);
+                  });
+                }
+              });
+            }
+
+           * 在websocket 中通过如下方法绑定server
+           * function addListeners (server, map) {
+              for (const event of Object.keys(map)) server.on(event, map[event]);
+
+              return function removeListeners () {
+                for (const event of Object.keys(map)) {
+                  server.removeListener(event, map[event]);
+                }
+              };
+            }
+            在node_modules\subscriptions-transport-ws\dist\server.js进行监听connection 事件
+        this.wsServer.on('connection', connectionHandler);
+        this.closeHandler = function () {
+            _this.wsServer.removeListener('connection', connectionHandler);
+            _this.wsServer.close();
+        };
+           */
           server: server,
-          path: "/subscriptions"
+          path: "/subscriptions"// 这个是websocket 的路径
         }
       );
     });

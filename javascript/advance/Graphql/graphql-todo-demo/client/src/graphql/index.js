@@ -44,7 +44,7 @@ export const withTodos = graphql(TODOS_QUERY, {
         clientID // subscribeTodoChanged 只是暴露出的一个props, 在Layout 的componentDidMount 执行，也就是去监听
       ) =>
         opts.data.subscribeToMore({
-          // subscribeToMore 是内置方法
+          // subscribeToMore 是内置方法,通过这个方法来进行订阅
           document: TODO_SUBSCRIPTION,
           variables: { filter: clientID },
           updateQuery: (

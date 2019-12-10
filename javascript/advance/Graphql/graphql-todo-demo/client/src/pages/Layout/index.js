@@ -24,7 +24,7 @@ class Layout extends React.Component {
   // }
   componentDidMount() {
     const clientID = window.localStorage.getItem("Linxiaowu66-Client-ID");
-    // this.props.subscribeTodoChanged(clientID);
+    this.props.subscribeTodoChanged(clientID);
   }
 
   _handleTextInputSave = text => {
@@ -97,7 +97,64 @@ class Layout extends React.Component {
     );
   }
 }
+/**
+ * conpose 返回一个函数
+ * function compose() {
+  var funcs = [];
 
+  for (var _i = 0; _i < arguments.length; _i++) {
+    funcs[_i] = arguments[_i];
+  }
+
+  var functions = funcs.reverse();
+  return function () {
+    var args = [];
+
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+
+    var firstFunction = functions[0],
+        restFunctions = functions.slice(1);
+    var result = firstFunction.apply(null, args);
+    restFunctions.forEach(function (fnc) {
+      result = fnc.call(null, result);
+    });
+    return result;
+  };
+}
+2. 将Layout 组建作为参数传递进入compose 返回的函数
+3. 然后一个个的执行withTodos...等传入的参数， 而withTodos 是一个graphql 包裹过的函数，接收一个组件WrappedComponent作为参数
+ var result = Object.assign(r, data || {});
+          var name = operationOptions.name || 'data';
+          var childProps = (_b = {}, _b[name] = result, _b);
+
+          if (operationOptions.props) {
+            var newResult = (_c = {}, _c[name] = result, _c.ownProps = props, _c);
+            lastResultProps = operationOptions.props(newResult, lastResultProps);
+            childProps = lastResultProps;
+          }
+
+          return createElement(WrappedComponent, __assign({}, props, childProps)); 
+          // 创建了一个新的组件， 并且有新的props
+          // 所以在组件中，可以通过props.todos直接访问data数据
+  4. 通过createElement 生成了一个新的组件
+  5. 新的组件就有了graphql 方法传递的props的对应的属性
+
+  6. graphql 会根据Query mutation subscription 执行props方法时，返回不一样的结果，如下返回的包含mutate
+   if (operationOptions.props) {
+            var newResult = (_c = {}, _c[name] = mutate, _c[resultName] = result, _c.ownProps = props, _c);
+            childProps = operationOptions.props(newResult);
+          }
+          这里执行props函数：传递的其实是一个newResult的对象参数：
+          {
+            mutate: ƒ (options)
+            ownProps: {todos: {…}, subscribeTodoChanged: ƒ}
+            result: {called: false, loading: false, error: undefined, client: ApolloClient}
+ 
+          }
+  7. graphql 方法里面的props 返回的是一个对象， 也就是HOC的新的属性
+ */
 export default compose(
   // withTodos1,
   withTodos,
