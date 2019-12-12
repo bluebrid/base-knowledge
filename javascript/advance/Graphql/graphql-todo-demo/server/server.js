@@ -80,7 +80,7 @@ mongo
                 }
               };
             }
-            在node_modules\subscriptions-transport-ws\dist\server.js进行监听connection 事件
+            在node_modules\subscriptions-transport-ws\dist\server.js进行监听connection 事件， 从而将
         this.wsServer.on('connection', connectionHandler);
         this.closeHandler = function () {
             _this.wsServer.removeListener('connection', connectionHandler);

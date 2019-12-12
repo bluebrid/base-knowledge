@@ -53,6 +53,7 @@ const IS_LOGGED_IN = gql`
 `;
 
 function IsLoggedIn() {
+  // 先从cache 中查询是否已经登录
   const { data } = useQuery(IS_LOGGED_IN);
   return data.isLoggedIn ? <Pages /> : <Login />;
 }
