@@ -1,7 +1,7 @@
 {
     "excel": "datas.xlsx",
     "email": {
-        "username": "594774261@qq.com",
+        "username": "12345678@qq.com",
         "password": "ncgwgviarqhbbegb",
         "receivers": ["15813849613@126.com", "bcd@qq.com"],
         "emailTitle": "测试报告-{}",
