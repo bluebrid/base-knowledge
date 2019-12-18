@@ -16,6 +16,8 @@ https://docs.python.org/zh-cn/3/library/functions.html?highlight=setattr#setattr
 
 https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html#id7
 
+https://chercher.tech/python/install-selenium-python
+
 **添加allure**
 先运行下面的脚本生成报告
 >1. behave -f allure_behave.formatter:AllureFormatter -o allure_result_folder ./features

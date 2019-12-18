@@ -4,7 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
+
         {
             "name": "Python: Behave current file",
             "type": "python",
@@ -14,7 +14,7 @@
             "args": [
                 // -f allure_behave.formatter:AllureFormatter -o allure_result_folder ./features
                 // "${workspaceFolder}\\features\\Todo.feature", "-D", "ARCHIVE=Yes"
-                "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./featuresDemos"
+                "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./features/Todo.feature"
             ]
         }
     ]

@@ -4,8 +4,9 @@ Feature: 测试待办清单功能
 
   Scenario: 待办清单功能
     When 打开网站
-    And 点击登录按钮
-    Then 从excel获取登录用户名和密码进行登录
+    And 加载cookies
+    # And 点击登录按钮
+    # Then 从excel获取登录用户名和密码进行登录
     Then 点击"待办清单"按钮
     Then 检查默认的清单类型是否为"只用这一个"
     Then 先删除所有的待办事项
