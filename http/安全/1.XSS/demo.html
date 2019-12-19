@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- 1. 预防方案： CSF -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src self"> -->
+    <!-- https://www.jianshu.com/p/28cfa8508237 -->
+    <!-- https://www.jianshu.com/p/a8b769e7d4bd -->
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-sha256-z7rg2N0+NDZmk551/B+qEVB/HH2MeDkp5QToCwS5Qhg='">
     <title>可信任网站</title>
   </head>
-  <script>
+  <script nonce="sha256-z7rg2N0+NDZmk551/B+qEVB/HH2MeDkp5QToCwS5Qhg=">
     function escape(str) {
       str = str.replace(/&/g, "&amp;");
       str = str.replace(/</g, "&lt;");
