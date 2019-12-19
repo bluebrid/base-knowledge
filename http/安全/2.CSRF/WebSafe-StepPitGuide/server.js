@@ -7,6 +7,7 @@ app.use(koaStatic('./static', {
 	hidden: true,
 	maxage: 365*24*3600*1000
 }));
+// xss : meta(http-equiv="Content-Security-Policy", content="script-src self nonce-1234")
 // 1. 检查请求头的referer, 某些请求只有指定的referer 才能请求
 // app.use(async (ctx, next) => {
 // 	var referer = ctx.req.headers.referer

