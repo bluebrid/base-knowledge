@@ -1,0 +1,9 @@
+/.idea/
+*.log
+/failed_scenarios_screenshots/*
+/*.zip
+*.html
+*.pyc
+*.exe
+/allure_result_folder/*
+/results.json

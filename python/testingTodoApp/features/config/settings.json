@@ -1,0 +1,19 @@
+{
+    "excel": "datas.xlsx",
+    "email": {
+        "username": "12345678@qq.com",
+        "password": "ncgwgviarqhbbegb",
+        "receivers": ["123@126.com", "bcd@qq.com"],
+        "emailTitle": "测试报告-{}",
+        "emailContent": "测试报告内容"
+    },
+    "desiredCaps": {
+        "platformName": "Android",
+        "platformVersion": "5.1.1",
+        "deviceName": "127.0.0.1:62001",
+        "appPackage": "com.wunderkinder.wunderlistandroid",
+        "appActivity": "com.wunderkinder.wunderlistandroid.activity.WLMainFragmentActivity",
+        "app": "../apps/wunderlist-android.apk"
+    },
+    "url": "http://localhost:4723/wd/hub"   
+}
