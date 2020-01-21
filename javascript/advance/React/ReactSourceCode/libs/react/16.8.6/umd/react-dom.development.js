@@ -10315,13 +10315,14 @@ var debugCounter = void 0;
 function FiberNode(tag, pendingProps, key, mode) {
   /**
    * FiberNode 对象,接收四个参数：
-   * tag: 表示对应组件的类型
+   * tag: 表示对应组件的类型(根组件是： HostRoot, 其对应的值是3)
    * pendingProps:
    * key: 
    * mode
    */
   // Instance
   log(`(FiberNode) 创建FiberNode对象节点: tag: ${tag}, pendingProps: ${pendingProps}, key: ${key}, mode: ${mode}`)
+
   this.tag = tag;
   this.key = key;
   this.elementType = null;

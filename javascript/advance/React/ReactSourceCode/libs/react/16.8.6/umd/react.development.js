@@ -1887,7 +1887,7 @@ var ReactElement = function (type, key, ref, self, source, owner, props) {
     $$typeof: REACT_ELEMENT_TYPE,
 
     // Built-in properties that belong on the element
-    type: type,
+    // type: type,
     key: key,
     ref: ref,
     props: props,
@@ -1895,8 +1895,14 @@ var ReactElement = function (type, key, ref, self, source, owner, props) {
     // Record the component responsible for creating this element.
     _owner: owner
   };
-
   {
+    Object.defineProperty(element, 'type', {
+      // value: type,
+      get: function () {
+        console.log('read component type')
+        return type;
+      }
+    });
     // The validation flag is currently mutative. We put it on
     // an external backing store so that we can freeze the whole object.
     // This can be replaced with a WeakMap once they are implemented in
@@ -1997,16 +2003,18 @@ function createElement(type, config, children) {
   }
 
   // Resolve default props
+  // 对组件默认属性的处理
   if (type && type.defaultProps) {
     var defaultProps = type.defaultProps;
     for (propName in defaultProps) {
-      if (props[propName] === undefined) {
+      if (props[propName] === undefined) { //如果引用该组件的时候没有传入对应的属性， 则使用默认属性
         props[propName] = defaultProps[propName];
       }
     }
   }
   {
     if (key || ref) {
+      // 定义显示名称
       var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
       if (key) {
         defineKeyPropWarningGetter(props, displayName);
@@ -2628,7 +2636,13 @@ function forwardRef(render) {
 function isValidElementType(type) {
   return typeof type === 'string' || typeof type === 'function' ||
   // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE ||
+  type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || 
+  type === REACT_SUSPENSE_TYPE || 
+  typeof type === 'object' && type !== null && 
+  (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || 
+    type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || 
+    type.$$typeof === REACT_FORWARD_REF_TYPE);
 }
 
 function memo(type, compare) {

@@ -37,20 +37,34 @@ export default class Markdown extends React.Component {
   }
 
   render() {
+    /**
+     * document(locale) {
+        return require(`../../docs/${locale}/radio.md`);
+      }
+     */
     const document = this.document(localStorage.getItem('ELEMENT_LANGUAGE') || 'zh-CN');
 
     if (typeof document === 'string') {
       this.components.clear();
 
-      const html = marked(document.replace(/:::\s?demo\s?([^]+?):::/g, (match, p1, offset) => {
+      const html = marked(
+        document.replace(/:::\s?demo\s?([^]+?):::/g, (match, p1, offset) => {
         const id = offset.toString(36);
+        // p1就是匹配上的：：：之间的字符串
+        this.components.set(
+          id, 
+          React.createElement(
+            Canvas, 
+            Object.assign({
+             name: this.constructor.name.toLowerCase()
+            }, this.props), 
+            p1)// 匹配上的p1 作为child 传给Canvas
+        );
 
-        this.components.set(id, React.createElement(Canvas, Object.assign({
-          name: this.constructor.name.toLowerCase()
-        }, this.props), p1));
-
-        return `<div id=${id}></div>`;
-      }), { renderer: this.renderer });
+        return `<div id=${id}></div>`;// 将对应的代码片段用一个<div> 替换， 在componentDidMount 方法中，再去渲染markdown 中的脚本
+      }), 
+      { renderer: this.renderer }
+      );
 
       return (
         <div dangerouslySetInnerHTML={{
