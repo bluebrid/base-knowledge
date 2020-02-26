@@ -84,6 +84,13 @@ function WindowWidth() {
   const [width, setWidth] = useState(window.innerWidth)
   useEffect(
     () => {
+      /**
+       * 1. 在第一次加载组件的时候，回执行整个方法，然后会执行useEffect 函数，会执行里面的第一个参数函数，然后注册了事件
+       * 2. 在缩小或者放大页面大小的时候，就会进入resize 事件，然后执行setWidth 钩子函数
+       * 3. 然后重新渲染整个组件函数，重新注册一个resize事件，但是会判断上一个effect 有没有返回一个函数，如果返回了一个函数
+       * 则先执行整个函数，所以在这个返回函数中添加取消事件监听函数
+       * 4. 在执行useEffect 会去判断上一次和这一次的传递的第二个参数是否一样，如果一样，则不会执行。
+       */
       console.log('===============>Pre Width', width)
       console.log('windowWidth Value:' + document.querySelector('#windowWidth').value);
       const handleResize = () => {

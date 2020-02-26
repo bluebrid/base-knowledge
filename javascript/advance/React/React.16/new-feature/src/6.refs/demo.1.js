@@ -21,7 +21,8 @@ class Demo1 extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <TextInput ref={this.myRef} />
+                {/* <TextInput ref={this.myRef} /> */}
+                <input type="text" placeholder="Hello forwardRef" ref={this.myRef} />
                 <button type="submit">Submit</button>
             </form>
         )

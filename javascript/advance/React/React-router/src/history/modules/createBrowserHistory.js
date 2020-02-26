@@ -268,6 +268,8 @@ const createBrowserHistory = (props = {}) => {
     listenerCount += delta;
 
     if (listenerCount === 1) {
+      // const PopStateEvent = "popstate";
+      // const HashChangeEvent = "hashchange";
       window.addEventListener(PopStateEvent, handlePopState);
 
       if (needsHashChangeListener)

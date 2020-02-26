@@ -30,7 +30,7 @@ function makeUpdater(sourceSelector, store) {
         }
        */
       const nextProps = sourceSelector(store.getState(), props)
-      if (nextProps !== prevState.props || prevState.error) {
+      if (nextProps !== prevState.props || prevState.error) { // 利用shouldComponentUpdate 来判断是否需要更新组件
         return {
           shouldComponentUpdate: true,
           props: nextProps,
