@@ -142,7 +142,7 @@ module.exports = class Application extends Emitter {
      * 1. 获取所有的中间件
      */
     const fn = compose(this.middleware);
-
+    // 监听异常
     if (!this.listenerCount('error')) this.on('error', this.onerror);
 
     const handleRequest = (req, res) => {
@@ -163,10 +163,12 @@ module.exports = class Application extends Emitter {
   handleRequest(ctx, fnMiddleware) {
     const res = ctx.res;
     res.statusCode = 404;
-    const onerror = err => ctx.onerror(err);
+    const onerror = err => {
+      return ctx.onerror(err)
+    };
     const handleResponse = () => respond(ctx);
     onFinished(res, onerror);
-    // fnMiddleware 就是compose 执行的中间件
+    // fnMiddleware 就是compose 执行的中间件, 有个catch 
     return fnMiddleware(ctx).then(handleResponse).catch(onerror);
   }
 
