@@ -20,3 +20,19 @@ module.exports = {
  * 区分他们之间的区别就是 exports 只是 module.exports的引用，辅助后者添加内容用的。
  * 用内存指向的方式更好理解。
  */
+/*
+1. 在node中每个文件模块都是一个如下的对象
+function Module(id, parent) {
+    this.id = id;
+    this.exports = {};
+    this.parent = parent;
+    this.filename = null;
+    this.loaded = false;
+    this.children = [];
+  }
+  
+  module.exports = Module;
+  
+  var module = new Module(filename, parent);
+  2. 所有的模块都是 Module 的实例。可以看到，当前模块（module.js）也是 Module 的一个实例
+ */

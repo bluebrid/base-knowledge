@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+    on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>BFC可以包含浮动元素</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            padding: 0;
+        }
+
+        .first {
+            margin: 20px;
+            background: lightgreen;
+            border: 2px solid lightgreen;
+            /*可以通过如下的方式将父级元素设置为BFC，就可以包含浮动元素了*/
+            /*display:inline-block;*/ 
+            /*overflow:hidden;*/
+            /*float: left;*/
+            /*position: absolute;*/
+        }
+
+        ul {
+            overflow: hidden;
+            margin: 10px;
+            background: lightblue;
+            width: 100px;
+            height: 200px;
+            float: left;
+        }
+
+        li {
+            margin: 25px;
+        }
+    </style>
+
+
+</head>
+
+<body class="claro">
+    <div class="first">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
