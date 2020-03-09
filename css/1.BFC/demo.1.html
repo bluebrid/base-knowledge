@@ -1,0 +1,40 @@
+<!doctype HTML>
+<html>
+
+<head>
+    <title>防止margin重叠：</title>
+    <style type="text/css">
+        div {
+            display: inline-block; 
+            /*
+            display的值为inline-block、table-cell、table-caption可以生产一个BFC
+            */
+            
+        }
+        #green {
+            margin: 10px 10px 10px 10px
+        }
+
+        #blue {
+            margin: 10px 10px 10px 10px
+        }
+
+        #red {
+            margin: 10px 10px 10px 10px
+        }
+
+        body {
+            /* writing-mode: tb-rl; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="green" style="background:lightgreen;height:100px;width:100px;"></div>
+    <div id="blue" style="background:lightblue;height:100px;width:100px;"></div>
+    <div id="red" style="background:pink;height:100px;width:100px;"></div>
+
+</body>
+
+</html>

@@ -6,7 +6,7 @@ function fib(n) {
   let result = {};
   let count = 0;
   function memory(i) {
-    count++;
+    count++;// 表示执行的次数
     if (i < 1) {
       result[i] = 0;
       return 0;

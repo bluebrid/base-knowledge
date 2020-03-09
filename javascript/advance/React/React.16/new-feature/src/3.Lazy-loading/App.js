@@ -5,7 +5,8 @@ import React from "react";
 import StockTable from "./StockTable";
 import './App.scss'
 const stockChartPromise = import(/* webpackChunkName: 'StockChart' */ "./StockChart");// 预加载
-const StockChart = React.lazy(() => stockChartPromise);// 懒加载组件
+const StockChart = React.lazy(() => stockChartPromise);// 懒加载组件，React.lazy 的参数是一个function, 返回的是一个promise.
+// const StockChart = React.lazy(() => import(/* webpackChunkName: 'StockChart' */ "./StockChart"))
 function randomValue() {
   return Math.round(1000 + Math.random() * 1000) / 10;
 }

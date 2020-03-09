@@ -4,4 +4,5 @@ const encoding = 'base64';
 const base64Data = fs.readFileSync(`${__dirname}/monkey.png`).toString(encoding);
 const uri = `data:${mime};${encoding},${base64Data}`;
 process.stdout.write(uri);
+console.log('----------------------------')
 console.log(uri);

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>垂直居中</title>
+    <style>
+        body {
+            display: flex;
+            /*
+                我们可以通过align-items和justify-content属性使设置固定尺寸的<main>容器里面的文本居中 
+                */
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        /* Base style */
+
+        main {
+            padding: 1em 1.5em;
+            box-sizing: border-box;
+            background: #655;
+            color: white;
+            /*   text-align: center; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 18em;
+            height: 10em;
+        }
+
+        h1 {
+            margin: 0 0 .2em;
+            font-size: 150%;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        body {
+            background: #fb3;
+            font: 100%/1.5 sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <main>Center me, please!</main>
+</body>
+
+</html>

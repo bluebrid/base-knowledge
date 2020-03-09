@@ -41,7 +41,7 @@
                 })
             }
             createCallback() {
-                window[this.cbName] = this.cb
+                window[this.cbName] = this.cb;// 将windows 的函数指向我们传递进来的cb
             }
         }
         document.getElementById('jsonp').addEventListener('click', () => {
