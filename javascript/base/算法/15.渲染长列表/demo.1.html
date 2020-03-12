@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>渲染长列表</title>
+  </head>
+  <body>
+    <ul id="container"></ul>
+    <script>
+      // 记录任务开始时间
+      let now = Date.now();
+      // 插入十万条数据
+      const total = 100000;
+      // 获取容器
+      let ul = document.getElementById("container");
+      // 将数据插入容器中
+      for (let i = 0; i < total; i++) {
+        let li = document.createElement("li");
+        li.innerText = ~~(Math.random() * total);
+        ul.appendChild(li);
+      }
+      /**
+       * 1. 在 JS 的Event Loop中，当JS引擎所管理的执行栈中的事件以及所有微任务事件全部执行完后，才会触发渲染线程对页面进行渲染
+       * 2. 第一个console.log的触发时间是在页面进行渲染之前，此时得到的间隔时间为JS运行所需要的时间
+       * 3. 第二个console.log是放到 setTimeout 中的，它的触发时间是在渲染完成，在下一次Event Loop中执行的
+       * 4. 对于大量数据渲染的时候，JS运算并不是性能的瓶颈，性能的瓶颈主要在于渲染阶段
+       */
+      console.log("JS运行时间：", Date.now() - now);
+      setTimeout(() => {
+        console.log("总运行时间：", Date.now() - now);
+      }, 0);
+      // print: JS运行时间： 187
+      // print: 总运行时间： 2844
+    </script>
+  </body>
+</html>
