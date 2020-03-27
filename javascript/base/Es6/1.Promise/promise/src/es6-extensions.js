@@ -67,11 +67,11 @@ Promise.all = function (arr) {
     function res(i, val) {
       if (val && (typeof val === 'object' || typeof val === 'function')) {
         if (val instanceof Promise && val.then === Promise.prototype.then) {
-          while (val._state === 3) {
+          while (val._state === 3) { // 3表示fulfilled
             val = val._value;
           }
-          if (val._state === 1) return res(i, val._value);
-          if (val._state === 2) reject(val._value);
+          if (val._state === 1) return res(i, val._value); // 1 表示pending 
+          if (val._state === 2) reject(val._value); // 2: reject 状态为2表示失败，任何一个失败的， 都直接reject 
           val.then(function (val) {
             res(i, val);
           }, reject);
@@ -98,16 +98,19 @@ Promise.all = function (arr) {
   });
 };
 
+Promise.allSettled = function(arr) {
+  var args = iterableToArray(arr)
+}
 Promise.reject = function (value) {
   return new Promise(function (resolve, reject) {
-    reject(value);
+    reject(value); // 返回一个新的promise 对象，并且直接reject 
   });
 };
 
 Promise.race = function (values) {
   return new Promise(function (resolve, reject) {
     iterableToArray(values).forEach(function(value){
-      Promise.resolve(value).then(resolve, reject);
+      Promise.resolve(value).then(resolve, reject);// 任何一个promise 先执行resolve or reject 就完成了, 因为传给每一个Promise的reject和resolve 就是返回的promise 的参数
     });
   });
 };

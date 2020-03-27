@@ -1,6 +1,6 @@
 'use strict';
 
-var asap = require('asap/raw');
+var asap = require('./raw');
 
 function noop() {}
 
@@ -59,6 +59,7 @@ function Promise(fn) {
     throw new TypeError('Promise constructor\'s argument is not a function');
   }
   this._deferredState = 0;
+  // 设置初始化Promise的状态是0, 也就是pendding 
   this._state = 0;
   this._value = null;
   this._deferreds = null;
@@ -119,8 +120,16 @@ function handle(self, deferred) {
 }
 
 function handleResolved(self, deferred) {
+  /**
+   * 1. asap 通过process.nextTick(flush); 进行异步处理
+   * 2. asap 传递进去的fn, 保存在一个queue 队列中， 
+   * 3. 在flush 函数中，遍历所有的queue 队列进行执行
+   * 4. 在queue 中通过先进先出的原则执行
+   */
   asap(function() {
-    // 这里形成了一个闭包， deferred 是在then里面传递进来的，deferred.promise 保存了下一个promise的配置， 
+    // 这里形成了一个闭包， deferred 是在then里面传递进来的，deferred.promise 保存了下一个promise的配置，
+    // 因为在new Promise 中执行对应的reject or resolve 的时候， 设置了对应的_state的状态为： 2， 1， 
+    // 然后根据这个状态去获取保存的对应的对应的onrject , onfulfilled 函数 
     var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
     if (cb === null) {
       if (self._state === 1) {
@@ -140,10 +149,23 @@ function handleResolved(self, deferred) {
         }
       }
      */
-    var ret = tryCallOne(cb, self._value);
-    if (ret === IS_ERROR) {
+    // 这里对应的cb 就是对应的onReject , onResolve 函数
+    var ret = tryCallOne(cb, self._value); 
+    if (ret === IS_ERROR) { 
       reject(deferred.promise, LAST_ERROR);
     } else {
+      // 将返回值，作为resolve 的value , 如果没有返回值，则是undefined
+      /**
+       *  .then(
+          data => {
+            console.log("result: " + data);
+          },
+          errMsg => {
+            console.log("Error message: " + errMsg);
+          }
+        )
+       */
+      // 如上，在onResolve, onReject 中没有返回值， 怎么在后面的onResolve 中没有值
       resolve(deferred.promise, ret); // 不是链式调用，而是通过闭包的原理保存了从then里面传递进来的新的promise 信息
     }
   });
@@ -177,13 +199,13 @@ function resolve(self, newValue) {
       return;
     }
   }
-  self._state = 1;// 将状态变更为1
+  self._state = 1;// 将状态变更为1, 表示执行了resolve
   self._value = newValue;// 将resolve 里面传递进来的值保存起来
   finale(self);
 }
 
 function reject(self, newValue) {
-  self._state = 2;
+  self._state = 2; // 将状态变更为2, 表示执行了reject.
   self._value = newValue;
   if (Promise._onReject) {
     Promise._onReject(self, newValue);
@@ -216,6 +238,7 @@ function Handler(onFulfilled, onRejected, promise){
  * Makes no guarantees about asynchrony.
  */
 function doResolve(fn, promise) {
+
   var done = false;
   /**
    * function tryCallTwo(fn, a, b) {
@@ -228,7 +251,19 @@ function doResolve(fn, promise) {
     }
    */
   // tryCallTwo 就是去执行我们传递进来的回调函数，并且传入两个函数，也就是resolve 和reject
-  var res = tryCallTwo(fn, function (value) { 
+   /**
+   * 1. fn 就是new Promise(fn) 传入的函数
+   * 2. promise , 传递的就是this , 也就是new promise 的实例化对象
+   * var promise = new Promise(function(resolve, reject) {
+   * // setTimeout(() => {
+   *   //     resolve(1000)
+   *  // }, 1000 * 4)
+   *      resolve(1000);
+   * });
+   * 3. 当执行resolve 方法的时候，其实就是执行下面的onResolve
+   * 4. reject 指向的也就是下面的onReject 
+   */
+  var res = tryCallTwo(fn, function onResolve(value) { 
     if (done) return;
     done = true; // 标记状态已经完成
     /** 
@@ -236,7 +271,7 @@ function doResolve(fn, promise) {
      * 2. 如果是异步，在then 中重新创建了一个新的Promise对象, 并且这个对象中的_deferreds保存了，then 中传递进来的onResolve和onReject两个方法，
     */
     resolve(promise, value); 
-  }, function (reason) {
+  }, function onReject (reason) {
     if (done) return;
     done = true;
     reject(promise, reason);

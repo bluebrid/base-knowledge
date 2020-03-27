@@ -29,6 +29,7 @@ const env = getClientEnvironment(publicUrl);
 module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
+  // https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651558030&idx=2&sn=0bdae1330ec5506f18149ad81c026de7&chksm=8025474fb752ce592b88c5fc355c0bceed3b9f39b758fbe1c06e4ae159e6a862ce2b8ec29bfe&scene=126&sessionid=1584432305&key=dc4e31bc6e94f2fef4c669334ea52c5129bd6a4714ae49c46d1df2b0ca6e200fbb2d8899e7abe3373b95ca8802503f8c86ca7febebe4ccdb8d8b74ce20256cb001811a27e6d4839a709c05963693e85e&ascene=1&uin=MjEwNzg0ODc4Mg%3D%3D&devicetype=Windows+10&version=62080079&lang=en&exportkey=A%2BGfxDeu1xng8oUOuBGGSSI%3D&pass_ticket=waBE7Fr8nxYdONGUTNHmR92He9Fb6kVyNJmCEelIBMX6U9XwQ1msu0ffuD7LK49m
   // devtool: "cheap-module-source-map",
   devtool: "none", //在开发者模式下，默认开启sourcemap,将其关闭
   //devtool:'source-map'//开启映射打包会变慢
