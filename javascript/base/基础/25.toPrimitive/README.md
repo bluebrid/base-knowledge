@@ -1,6 +1,6 @@
 https://www.cnblogs.com/nanchen/p/7905528.html
 
-## ToPrimitive(input , PreferredType) 的流程
+## ToPrimitive(input , PreferredType) 的流程（隐式转换）
 
 1. input的值为原始值，则直接返回
 2. 不是原始值，调用该对象的valueOf()方法， 如果结果是原始值，则返回原始值

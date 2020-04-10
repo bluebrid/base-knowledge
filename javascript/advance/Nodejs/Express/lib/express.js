@@ -46,7 +46,7 @@ exports = module.exports = createApplication;
 
 function createApplication() {
   var app = function(req, res, next) {
-    app.handle(req, res, next);
+    app.handle(req, res, next);// app._router.stack[2].handle.stack[0] -> 指向的是路由的信息
   };
   /**
    * 1. 利用http.createServer创建一个nodejs 的server, 其参数函数就是请求的拦截器，任何请求都会进入这个函数
@@ -56,6 +56,13 @@ function createApplication() {
       var server = http.createServer(this);
       return server.listen.apply(server, arguments);
     };
+    // 原生的http 创建server 的方式如下。
+    const server = http.createServer((req, res) => {
+      res.setHeader('Content-Type', 'text/html');
+      res.setHeader('X-Foo', 'bar');
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('ok');
+    });
    */
 
   mixin(app, EventEmitter.prototype, false);
@@ -70,7 +77,7 @@ function createApplication() {
   app.response = Object.create(res, {
     app: { configurable: true, enumerable: true, writable: true, value: app }
   })
-
+  //设置默认配置
   app.init();
   return app;
 }

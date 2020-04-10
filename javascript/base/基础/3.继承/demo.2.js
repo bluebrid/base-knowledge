@@ -1,9 +1,18 @@
 /**
  * 多继承
  */
+function SuperClass () {
+    this.superVal = 'super'
+}
+
+function OtherSuperClass () {
+    this.otherSuperVal = 'other super value'
+}
+
 function MyClass() {
     SuperClass.call(this);
     OtherSuperClass.call(this);
+    this.val = 'val'
 }
 
 // 继承一个类
@@ -14,5 +23,9 @@ Object.assign(MyClass.prototype, OtherSuperClass.prototype);
 MyClass.prototype.constructor = MyClass;
 
 MyClass.prototype.myMethod = function () {
-    // do a thing
+    console.log(this.val, this.superVal, this.otherSuperVal)
 };
+
+var myClass = new MyClass()
+
+myClass.myMethod()

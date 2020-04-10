@@ -8,8 +8,10 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\index.js",
-            "console":"integratedTerminal"
+            "program": "${workspaceFolder}\\index.3.js",
+            "console":"integratedTerminal",
+            "runtimeExecutable": "nodemon",
+            "restart":true
         }
     ]
 }

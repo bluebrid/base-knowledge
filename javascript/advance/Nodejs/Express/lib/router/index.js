@@ -40,7 +40,7 @@ var toString = Object.prototype.toString;
  * @public
  */
 
-var proto = module.exports = function(options) {
+var proto = module.exports = function (options) {
   var opts = options || {};
 
   function router(req, res, next) {
@@ -149,7 +149,7 @@ proto.handle = function handle(req, res, out) {
   var options = [];
 
   // middleware and routes
-  // 获取所有的中间件
+  // 获取所有的中间件, router 是所有中间件的入口，同时router 也是一个特殊的中间件。
   var stack = self.stack;
 
   // manage inter-router variables
@@ -162,7 +162,7 @@ proto.handle = function handle(req, res, out) {
 
   // for options requests, respond with a default if nothing else responds
   if (req.method === 'OPTIONS') {
-    done = wrap(done, function(old, err) {
+    done = wrap(done, function (old, err) {
       if (err || options.length === 0) return old(err);
       sendOptionsResponse(res, options, old);
     });
@@ -220,6 +220,7 @@ proto.handle = function handle(req, res, out) {
     var layer;
     var match;
     var route;
+    console.log('============================> next: ' + stack.length)
     // idx 在方法最开始缓存了结果
     while (match !== true && idx < stack.length) {
       layer = stack[idx++];
@@ -268,8 +269,8 @@ proto.handle = function handle(req, res, out) {
         match = false;
         continue;
       }
-    } // 已经退出了while 循环
-
+    } 
+    // *********************************已经退出了while 循环
     // no match
     if (match !== true) {
       return done(layerError);
@@ -286,7 +287,18 @@ proto.handle = function handle(req, res, out) {
       : layer.params;
     var layerPath = layer.path;
 
-    // this should be done for the layer
+    // this should be done for the layer, 这里是先处理params, 
+    /**
+     * router.param("userId", (req, res, next, userId) => {
+        var user = users.find(user => user.id == userId);
+        if (user) {
+          req.user = user;
+          next();
+        } else {
+          next(new Error("Failed to load user by id: " + userId));
+        }
+      });
+     */
     self.process_params(layer, paramcalled, req, res, function (err) {
       if (err) {
         return next(layerError || err);
@@ -296,6 +308,17 @@ proto.handle = function handle(req, res, out) {
         return layer.handle_request(req, res, next);
       }
       // 如果匹配的不是路由中间件， 则执行trim_prefix ， 也就是常规中间件
+      /**
+       * 每个中间件都会执行，next 也就是这个函数
+       * return function query(req, res, next){
+          if (!req.query) {
+            var val = parseUrl(req).query;
+            req.query = queryparse(val, opts);
+          }
+
+          next();
+        };
+       */
       trim_prefix(layer, layerError, layerPath, path);
     });
   }
@@ -327,6 +350,7 @@ proto.handle = function handle(req, res, out) {
     debug('%s %s : %s', layer.name, layerPath, req.originalUrl);
 
     if (layerError) {
+      //出现错误， 执行error 
       layer.handle_error(layerError, req, res, next);
     } else {
       // 将next 给传递过去
@@ -366,7 +390,7 @@ proto.process_params = function process_params(layer, called, req, res, done) {
       return done(err);
     }
 
-    if (i >= keys.length ) {
+    if (i >= keys.length) {
       return done();
     }
 
@@ -518,16 +542,25 @@ proto.route = function route(path) {
     strict: this.strict,
     end: true
   }, route.dispatch.bind(route));
-  // 只有路由创建的中间件， 在Layer 对象上绑定了route
+  // 只有路由创建的中间件， 在Layer 对象上绑定了route, 也就是如下的方式
+  /**
+   * router.get("/getUser/:userId", (req, res) => {
+        res.end(JSON.stringify(req.user));
+      });
+      // route to trigger the capture
+      router.get("/user/:id", function(req, res) {
+        res.send("OK");
+      });
+   */
   layer.route = route;
-
+  // 这个this 是router 对象
   this.stack.push(layer);
   return route;
 };
 
 // create Router#VERB functions
-methods.concat('all').forEach(function(method){
-  proto[method] = function(path){
+methods.concat('all').forEach(function (method) {
+  proto[method] = function (path) {
     var route = this.route(path)
     route[method].apply(route, slice.call(arguments, 1));
     return this;

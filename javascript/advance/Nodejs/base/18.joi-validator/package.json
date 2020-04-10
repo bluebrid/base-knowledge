@@ -1,0 +1,16 @@
+{
+  "name": "18.joi-validator",
+  "version": "0.0.0",
+  "decription": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Ivan Fan <15813849613@126.com> (https://github.com/bluebrid)",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "express-joi": "^0.3.1"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1"
+  }
+}
