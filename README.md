@@ -55,11 +55,11 @@
 - [X] https的通信过程是怎样的
 
 ## 框架
-- [ ] webpack的构建原理
-- [ ] react.js 虚拟DOM的理解
-- [ ] React.js 虚拟DOM的diff算法
-- [ ] Vue.js 的双向绑定原理
-- [ ] Vue.js 和React.js 对比,各自优势在哪里，如果选型(选型的时候需要通过哪些维度进行对比)
+- [x] webpack的构建原理
+- [x] react.js 虚拟DOM的理解
+- [x] React.js 虚拟DOM的diff算法
+- [x] Vue.js 的双向绑定原理
+- [x] Vue.js 和React.js 对比,各自优势在哪里，如果选型(选型的时候需要通过哪些维度进行对比)
 
 ## 后端
 - [ ] Redis的使用和原理
