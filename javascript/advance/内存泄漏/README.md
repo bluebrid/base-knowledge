@@ -27,6 +27,7 @@
 定位内存泄漏的位置：
 1. 通过Chrome 的Perference 来进行录制定位
 2. Nodejs 可以安装插件easy-monitor 来进行分析定位
+3. 打印出堆快照(npm i heap)，然后倒入到chrome, 进行分析， 到底哪里可能存在内存泄漏
 
 ## Node 常驻内存模型
 
