@@ -6,9 +6,11 @@ console.log(exports); //能打印出结果为：{}
 // 一开始exports指向的就是module.exports的内存，如果直接通过exports 进行赋值，
 //也就是将exports的内存的指向和module.exports的指向给断开了。
 // 再次给exports.a进行赋值，其实module.exports的值是没有变更的
+// 这里已经将exports 和module.exports的指向给断开了
 exports = "一开始指向其他的内存"
+console.log(module.exports)
 exports.a = '程序员成长指北哦哦'; //这里辛苦劳作帮 module.exports 的内容给改成 {a : '程序员成长指北哦哦'}
-
+console.log(module.exports)
 exports = '指向其他内存区'; //这里把exports的指向指走
 
 module.exports = {
