@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>performance演示</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+
+  <body>
+    <div class="text">
+      Monitor Perference Demo
+    </div>
+    <div class="button">
+      <input type="button" value="Button" />
+    </div>
+    <div class="image">
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+    </div>
+    <script>
+      /**
+       * 参考： https://www.jianshu.com/p/7e7c8b8a3d0e , F12 查看console
+       */
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var performance = window.performance;
+          if (performance) {
+            var navigation = performance.getEntriesByType("navigation")[0],
+              start = 0;
+            navigation ||
+              (start = (navigation = performance.timing).navigationStart);
+            var summary = {
+              redirect: {
+                desc: "网页重定向的耗时",
+                value: navigation.redirectEnd - navigation.redirectStart,
+              },
+              appCache: {
+                desc: "检查本地缓存的耗时",
+                value: navigation.domainLookupStart - navigation.fetchStart,
+              },
+              dns: {
+                desc: "DNS查询的耗时",
+                value:
+                  navigation.domainLookupEnd - navigation.domainLookupStart,
+              },
+              TCP: {
+                desc: "TCP连接的耗时",
+                value: navigation.connectEnd - navigation.connectStart,
+              },
+              ttfb: {
+                desc: "从客户端发起请求到接收到响应的时间 / Time To First Byte",
+                value: navigation.responseStart - navigation.requestStart,
+              },
+              contentDownload: {
+                desc: "下载服务端返回数据的时间",
+                value: navigation.responseEnd - navigation.responseStart,
+              },
+              httpTotalTime: {
+                desc: "http请求总耗时",
+                value: navigation.responseEnd - navigation.requestStart,
+              },
+              domContentLoaded: {
+                desc: "dom加载完成的时间",
+                value: navigation.domContentLoadedEventEnd - start,
+              },
+              loaded: {
+                desc: "页面load的总耗时",
+                value: navigation.loadEventEnd - start,
+              },
+            };
+            if (Math.random() > 0.1) {
+              var location = window.location,
+                href = location.href,
+                pathname = location.pathname,
+                userAgent = navigator.userAgent,
+                url = href.split("?")[0];
+              axios
+                .post("/monitorPerforence", {
+                  app: "shakespeare-performance",
+                  url: url,
+                  ua: userAgent,
+                  path: pathname,
+                  stats_ttfb: summary.ttfb, // Waiting(TTFB)
+                  stats_domLoaded: summary.domContentLoaded, // dom加载完成的时间
+                  stats_loaded: summary.loaded, // 页面load的总耗时
+                })
+                .then(
+                  (data) => {
+                    console.log(data);
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                )
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+            console && console.log && console.log(summary);
+          }
+        }, 0);
+      });
+    </script>
+  </body>
+</html>

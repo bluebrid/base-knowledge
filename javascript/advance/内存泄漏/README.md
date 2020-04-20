@@ -30,7 +30,7 @@
 3. 打印出堆快照(npm i heap)，然后倒入到chrome, 进行分析， 到底哪里可能存在内存泄漏
 
 ## Node 常驻内存模型
-
+[V8 内存浅析](https://zhuanlan.zhihu.com/p/33816534)
 1. 分为两种内存： 堆内内存和堆外内存
 2. 堆内内存是V8负责管理， 堆外内存是C++程勋管理
 3. 堆内内存分为： new space, code space, map space, old space, large object space

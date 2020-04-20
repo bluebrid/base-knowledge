@@ -1,0 +1,13 @@
+.text {
+    color: red;
+}
+.button input {
+    background: red;
+}
+.image {
+    width: 500px;    
+    border: 1px solid red;
+}
+.image img {
+    width: 100%;
+}

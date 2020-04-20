@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>performance演示</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      /**
+       * 参考： https://www.jianshu.com/p/7e7c8b8a3d0e , F12 查看console
+       */
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var performance = window.performance;
+          if (performance) {
+            var navigation = performance.getEntriesByType("navigation")[0],
+              start = 0;
+              navigation || (start = (navigation = performance.timing).navigationStart);
+            var n = [
+              {
+                key: "Redirect",
+                desc: "网页重定向的耗时",
+                value: navigation.redirectEnd - navigation.redirectStart,
+              },
+              {
+                key: "AppCache",
+                desc: "检查本地缓存的耗时",
+                value: navigation.domainLookupStart - navigation.fetchStart,
+              },
+              {
+                key: "DNS",
+                desc: "DNS查询的耗时",
+                value: navigation.domainLookupEnd - navigation.domainLookupStart,
+              },
+              {
+                key: "TCP",
+                desc: "TCP连接的耗时",
+                value: navigation.connectEnd - navigation.connectStart,
+              },
+              {
+                key: "Waiting(TTFB)",
+                desc:
+                  "从客户端发起请求到接收到响应的时间 / Time To First Byte",
+                value: navigation.responseStart - navigation.requestStart,
+              },
+              {
+                key: "Content Download",
+                desc:
+                  "下载服务端返回数据的时间",
+                value: navigation.responseEnd - navigation.responseStart,
+              },
+              {
+                key: "HTTP Total Time",
+                desc: "http请求总耗时",
+                value: navigation.responseEnd - navigation.requestStart,
+              },
+              {
+                key: "DOMContentLoaded",
+                desc: "dom加载完成的时间",
+                value: navigation.domContentLoadedEventEnd - start,
+              },
+              {
+                key: "Loaded",
+                desc: "页面load的总耗时",
+                value: navigation.loadEventEnd - start,
+              },
+            ];
+            if (Math.random() > 0.1) {
+              var location = window.location,
+                href = location.href,
+                pathname = location.pathname,
+                userAgent = navigator.userAgent,
+                url = href.split("?")[0];
+                axios
+                .post("https://tr.jianshu.com/fe/1/mon/atf", {
+                  app: "shakespeare-performance",
+                  url: url,
+                  ua: userAgent,
+                  path: pathname,
+                  stats_ttfb: navigation.responseStart - navigation.requestStart,
+                  stats_domLoaded: navigation.domContentLoadedEventEnd - start,
+                  stats_loaded: navigation.loadEventEnd - start,
+                })
+                .then((data) => {
+                  console.log(data)
+                }, (err) => {
+                  console.log(err)
+                })
+                .catch(err => {
+                  console.log(err)
+                });
+            }
+            console && console.log && console.log(n);
+          }
+        }, 0);
+      });
+    </script>
+  </body>
+</html>
