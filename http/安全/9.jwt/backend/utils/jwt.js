@@ -1,4 +1,5 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
+const jwt = require('./jsonwebtoken');
 const {SECRET} = require('../config');
 
 function sign(payload) {
