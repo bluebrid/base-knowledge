@@ -18,3 +18,11 @@ https://juejin.im/post/5d5b4c2df265da03dd3d73e5
 http://fex.baidu.com/blog/2014/05/what-happen/
 
 [使用 HMTL5 API 监控前端性能](https://www.infoq.cn/article/html5-performance-api-monitoring/)
+
+[https://juejin.im/post/5e9052916fb9a03c9843284f](去大厂，你就应该了解前端监控和埋点!)
+
+[web performance](http://kailian.github.io/2017/02/04/web-performance)
+
+[前端优化不完全指南](https://aotu.io/notes/2016/03/16/optimization/)
+
+[使用window.performance分析web前端性能](https://blog.csdn.net/lovenjoe/article/details/80260658)

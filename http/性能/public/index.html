@@ -29,15 +29,23 @@
     <script>
       /**
        * 参考： https://www.jianshu.com/p/7e7c8b8a3d0e , F12 查看console
+       * https://juejin.im/post/5e9052916fb9a03c9843284f
        */
       window.addEventListener("load", function () {
         setTimeout(function () {
+          var timing = window.performance.timing;
+          timing.domLoading; //浏览器开始解析 HTML 文档第一批收到的字节
+          timing.domInteractive; // 浏览器完成解析并且所有 HTML 和 DOM 构建完毕
+          timing.domContentLoadedEventStart; //DOM 解析完成后，网页内资源加载开始的时间
+          timing.domContentLoadedEventEnd; // DOM 解析完成后，网页内资源加载完成的时间（如 JS 脚本加载执行完毕）
+          timing.domComplete; //网页上所有资源（图片等）下载完成,且准备就绪的时间
+
           var performance = window.performance;
           if (performance) {
             var navigation = performance.getEntriesByType("navigation")[0],
-              start = 0;
+            navigationStart = 0;
             navigation ||
-              (start = (navigation = performance.timing).navigationStart);
+              (navigationStart = (navigation = performance.timing).navigationStart);
             var summary = {
               redirect: {
                 desc: "网页重定向的耗时",
@@ -70,12 +78,20 @@
               },
               domContentLoaded: {
                 desc: "dom加载完成的时间",
-                value: navigation.domContentLoadedEventEnd - start,
+                value: navigation.domContentLoadedEventEnd - navigationStart,
               },
               loaded: {
                 desc: "页面load的总耗时",
-                value: navigation.loadEventEnd - start,
+                value: navigation.loadEventEnd - navigationStart,
               },
+              idle: {
+                desc: "白屏时间",
+                value: navigation.responseStart - navigationStart
+              },
+              domTree: {
+                desc: "解析DOM树耗时", 
+                value: navigation.domComplete - navigation.domInteractive
+              }
             };
             if (Math.random() > 0.1) {
               var location = window.location,
