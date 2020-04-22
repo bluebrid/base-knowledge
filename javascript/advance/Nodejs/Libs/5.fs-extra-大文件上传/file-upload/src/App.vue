@@ -186,19 +186,21 @@ export default {
     async handleUpload() {
       if (!this.container.file) return;
       this.status = Status.uploading;
+      // 1. 根据file.slice 来拆分分局为不同的chunk 数组
       const fileChunkList = this.createFileChunk(this.container.file);
+      // 2. 根据MD5 根据每个文件的内容计算每个文件的hash值，根据内容，名称来计算
       this.container.hash = await this.calculateHash(fileChunkList);
-
+      // 3. 根据文件名称和文件的hash 值来验证文件是否已经上传过, 在后端保存的文件都是以hash值作为名称值+后缀, 后端并且返回哪些chunk 已经上传了
       const { shouldUpload, uploadedList } = await this.verifyUpload(
         this.container.file.name,
         this.container.hash
       );
+      // 4. 如果验证文件已经上传成功了， 就是秒传成功
       if (!shouldUpload) {
         this.$message.success("秒传：上传成功");
         this.status = Status.wait;
         return;
       }
-
       this.data = fileChunkList.map(({ file }, index) => ({
         fileHash: this.container.hash,
         index,
@@ -209,10 +211,12 @@ export default {
           ? 100
           : 0
       }));
+      // 5. 去上传根据文件拆分的chunk
       await this.uploadChunks(uploadedList);
     },
     // 上传切片，同时过滤已上传的切片
     async uploadChunks(uploadedList = []) {
+      // 6. 过滤掉，已经上传成功的chunk , 
       const requestList = this.data
         .filter(({ hash }) => !uploadedList.includes(hash)) // uploadedList 保存的是已经上传的切片的hash值
         .map(({ chunk, hash, index }) => {
@@ -224,6 +228,7 @@ export default {
           return { formData, index };
         })
         .map(async ({ formData, index }) =>
+        // 7. 没有上传过的chunk继续上传
           this.request({
             url: "http://localhost:3000",
             data: formData,
@@ -231,6 +236,7 @@ export default {
             requestList: this.requestList
           })
         );
+        // 8. 等待所有的chunk 都上传完成， 直接去提交一个合并文件的请求
       await Promise.all(requestList);
       // 之前上传的切片数量 + 本次上传的切片数量 = 所有切片数量时
       // 合并切片
