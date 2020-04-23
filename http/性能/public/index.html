@@ -105,9 +105,10 @@
                   url: url,
                   ua: userAgent,
                   path: pathname,
-                  stats_ttfb: summary.ttfb, // Waiting(TTFB)
-                  stats_domLoaded: summary.domContentLoaded, // dom加载完成的时间
-                  stats_loaded: summary.loaded, // 页面load的总耗时
+                  idle: summary.idle,// 1. 白屏时间
+                  stats_ttfb: summary.ttfb, // 2.发起请求到首次响应时间
+                  stats_domLoaded: summary.domContentLoaded, // 3. dom加载完成的时间
+                  stats_loaded: summary.loaded, // 4. 页面load的总耗时
                 })
                 .then(
                   (data) => {

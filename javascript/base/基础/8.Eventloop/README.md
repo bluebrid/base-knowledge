@@ -1,8 +1,22 @@
 https://github.com/Nealyang/PersonalBlog/issues/55
 https://juejin.im/post/5d693d8b6fb9a06aca383488
 https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
+[从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://segmentfault.com/a/1190000012925872)
+[「前端进阶」从多线程到Event Loop全面梳理](https://juejin.im/post/5d5b4c2df265da03dd3d73e5)
 
-https://juejin.im/post/5d5b4c2df265da03dd3d73e5
+我们都知道JS是**单线程**, 但是其实依靠**事件队列(Event loop)**的方式来实现异步回调的。
+
+浏览器是一个**多进程**的， 其中包括**GPU进程**， **主进程**， **第三方插件进程**， **tab进程**， **渲染进程**
+
+但是对于一个普通的前端用户来说，我们需要关注的是**渲染进程**，其实也就是**浏览器内核**
+包括如下的线程：
+1. GUI线程，主要负责渲染，布局，绘制，重绘，回流等，与JS线程是互斥的，防止渲染结果不可预期
+2. JS引擎线程
+4. 事件触发线程
+5. 定时器线程
+6. 网络请求线程
+
+> JS 引擎线程和GUI渲染线程是<font size=5 color=red>互斥</font>的， 因为如果不是互斥，在GUI渲染的时候，JS又在操作DOM元素， 就会让页面混乱， 因为是互斥的，所以在在执行完成一个**宏任务**后，会在下一个宏任务执行之前去执行一个**GUI渲染进程**去对页面进行渲染绘制。
 
 我们已经知道宏任务结束后，会执行渲染，然后执行下一个宏任务，
 而微任务可以理解成在当前宏任务执行后立即执行的任务。
