@@ -8,6 +8,7 @@ const {
     Worker
 } = require('worker_threads');
 
+// node --experimental-worker demo.js
 function mainThread() {
     for (let i = 0; i < 5; i++) {
         const worker = new Worker(__filename, { workerData: i });
@@ -23,8 +24,8 @@ function workerThread() {
     console.log(`worker: workerDate ${workerData}`);
     parentPort.on('message', msg => {
         console.log(`worker: receive ${msg}`);
-    }),
-        parentPort.postMessage(workerData);
+    })
+    parentPort.postMessage(workerData);
 }
 
 if (isMainThread) {
