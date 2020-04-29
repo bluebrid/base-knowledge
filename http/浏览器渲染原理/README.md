@@ -2,14 +2,14 @@
 [「前端进阶」从多线程到Event Loop全面梳理](https://juejin.im/post/5d5b4c2df265da03dd3d73e5)
 ## 浏览器工作原理
 1. 浏览器会解析三个模块: Dom, CSS, JS
-2. 下载HTML文件后， 回去解析HTML，生成Dom Tree
+2. 下载HTML文件后， 会去解析HTML，生成Dom Tree
 3. 遇到CSS脚本或者CSS文件， 会生成一个CSS Rule Tree
 4. 如果在解析DOM的时候，遇到CSS脚本文件，不会阻塞DOM Tree的构建，但是会阻塞Render Tree的生成， 因为是需要将DOM tree和CSS rule Tree 合并成一个Render Tree
 5. 如果遇到JS脚本和文件， 会阻塞DOM 树的解析， 因为JS会去操作Dom 和 CSS
 6. 所以建议将JS文件放在最下面
 7. 将Dom Tree 和 CSS rule tree 合并成一个Render tree
 8. 生成render tree 后， 会去计算每一个DOM的具体位置和大小，也就是Layout(reflow)
-9. Render tree 并不等同于Dom 树，因为在Render tree中不会显示header 和隐藏的元素
+9. Render tree中不会显示header 和隐藏的元素
 10. 调用操作系统的Native GUI的API绘制Render tree 到屏幕中
 
 ## 造成重排(reflow)和重绘(repaint)的原因
@@ -37,6 +37,7 @@
 > 2. 减少HTTP请求书，如果图片处理，雪碧图， 字体图标
 > 3. 图片的懒加载
 > 4. 启动gzip, minify文件
+> 5. 接口合并
 2. 加快请求速度
 > 1. 预解析DNS pre-fetch, 
 > 2. 减少域名数
