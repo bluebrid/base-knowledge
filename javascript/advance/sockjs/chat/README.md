@@ -31,7 +31,7 @@ server.on('upgrade', function(request, socket, head) {
 7. Http是通过Request 来界定的，也就是一个Request对应一个Response, 而且Response 是被动发送， 不能主动发送
 8. 虽然Http1.1改进使用了keep-live, 但也只是说在一个http 连接(tcp/ip)连接，可以发送多个request
 9. 使用场景：
-> 1. 信息需要实时更新的，如聊天系统
+> 1. 信息需要实时更新的，如聊天系统， 游戏等
 > 2. 需要服务器推送消息， 如股票的实时价格信息
 > 3. 如OA系统的待办事项的数据信息
 10. Websocket 需要注意的是丢包的情况，所以需要做**心跳检测**
