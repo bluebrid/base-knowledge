@@ -4,13 +4,21 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
-
         {
             "type": "node",
             "request": "launch",
             "name": "Axios Learning Launch Program",
             "program": "${workspaceFolder}\\scripts\\start.js",
+            // "program": "${workspaceFolder}\\scripts\\build.js",
+            // "console":"integratedTerminal",
+            "args": [
+                "p1", "--p2", "p3"
+             ],
+        }, {
+            "type": "node",
+            "request": "launch",
+            "name": "Axios Learning Launch Program Server ",
+            "program": "${workspaceFolder}\\server.js",
             // "program": "${workspaceFolder}\\scripts\\build.js",
             // "console":"integratedTerminal",
             "args": [

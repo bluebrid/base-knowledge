@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@huse/action-pending": "^0.9.3",
+    "@huse/debounce": "^0.11.0",
+    "@huse/input-value": "^0.9.3",
+    "@huse/selection": "^0.9.2",
+    "@huse/timeout": "^0.9.3",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "mockjs": "^1.0.1-beta3",
@@ -15,9 +20,9 @@
     "victory": "^30.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -30,7 +35,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "cross-env": "^6.0.3",
+    "customize-cra": "^0.9.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "react-app-rewired": "^2.1.5",
     "webpack-bundle-analyzer": "^3.4.1"
   }
 }

@@ -16,63 +16,97 @@
           },
           "name": "\u6253\u5f00\u7f51\u7ad9",
           "result": {
-            "duration": 0.009006261825561523,
-            "error_message": [
-              "Traceback (most recent call last):",
-              "  File \"C:\\Users\\Ivan_Fan.PRINCETON\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\behave\\model.py\", line 1329, in run",
-              "    match.run(runner.context)",
-              "  File \"C:\\Users\\Ivan_Fan.PRINCETON\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\behave\\matchers.py\", line 98, in run",
-              "    self.func(context, *args, **kwargs)",
-              "  File \"features\\steps\\homeSteps.py\", line 19, in step_impl",
-              "    page.browser.add_cookie(cookie_dict)",
-              "  File \"C:\\Users\\Ivan_Fan.PRINCETON\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py\", line 882, in add_cookie",
-              "    self.execute(Command.ADD_COOKIE, {'cookie': cookie_dict})",
-              "  File \"C:\\Users\\Ivan_Fan.PRINCETON\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py\", line 320, in execute",
-              "    self.error_handler.check_response(response)",
-              "  File \"C:\\Users\\Ivan_Fan.PRINCETON\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py\", line 242, in check_response",
-              "    raise exception_class(message, screen, stacktrace)",
-              "selenium.common.exceptions.InvalidCookieDomainException: Message: invalid cookie domain",
-              "  (Session info: chrome=79.0.3945.79)",
-              ""
-            ],
-            "status": "failed"
+            "duration": 10.471647024154663,
+            "status": "passed"
           },
           "step_type": "when"
         },
         {
           "keyword": "And",
           "location": "features/Todo.feature:7",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:12"
+          },
           "name": "\u52a0\u8f7dcookies",
+          "result": {
+            "duration": 2.920220375061035,
+            "status": "passed"
+          },
           "step_type": "when"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:10",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:67"
+          },
           "name": "\u70b9\u51fb\"\u5f85\u529e\u6e05\u5355\"\u6309\u94ae",
+          "result": {
+            "duration": 0.3762855529785156,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:11",
+          "match": {
+            "arguments": [
+              {
+                "value": "\u53ea\u7528\u8fd9\u4e00\u4e2a"
+              }
+            ],
+            "location": "features/steps/todoSteps.py:8"
+          },
           "name": "\u68c0\u67e5\u9ed8\u8ba4\u7684\u6e05\u5355\u7c7b\u578b\u662f\u5426\u4e3a\"\u53ea\u7528\u8fd9\u4e00\u4e2a\"",
+          "result": {
+            "duration": 1.9689455032348633,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:12",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:13"
+          },
           "name": "\u5148\u5220\u9664\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 0.016407489776611328,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:13",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:53"
+          },
           "name": "\u70b9\u51fb\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879\u6309\u94ae",
+          "result": {
+            "duration": 0.33437442779541016,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:14",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:58"
+          },
           "name": "\u9a8c\u8bc1\u6dfb\u52a0\u4e8b\u9879\u5931\u8d25\u4fe1\u606f",
+          "result": {
+            "duration": 7.872084856033325,
+            "status": "passed"
+          },
           "step_type": "then",
           "table": {
             "headings": [
@@ -124,25 +158,58 @@
         {
           "keyword": "Then",
           "location": "features/Todo.feature:21",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:66"
+          },
           "name": "\u4eceexcel\u8bfb\u53d6\u6570\u636e\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 10.88068151473999,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:22",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:85"
+          },
           "name": "\u68c0\u67e5\u662f\u5f85\u529e\u4e8b\u9879\u6dfb\u52a0\u6210\u529f",
+          "result": {
+            "duration": 0.0,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:23",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:27"
+          },
           "name": "\u5b8c\u6210\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 7.670578479766846,
+            "status": "passed"
+          },
           "step_type": "then"
         },
         {
           "keyword": "Then",
           "location": "features/Todo.feature:24",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:93"
+          },
           "name": "\u5220\u9664\u7b2c\u4e00\u4e2a\u5df2\u5b8c\u6210\u7684\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 1.3335986137390137,
+            "error_message": "Assertion Failed: \u5220\u9664\u4e86\u4e00\u4e2a\u5df2\u7ecf\u5b8c\u6210\u7684\u5f85\u529e\u4e8b\u9879, \u5e94\u8be5\u8fd8\u5269\u4e0b8\u4e2a\u5f85\u529e\u4e8b\u9879",
+            "status": "failed"
+          },
           "step_type": "then"
         },
         {

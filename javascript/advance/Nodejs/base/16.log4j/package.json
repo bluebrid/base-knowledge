@@ -1,0 +1,13 @@
+{
+  "name": "16.log4j",
+  "version": "0.0.0",
+  "decription": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Ivan Fan <15813849613@126.com> (https://github.com/bluebrid)",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "log4js": "^6.1.2"
+  }
+}

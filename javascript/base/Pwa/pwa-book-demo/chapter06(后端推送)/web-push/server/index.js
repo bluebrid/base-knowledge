@@ -43,7 +43,7 @@ setInterval(function () {
       }))
     })
   }
-}, 1000 * 60)
+}, 1000 * 2)
 
 // 设定静态文件目录，比如本地文件
 // 目录为 pwa-book-demo/public/images，访问

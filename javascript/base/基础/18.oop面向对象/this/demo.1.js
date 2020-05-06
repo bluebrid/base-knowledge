@@ -20,5 +20,5 @@ otherObj.show = function() {
 };
 obj.show(); //Name:sharpxiajun;Job:Software
 otherObj.show(); //Name:xtq;Job:good
-var show=obj.show;
+var show = obj.show;
 show()

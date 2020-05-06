@@ -37,6 +37,7 @@ def before_feature(context, feature):
 # Scenario level objects are popped off context when scenario exits
 
 def before_scenario(context, scenario):
+    #https://github.com/serhatbolsu/appium-python-bdd/blob/master/features/environment.py
     print("User data:", context.config.userdata)
     desired_caps = settings["desiredCaps"]
     desired_caps['app'] = PATH(desired_caps['app'])

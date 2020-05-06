@@ -15,5 +15,5 @@
         "appActivity": "com.wunderkinder.wunderlistandroid.activity.WLMainFragmentActivity",
         "app": "../apps/wunderlist-android.apk"
     },
-    "url": "http://localhost:4723/wd/hub"   
+    "url": "http://localhost:4723/wd/hub"
 }

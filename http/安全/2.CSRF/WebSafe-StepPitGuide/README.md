@@ -3,7 +3,7 @@
 
 ---
 
-* [X](https://github.com/TYRMars/WebsafeLearn#X)`自己对Web安全的探索`
+* [X](v)`自己对Web安全的探索`
 
 # 目录
 #### 第一章 Web-前置知识

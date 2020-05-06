@@ -32,7 +32,7 @@ class RedisSessionStore {
         const id = getRedisSessionId(sessionId)
         let ttlSecond
         if (typeof ttl === 'number') {
-            ttl = 1000 * 10
+            ttl = 1000 * 10 // 这里固定设置为十秒了
             // 毫秒转秒
             ttlSecond = Math.ceil(ttl / 1000)
         }

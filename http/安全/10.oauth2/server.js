@@ -17,10 +17,10 @@ var pub = new Redis();
 const redisClient = new Redis(
     {
         port: 6379, // Redis port
-        // host: "127.0.0.1", // Redis host
+        host: "127.0.0.1", // Redis host
         // family: 4, // 4 (IPv4) or 6 (IPv6)
         // password: "123456",
-        // db: 0
+        db: 0
     }
 )
 // redisClient.send_command('config', ['set', 'notify-keyspace-events', 'KExe'], SubscribeExpired)

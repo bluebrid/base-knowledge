@@ -26,6 +26,6 @@ console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 console.log([...obj]);
-// for(let item of obj) {
-//   console.log(item)
-// }
+for(let item of obj) {
+  console.log(item)
+}

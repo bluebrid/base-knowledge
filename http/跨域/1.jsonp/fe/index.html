@@ -29,7 +29,7 @@
                 this.createCallback()
             }
             createScript() {
-                // mdn 又说 script 标签不受同源策略的限制. 那么, 我们尝试一下用 script 标签引入 http://localhost:8888/ 试试
+                // mdn 有说 script 标签不受同源策略的限制. 那么, 我们尝试一下用 script 标签引入 http://localhost:8888/ 试试
                 let script = document.createElement('script')
                 script.src = this.url
                 document.body.appendChild(script)

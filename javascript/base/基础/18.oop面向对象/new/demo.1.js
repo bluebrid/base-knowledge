@@ -27,7 +27,7 @@ function createObject(cls) {
     //1,创建一个空对象
     var o = new Object();
     var args = Array.prototype.slice.call(arguments, 1);
-    //2，将新队形的原指向构造函数
+    //2，将新对象的原指向构造函数
     o.__proto__ = cls.prototype;
     cls.prototype.constructor = cls;
     //3,执行构造函数，给新对象添加属性值
