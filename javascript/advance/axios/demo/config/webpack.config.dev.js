@@ -30,7 +30,7 @@ module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
   // devtool: "cheap-module-source-map",
-  devtool: "none", //在开发者模式下，默认开启sourcemap,将其关闭
+  devtool: "cheap-inline-source-map", //在开发者模式下，默认开启sourcemap,将其关闭
   //devtool:'source-map'//开启映射打包会变慢
   //devtool:'inline-source-map'//不单独生成.map文件，会将生成的映射文件以base64的形式插入到打包后的js文件的底部
   //devtool:'cheap-inline-source-map'//代码出错提示不用精确显示第几行的第几个字符出错，只显示第几行出错，会提高一些性能

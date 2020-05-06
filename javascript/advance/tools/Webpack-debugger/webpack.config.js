@@ -8,6 +8,7 @@ const InlinePlugin = require('./plugins/InlinePlugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AutoExternalPlugin = require('./plugins/AutoExternalPlugin');
 const MyPlugin = require('./plugins/MyPlugin')
+const firstPlugin = require('./plugins/webpack-firstPlugin')
 const CustomLogerPlugin = require('./plugins/BeforeRunPlugin')
 const BannerPlugin = require('./lib/webpack').BannerPlugin;
 const DefinePlugin = require('./lib/webpack').DefinePlugin;
@@ -38,6 +39,7 @@ module.exports = {
         }),
         // new MyPlugin(),
         new CustomLogerPlugin(),
+        new firstPlugin(),
         // new InlinePlugin({
         //     test:/\.(js|css)$/
         // })
@@ -81,6 +83,8 @@ module.exports = {
                         options: {
                             name: 'loader 2'
                         }
+                    }, {
+                        loader: path.resolve('./loaders/drop-console.js'),
                     }]
 
             }

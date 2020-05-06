@@ -1,4 +1,4 @@
-/*! 版权所有，翻版必究: hash:b7e427642e486d53dd2f, chunkhash:def2ecde35889ae8bcaf, name:main, filebase:bundle.js, query:, file:bundle.js */
+/*! 版权所有，翻版必究: hash:083a0f5bc7d4908c74d4, chunkhash:f6085d4ea8fe58a7d0ed, name:main, filebase:bundle.js, query:, file:bundle.js */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -94,7 +94,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("/**\n    This a custom comments added by Ivan Fan.\n    */\r\n// import './index.css'\r\n// import $ from 'jquery'\r\n\r\nlet a = 11;\r\nconsole.log(a)\r\nconsole.log(\"development\")\r\nif (false) {}\r\nconsole.log(\"5fa3b9\")\r\nif (true) {\r\n  console.log('Production log');\r\n}\r\n\r\n// console.log($)\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("/**\n    This a custom comments added by Ivan Fan.\n    */// import './index.css'\n// import $ from 'jquery'\nlet a = 11;\n\nif (false) {}\n\nif (true) {} // console.log($)\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

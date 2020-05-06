@@ -15,6 +15,7 @@ import App1101 from './11.useReducer-todoMvc/App'
 import App12 from './12.useMemo/App'
 import App13 from './13.customHooks/App'
 import App14 from './14.useLayoutEffect/App'
+import App15 from './15.useXState/App'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<div>
@@ -32,6 +33,7 @@ ReactDOM.render(<div>
   <App12 />
   <App13 />
   <App14 />
+  {/* <App15 /> */}
 </div>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
