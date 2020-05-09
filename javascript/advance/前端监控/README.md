@@ -42,6 +42,7 @@
 > 2. 减少域名数
 > 3. CDN分发
 > 4. http1.1 keep-alive， http2.0 协议升级
+> 5. 利用preconnect 对tcp/ip 提前进行连接
 3. 缓存文件处理
 > 1. 用PWA缓存请求结果
 > 2. 浏览器进行缓存，强缓存: Expires, Cache-Control ,协商缓存: last-modify/if-modify-since, etag/if-none-match
