@@ -7,7 +7,7 @@ const mySyncHook = new SyncBailHook(["name", "age"]);
 
 mySyncHook.tap("name1", (name, age) => {
 	console.log(name, age, "name1");
-	return "wrong"; // 不关心返回值 这里写返回值对结果没有任何影响
+	return "wrong"; //关心返回值，如果返回值不为undefined 则后面的都不会执行，否则会继续执行
 });
 
 mySyncHook.tap("name2", (name, age) => {
@@ -20,7 +20,8 @@ mySyncHook.tap("name13", (name, age) => {
 
 mySyncHook.call("Ivan Fan", "18");
 // 调用call 执行的时候，最终根据上面tap 注册的事件(都保存在taps中)，生成如下的匿名函数:
-// 从下面的代码可知，SyncBail 类型的钩子, 都是同步执行的，但是其关心返回值，如果前面的注册的回调函数中，有返回值，且不为undefined, 则后面注册的都不会执行
+// 从下面的代码可知，SyncBail 类型的钩子, 都是同步执行的，但是其关心返回值，
+// 如果前面的注册的回调函数中，有返回值，且不为undefined, 则后面注册的都不会执行
 /**
  * 
  (function anonymous(name, age

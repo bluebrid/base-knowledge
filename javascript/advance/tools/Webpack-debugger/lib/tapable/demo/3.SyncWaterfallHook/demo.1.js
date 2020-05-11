@@ -7,7 +7,7 @@ const mySyncHook = new SyncWaterfallHook(["name", "age"]);
 
 mySyncHook.tap("name1", (name, age) => {
 	console.log(name, age, "name1");
-	return ["wrong", '22']; // 不关心返回值 这里写返回值对结果没有任何影响
+	return ["wrong", '22']; // 关心返回值，如果有返回值，则将作为下一个钩子的第一个参数传递进去
 });
 
 mySyncHook.tap("name2", (name, age) => {
