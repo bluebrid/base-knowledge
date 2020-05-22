@@ -10,6 +10,7 @@ const Sequelize = require('sequelize');
 
 const log = config.logger;
 
+// 启动时，初始化所有的连接
 const sequelize = new Sequelize(config.mysql.options);
 sequelize
   .authenticate()
@@ -20,6 +21,7 @@ sequelize
     log.fatal(err);
     process.exit(1);
   });
+// 将对应的连接保存在config配置文件中
 config.mysql.client = sequelize;
 
 mongoose.connect(config.mongodb.dsn)

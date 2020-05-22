@@ -1,4 +1,6 @@
 # base-knowledge
+[Chrome Demos](https://www.chromestatus.com/samples)
+[Chrome developers](https://developers.google.com/web/fundamentals/codelabs/web-perf)
 ## 前言
 用来整理归纳自己的知识,巩固自己的基础,如下分为几大类
 

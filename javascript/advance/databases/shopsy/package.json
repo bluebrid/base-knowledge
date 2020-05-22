@@ -4,7 +4,7 @@
   "private": true,
   "author": "Daniel Khan <daniel@khan.io>",
   "scripts": {
-    "start": "node ./server/bin/www | ./node_modules/bunyan/bin/bunyan"
+    "start": "node ./server/bin/www | bunyan"
   },
   "dependencies": {
     "bcrypt": "^3.0.8",

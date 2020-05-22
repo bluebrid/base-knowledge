@@ -1,4 +1,5 @@
 [【周刊-2】三年大厂面试官-前端面试题（偏难](https://juejin.im/post/5cb0315f518825215e61ec14)
+[搜索引擎优化](https://docs.microsoft.com/zh-cn/previous-versions/visualstudio/design-tools/expression-studio-4/ff724016(v=expression.40)?redirectedfrom=MSDN)
 ## SEO优化方案
 1. 合理利用`title`, `description`, `keywords`
 > 搜索对着三项的权重逐渐减少，title强调重点即可，description把页面高度概括，keywords列举重要的关键词

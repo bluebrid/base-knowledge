@@ -26,3 +26,5 @@ http://fex.baidu.com/blog/2014/05/what-happen/
 [前端优化不完全指南](https://aotu.io/notes/2016/03/16/optimization/)
 
 [使用window.performance分析web前端性能](https://blog.csdn.net/lovenjoe/article/details/80260658)
+
+[发现并解决网络应用性能的问题](https://developers.google.com/web/fundamentals/codelabs/web-perf)
