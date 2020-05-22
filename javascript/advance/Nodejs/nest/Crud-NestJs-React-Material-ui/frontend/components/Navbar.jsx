@@ -14,7 +14,7 @@ const NavBar = () => {
       <AppBar position='static'>
         <Toolbar>
           <IconButton edge='start' color='inherit' aria-label='Menu' />
-          <Typography variant='h6' style={style}>Sua Loja | React</Typography>
+          <Typography variant='h6' style={style}>Ivan Fan | React</Typography>
           <Button color='inherit'><ShoppingCartIcon /></Button>
         </Toolbar>
       </AppBar>
