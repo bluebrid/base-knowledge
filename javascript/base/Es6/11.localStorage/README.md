@@ -1,0 +1,1 @@
+[localforage](https://localforage.docschina.org/#)
