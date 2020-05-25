@@ -1,5 +1,8 @@
 1. webpack
 2. babel
+
+[learnyounode Node CLI 工具](https://github.com/workshopper/learnyounode/blob/master/learnyounode.js)
+
 https://medium.com/@jsilvax/debugging-webpack-with-vs-code-b14694db4f8e
 https://github.com/wallaceyuan/CodeBeautify
 https://segmentfault.com/a/1190000013476837
