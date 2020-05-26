@@ -50,11 +50,18 @@ class Router extends React.Component {
   }
 
   componentWillUnmount() {
+    // 移除监听
     if (this.unlisten) this.unlisten();
   }
 
   render() {
     return (
+      // RouterContext.Provider 是一个在React createContext 基础进行了二次扩展的context, 在这个组件中， 有对应的render方法， 
+      /***
+       *  _proto.render = function render() {
+      return this.props.children;
+    };
+       */
       <RouterContext.Provider
         children={this.props.children || null}
         value={{
@@ -63,10 +70,10 @@ class Router extends React.Component {
           match: Router.computeRootMatch(this.state.location.pathname),
           staticContext: this.props.staticContext
         }}
-        
+
       >
-          {/* {this.props.children} */}
-        </RouterContext.Provider>
+        {/* {this.props.children} */}
+      </RouterContext.Provider>
     );
   }
 }
@@ -78,7 +85,7 @@ if (__DEV__) {
     staticContext: PropTypes.object
   };
 
-  Router.prototype.componentDidUpdate = function(prevProps) {
+  Router.prototype.componentDidUpdate = function (prevProps) {
     warning(
       prevProps.history === this.props.history,
       "You cannot change <Router history>"

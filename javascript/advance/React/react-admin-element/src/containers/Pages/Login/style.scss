@@ -1,0 +1,20 @@
+.admin__login__form {
+    width: 300px;
+    margin-top: -300px;
+    padding: 50px 30px 30px 30px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: #fff;
+    &__forgetPwd {
+        text-align: right;
+        > span {
+            cursor: pointer;
+        }
+        > span:hover {
+            color: $active-color;
+        }
+    }
+    &__btn {
+        text-align: center;
+    }
+}

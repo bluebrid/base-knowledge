@@ -8,6 +8,14 @@ import matchPath from "./matchPath.js";
 
 /**
  * The public API for rendering the first <Route> that matches.
+ * 渲染与该地址匹配的第一个子节点 <Route> 或者 <Redirect>。
+ * import { Switch, Route } from 'react-router'
+    <Switch>
+      <Route exact path="/" component={Home}/>
+      <Route path="/about" component={About}/>
+      <Route path="/:user" component={User}/>
+      <Route component={NoMatch}/>
+    </Switch>
  */
 class Switch extends React.Component {
   render() {

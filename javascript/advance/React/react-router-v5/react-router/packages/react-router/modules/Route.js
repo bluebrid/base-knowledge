@@ -47,6 +47,8 @@ class Route extends React.Component {
             </Switch>
            */
           const location = this.props.location || context.location;
+          // {pathname: "/two", search: "", hash: "", state: null, key: "k521sm"}
+          // <Route path="/" exact component={Form} /> match 是去匹配当前组件是否匹配对应的location 
           const match = this.props.computedMatch
             ? this.props.computedMatch // <Switch> already computed the match for us
             : this.props.path
@@ -64,9 +66,50 @@ class Route extends React.Component {
           }
 
           return (
+            /** 
+             * Route 有三种渲染的方法：
+             * 1. <Route path="/" exact component={Form} /> 
+             *  <Route path="/user/:username" component={User}/>
+                const User = ({ match }) => {
+                  return <h1>Hello {match.params.username}!</h1>
+                }
+             * 2. <Route path="/" exact render={Form} /> 
+             // convenient inline rendering
+              <Route path="/home" render={() => <div>Home</div>}/>
+
+              // wrapping/composing
+              const FadingRoute = ({ component: Component, ...rest }) => (
+                <Route {...rest} render={props => (
+                  <FadeIn>
+                    <Component {...props}/>
+                  </FadeIn>
+                )}/>
+              )
+             * 3. <Route path="/" exact children={Form} /> 
+             <ul>
+                <ListItemLink to="/somewhere"/>
+                <ListItemLink to="/somewhere-else"/>
+              </ul>
+
+              const ListItemLink = ({ to, ...rest }) => (
+                <Route path={to} children={({ match }) => (
+                  <li className={match ? 'active' : ''}>
+                    <Link to={to} {...rest}/>
+                  </li>
+                )}/>
+              )
+
+              <Route children={({ match, ...rest }) => (
+                <Animate>
+                {match && <Something {...rest}/>}
+              </Animate>
+              )}/>
+            */
+           // 优先级： component > render > children (文档是这样，但是从代码层面分析，应该是如下的方式)
+           // 优先级： children > component > render
             <RouterContext.Provider value={props}>
-              {props.match
-                ? children
+              {props.match // 表示如果当前组件匹配上了 
+                ? children // <Route path="/" exact component={Form} /> 这里涉及了Route 的几种写法
                   ? typeof children === "function"
                     ? __DEV__
                       ? evalChildrenDev(children, props, this.props.path)
@@ -80,8 +123,9 @@ class Route extends React.Component {
                 : typeof children === "function"
                 ? __DEV__
                   ? evalChildrenDev(children, props, this.props.path)
-                  : children(props)
-                : null}
+                  : children(props) // children 会将所有的props 传递进去
+                : null// 如果当前组件没有匹配上， 则render 一个null 
+              } 
             </RouterContext.Provider>
           );
         }}
@@ -100,15 +144,15 @@ if (__DEV__) {
       //   );
       // }
     },
-    exact: PropTypes.bool,
+    exact: PropTypes.bool, // 如果为 true，则只有在路径完全匹配 location.pathname 时才匹配。
     location: PropTypes.object,
-    path: PropTypes.oneOfType([
+    path: PropTypes.oneOfType([ // 任何 path-to-regexp 可以解析的有效的 URL 路径
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
     ]),
     render: PropTypes.func,
-    sensitive: PropTypes.bool,
-    strict: PropTypes.bool
+    sensitive: PropTypes.bool, // 如果路径区分大小写，则为 true ，则匹配。
+    strict: PropTypes.bool // https://react-router.docschina.org/web/api/Route/strict-bool
   };
 
   Route.prototype.componentDidMount = function() {

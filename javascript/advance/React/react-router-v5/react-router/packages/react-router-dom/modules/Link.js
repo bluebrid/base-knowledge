@@ -34,6 +34,7 @@ const LinkAnchor = forwardRef(
       ...rest,
       onClick: event => {
         try {
+          // 如果有onClick事件，就直接运行click 事件， 不会在执行navigate, 但是to 属性也会生效， 因为Link 其实就是一个a标签，这个地方没有preventDefault 阻止默认事件
           if (onClick) onClick(event);
         } catch (ex) {
           event.preventDefault();
@@ -70,8 +71,9 @@ if (__DEV__) {
 
 /**
  * The public API for rendering a history-aware <a>.
+ * const FocusInput = React.forwardRef((props, ref) => <input type="text" ref={ref} />);
  */
-const Link = forwardRef(
+const Link = forwardRef( // 引用传递（Ref forwading）是一种通过组件向子组件自动传递 引用ref 的技术。
   (
     {
       component = LinkAnchor,
@@ -82,7 +84,8 @@ const Link = forwardRef(
     },
     forwardedRef
   ) => {
-    return (
+    return (  
+      // <Link to="/">Form</Link>
       <RouterContext.Consumer>
         {context => {
           invariant(context, "You should not use <Link> outside a <Router>");

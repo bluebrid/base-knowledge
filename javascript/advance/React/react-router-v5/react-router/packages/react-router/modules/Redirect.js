@@ -11,6 +11,18 @@ import generatePath from "./generatePath.js";
  * The public API for navigating programmatically with a component.
  *  <Redirect from="/old-match" to="/will-match" />
  */
+/**
+ * 渲染 <Redirect> 将使导航到一个新的地址。这个新的地址会覆盖 history 栈中的当前地址，类似服务器端（HTTP 3xx）的重定向。
+ * import { Route, Redirect } from 'react-router'
+
+    <Route exact path="/" render={() => (
+      loggedIn ? (
+        <Redirect to="/dashboard"/>
+      ) : (
+        <PublicHomePage/>
+      )
+    )}/>
+ */
 function Redirect({ computedMatch, to, push = false }) {
   return (
     <RouterContext.Consumer>
@@ -37,11 +49,10 @@ function Redirect({ computedMatch, to, push = false }) {
           method(location);
           return null;
         }
-
         return (
           <Lifecycle
             onMount={() => {
-              method(location);
+              method(location); // 就是通过history.push or replace 去跳转到to 的location
             }}
             onUpdate={(self, prevProps) => {
               const prevLocation = createLocation(prevProps.to);

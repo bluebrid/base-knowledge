@@ -1,23 +1,23 @@
-// import React from "react";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-// import basename from "../basename.js";
-// import DelegateMarkdownLinks from "./DelegateMarkdownLinks.js";
-// import Home from "./Home/index.js";
-// import Environment from "./Environment.js";
+import basename from "../basename.js";
+import DelegateMarkdownLinks from "./DelegateMarkdownLinks.js";
+import Home from "./Home/index.js";
+import Environment from "./Environment.js";
 
-// export default function App() {
-//   return (
-//     <Router basename={basename}>
-//       <DelegateMarkdownLinks>
-//         <Switch>
-//           <Route path="/" exact={true} component={Home} />
-//           <Route path="/:environment" component={Environment} />
-//         </Switch>
-//       </DelegateMarkdownLinks>
-//     </Router>
-//   );
-// }
+export default function App() {
+  return (
+    <Router basename={basename}>
+      <DelegateMarkdownLinks>
+        <Switch>
+          <Route path="/" exact={true} component={Home} />
+          <Route path="/:environment" component={Environment} />
+        </Switch>
+      </DelegateMarkdownLinks>
+    </Router>
+  );
+}
  
 
 // import React from "react";
@@ -111,28 +111,53 @@
 // }
 
 // import React from "react";
-// import { BrowserRouter as Router, Route, Link, Prompt } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link, Prompt , Redirect } from "react-router-dom";
 // const getConfirmation = (message, callback) => {
 //   const allowTransition = window.confirm(message + ';custom prop')
 //   callback(allowTransition)
 // }
+// const onClick = (e) => {
+//   console.log('click Link.')
+// }
+// const loggedIn = false
 // const PreventingTransitionsExample = () => (
-//   <Router getUserConfirmation={getConfirmation}>
+  
+//   <Router basename="demo" forceRefresh={false} getUserConfirmation={getConfirmation}>
 //     <div>
 //       <ul>
 //         <li>
-//           <Link to="/">Form</Link>
+//           <Link to="/" onClick={onClick}>Form</Link>
 //         </li>
 //         <li>
 //           <Link to="/one">One</Link>
 //         </li>
 //         <li>
+//           <Link to="/one1">One1</Link>
+//         </li>
+//         <li>
 //           <Link to="/two">Two</Link>
 //         </li>
+//         <li>
+//           <Link to="/home ">Home Page </Link>
+//         </li>
+//         <li>
+//           <Link to="/login">Login</Link>
+//         </li>
 //       </ul>
-//       <Route path="/" exact component={Form} />
+//       <Route path="/" exact render={(props) => <Form {...props}/>} />
 //       <Route path="/one" render={() => <h3>One</h3>} />
+//       <Route path="/one1" render={() => <h3>One1</h3>} />
 //       <Route path="/two" render={() => <h3>Two</h3>} />
+//       <Route path="/login" render={() => <h3>Login Page</h3>} />
+//       <Route path="/home" render={() => {
+//         console.log(loggedIn)
+//         return (
+//         !loggedIn ? (
+//           <Redirect to="/login"/>
+//         ) : (
+//           <div>Home Page</div>
+//         )
+//       )}}/>
 //     </div>
 //   </Router>
 // );
@@ -189,86 +214,86 @@
 
 // export default PreventingTransitionsExample;
 
-import React from "react";
-import PropTypes from 'prop-types'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect,
-  withRouter
-} from "react-router-dom";
+// import React from "react";
+// import PropTypes from 'prop-types'
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link,
+//   Switch,
+//   Redirect,
+//   withRouter
+// } from "react-router-dom";
 
-const NoMatchExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/old-match">Old Match, to be redirected</Link>
-        </li>
-        <li>
-          <Link to="/will-match">Will Match</Link>
-        </li>
-        <li>
-          <Link to="/will-not-match">Will Not Match</Link>
-        </li>
-        <li>
-          <Link to="/also/will/not/match">Also Will Not Match</Link>
-        </li>
-      </ul>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Redirect from="/old-match" to="/will-match" />
-        <Route path="/will-match" component={WillMatch} />
-        <Route component={NoMatch} />
-      </Switch>
-      <ShowTheLocationWithRouter/>
-    </div>
-  </Router>
-);
+// const NoMatchExample = () => (
+//   <Router>
+//     <div>
+//       <ul>
+//         <li>
+//           <Link to="/">Home</Link>
+//         </li>
+//         <li>
+//           <Link to="/old-match">Old Match, to be redirected</Link>
+//         </li>
+//         <li>
+//           <Link to="/will-match">Will Match</Link>
+//         </li>
+//         <li>
+//           <Link to="/will-not-match">Will Not Match</Link>
+//         </li>
+//         <li>
+//           <Link to="/also/will/not/match">Also Will Not Match</Link>
+//         </li>
+//       </ul>
+//       <Switch>
+//         <Route path="/" exact component={Home} />
+//         <Redirect from="/old-match" to="/will-match" />
+//         <Route path="/will-match" component={WillMatch} />
+//         <Route component={NoMatch} />
+//       </Switch>
+//       <ShowTheLocationWithRouter/>
+//     </div>
+//   </Router>
+// );
 
-const Home = () => (
-  <p>
-    A <code>&lt;Switch></code> renders the first child <code>&lt;Route></code>{" "}
-    that matches. A <code>&lt;Route></code> with no <code>path</code> always
-    matches.
-  </p>
-);
+// const Home = () => (
+//   <p>
+//     A <code>&lt;Switch></code> renders the first child <code>&lt;Route></code>{" "}
+//     that matches. A <code>&lt;Route></code> with no <code>path</code> always
+//     matches.
+//   </p>
+// );
 
-const WillMatch = () => <h3>Matched!</h3>;
+// const WillMatch = () => <h3>Matched!</h3>;
 
-const NoMatch = ({ location }) => (
-  <div>
-    <h3>
-      No match for <code>{location.pathname}</code>
-    </h3>
-  </div>
-);
+// const NoMatch = ({ location }) => (
+//   <div>
+//     <h3>
+//       No match for <code>{location.pathname}</code>
+//     </h3>
+//   </div>
+// );
  
 
-// 显示当前位置的路径名的简单组件
-class ShowTheLocation extends React.Component {
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
-  }
+// // 显示当前位置的路径名的简单组件
+// class ShowTheLocation extends React.Component {
+//   static propTypes = {
+//     match: PropTypes.object.isRequired,
+//     location: PropTypes.object.isRequired,
+//     history: PropTypes.object.isRequired
+//   }
 
-  render() {
-    const { match, location, history } = this.props
+//   render() {
+//     const { match, location, history } = this.props
 
-    return (
-      <div>You are now at {location.pathname}</div>
-    )
-  }
-}
+//     return (
+//       <div>You are now at {location.pathname}</div>
+//     )
+//   }
+// }
 
-// 创建一个“connected”的新组件（借用Redux 术语）到路由器。
+// // 创建一个“connected”的新组件（借用Redux 术语）到路由器。
 
-const ShowTheLocationWithRouter = withRouter(ShowTheLocation)
+// const ShowTheLocationWithRouter = withRouter(ShowTheLocation)
 
-export default NoMatchExample;
+// export default NoMatchExample;

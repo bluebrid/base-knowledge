@@ -42,8 +42,8 @@ function createBrowserHistory(props = {}) {
   const needsHashChangeListener = !supportsPopStateOnHashChange();
 
   const {
-    forceRefresh = false,
-    getUserConfirmation = getConfirmation,
+    forceRefresh = false, // 设置路由变更强制刷新页面 if (forceRefresh) {   window.location.href = href;   }
+    getUserConfirmation = getConfirmation, // 设置一个默认的getUserConfirmation <Router basename="demo" forceRefresh={false} getUserConfirmation={getConfirmation}>
     keyLength = 6
   } = props;
   const basename = props.basename
@@ -163,7 +163,14 @@ function createBrowserHistory(props = {}) {
     );
 
     const action = 'PUSH';
-    // 如果是同一个路由点击都次，也是会触发多次渲染， 因为每次点击都会创建一个新的key, 
+    // 如果是同一个路由点击多次，也是会触发多次渲染， 因为每次点击都会创建一个新的key, 
+    /**
+     *  function createKey() {
+          return Math.random()
+            .toString(36)
+            .substr(2, keyLength);
+        }
+     */
     const location = createLocation(path, state, createKey(), history.location);
 
     transitionManager.confirmTransitionTo(// 主要是用来判断是否有Prompt 功能
@@ -197,6 +204,16 @@ function createBrowserHistory(props = {}) {
                 history.length = globalHistory.length;
                 transitionManager.notifyListeners(history.location, history.action);
               }
+              // 在Router 中进行了监听
+              this.unlisten = props.history.listen(location => {
+                if (this._isMounted) {
+                  // console.table(this.state.location)
+                  // console.table(location)
+                  this.setState({ location });
+                } else {
+                  this._pendingLocation = location;
+                }
+              });
             */
             setState({ action, location });
           }
@@ -293,6 +310,7 @@ function createBrowserHistory(props = {}) {
   let isBlocked = false;
 
   function block(prompt = false) {
+    // 设置一个prompt
     const unblock = transitionManager.setPrompt(prompt);
 
     if (!isBlocked) {
@@ -311,7 +329,20 @@ function createBrowserHistory(props = {}) {
   }
 
   function listen(listener) {
+    /**
+     * 在初始化Router组件的时候，会调用listen方法
+     *    this.unlisten = props.history.listen(location => {
+        if (this._isMounted) {
+          // console.table(this.state.location)
+          // console.table(location)
+          this.setState({ location });
+        } else {
+          this._pendingLocation = location;
+        }
+      });
+     */
     const unlisten = transitionManager.appendListener(listener);
+    // 其中checkDOMListeners 是对history 进行最原始的popstate和hashchange 事件的监听
     checkDOMListeners(1);
 
     return () => {
