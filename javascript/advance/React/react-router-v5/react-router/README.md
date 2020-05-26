@@ -3,7 +3,7 @@
 2. `website`是一个`Demo`
 
 ## 运行项目
-1. 在项目根目录下运行`npm run build`, 去构建源码, 构建工具是`rollup` , 我们可以尝试修改源码， 会实时监听变更
+1. 在项目根目录下运行`npm run build`, 去构建源码, 构建工具是`rollup` , 我们可以尝试修改源码， 会实时监听变更, 或者cd 到 packages不同的目录下单独进行 build.
 2. 运行`npm run start` 去启动Demo
 3. 我们查看websit 里的源码，发现其引用`react-router` 的方式是：`import { BrowserRouter as Router, Route, Link, Prompt } from "react-router-dom";`,但是当我们修改`react-router`里面的源码时，会在demo中实时的体现出来，是因为在website 中配置的webpack文件中配置的：
 ```javascript
