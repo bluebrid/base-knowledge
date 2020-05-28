@@ -10,6 +10,7 @@ import Subscription from '../utils/Subscription'
   </Provider>,
  */
 function Provider({ store, context, children }) {
+  // useMemo 是缓存函数用的，如果传递的第二个参数不变，这个方法不会反复创建
   const contextValue = useMemo(() => {
     // 创建了一个根subscription
     const subscription = new Subscription(store, null, 'Provider')

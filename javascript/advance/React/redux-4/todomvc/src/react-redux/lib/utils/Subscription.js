@@ -51,6 +51,7 @@ function createListenerCollection() {
 
 export default class Subscription {
   // 其实是在Redux 的store 的基础上进行的封装
+  // const subscription = new Subscription(store, null, 'Provider')
   constructor(store, parentSub, name) {
     // if (!parentSub) {
     //   debugger

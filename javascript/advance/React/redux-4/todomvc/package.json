@@ -7,7 +7,10 @@
     "react-test-renderer": "^16.8.6",
     "customize-cra": "^0.9.1",
     "isomorphic-unfetch": "^3.0.0",
-    "react-app-rewired": "^2.1.5"
+    "react-app-rewired": "^2.1.5",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-chart-monitor": "^1.6.0",
+    "redux-devtools-dock-monitor": "^1.1.1"
   },
   "dependencies": {
     "classnames": "^2.2.6",

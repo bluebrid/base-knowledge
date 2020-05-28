@@ -164,3 +164,42 @@ export default function compose(...funcs) {
 ```
 
 <font size=5 color=red>中间件的作用其实就是重新封装了dispatch函数！！！</font>
+
+## react-redux 组件
+redux是对所有框架都是用的一个库，但是react-redux 是React针对redux 进行封装的一个库，他主要暴露了如下几个方法：
+```javascript
+  Provider, 
+  connectAdvanced,
+  ReactReduxContext,
+  connect,
+  batch,
+  useDispatch,
+  createDispatchHook,
+  useSelector,
+  createSelectorHook,
+  useStore,
+  createStoreHook,
+  shallowEqual
+```
+
+### Provider 组件
+
+Provider 是一个组件， 组件签名`function Provider({ store, context, children }) `, 一般而言我们只会传递`store`和`children`两个props
+```javascript
+ <Provider store={store}>
+    <App />
+    <DevTools />
+  </Provider>
+```
+因为我们没有传递第二个参数`context`, 所以Provider组件其实就是React的原生的`React.createContext`创建的一个context
+```javascript
+const Context = context || ReactReduxContext
+return <Context.Provider value={contextValue}>{children}</Context.Provider>
+```
+`Context.Provider` 的value 是一个如下对象：
+```javascript
+{
+  store,
+  subscription
+}
+```

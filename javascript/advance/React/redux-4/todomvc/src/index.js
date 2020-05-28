@@ -7,6 +7,9 @@ import reducer from './reducers'
 import 'todomvc-app-css/index.css'
 import {createLogger } from './redux-logger'
 import customLogger from './custom-logger'
+import DevTools from './containers/DevTools'
+import configureStore from './store'
+// const store = configureStore()
 const store = createStore(
   reducer,
   applyMiddleware(createLogger({
@@ -18,6 +21,7 @@ const store = createStore(
 render(
   <Provider store={store}>
     <App />
+    <DevTools />
   </Provider>,
   document.getElementById('root')
 )

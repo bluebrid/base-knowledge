@@ -16,7 +16,7 @@ const Header = ({ addTodo }) => (
     />
   </header>
 )
-
+Header.displayName = "This is custom header name "
 Header.propTypes = {
   addTodo: PropTypes.func.isRequired
 }
