@@ -115,6 +115,7 @@ export function createSelectorHook(context = ReactReduxContext) {
     context === ReactReduxContext
       ? useDefaultReduxContext
       : () => useContext(context)
+      // const counter = useSelector(state => state.counter)
   return function useSelector(selector, equalityFn = refEquality) {
     invariant(selector, `You must pass a selector to useSelectors`)
 

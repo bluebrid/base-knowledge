@@ -203,3 +203,27 @@ return <Context.Provider value={contextValue}>{children}</Context.Provider>
   subscription
 }
 ```
+
+### connect 组件
+
+从上面可以看出，Provider 组件其实就是提供一个`Context`的上下文，我们下面来分析Provider 下面的children 怎么跟store 关联起来的.
+其主要是`connect`实现的。
+```javascript
+export default connect(null, { addTodo })(Header)
+```
+connect的方法签名如下：
+```javascript
+function connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    mergeProps,
+    {
+      pure = true, // 默认是纯函数
+      areStatesEqual = strictEqual,
+      areOwnPropsEqual = shallowEqual,
+      areStatePropsEqual = shallowEqual,
+      areMergedPropsEqual = shallowEqual,
+      ...extraOptions
+    } = {}
+  )
+```

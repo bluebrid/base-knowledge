@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": "06005020-a179-11ea-b577-ef89e33fd646",
+      "text": "1",
+      "completed": false,
+      "createdDate": 1590735175202
+    },
+    {
+      "id": "06e6b880-a179-11ea-b577-ef89e33fd646",
+      "text": "2",
+      "completed": false,
+      "createdDate": 1590735176712
+    },
+    {
+      "id": "09fe0aa0-a179-11ea-b577-ef89e33fd646",
+      "text": "3",
+      "completed": false,
+      "createdDate": 1590735181898
+    }
+  ]
+}
