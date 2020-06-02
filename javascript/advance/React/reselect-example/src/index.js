@@ -55,9 +55,11 @@ let exampleState = {
 
 subtotalSelectorBtn.addEventListener('click', ()=> {
     subtotalSelectorValue.innerText = subtotalSelector(exampleState)
+    exampleState.shop.items[0].value = 1.3
 })
 taxSelectorBtn.addEventListener('click', () => {
     taxSelectorValue.innerText = taxSelector(exampleState)
+    exampleState.shop.items[1].value = 0.96
 })
 
 

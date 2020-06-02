@@ -1,4 +1,5 @@
 function defaultEqualityCheck(a, b) {
+    // 浅比较，如果是同一个Object， 修改了其值，则也会一直相等的， 因为是引用类型， 引用类型只会判断引用的地址是否相等， 不会判断值是否真的相等
     return a === b
 }
 
