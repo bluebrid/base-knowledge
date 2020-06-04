@@ -27,6 +27,7 @@ app.use(convert(require('koa-static')(path.join(__dirname, 'public'))))
 
 app.use(views(path.join(__dirname, 'views'), { extension: 'ejs' }))
 
+// 封装： ctx.error ctx.success
 app.use(require('./server/middlewares/return'))
 
 app.use(proxy(app))
