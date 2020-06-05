@@ -43,7 +43,7 @@ exports.insert = async ctx => {
                 is_delete: 0,
                 timestamp: moment().format('X')
             })
-            ctx.success(result._id, '添加成功')
+            ctx.success(result, '添加成功')
         } catch (err) {
             ctx.error(null, err.toString())
         }

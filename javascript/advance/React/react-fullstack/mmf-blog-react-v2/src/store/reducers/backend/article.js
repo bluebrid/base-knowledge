@@ -35,11 +35,7 @@ const reducers = {
     ['insertArticleItem']: (state, { item }) => {
         const { lists } = state.toJS()
         const data = [item].concat(lists.data)
-        return state.mergeDeep({
-            lists: {
-                data
-            }
-        })
+        return state.setIn(['lists', 'data'], data)
     },
     ['updateArticleItem']: (state, { data }) => {
         const { lists } = state.toJS()

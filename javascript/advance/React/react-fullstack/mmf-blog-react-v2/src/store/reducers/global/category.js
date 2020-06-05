@@ -11,9 +11,7 @@ const initStates = fromJS({
 const reducers = {
     ['receiveCategoryList']: (state, action) => {
         const { data } = action
-        return state.mergeDeep({
-            lists: data
-        })
+        return state.set('lists', data)
     },
     ['receiveCategoryItem']: (state, action) => {
         const { data } = action
@@ -23,7 +21,7 @@ const reducers = {
     },
     ['insertCategoryItem']: (state, { item }) => {
         const { lists } = state.toJS()
-        const data = [item].concat(lists.data)
+        const data = [item].concat(lists)
         return state.set('lists', data)
     },
     ['updateCategoryItem']: (state, { data }) => {
