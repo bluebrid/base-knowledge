@@ -1,4 +1,6 @@
-https://www.cnblogs.com/nanchen/p/7905528.html
+[JS的隐式转换 从 [] ==false 说起](https://www.cnblogs.com/nanchen/p/7905528.html)
+
+[[译] 在JS中，如何让(a===1 && a===2 && a === 3)(严格相等)的值为true？](https://juejin.im/post/5bfcc632f265da61493353cc)
 
 ## ToPrimitive(input , PreferredType) 的流程（隐式转换）
 
