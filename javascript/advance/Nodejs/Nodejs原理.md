@@ -6,6 +6,8 @@ https://www.npmtrends.com/ajv-vs-joi-vs-validator
 
 [Nodejs探秘：深入理解单线程实现高并发原理](https://blog.csdn.net/j2IaYU7Y/article/details/81623516?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2)
 
+[《吊打面试官》系列 Node.js 必知必会必问！！](https://mp.weixin.qq.com/s/94wxm57cd3fS96gixVAxMA)
+
 ## node 架构
 ![](https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/tvEoHIulOU6O97KhZyY16AXcrlX8qrCibXv3bk317tXKlSYUBNQicD9obpP1DjT627ed6QebGsW5ia3ICX4MzWkaw/640?wx_fmt=jpeg)
 1. 顶层就是Nodejs standard library 

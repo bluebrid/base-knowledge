@@ -9,6 +9,9 @@
             "request": "launch",
             "name": "Axios Learning Launch Program",
             "program": "${workspaceFolder}\\scripts\\start.js",
+            "env": {
+                "PORT": 3000
+            },
             // "program": "${workspaceFolder}\\scripts\\build.js",
             // "console":"integratedTerminal",
             "args": [
