@@ -1,5 +1,6 @@
 [浏览器渲染原理（性能优化之如何减少重排和重绘）](https://juejin.im/post/5c35cf62f265da615e05a67d)
 [「前端进阶」从多线程到Event Loop全面梳理](https://juejin.im/post/5d5b4c2df265da03dd3d73e5)
+
 ## 浏览器工作原理
 1. 浏览器会解析三个模块: Dom, CSS, JS
 2. 下载HTML文件后， 会去解析HTML，生成Dom Tree
