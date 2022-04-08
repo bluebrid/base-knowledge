@@ -8,7 +8,7 @@
 5. 如果遇到JS脚本和文件， 会阻塞DOM 树的解析， 因为JS会去操作Dom 和 CSS
 6. 所以建议将JS文件放在最下面
 7. 将Dom Tree 和 CSS rule tree 合并成一个Render tree
-8. 生成render tree 后， 会去计算每一个DOM的具体位置和大小，也就是Layout(reflow)
+8. 生成render tree 后， 会去计算每一个DOM的具体位置和大小，也就是Layout(reflow, 重排，回流)
 9. Render tree 并不等同于Dom 树，因为在Render tree中不会显示header 和隐藏的元素
 10. 调用操作系统的Native GUI的API绘制Render tree 到屏幕中
 

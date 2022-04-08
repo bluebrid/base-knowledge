@@ -1,8 +1,10 @@
+# import sys
+# sys.path.append('./lib/utils')
 from selenium import webdriver
 # If you don't see colors (RED and GREEN) on command line, add the below lines
 # from colorama import init
 # init()
-from features.lib.utils import *
+from lib.utils import *
 from config.config import settings
 import os
 # import zipfile

@@ -16,8 +16,8 @@ class Login(BasePage):
         self.driver = webapp.get_driver()
 
     def click_login_by_password_btn(self):
-        loginBtn = webapp.get_element_by_id('switchAccountLogin')
-        loginBtn.click()
+        # loginBtn = webapp.get_element_by_id('switchAccountLogin')
+        # loginBtn.click()
         iframe = webapp.get_element_by_tag_name('iframe')
         webapp.switch_to_frame(iframe)
     

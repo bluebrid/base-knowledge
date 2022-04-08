@@ -1,7 +1,6 @@
 import random
 import string
 from behave import *
-from openpyxl import Workbook
 from openpyxl import load_workbook
 from config.config import settings
 #http://zetcode.com/python/openpyxl/

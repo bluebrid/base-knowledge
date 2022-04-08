@@ -12,9 +12,9 @@
             "module": "behave",
             "console": "integratedTerminal",
             "args": [
-                // -f allure_behave.formatter:AllureFormatter -o allure_result_folder ./features
+                -f allure_behave.formatter:AllureFormatter -o allure_result_folder ./features
                 // "${workspaceFolder}\\features\\Todo.feature", "-D", "ARCHIVE=Yes"
-                "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./features/Todo.feature"
+                // "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./features/Todo.feature"
             ]
         }
     ]
