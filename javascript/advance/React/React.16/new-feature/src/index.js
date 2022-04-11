@@ -21,13 +21,13 @@ import App16 from './16.react-query/App'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<div>
-  {/* <App1 />
+  <App1 />
   <App2 />
   <App3 />
   <App4 />
-  <App5 /> 
+  <App5 />
   <App6 />
-   <App7 />
+  <App7 />
   <App8 />
   <App10 />
   <App11 />
@@ -35,7 +35,7 @@ ReactDOM.render(<div>
   <App12 />
   <App13 />
   <App14 />
-  <App15 /> */}
+  <App15 />
   <App16 />
 </div>, document.getElementById('root'));
 

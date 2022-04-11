@@ -3,7 +3,7 @@
 1. supervisor 是开发环境用
 2. forever 管理多个站点，每个站点访问量不大，不需要监控
 3. nodemon 是开发环境使用， 修改自动重启
-4. pm2 网站访问量大，需要毕竟完整的监控
+4. pm2 网站访问量大，需要比较完整的监控
 
 ## [PM2的有点](https://www.cnblogs.com/zhoujie/p/nodejs4.html)
 1. 内建了负载均衡(使用node cluster 集群模块)

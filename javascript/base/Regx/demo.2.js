@@ -18,4 +18,4 @@ function transform2(str, flag) {
 }
 
 var str = '=gabcd, dsadf ==bsssdff=';
-console.log(transform2(str, '='));
+// console.log(transform2(str, '='));

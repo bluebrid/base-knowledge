@@ -2,8 +2,6 @@ function cloneJSON(source) {
     return JSON.parse(JSON.stringify(source));
 }
 
- 
-
 var test={
     a:"ss",
     b:"dd",

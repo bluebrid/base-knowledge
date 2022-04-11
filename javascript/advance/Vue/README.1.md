@@ -1,5 +1,9 @@
 # Vue 的整体架构
 
+https://mp.weixin.qq.com/s/NkUZCBkX-NoF6yVDkavcsA
+
+https://mp.weixin.qq.com/s/DRIYDutR2BcKzMs5CkycQg
+
 ## 准备环境
 1. 先从[Vue Git](https://github.com/vuejs/vue) clone 一份代码`git clone git@github.com:vuejs/vue.git`到本地
 2. 切换到根目录`cd vue`

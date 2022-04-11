@@ -4,6 +4,7 @@
 
 [一网打尽 React 重难点](https://mp.weixin.qq.com/s?__biz=MzA4Nzg0MDM5Nw==&mid=2247484478&amp;idx=1&amp;sn=d39e4d6fc96dddbb4ab122d4819bc2fc&source=41#wechat_redirect)
 
+[react源码解析](https://xiaochen1024.com/courseware/60b1b2f6cf10a4003b634718/60b1b328cf10a4003b63471b)
 
 ## 分析 -> 修复 -> 分析(返回这个过程)
 ## React 性能优化方向

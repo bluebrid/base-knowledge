@@ -39,7 +39,7 @@ class newPromise {
             throw err;
         }
         if (this.status === this.allStatus.RESOLVE) {
-            onFufilled(this.value) 
+            onFufilled(this.value)
         } else if (this.status === this.allStatus.REJECT) {
             onRejected(this.reason)
         }
@@ -47,8 +47,8 @@ class newPromise {
 }
 
 new newPromise((resolve, reject) => {
-    resolve(1000)
-}).then (
+    reject(1000)
+}).then(
     value => console.log(value),
     err => console.log(err)
 )
