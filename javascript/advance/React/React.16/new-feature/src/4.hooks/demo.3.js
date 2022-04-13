@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+// 1. 如果第二个参数，没有传， 则相当于，首次和更新状态，都会执行
+// 2. 第二个参数如果为一个空数组[], 则相当于componentDidMount,只执行一次
 
 /**
  * useEffect 相当于是监听useState 的值的改变后要处理的事件

@@ -7,9 +7,17 @@ function sleep(delay) {
   }
 }
 
-function test() {
+async function sleep1(delay) {
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true)
+    }, delay)
+  })
+}
+
+async function test() {
   console.log("111");
-  sleep(2000);
+  await sleep1(2000);
   console.log("222");
 }
 

@@ -5,7 +5,8 @@
  *     this.left = this.right = null;
  * }
  */
-
+// 给你二叉树的根节点 root ，返回其节点值 自底向上的层序遍历 。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+// 
 let TreeNode = require('../工具/二叉树.js')
 
 /**

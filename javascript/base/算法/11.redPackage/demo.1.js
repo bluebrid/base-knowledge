@@ -1,4 +1,4 @@
- 
+
 
 /**
  * 面试问题：发一个随机红包，100块钱给10个人。每个人最多12块钱，最少6块钱。怎么分？
@@ -35,7 +35,7 @@ function randomRedPackages(amount, count, min, max) {
         if (redPackages[index] < max) {
             var temp = max - redPackages[index];
             var add = random(1, temp);
-            if (remainAmount - add >=0) {
+            if (remainAmount - add >= 0) {
                 redPackages[index] = redPackages[index] + add;
                 remainAmount = remainAmount - add;
             }
@@ -50,8 +50,8 @@ var redPackages = randomRedPackages(100, 10, 6, 12);
 var sum = redPackages.reduce((a, b) => {
     return a + b;
 })
-var test=redPackages.every((e) =>{
-    return e>=6&&e<=12;
+var test = redPackages.every((e) => {
+    return e >= 6 && e <= 12;
 })
 console.log(redPackages)
 console.log(sum)

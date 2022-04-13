@@ -1,6 +1,6 @@
 let maxSlidingWindow = function (nums, k) {
   if (k === 0 || !nums.length) {
-      return []
+    return []
   }
   let left = 0
   let right = k - 1

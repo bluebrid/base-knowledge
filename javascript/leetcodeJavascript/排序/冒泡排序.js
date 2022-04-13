@@ -14,7 +14,7 @@ function bubbleSort(arr) {
     // 所以这里的终止条件可以是n - i再减去1
     for (let j = 0; j < n - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
-        swap(arr, j, j + 1)
+        swap(arr, j, j + 1) // 两两进行互换
         flag = true
       }
     }

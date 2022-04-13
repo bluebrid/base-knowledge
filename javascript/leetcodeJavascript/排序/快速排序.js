@@ -55,5 +55,6 @@ function partition(arr, left, right) {
 }
 
 quickSort.sortName = "快速排序"
-
+const arrs = [11,2,442,23,4522,2333 ]
+console.log(quickSort(arrs))
 // module.exports = quickSort

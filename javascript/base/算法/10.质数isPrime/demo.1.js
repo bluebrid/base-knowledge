@@ -3,7 +3,7 @@
  * 判断一个数是否是质数
  * @return {[type]} [description]
  */
-Number.prototype.isPrime = Number.prototype.isPrime || function() {
+Number.prototype.isPrime = Number.prototype.isPrime || function () {
     if (!this instanceof Number) {
         console.log('please input a number')
         return;
