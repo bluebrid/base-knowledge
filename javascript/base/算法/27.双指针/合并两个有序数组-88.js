@@ -38,5 +38,9 @@ let merge = function (arr1, m, arr2, n) {
     j--;
     k--;
   }
+  return arr1
 };
+const arr1 = [1,4,7,9]
+const arr2 = [3,6,11,33,44]
+console.log(merge(arr1, arr1.length, arr2, arr2.length))
 // @lc code=end
