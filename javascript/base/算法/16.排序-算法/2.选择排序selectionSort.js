@@ -1,5 +1,5 @@
 /**
- * 1. 选择排序
+ *选择排序
  */
 
 function selectionSort(arr) {

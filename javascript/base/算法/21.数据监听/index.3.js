@@ -15,7 +15,7 @@ class EventEmeitter {
             });
         }
     }
-    remove(type, listener) {
+    off(type, listener) {
         let tempListener = [];
         if(this.listeners[type]) {
             let index = this.listeners[type].indexOf(lis => lis === listener);
@@ -60,5 +60,5 @@ const listenerB5 = msg => {
 }
 emitter2.on('B', listenerB5)
 emitter.emit('B', 'Hello world B 01')
-emitter2.remove('B', listenerB5)
+emitter2.off('B', listenerB5)
 emitter2.emit('B', 'Hello world B 02')
