@@ -17,4 +17,5 @@ function sum(...args) {
     return subSum
 }
 console.log(sum(10))
+console.log(sum(10)())
 console.log(sum(100, 200)(100)(200, 400, 600)())

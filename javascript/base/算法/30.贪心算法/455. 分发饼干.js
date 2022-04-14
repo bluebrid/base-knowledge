@@ -16,7 +16,7 @@ var findContentChildren = function (g, s) {
         //从胃口大的小孩开始满足
         if (index >= 0 && s[index] >= g[i]) { // 饼干大于当前小孩的胃口，则是满足条件的
             result++; //结果加1
-            index--;
+            index--; // 饼干减1
         }
     }
     return result;
