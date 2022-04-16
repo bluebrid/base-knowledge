@@ -17941,6 +17941,7 @@ var Vue = (() => {
     const ctx = instance.ctx;
     shouldCacheAccess = false;
     if (options.beforeCreate) {
+      debugger;
       callHook(options.beforeCreate, instance, "bc" /* BEFORE_CREATE */);
     }
     const {

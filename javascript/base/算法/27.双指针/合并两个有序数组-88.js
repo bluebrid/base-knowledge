@@ -12,33 +12,27 @@
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
-let merge = function (arr1, m, arr2, n) {
-  // 两个指针指向数组非空位置的末尾
-  let i = m - 1;
-  let j = n - 1;
-  // 第三个指针指向第一个数组的末尾 填充数据
-  let k = arr1.length - 1;
 
-  while (i >= 0 && j >= 0) {
-    let num1 = arr1[i];
-    let num2 = arr2[j];
-
-    if (num1 > num2) {
-      arr1[k] = num1;
-      i--;
-    } else {
-      arr1[k] = num2;
-      j--;
-    }
-    k--;
+ var merge = function(nums1, m, nums2, n) {
+  let p1 = 0, p2 = 0;
+  const sorted = new Array(m + n).fill(0);
+  var cur;
+  while (p1 < m || p2 < n) {
+      if (p1 === m) {
+          cur = nums2[p2++];
+      } else if (p2 === n) {
+          cur = nums1[p1++];
+      } else if (nums1[p1] < nums2[p2]) {
+          cur = nums1[p1++];
+      } else {
+          cur = nums2[p2++];
+      }
+      sorted[p1 + p2 - 1] = cur;
   }
-
-  while (j >= 0) {
-    arr1[k] = arr2[j];
-    j--;
-    k--;
+  for (let i = 0; i != m + n; ++i) {
+      nums1[i] = sorted[i];
   }
-  return arr1
+  return nums1
 };
 const arr1 = [1,4,7,9]
 const arr2 = [3,6,11,33,44]
