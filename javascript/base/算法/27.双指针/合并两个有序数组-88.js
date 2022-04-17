@@ -13,8 +13,11 @@
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 
- var merge = function(nums1, m, nums2, n) {
+ var merge = function(nums1, nums2) {
   let p1 = 0, p2 = 0;
+  const m = nums1.length
+  const n = nums2.length;
+  // 先填充一个最大长度的数组
   const sorted = new Array(m + n).fill(0);
   var cur;
   while (p1 < m || p2 < n) {
@@ -36,5 +39,5 @@
 };
 const arr1 = [1,4,7,9]
 const arr2 = [3,6,11,33,44]
-console.log(merge(arr1, arr1.length, arr2, arr2.length))
+console.log(merge(arr1, arr2))
 // @lc code=end

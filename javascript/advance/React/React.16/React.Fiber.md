@@ -1,0 +1,62 @@
+https://xiaochen1024.com/article_item/600aca0cecf02e002e6db56c
+## Fiber 产生背景
+### 原因
+1. React15 在render阶段的reconcile 是不可以打断的
+2. 这个时候会进行大量的Dom的reconcile 会产生卡顿
+3. 因为浏览器执行JS是单线程的， 这个时候将所有的事件都交给了JS执行
+
+### react 16 方案
+1. 16之后就有了scheduler进行实践片的调度，给每个task 一定的执行时间
+2. 如果在对应的时间内没有执行完成， 也需要交出执行权给浏览器进行绘制和重排
+3. 所以异步可中断的更新， 则需要一定的数据结构在**内存中**保存这个dom 的信息， 这个数据结构就是： **Fiber(虚拟Dom)**
+4. Fiber 首先要保存节点的信息， 如： tag, key , type. typeNode(节点信息)
+5. Fiber 是一棵树， 需要保存 Child, sibling(兄弟节点) 
+6. Fiber 需要来保存状态值信息， 
+7. Fiber(双缓存)， 也就是fiber首先会保存当前正式的Dom信息(current fiber),同时也会保存当前构建的fiber ,也就是workInProgress Fiber, 这两棵树通过（**alertnate**） 相连
+8. 在**Mount**时(第一次render), 会创建fiberRoot 和 RootFiber,然后跟进JSX创建的Fiber节点， 生成一个Current Fiber 树
+9. 在**Update**时(更新) ，会根据最新的jsx 和current Fiber 进行diff算法， 生成一个WorkInProgress的Fiber树， 然后将fiberRoot的current 指向 WorkInprogress树， 这个时候的workInProgress树，就是current Fiber
+```javascript
+function FiberNode(
+  tag: WorkTag,
+  pendingProps: mixed,
+  key: null | string,
+  mode: TypeOfMode,
+) {
+  //保存节点的信息
+  this.tag = tag;//对应组件的类型
+  this.key = key;//key属性
+  this.elementType = null;//元素类型
+  this.type = null;//func或者class
+  this.stateNode = null;//真实dom节点
+
+  //连接成fiber树
+  this.return = null;//指向父节点
+  this.child = null;//指向child
+  this.sibling = null;//指向兄弟节点
+  this.index = 0;
+
+  this.ref = null;
+
+  //用来计算state
+  this.pendingProps = pendingProps;
+  this.memoizedProps = null;
+  this.updateQueue = null;
+  this.memoizedState = null;
+  this.dependencies = null;
+
+  this.mode = mode;
+    
+	//effect相关
+  this.effectTag = NoEffect;
+  this.nextEffect = null;
+  this.firstEffect = null;
+  this.lastEffect = null;
+
+  //优先级相关的属性
+  this.lanes = NoLanes;
+  this.childLanes = NoLanes;
+
+  //current和workInProgress的指针
+  this.alternate = null;
+}
+```
