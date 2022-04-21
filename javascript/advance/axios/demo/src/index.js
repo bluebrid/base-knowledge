@@ -82,6 +82,7 @@ let source = axios.CancelToken.source();
 
 document.getElementById("send").addEventListener("click", () => {
   source = axios.CancelToken.source();
+  console.log('---------------------')
   axios
     .get("/users", {
       cancelToken: source.token,
@@ -96,7 +97,7 @@ document.getElementById("send").addEventListener("click", () => {
 });
 
 document.getElementById("cancel").addEventListener("click", () => {
-  source.cancel("用户撤销了请求");
+  source.cancel("用户撤销了请求!");
 });
 
 document.getElementById("sendProxy").addEventListener("click", () => {
