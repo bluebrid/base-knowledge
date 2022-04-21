@@ -16,4 +16,30 @@ var longestPalindrome = function(s) {
     return res;
 };
 
+// 回文串正着读反着读都一样，遍历每个字符，从中心往两端扩散，找到最长回文串。
+var longestPalindrome1 = function (s) {
+    let res = ""
+    for (let i = 0; i < s.length; i++) {
+        // 处理奇数回文串
+        const s1 = palindrome(s, i, i)
+        // 处理偶数回文串（应该叫下一个字符串，是否页是满足回文的意思）
+        const s2 = palindrome(s, i, i + 1)
+        res = res.length <= s1.length ? s1 : res
+        res = res.length <= s2.length ? s2 : res
+    }
+    return res
+};
+
+// 返回以l,r为中心点扩散的最长回文串
+function palindrome(s, l, r) {
+    while (l >= 0 && r < s.length && s[l] === s[r]) { //这个就是阻断循环的条件
+        // 左右指针
+        l--
+        r++
+    }
+    return s.slice(l + 1, r)
+}
+
+
 console.log(longestPalindrome("babad"))
+console.log(longestPalindrome1("babad"))

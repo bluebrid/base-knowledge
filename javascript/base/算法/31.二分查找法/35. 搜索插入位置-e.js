@@ -14,7 +14,7 @@ var searchInsert = function (nums, target) {
       result = mid;
       break
     }
-    if (left + 1 === right && mid[left] !== target && mid[right] !== target) {
+    if (left + 1 === right && mid[left] !== target && mid[right] !== target) { // 这个表示插入得索引
       result = left + 1;
       break
     }

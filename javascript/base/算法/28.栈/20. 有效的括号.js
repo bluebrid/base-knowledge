@@ -15,7 +15,7 @@ var isValid = function (s) {
             if (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
                 return false;
             }
-            stk.pop(); // 出栈
+            stk.pop(); // 出栈（移除最后一个）
         } else {
             stk.push(ch);//如果遇到左括号入栈 ，入栈
         }

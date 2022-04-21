@@ -22,6 +22,7 @@ let num1 = -123;
 let num = -101;
 let num2 = -100
 console.log(reverse(num))
-
+console.log(reverse(num1))
+console.log(reverse(num2))
 // console.log(123 / 10)
 
