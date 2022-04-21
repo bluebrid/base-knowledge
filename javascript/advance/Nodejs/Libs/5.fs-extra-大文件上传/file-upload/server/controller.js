@@ -55,7 +55,7 @@ module.exports = class {
     const multipart = new multiparty.Form();
 
     multipart.parse(req, async (err, fields, files) => {
-      if (err) {
+      if (err || !files) {
         console.error(err);
         res.status = 500;
         res.end("process file chunk failed");
