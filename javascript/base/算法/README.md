@@ -5,3 +5,5 @@
 [(1.8w字)负重前行，前端工程师如何系统练习数据结构和算法？【上】](https://juejin.im/post/5e2f88156fb9a02fdd38a184)
 
 [leetcode-javascript](https://github.com/sl1673495/leetcode-javascript)
+
+[算法可视化](https://visualgo.net/zh/suffixarray?slide=3-6)

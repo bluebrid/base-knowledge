@@ -1,6 +1,7 @@
 /**
  * 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
  * 子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。
+ * [从最长递增子序列学会如何推状态转移方程](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247485269&idx=1&sn=571a6366b0b592f103971ae3e119998b&scene=21#wechat_redirect)
  * @param {number[]} nums
  * @return {number}
  */
