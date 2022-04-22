@@ -30,6 +30,9 @@ server.on('upgrade', function(request, socket, head) {
 6. Websocket 是一个持久化协议， 而Http是非持久的协议
 7. Http是通过Request 来界定的，也就是一个Request对应一个Response, 而且Response 是被动发送， 不能主动发送
 8. 虽然Http1.1改进使用了keep-live, 但也只是说在一个http 连接(tcp/ip)连接，可以发送多个request
+> 1. keep-live 只是说创建一个tcp链接，但是每次发送请求还是需要单独发送header 等信息
+> 2. 服务端和客户端还要大量交换Http Header 信息， 信息交换得效率很低
+> 3. Websocket 就是通过第一个http request 创建连接后， 之后记欢数据都不在需要发送http Request . 
 9. 使用场景：
 > 1. 信息需要实时更新的，如聊天系统， 游戏等
 > 2. 需要服务器推送消息， 如股票的实时价格信息
