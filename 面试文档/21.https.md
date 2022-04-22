@@ -1,0 +1,220 @@
+
+## 前言
+一直对**Https**的原理一知半解，只知道Https比Http协议更安全，但是为什么更安全呢？以及怎么具体去部署一个Https呢？都是迷糊状态，通过参考如下文章，对Https有一个入门理解(参考文章以及个人的见解)。
+
+参考资源：
+
+1. [图解HTTPS基本原理](https://www.thinktxt.com/http/2019/08/15/diagrammatize-https.html)
+2. [HTTPS证书生成原理和部署细节](https://www.barretlee.com/blog/2015/10/05/how-to-build-a-https-server/)
+3. [openssl命令目录](https://www.cnblogs.com/aixiaoxiaoyu/p/8650180.html)
+
+首先放一张[图解HTTPS基本原理](https://www.thinktxt.com/http/2019/08/15/diagrammatize-https.html)文章中的图(加了个人的理解注释)：
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f213db7c9bc70b~tplv-t2oaga2asx-image.image)
+
+我们后面会针对这个图进行一步步的分析。
+
+下面我们针对以下两个主题来理解Https:
+
+1. 在本地部署https 服务(实践)
+2. 分析https(原理)
+
+## 本地部署https
+我们需要理解**https**, 那我们如果只是针对原理来理解，相信很多环节都串联不起来，看完后最终还是一头雾水。
+所以我们需要先实践下Https到底是个什么东西， 到底该怎么部署一个https服务。
+参考文章： [HTTPS证书生成原理和部署细节](https://www.barretlee.com/blog/2015/10/05/how-to-build-a-https-server/)
+
+### 生成CA机构
+正常的我们要运行一个Https， 需要向一个CA数字证书认证中心去申请一个我们的CA证书。但是我们只是想测试一下Https, 并不可能真的去一个合法的CA机构去申请一个证书，所以我们可以使用**自签名** 来构建自己的CA机构, 也就是一个可以给自己的服务器颁发证书的机构。
+
+下面我们来看怎么生成一个自己的CA机构。
+
+1. 生成CA<font size=5 color=red>私钥</font>
+```shell
+openssl genrsa -out ca.key 1024
+```
+上面的`ca.key`就是CA机构的私钥文件
+关于`openssl`命令的使用方式可以参考：[openssl命令目录](https://www.cnblogs.com/aixiaoxiaoyu/p/8650180.html)
+
+2. 根据CA私钥生成一个CA证书
+```shell
+# a.根据私钥ca.key生成一个新的证书请求文件。其中"-new"表示新生成一个新的证书请求文件，
+# "-key"指定私钥文件，"-out"指定输出文件，此处输出文件即为证书请求文件。
+openssl req -new -key ca.key -out ca.csr
+# x509 表示自签署证书，可用于自建根CA时。
+openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+# 上面两个步骤可以合并为： openssl req -x509 -key ca.key -in ca.csr -out ca.crt -days 365
+```
+
+在上面第二步的时候，会有如下的指引：
+```
+➜  keys  openssl req -new -key ca.key -out ca.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:CN
+State or Province Name (full name) [Some-State]:Zhejiang
+Locality Name (eg, city) []:Hangzhou
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:My CA
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:localhost
+Email Address []:
+```
+
+<font size=5 color=red>注意</font>：我们的服务器在向CA申请证书的时候，也会有如上的指引提示， `Organization Name (eg, company) [Internet Widgits Pty Ltd]` 的值不能一样， 我们可以给CA机构设置值为`My CA`, 我们服务器在申请证书的时候设置的值为`My CA Server`.
+
+通过上面两个步骤，我们已经创建了**自签名**机构。
+
+我们已经有了CA机构，现在我们需要给我们的服务向CA机构申请一个**CA证书**
+
+### 申请CA证书 
+我们在给我们的服务申请CA证书的时候， 我们首先需要给我们自己的服务创建两个钥匙：**公钥**和**私钥**。
+
+生成步骤如下：
+
+1. 生成私钥
+```shell
+openssl genrsa -out server.key 1024
+```
+2. 生成公钥
+```shell
+openssl rsa -in server.key -pubout -out server.pem
+```
+上面生成了两个文件： `server.key` 和 `server.pem`, <font size=5 color=red>我们在生成公钥的时候，是根据私钥生成的。</font>
+
+我们已经生成了公钥和私钥了，我们现在需要向CA机构申请证书了, 可以通过如下的脚本生成：
+```shell
+# 服务器端需要向 CA 机构申请签名证书，在申请签名证书之前依然是创建自己的 CSR 文件
+openssl req -new -key server.key -out server.csr
+# 向自己的 CA 机构申请证书，签名过程需要 CA 的证书和私钥参与，最终颁发一个带有 CA 签名的证书
+openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt
+```
+上面的`server.crt`就是我们服务向CA申请的证书。
+
+我们可以分析上面的脚本得:
+
+1. 在向CA申请证书的时候，我们需要提供我们服务的<font size=5 color=red>公钥(server.key)</font>
+2. 但是上面却没有提供<font size=5 color=red>私钥(server.key)</font>
+
+总结：
+1. CA机构是保存了我们的公钥信息
+2. 我们服务的私钥信息，只有我们的服务自己知道，其他人谁也不知道。
+
+在上面我们已经准备好了自前面CA机构 ，已经我们服务生成了公钥，私钥，以及向CA申请到了证书了，下面我们就来看搭建Https服务了。
+
+### 搭建https服务
+我们通过Nodejs 来搭建一个https服务，其脚本如下(我们需要将上面生成的文件都放在我们项目的`keys`目录下)：
+```javascript
+// file http-server.js
+var https = require('https');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync('./keys/server.key'),// 服务器端私钥
+  cert: fs.readFileSync('./keys/server.crt')  
+};
+
+https.createServer(options, function(req, res) {
+  res.writeHead(200);
+  res.end('hello world 8000');
+}).listen(8000, () => {
+  console.log(`服务器启动：localhost:8000`)
+});
+```
+接下来我们可以通过`node http-server.js`来启动我们的服务了，我们可以在浏览器打开`https://localhost:8000/`
+
+我们可以看到如下的效果：
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f216dab23804a2~tplv-t2oaga2asx-image.image)
+
+看到上面的效果表面我们的https服务搭建成功了，之所以浏览器显示不安全，是因为浏览器只认可其内置的CA证书， 但这不影响我们学习。
+
+我们点击上面的证书，然后查看`Certification Path` 选项：
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f223ad5763616f~tplv-t2oaga2asx-image.image)
+
+发现根证书不被信任，那我们怎么可以让浏览器信任我们的**自签名**CA呢， 我么可以按照如下操作：
+ 1. 按如下图选择网站设置：
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f2240986327858~tplv-t2oaga2asx-image.image)
+2. 选择隐私和安全性，然后选择管理证书：
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f2241a35c0d61f~tplv-t2oaga2asx-image.image)
+
+3. 选择"Trusted Root Certification Authoritities"(信任的根证书机构), 然后选择Import(导入)，选择我们上面步骤生存的`ca.crt` 文件，进行安装。安装完成后，我们可以再次查看我们的证书：
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f22440d603b288~tplv-t2oaga2asx-image.image)
+
+发现我们的证书已经被浏览器信任了.
+
+
+## 分析https(原理)
+上面我们已经简单搭建了一个自签名的https服务，我们已经已经知道一些基本名词： 私钥，公钥，CA，申请CA证书。下面我们就根据上面我们贴的图片来解释https运行的基本原理。
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/20/16f213db7c9bc70b~tplv-t2oaga2asx-image.image)
+
+①：一般【客户端】首先发起请求，例如请求网站https://www.thinktxt.com/, 生成一个随机数（**RandomC**），携带支持的TLS版本、**加密算法**等信息发送至【服务端】
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/23/16f31d67cc7606dd~tplv-t2oaga2asx-image.image)
+②：【服务端】收到请求，**返回证书**、一个随机数（**RandomS**）、**协商加密算法**。这个时候，【服务端】已经保存了两个随机数：<font color=red>RandomC</font> 和 <font color=red>RandomS</font>. 服务器端这个时候发送给客户端的<font color=red>RandomS</font>是未加密的明文。
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/23/16f31e4d91750c58~tplv-t2oaga2asx-image.image)
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/23/16f31e6292b9fda7~tplv-t2oaga2asx-image.image)
+③：【客户端】拿到证书后开始进行校验，验证其合法性。
+
+客户端通过本地浏览器或操作系统内置的权威第三方认证机构的CA证书进行验证，<font color=red>一个证书包含域名、**证书编号**、公钥、有效期等信息</font>(这里是指浏览器内置的CA机构，已经保存了我们服务的证书的相关信息).
+
+证书编号是在服务器管理员通过第三方证书机构申请证书的时候，第三方机构用他们的**私钥**对证书编号进行加密存入证书，
+
+> 上面一句话可以根据我们上面**申请CA证书**的里的步骤进行理解：
+```
+# 服务器端需要向 CA 机构申请签名证书，在申请签名证书之前依然是创建自己的 CSR 文件
+openssl req -new -key server.key -out server.csr
+# 向自己的 CA 机构申请证书，签名过程需要 CA 的证书和私钥参与，最终颁发一个带有 CA 签名的证书
+openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt
+```
+<font color=red>证书编号：</font> 可以理解我上面脚本生成的`server.crt`的编号。 在上面的脚本中，用到的<font color=red>ca.key</font>文件， 这个文件就是<font size=5 color=red>CA的私钥</font>
+
+
+根据**编号生成方法**生成**证书编号**（**证书本身携带了生成证书编号的方法**），
+
+
+与**CA证书公钥**解密得出的证书编号进行对比，验证不通过或者证书过期等情况就提示存在风险（浏览器的红色警告），验证通过则进行下一步。
+> 这里是指我们浏览器内置的CA保存我们服务的CA证书的编号，但是通过`ca.key`私钥加密过的， 我们在验证证书编号是否合法的时候，我们再通过浏览器内置的CA的**公钥** 对CA里面保存的编号进行解密，用解密后的证书编号和服务器返回来的证书编号进行匹配。
+
+④：【客户端】生成一个随机数（PreMaster Key），此时已经有第三个随机数了，根据三个随机数（<font color=red>RandomC、RandomS、PreMaster Key</font>）按照双方约定的算法生成用于后面会话的同一把的“<font size=5 color=red>会话密钥</font>”。
+> 但是这个时候生成的“<font size=5 color=red>会话密钥</font>” 知识在客户端生成保存起来，服务器这个时候还是没有第三个随机数<font color=red>PreMaster Key</font>, 服务器要想生成相同的“<font size=5 color=red>会话密钥</font>”， 则必须同时也知晓同样的三个随机数，所以现在的问题就是怎么将第三个随机数<font color=red>PreMaster Key</font>传给服务器。
+
+⑤：【客户端】将随机数（PreMaster Key）通过<font size=5 color=red>公钥</font>加密后发送至【服务端】(<font color=red>这个步骤只是传递了加密后的随机数PreMaster Key, 会话密钥并没有发送到服务端，因为需要服务端根据只有自己知道的私钥去解密PreMaster Key， 然后生成对应的会话密钥 </font>)。
+> 1. 在这里的<font size=5 color=red>公钥</font> 就是我们服务端申请的CA证书里面的内置的公钥，也就是我们服务器在申请CA证书时候生成的公钥。<font color=red>通过公钥加密的数据，只有对应的私钥才能解密， 而这个私钥只有我们的服务端才知道，即使是CA机构都不知道的</font>
+
+> 2. 我们在①② 中传递的随机数<font color=red>RandomC、RandomS</font> 都是明文传递的，这里为什么需要加密呢？因为我们已经明文传递了两个随机数，如果第三个随机数也明文传递， 那都是可以被第三方拦截处理的。
+
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/23/16f31e8317711ece~tplv-t2oaga2asx-image.image)
+⑥：【服务端】收到密文后用私钥进行解密，得到随机数（PreMaster Key），此时服务端也拥有了三个随机数，根据三个随机数按照事先约定的加密算法生成用于后面会话的同一把的“会话密钥”。
+
+> 此时在服务端生成的**会话密钥** 和④ 中浏览器生成的**会话密钥**是一样的啦。
+
+⑦：【服务端】计算此前所有内容的握手消息hash值，并用“会话密钥”加密后发送至客户端用于验证。
+
+> 这个<font size=5 color=red>会话密钥</font>是浏览器和服务端根据三个随机数生成的，并没有通过网络传递，第三方是获取不到这个值的，然后通过<font size=5 color=red>会话密钥</font>加密数据传递给客户端(其实这个时候可以算是对称加密了，因为浏览器和客户端都已经知道密钥了)
+
+> 在⑦计算所有的内容的握手消息的hash 值， 并用【会话密钥】加密后发送给客户端。
+
+⑧：【客户端】解密并计算握手消息的hash值，如果与服务端发来的hash一致，此时握手过程结束。
+>1. 客户端根据自己在④生成的<font size=5 color=red>会话密钥</font>解密收到的消息
+>2. 客户端重新计算所有握手消息的hash值
+>3. 将解密后的hash 和自己计算的hash 进行判断，如果一样，则算是真正的验证通过了，可以进行正常通信了
+
+⑨：验证通过后，开始正常的加密通信。
+> 开始正常的进行通信了，通信内容会用<font size=5 color=red>会话密钥</font>和之前协商好的加密算法进行加密了。
+
+<font size=5 color=red>总结:</font>
+1. 服务端的**私钥** 只要服务端知道，其他人都不知道
+2. CA证书的校验，是因为客户端(浏览器)内置了所有的认可的CA证书，因为CA证书是客户端(浏览器)内置的，所以不需要出现在网络请求，也就不会出现第三方劫持的情况，所以达到了安全传输保障
+3. CA证书中携带了服务端的**公钥**, 用公钥加密的数据，只有私钥才能解密，也就是只有服务端才能正确解密
+4. 会话密钥是客户端和服务端生成的，不在网络请求中传输，所以会话密钥是安全的
