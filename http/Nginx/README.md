@@ -1,6 +1,6 @@
 [nginx-tutorial](https://github.com/jaywcjlove/nginx-tutorial)
 [server-configs-nginx](https://github.com/h5bp/server-configs-nginx)
-
+[前端开发者必备的Nginx知识](https://juejin.cn/post/6844903793918738440)
 <p align="center">
   <a href="http://nginx.org/">
     <img width="210" src="./nginx.svg" />
