@@ -1,4 +1,6 @@
 
+//LRU 是 Least Recently Used 的缩写，即最近最少使用，是一种常用的页面置换算法，将最近最久未使用的页面予以淘汰。
+// 核心的思想就是“如果数据最近被访问，那么将来被访问的几率也就更高”。
 class Item {
     constructor(key, value) {
         this._key = key
