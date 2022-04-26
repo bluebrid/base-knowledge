@@ -1,0 +1,1 @@
+## [16. 使用Promise封装AJAX请求](https://www.yuque.com/cuggz/interview/pkg93q#qKn6Y)
