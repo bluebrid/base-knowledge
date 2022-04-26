@@ -153,3 +153,5 @@ fetch("/service", {
 controller.abort(); 
 ```
 4. 浏览器的支持度， XMLHttpRequest 基本支持所有的浏览器
+
+<font size=5 color="red">axios 使用的是XMLHttpRequest</font>
