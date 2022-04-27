@@ -46,3 +46,39 @@ setTimeout(function () {
     console.log("12");
   });
 });
+
+Promise.resolve().then(() => {
+  console.log(1)
+}).then(() => {
+  console.log(3)
+  return Promise.resolve(3.5)
+}).then(() => {
+  console.log(5)
+}).then(() => {
+  console.log(7)
+})
+
+Promise.resolve().then(() => {
+  console.log(2)
+}).then(() => {
+  console.log(4)
+}).then(() => {
+  console.log(6)
+}).then(() => {
+  console.log(8)
+})
+
+// 微任务如果接着有微任务，则直接插入队列继续执行
+console.log(1)
+setTimeout(() => {
+    console.log('宏任务')
+})
+Promise.resolve().then(() => { // f1
+    console.log('微任务1')
+    Promise.resolve().then(() => { // f2 插队
+        console.log('微任务2')
+    })
+}).then(() => { // f3
+    console.log('微任务3')
+})
+// 输出： 1 -> 微任务1-> 微任务2 -> 微任务3 -> 宏任务
