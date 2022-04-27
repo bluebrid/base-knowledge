@@ -28,7 +28,7 @@ let threeSum = function (nums) {
     //[-1, 0, 1, 2, -1, -4] => [-4, -1, -1, 0, 1, 2]
     // 经过排序的， 前面的一定是负数
     const t = nums.slice(i + 1)
-    let find = twoSum(t, -nums[i])
+    let find = twoSum(t, -nums[i]) // 这里是一个关键（c=-(a+b))
     if (find) {
       find.forEach((arr) => {
         if (!set.has(arr.join(''))) {

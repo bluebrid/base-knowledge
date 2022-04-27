@@ -1,5 +1,11 @@
-// 循环数组，不断将元素加入滑动窗口中，也就是加入set，如果set中存在重复元素并且窗口大小小于指定大小就返回，否则加入set中，当滑动窗口超过了指定大小，缩小窗口
-// 需求： 给出一个数组， 判断在一个指定长度的子数组中是否存在重复元素
+/**
+ * 给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，
+ * 满足 nums[i] == nums[j] 且 abs(i - j) <= k 。
+ * 如果存在，返回 true ；否则，返回 false 。
+ * @param {*} nums 
+ * @param {*} k 
+ * @returns 
+ */
 var containsNearbyDuplicate = function (nums, k) {
   const set = new Set();
   for (let i = 0; i < nums.length; i++) {
