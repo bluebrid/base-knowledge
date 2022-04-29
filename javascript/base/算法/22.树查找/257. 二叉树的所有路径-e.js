@@ -6,6 +6,7 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
+ let TreeNode = require('./二叉树.js')
 /**
  * 给你一个二叉树的根节点 root ，按 任意顺序 ，返回所有从根节点到叶子节点的路径。
  * 叶子节点 是指没有子节点的节点。
@@ -30,3 +31,12 @@ var binaryTreePaths = function (root) {
     dfs(root, "");
     return paths;
 };
+var t = new TreeNode(3)
+t.left = new TreeNode(9)
+t.right = new TreeNode(20)
+t.left.left = new TreeNode(7)
+t.left.right = new TreeNode(8)
+t.right.left = new TreeNode(15)
+t.right.right = new TreeNode(7)
+
+console.log(binaryTreePaths(t))

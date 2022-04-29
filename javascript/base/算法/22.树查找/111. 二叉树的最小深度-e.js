@@ -6,6 +6,7 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
+ let TreeNode = require('./二叉树.js')
 /**
  * 给定一个二叉树，找出其最小深度。
  * 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
@@ -28,3 +29,13 @@ var minDepth = function (root) {
     }
     return ans + 1;//最小深度等于左右子树最小深度+1
 };
+
+var t = new TreeNode(3)
+t.left = new TreeNode(9)
+t.right = new TreeNode(20)
+t.left.left = new TreeNode(7)
+t.left.right = new TreeNode(8)
+t.right.left = new TreeNode(15)
+t.right.right = new TreeNode(7)
+
+console.log(minDepth(t))

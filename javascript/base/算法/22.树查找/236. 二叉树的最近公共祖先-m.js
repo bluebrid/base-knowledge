@@ -51,3 +51,6 @@ var lowestCommonAncestor = function (root, p, q) {
     }
     return root;//如果上述条件都不满足说明root就是公共祖先
 };
+
+// 公共祖先， 就是， left<root root > right 的第一个值
+// 如果不满足， 那就继续左右进行递归查询

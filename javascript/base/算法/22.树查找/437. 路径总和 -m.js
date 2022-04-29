@@ -6,6 +6,7 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
+let TreeNode = require('./二叉树.js')
 /**
  * 给定一个二叉树的根节点 root ，和一个整数 targetSum ，
  * 求该二叉树里节点值之和等于 targetSum 的 路径 的数目。
@@ -43,3 +44,13 @@ const rootSum = (root, targetSum) => {
     ret += rootSum(root.right, targetSum - val);
     return ret;
 }
+
+var t = new TreeNode(3)
+t.left = new TreeNode(9)
+t.right = new TreeNode(20)
+t.left.left = new TreeNode(7)
+t.left.right = new TreeNode(8)
+t.right.left = new TreeNode(15)
+t.right.right = new TreeNode(7)
+
+console.log(pathSum(t, 12))

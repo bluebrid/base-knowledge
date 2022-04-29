@@ -36,6 +36,7 @@ var getIntersectionNode = function(headA, headB) {
     }
     let pA = headA, pB = headB;
     while (pA !== pB) { // 这个是关键
+        // 如果某个节点，都为空，肯定不存在了，所以置空，但是直接如果false ????
         pA = pA === null ? headB : pA.next;//链表A循环结束就循环链表B	
         pB = pB === null ? headA : pB.next;//链表A循环结束就循环链表B	
     }
