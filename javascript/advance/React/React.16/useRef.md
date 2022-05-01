@@ -11,7 +11,7 @@
 5. react 组件，有四个阶段： render(渲染)-> reconciliation() -> Layout(布局) -> commit(提交) // https://juejin.im/post/5e5c5f6a6fb9a07cad3ba383
 6.  render 阶段， 不允许有副作用， 因为有可能被暂停，中断，重新执行
 7. commit 阶段， 可以操作Dom, 运行有副作用的操作，然后重新安排更新(在Hooks中， useEffect, useLayoutEffect 就是可以去操作副作用的地方)
-8. 再Render中不能直接使用ref, 应render 阶段，还不能获取DOM
+8. 在Render中不能直接使用ref, 因为render 阶段，还不能获取DOM
 ```jsx
 <>
   <span id="name" ref={this.spanRef}>{this.state.title}</span>

@@ -46,12 +46,18 @@ function handleClick() {
 }
 ```
 
-5. 流式SSR
+5. [流式SSR](https://github.com/reactwg/react-18/discussions/37)
 SSR流程：
 > 1. 服务的fetch页面所需要的数据
 > 2. 数据准备好之后， 将组件渲染成String的形式作为response 返回
 > 3. 客户端加载资源
 > 4. 客户端合成（hydrate）合成最终的页面内容
+
+You no longer have to wait for all the data to load on the server before sending HTML. Instead, you start sending HTML as soon as you have enough to show a shell of the app, and stream the rest of the HTML as it’s ready.
+
+You no longer have to wait for all JavaScript to load to start hydrating. Instead, you can use code splitting together with server rendering. The server HTML will be preserved, and React will hydrate it when the associated code loads.
+
+You no longer have to wait for all components to hydrate to start interacting with the page. Instead, you can rely on Selective Hydration to prioritize the components the user is interacting with, and hydrate them early.
 
 在传统的SSR中，上述的流程式串行的， 如果其中一个步骤比较慢， 都会影响整个渲染的速度
 > 1. React18 支持全新的`suspense`, 支持了流式SSR， 也就是运行服务端一点点的返回页面内容
