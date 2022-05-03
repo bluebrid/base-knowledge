@@ -2,6 +2,9 @@
 1. Vite 是基于<font color="red" size=5>esbuild</font> 和 Rollup ，依靠浏览器自身的ESM编译功能， 实现极致开发体验的新一代构建工具
 2. <font size=5 color="red">依赖：</font>开发中不会变动的部分（NPM包，UI组件库)，esbuild进行预构建
 3. <font size=5 color="red">源码：</font>浏览器不能直接允许非JS代码（jsx,.css,vue等），vite 只在浏览请求相关源码的时候进行转换，提供ESM源码
+```html
+<script type="module" src="/src/main.tsx"></script>
+```
 
 ## 开发环境
 1. 利用浏览器原生的`ES Module`编译能力，省略费时的编译环节，直接给浏览器开发环境源码，`dev server`只提供轻量服务
