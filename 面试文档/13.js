@@ -47,6 +47,7 @@ setTimeout(function () {
   });
 });
 
+// 这里需要考虑，微任务追加的顺序，
 Promise.resolve().then(() => {
   console.log(1)
 }).then(() => {

@@ -12,6 +12,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
+ let TreeNode = require('./二叉树.js')
 // 深度优先遍历
  var maxDepth = function(root) {
     if(!root) {
@@ -23,7 +24,7 @@
     }
 };
 // BFS
-const maxDepth = (root) => {
+const maxDepth1 = (root) => {
     if (root == null) return 0;
     const queue = [root];
     let depth = 1;
@@ -43,3 +44,12 @@ const maxDepth = (root) => {
     }
     return depth;
 };
+var t = new TreeNode(3)
+t.left = new TreeNode(9)
+t.right = new TreeNode(20)
+t.left.left = new TreeNode(7)
+t.left.right = new TreeNode(8)
+t.right.left = new TreeNode(15)
+t.right.right = new TreeNode(7)
+t.right.right.right = new TreeNode(3)
+console.log(maxDepth(t))
