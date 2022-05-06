@@ -23,5 +23,5 @@ if (cluster.isMaster) {
     }).listen(8000);
     // 如果多个Node进程监听同一个端口，会报错，为什么cluster 模块不会呢？
     // 原因是： 在master进程中，启动了一个TCP服务器， 而真正监听端口的只有这个服务器，
-    // 当来自前端的请求被这歌TCP服务器的connection事件监听后， master会将对应的socket 句柄发送给子进程
+    // 当来自前端的请求被这个TCP服务器的connection事件监听后， master会将对应的socket 句柄发送给子进程
 }
