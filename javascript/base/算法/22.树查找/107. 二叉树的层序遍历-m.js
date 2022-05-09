@@ -25,7 +25,9 @@ const levelOrderBottom = (root) => {
     while (queue.length) {
         const subRes = [];
         const levelSize = queue.length;
+        // 取出上一次的长度， 后面push 的值不会受影响
         for (let i = 0; i < levelSize; i++) {
+            //队列，先进先出
             const cur = queue.shift();
             subRes.push(cur.val);
             if (cur.left) {

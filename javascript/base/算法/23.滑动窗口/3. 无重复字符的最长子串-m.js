@@ -31,7 +31,7 @@ var strOfLongestSubstring = function (s) {
   for (let i = 0; i < s.length; i++) {
     if (!set.has(s[i])) {//当前元素不在set中 就加入set 然后更新最大长度，i++继续下一轮循环
       set.add(s[i]);
-      maxLength = Math.max(maxLength, set.size);
+      maxLength = Math.max(maxLength, set.size); // 记录最大的值
     } else {
       // 其实只会存在第一个元素会被移除
       while (set.has(s[i])) {
