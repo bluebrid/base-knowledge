@@ -36,5 +36,5 @@ var isValid = function (s) {
     };
     return !stk.length;//循环结束的时候还要判断栈是否为空
 };
-console.log(isValid('([q]{})[]'))
+console.log(isValid('([]{})[]'))
 // console.log(isValid('((]{})[]'))
