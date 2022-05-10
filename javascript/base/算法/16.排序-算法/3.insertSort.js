@@ -7,7 +7,7 @@ function insertSort(arr) {
     var j = i;
     while (j > 0 && temp < arr[j - 1]) { // 如果前面的一个的值小于后面的值， 
       arr[j] = arr[j - 1];
-      j--;
+      j--; // 这个是为了记录将temp 转移的索引
     }
     if (j != i) {
       arr[j] = temp;

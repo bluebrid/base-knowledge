@@ -8,7 +8,7 @@ const http = require('http')
  * 5. 如果是一个简单的请求就直接请求，不用发送一个Option预检请求
  * 6. 如果是简单的请求，如果响应体携带 Access-Control-Allow-Origin 则表示是一个合法的请求，否则浏览器会抛出一个错误，
  * 被XMLHTTPRequest的onError回调函数捕获
- *    不同意：服务器会返回一个正常的HTTP回应（响应头里木有Access-Control-Allow-Origin这个头），
+ *    不同意：服务器会返回一个正常的HTTP回应（响应头里没有Access-Control-Allow-Origin这个头），
  * 浏览器发现木有这个头，就抛出一个错误XMLHttpRequest，
  *    进而进入ajax的onerror回到方法里（这就是为何你明明看到http状态码是200，
  * response也有返回值，但偏偏你ajax里就是进入的error的原因~），
@@ -23,7 +23,8 @@ const server = http.createServer((request, response) => {
       response.setHeader('Access-Control-Allow-Origin', origin)
     }
     // 七. If request method is not a case-sensitive match for any method in methods and is not a simple method, apply the cache and network error steps.
-    // 简单请求GET,HEAD, POST 这个三个请求是不需要特意设置Access-Control-Allow-Methods， 但是如果请求是PUT， 又没有设置Access-Control-Allow-Methods， 是预检不会成功的
+    // 简单请求GET,HEAD, POST 这个三个请求是不需要特意设置Access-Control-Allow-Methods， 
+    // 但是如果请求是PUT， 又没有设置Access-Control-Allow-Methods， 是预检不会成功的
     response.setHeader('Access-Control-Allow-Methods', 'PUT, DELETE')
     // 该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。
     // 设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。

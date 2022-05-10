@@ -63,3 +63,25 @@
 转换成falsely 的值有如下， `NaN`, `null`, `undefined`, `0`(是Number类型的0， 如果是字符串类型的0, 转换成Boolean 也是true)
 
 **如果是一个字符串，且值为`false`, 转换成Boolean的值也是true**
+
+## toString 和 valueOf 区别
+1. 共同点：在输出对象时会自动调用
+2. 不同点：<font color=red>默认返回值不同，且存在优先级关系</font>
+3. <font color=red>二者并存的情况下，在数值运算中，优先调用**valueOf**,字符串运算中，优先调用**toString**</font>
+```js
+class A {
+    valueOf() {
+        return 2
+    }
+    toString() {
+        return '哈哈哈'
+    }
+}
+let a = new A()
+
+console.log(String(a))  // '哈哈哈'   => (toString)
+console.log(Number(a))  // 2         => (valueOf)
+console.log(a + '22')   // '222'     => (valueOf)
+console.log(a == 2)     // true      => (valueOf)
+console.log(a === 2)    // false     => (严格等于不会触发隐式转换)
+```

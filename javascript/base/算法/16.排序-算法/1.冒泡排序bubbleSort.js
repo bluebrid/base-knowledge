@@ -4,7 +4,6 @@
  */
 
  function bubbleSort(arr) {
-
      for (var i = 1 ;i < arr.length; i ++) {
         var flag = true
         for (var j = 0; j < arr.length - i ; j++) {
