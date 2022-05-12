@@ -11,3 +11,9 @@
    > 4.2 非常适合实现隐式的链路跟踪，入侵小，目前隐式跟踪的最优解；
    > 4.3 提供了 API 来追踪 node 中异步资源的生命周期；
    > 4.4 借助 async_hook 实现上下文的关联关系；
+
+## [在 Node.js 中使用 Async Hooks 处理 HTTP 请求上下文](https://www.imooc.com/article/314801)
+### Async Hooks 使用场景
+1. 存储上下文
+2. 异步调用之间共享数据
+

@@ -39,3 +39,8 @@
     ​
     heapdump.writeSnapshot('./' + Date.now() + '.heapsnapshot');
    ```
+   ## 如何避免内存泄漏
+   1. ESLint 检测代码，检查非预期的<font color=red>全局变量</font>
+   2. 使用<font color=red>闭包</font>的时候， 需要明确知道闭包了什么对象，还有引用必要对象何时清除闭包
+   3. 绑定事件的时候，一定要在恰当的时候，清除监听。
+   4. 一般推荐使用`init`函数对类的事件进行监听，使用`destory`对事件和占用的资源进行释放

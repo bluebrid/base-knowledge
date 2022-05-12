@@ -10,7 +10,16 @@ Promise.resolve().then(() => {
 const hooks = asyncHooks.createHook({});
 hooks.enable();
 
-Promise.resolve().then(() => {
+Promise.resolve().then((val) => {
   // Promise asyncId: 7. Promise triggerAsyncId: 6
   console.log(`Promise asyncId: ${asyncId()}. Promise triggerAsyncId: ${triggerAsyncId()}`);
 })
+
+new Promise((resolve, reject) => {
+  console.log(asyncId(), triggerAsyncId())
+  resolve(1)
+}).then(
+  function onFullfilled(val) {
+    console.log(asyncId(), triggerAsyncId())
+  },
+  function onRejected(error) { })
