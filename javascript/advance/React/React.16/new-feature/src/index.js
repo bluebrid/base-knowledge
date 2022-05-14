@@ -18,10 +18,11 @@ import App14 from './14.useLayoutEffect/App'
 import App151 from './15.useXState/App'
 import App15 from './15.customHooks/App'
 import App16 from './16.react-query/App'
+import App17 from './17.hooks/App'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<div>
-  <App1 />
+  {/* <App1 />
   <App2 />
   <App3 />
   <App4 />
@@ -36,7 +37,8 @@ ReactDOM.render(<div>
   <App13 />
   <App14 />
   <App15 />
-  <App16 />
+  <App16 /> */}
+  <App17 />
 </div>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
