@@ -48,7 +48,8 @@ root.render(
   <App17 />*/}
     {/* <App18 />
     <App19 />
-    <App20 /> */}
+    */}
+    <App20 />
     <App21 />
   </React.StrictMode>
 );

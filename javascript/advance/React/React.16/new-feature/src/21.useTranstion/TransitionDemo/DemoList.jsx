@@ -3,7 +3,7 @@ import { fetchMockData, MockItem } from "./utils";
 import styles from "./DemoList.module.css";
 
 // 默认加载第一页 mock 数据
-const mockResource = fetchMockData(1);
+
 function UserList({ resource }) {
   const mockList = resource.read();
   return (
@@ -19,6 +19,8 @@ function UserList({ resource }) {
   );
 }
 function DemoList() {
+  const [currentPag, setCurrentPage] = useState(1)
+  const mockResource = fetchMockData(currentPag);
   const [resource, setResource] = useState(mockResource);
   const [isPending, startTransition] = useTransition();
 
@@ -28,16 +30,18 @@ function DemoList() {
       <button
         className={styles.button}
         type="button"
-        onClick={() =>
+        onClick={() => {
+          setCurrentPage(currentPag === 1 ? 2 : 1)
           startTransition(() => {
-            setResource(fetchMockData(2));
+            setResource(fetchMockData(currentPag))
           })
+        }
         }
       >
         下一页
       </button>
       {isPending && <div className={styles.loading}>加载中</div>}
-    </Suspense>
+    </Suspense >
   );
 }
 export default DemoList
