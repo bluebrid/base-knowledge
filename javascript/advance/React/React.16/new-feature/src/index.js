@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App1 from './1.newContext/App';
 import App2 from './2.ErrorBoundary/App'
@@ -19,11 +19,17 @@ import App151 from './15.useXState/App'
 import App15 from './15.customHooks/App'
 import App16 from './16.react-query/App'
 import App17 from './17.hooks/App'
-import App18 from './18.useImperativeHandle/App'
+import App18 from './18.useSyncExternalStore/App'
+import App19 from './19.useImperativeHandle/App'
+import App20 from './20.useTranstion/App'
+import App21 from './21.useTranstion/App'
 import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(<div>
-  {/* <App1 />
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+root.render(
+  <React.StrictMode>
+    {/* <App1 />
   <App2 />
   <App3 />
   <App4 />
@@ -40,8 +46,15 @@ ReactDOM.render(<div>
   <App15 />
   <App16 /> 
   <App17 />*/}
-  <App18/>
-</div>, document.getElementById('root'));
+    {/* <App18 />
+    <App19 />
+    <App20 /> */}
+    <App21 />
+  </React.StrictMode>
+);
+// ReactDOM.render(<div>
+
+// </div>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
