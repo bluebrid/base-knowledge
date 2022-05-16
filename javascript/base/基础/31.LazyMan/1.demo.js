@@ -4,6 +4,7 @@ class LazyManClass {
     this.name = name;
     console.log(`Hi I am ${this.name}`);
     setTimeout(() => {
+      // 这里是下个宏任务
       this.next();
     }, 0);
   }
@@ -12,6 +13,7 @@ class LazyManClass {
     var fn = (function (n) {
       return function () {
         console.log(`I am eating ${n}`)
+        // 接着执行下一个宏任务
         that.next();
       }
     })(name);
@@ -53,4 +55,3 @@ function LazyMan(name) {
   return new LazyManClass(name);
 }
 LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(4).eat('junk food');
-console.log(111111111)
