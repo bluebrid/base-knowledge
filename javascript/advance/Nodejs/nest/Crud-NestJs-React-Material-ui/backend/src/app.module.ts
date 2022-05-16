@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     ProductsModule,
-    MongooseModule.forRoot('mongodb://localhost/nest-blog-project', { useNewUrlParser: true }),
+    MongooseModule.forRoot('mongodb://localhost:27017/nest-blog-project', { useNewUrlParser: true }),
     // MongooseModule.forRoot('mongodb+srv://nene:nenelobo@cluster0-ynzrr.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true , useUnifiedTopology: true}),
   ],
   controllers: [AppController],
