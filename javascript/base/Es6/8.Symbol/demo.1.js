@@ -18,6 +18,6 @@ class Even {
 //         return Number(obj) % 2 === 0;
 //     }
 // };
-1 instanceof Even // false
-2 instanceof Even // true
-12345 instanceof Even // false
+console.log(1 instanceof Even) // false
+console.log(2 instanceof Even) // true
+console.log(12345 instanceof Even) // false

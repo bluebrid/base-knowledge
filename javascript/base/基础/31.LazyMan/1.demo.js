@@ -4,7 +4,7 @@ class LazyManClass {
     this.name = name;
     console.log(`Hi I am ${this.name}`);
     setTimeout(() => {
-      // 这里是下个宏任务
+      // 这里是下个宏任务, 想将任务都推送到队列， 然后下一次宏任务，去队列里面获取任务执行
       this.next();
     }, 0);
   }
@@ -30,7 +30,7 @@ class LazyManClass {
         }, t * 1000);
       }
     })(time);
-    this.taskList.unshift(fn);
+    this.taskList.unshift(fn); // sleepFirst 是首先需要sleep 才会执行其他的，所以推送到队列header 
     return this;
   }
   sleep(time) {
@@ -54,4 +54,5 @@ class LazyManClass {
 function LazyMan(name) {
   return new LazyManClass(name);
 }
-LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(4).eat('junk food');
+// LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(4).eat('junk food');
+LazyMan('Tony').eat('lunch').sleep(5).eat('dinner').sleep(4).eat('junk food');

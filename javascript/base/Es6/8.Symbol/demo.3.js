@@ -9,4 +9,4 @@ class Collection {
   }
 }
 let x = new Collection();
-Object.prototype.toString.call(x) // "[object xxx]"
+console.log(Object.prototype.toString.call(x)) // "[object xxx]"

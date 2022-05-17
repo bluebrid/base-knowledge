@@ -33,3 +33,11 @@ Promise.race([p1, p2, p3, p4]).then(
     v => console.log(v),
     err => console.log(err)
 )
+
+let p21 = Promise.resolve(12)
+p21.then(v => {
+    console.log(v)
+    return 111
+}).then((val) => {
+    console.log(val)
+})
