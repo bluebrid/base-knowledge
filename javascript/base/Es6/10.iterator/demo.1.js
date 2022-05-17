@@ -1,6 +1,6 @@
 var obj = { x: 1, y: 2, z: 4 };
 // https://juejin.im/post/5d2d146bf265da1b9163c5c9#heading-0
-obj[Symbol.iterator] = function() {
+obj[Symbol.iterator] = function () {
   // iterator 是一个具有具有 next 方法的对象，
   // 它的返回至少有一个对象
   // 两个属性：value＆done。
@@ -9,8 +9,8 @@ obj[Symbol.iterator] = function() {
   const keys = Object.keys(this);
   const _this = this;
   return {
-    next: function() {
-      this.objectIndex ++;
+    next: function () {
+      this.objectIndex++;
       return {
         value: _this[keys[this.objectIndex]],
         done: this.objectIndex >= keys.length
@@ -26,6 +26,6 @@ console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 console.log([...obj]);
-for(let item of obj) {
+for (let item of obj) {
   console.log(item)
 }

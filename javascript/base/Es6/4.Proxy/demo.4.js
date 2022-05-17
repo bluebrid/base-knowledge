@@ -1,7 +1,26 @@
+// Proxy 基本用法
+var obj = new Proxy({}, {
+    /**
+     * 
+     * @param {*} target 
+     * @param {*} propKey 
+     * @param {*} receiver 它总是指向原始的读操作所在的那个对象，一般情况下就是 Proxy 实例
+     * @returns 
+     */
+    get: function (target, propKey, receiver) {
+        console.log(`getting ${propKey}!`);
+        return Reflect.get(target, propKey, receiver);
+    },
+    set: function (target, propKey, value, receiver) {
+        console.log(`setting ${propKey}!`);
+        return Reflect.set(target, propKey, value, receiver);
+    }
+});
+
 var pipe = (function () {
     return function (value) {
         var funcStack = [];
-        var context =  global || window ;
+        var context = global || window;
         var oproxy = new Proxy({}, {
             get: function (target, fnName) {
                 console.log(fnName)
@@ -12,7 +31,7 @@ var pipe = (function () {
                 }
                 funcStack.push(context[fnName]); // 如果不加window, 则funcStack 保存的只是一个字符串， 
                 //funcStack.push(fnName);
-                return oproxy;
+                return oproxy; // 返回自己
             }
         });
 
