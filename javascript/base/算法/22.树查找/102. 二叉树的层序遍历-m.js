@@ -53,4 +53,4 @@ t.right.left = new TreeNode(15)
 t.right.right = new TreeNode(7)
 
 console.log(JSON.stringify(levelOrder(t)))
-console.log(levelOrder1(t))
+// console.log(levelOrder1(t))
