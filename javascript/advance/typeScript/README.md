@@ -5,3 +5,5 @@
 [类型体操](https://github.com/type-challenges/type-challenges/blob/main/README.zh-CN.md)
 [类型体操](https://zhuanlan.zhihu.com/p/427309936)
 [类型体操](https://juejin.cn/post/7077868567810539550)
+
+[7.3W 播放量的 TS 动画版进阶教程合集来了！](https://juejin.cn/post/7095547569777934367#heading-6)
