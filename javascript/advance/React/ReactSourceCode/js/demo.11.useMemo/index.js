@@ -76,4 +76,13 @@ function App() {
   )
 }
 
-ReactDOM.render(<App />, $root);
+const root = ReactDOM.createRoot(
+  $root
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// ReactDOM.render(<App />, $root);

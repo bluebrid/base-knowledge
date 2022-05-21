@@ -11,7 +11,16 @@ class App extends React.Component {
     this.setState({
       count: this.state.count + 1
     }, () => {
-    console.log('setState Done!')
+      console.log('setState Done!')
+    })
+    this.setState({
+      count: this.state.count + 1
+    })
+    this.setState({
+      count: this.state.count + 1
+    })
+    this.setState({
+      count: this.state.count + 1
     })
     console.log(this.state.count)
   }
@@ -19,16 +28,27 @@ class App extends React.Component {
     document.querySelector('button').addEventListener('click', this.onClick, false)
   }
   render() {
+    console.log('===================')
     return React.createElement("button", {}, `Click Me(${this.state.count})`);
   }
 }
+// React 18, 必须使用`createRoot`才能`automatic Batching`
+const root = ReactDOM.createRoot(
+  $root
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-ReactDOM.render(
-  React.createElement(App, null),
-  $root,
-  () => {
-    console.log('render done')
-  });
+
+// ReactDOM.render(
+//   React.createElement(App, null),
+//   $root,
+//   () => {
+//     console.log('render done')
+//   });
 
 
 
