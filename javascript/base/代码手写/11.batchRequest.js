@@ -45,4 +45,5 @@ const urls = ['a-1', 'a-2', 'a-3', 'a-4', 'b-1', 'b-2', 'b-3'], limit = 2;
 batchRequest(urls, limit).then((val) => {
   console.log(val)
 })
+console.log('=================Done')
 
