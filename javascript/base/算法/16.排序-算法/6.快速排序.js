@@ -4,10 +4,8 @@ function quickSort(arr) {
     return arr
   }
   const left = []
-
   const right = []
   const mid = arr[0] // 第一个作为中间数据
-
   for (let i = 1; i < arr.length; i++) {
     let num = arr[i]
     if (num < mid) {
@@ -16,7 +14,6 @@ function quickSort(arr) {
       right.push(num) // 大得放到右边
     }
   }
-
   return [...quickSort(left), mid, ...quickSort(right)]
 }
 

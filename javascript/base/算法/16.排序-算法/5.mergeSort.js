@@ -14,7 +14,6 @@ function mergeSort(arr) {  //采用自上而下的递归方法
 // 每次都只有一个进行排序
 function merge(left, right) {
   var result = [];
-
   while (left.length && right.length) {
     if (left[0] <= right[0]) {
       result.push(left.shift());
@@ -22,13 +21,10 @@ function merge(left, right) {
       result.push(right.shift());
     }
   }
-
   while (left.length)
     result.push(left.shift());
-
   while (right.length)
     result.push(right.shift());
-
   return result;
 }
 
