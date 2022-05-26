@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python: Behave current file for APP testing",
+            "type": "python",
+            "request": "launch",
+            "module": "behave",
+            "console": "integratedTerminal",
+            "args": [
+                // -f allure_behave.formatter:AllureFormatter -o allure_result_folder ./features
+                // "${workspaceFolder}\\features\\Todo.feature", "-D", "ARCHIVE=Yes"
+                "-D", "ARCHIVE=Yes", "-f", "allure_behave.formatter:AllureFormatter", "-o", "allure_result_folder", "./features/Login.feature"
+            ]
+        }
+    ]
+}

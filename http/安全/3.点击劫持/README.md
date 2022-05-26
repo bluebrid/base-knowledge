@@ -1,0 +1,1 @@
+https://zh.javascript.info/clickjacking

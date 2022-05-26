@@ -1,0 +1,9 @@
+Feature: Scenario Outline
+
+  Scenario Outline: Scenario outline with example variable Alice in name
+    Given simple passed step with param "Alice"
+
+    Examples: examples table
+    | user  |
+    | Alice |
+    | Bob   |

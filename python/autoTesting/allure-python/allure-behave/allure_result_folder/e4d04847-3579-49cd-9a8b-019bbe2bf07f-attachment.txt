@@ -1,0 +1,4 @@
+Feature: Step status
+
+  Scenario: Scenario with failed step
+      Given simple failed step

@@ -1,0 +1,6 @@
+Feature: Hook
+  Scenario: Scenario with "before all" hook
+    Given simple passed step
+
+  Scenario: Another scenario with "before all" hook
+    Given simple passed step

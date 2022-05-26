@@ -1,0 +1,22 @@
+ // .vscode/launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+      
+      {
+        "name": "Launch Webpack",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceRoot}",
+        "runtimeExecutable": "npm",
+        "windows": { "runtimeExecutable": "npm.cmd" },
+        "runtimeArgs": [ "run", "debug", "--", "--inspect-brk" ],
+        "console": "integratedTerminal",
+        "protocol": "auto",
+        "restart": true,
+        "port": 9229,
+        "autoAttachChildProcesses": true,
+        "program": "${workspaceFolder}/base-knowledge/http/缓存/app.js"
+      }
+    ]
+  }

@@ -1,0 +1,35 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>
+      跨域请求 -site1
+    </title>
+  </head>
+
+  <body>
+    
+    
+    <iframe src="http://localhost:3000/index.html" frameborder="0" onload="load()" id="iframe"></iframe>
+    iframe messag:<span id="message"></span>
+  </body>
+</html>
+
+<script>
+ let first = true
+    // onload事件会触发2次，第1次加载跨域页，并留存数据于window.name
+    function load() {
+      if(first){
+      // 第1次onload(跨域页)成功后，切换到同域代理页面
+        let iframe = document.getElementById('iframe');
+        iframe.src = 'http://localhost:3000/index.html';
+        first = false;
+      }else{
+      // 第2次onload(同域b.html页)成功后，读取同域window.name中数据
+        let iframe = document.getElementById('iframe');
+        console.log(iframe.contentWindow.name);
+        document.getElementById('message').innerText = iframe.contentWindow.name;
+      }
+    }
+ 
+</script>

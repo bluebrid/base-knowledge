@@ -1,0 +1,38 @@
+$red: #FE5252;
+$gray: #607D8B;
+
+// #root {
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: $gray;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   color: white;
+// }
+
+.btn {
+  background-color: $red;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 30px;
+  position: relative;
+  
+  &:hover {
+    cursor: pointer;
+    background-color:rgba(254, 82, 82, 0.9);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  &:active {
+    top: 5px;
+    border: none;
+    outline: none;
+  }
+}
+
+.red {
+  color: $red;
+  font-weight: bold;
+}

@@ -1,0 +1,32 @@
+page {
+  background-color: #fbfcfd;
+}
+
+.user-info {
+  display: flex;
+  padding-top: 20rpx;
+}
+
+.user-info .user-name {
+  flex: 1;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+
+.user_avator {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-left: 20rpx;
+}
+
+.user-address {
+  font-size: 24rpx;
+  color: gray;
+  margin-top: 18rpx;
+}
+
+.logout {
+  margin-right: 20rpx;
+  margin-top: 26rpx;
+}

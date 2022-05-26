@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="animate.js"></script>
+    <style>
+        #path {
+            outline: 1px solid #E8C48E;
+            width: 520px;
+            height: 20px;
+        }
+
+        #brick {
+            width: 20px;
+            height: 20px;
+            background: #EE6B47;
+            position: relative;
+            cursor: pointer;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="path">
+        <div id="brick"></div>
+    </div>
+    <input type="button" value="Start" id="start">
+    <input type="button" value="Pause" id="pause">
+    <input type="button" value="Restart" id="restart">
+    <script>
+        let animateIns = {}
+        start.onclick = function () {
+            animateIns = animate({
+                targets: '#brick',
+                duration: 4000,
+                delay: 1000,
+                loop: false,
+                timing: function (timeFraction) {
+                    return timeFraction
+                    //  return Math.pow(timeFraction, 2);
+                },
+                draw: function (progress, targets) {
+                    let styles = targets.style
+
+                    styles.left = progress * 500 + 'px';
+                    styles.borderRadius = progress * 10 + 'px';
+                    // brick.style.top = progress * 500 + 'px';
+                    // brick.style.opacity = progress * 1;
+                }
+            });
+        }
+        pause.onclick = function () {
+            animateIns.pause && animateIns.pause()
+        }
+        restart.onclick = function () {
+            animateIns.reStart && animateIns.reStart()
+        }
+    </script>
+</body>
+
+</html>

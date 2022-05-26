@@ -1,0 +1,10 @@
+import allure
+import allure_commons
+
+@allure.step('Step function')
+def step():
+    pass
+
+@allure_commons.fixture
+def before_all(context):
+    step()

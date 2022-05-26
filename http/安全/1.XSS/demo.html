@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- 1. 预防方案： CSP -->
+    <!-- https://www.jianshu.com/p/28cfa8508237 -->
+    <!-- https://www.jianshu.com/p/a8b769e7d4bd -->
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-sha256-z7rg2N0+NDZmk551/B+qEVB/HH2MeDkp5QToCwS5Qhg='"> -->
+    <title>可信任网站</title>
+  </head>
+  <body></body>
+  <script nonce="sha256-z7rg2N0+NDZmk551/B+qEVB/HH2MeDkp5QToCwS5Qhg=">
+    function escape(str) {
+      str = str.replace(/&/g, "&amp;");
+      str = str.replace(/</g, "&lt;");
+      str = str.replace(/>/g, "&gt;");
+      str = str.replace(/"/g, "&quto;");
+      str = str.replace(/'/g, "&#39;");
+      str = str.replace(/`/g, "&#96;");
+      str = str.replace(/\//g, "&#x2F;");
+      return str;
+    }
+    var url = new URL(location.href);
+    var defaultParams = url.searchParams.get("default");
+    // 2. 解决方案： 特殊字符的转义
+    // defaultParams = escape(defaultParams)
+    // 第三方库xss 进行转义
+    // const xss = require('xss')
+     
+    // 3. 服务端设置cooKie httpOnly 
+    // document.cookie =
+    // document.body.append(defaultParams)
+    document.write(defaultParams);
+    // 4. 浏览器自带的xss攻击拦截机制
+    // 设置Header X-XSS-Protection
+    // 此机制只适用于参数出现在HTML内容或属性才会去拦截
+    // 只适用于反射型
+    // 并不是所有浏览器都支持
+
+    // 危害：
+    // 获取页面数据
+
+    // 获取Cookies
+
+    // 劫持前端逻辑
+
+    // 发送请求
+
+    // 。。。
+
+    // 偷取网站任意数据
+
+    // 偷取用户资料
+
+    // 偷取用户密码和登录态
+
+    // 欺骗用户
+  </script>
+  
+</html>

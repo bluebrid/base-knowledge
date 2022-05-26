@@ -1,0 +1,5 @@
+Feature: Severity
+
+@minor @critical @blocker
+Scenario: Scenario with repeated severity tag
+  Given simple passed step

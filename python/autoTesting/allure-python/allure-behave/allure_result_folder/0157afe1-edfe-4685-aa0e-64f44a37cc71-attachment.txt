@@ -1,0 +1,12 @@
+Feature: Background
+
+  Background: Scenario background with broken step
+    Given broken step in background
+      And another passed step in background
+
+  Scenario: Scenario with background contains broken step
+    Given passed step
+      And one more passed step
+
+  Scenario: Another scenario with background contains broken step
+    Given passed step

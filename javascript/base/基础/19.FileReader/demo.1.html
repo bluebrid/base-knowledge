@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function readfile(f) {
+            var reader = new FileReader();
+            reader.readAsText(f);
+            reader.onload = function () {
+                var text = reader.result;
+                var out = document.getElementById('output');
+                out.innerHTML = '';
+                out.appendChild(document.createTextNode(text));
+            }
+            reader.onerror = function (e) {
+                console.log('Error', e);
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <input type='file' onchange='readfile(this.files[0])'></input>
+    <pre id='output'></pre>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>performance演示</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+
+  <body>
+    <div class="text">
+      Monitor Perference Demo
+    </div>
+    <div class="button">
+      <input type="button" value="Button" />
+    </div>
+    <div class="image">
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+      <img src="./images/timg.jpg" alt="" srcset="" />
+    </div>
+    <script>
+      /**
+       * 参考： https://www.jianshu.com/p/7e7c8b8a3d0e , F12 查看console
+       * https://juejin.im/post/5e9052916fb9a03c9843284f
+       */
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var timing = window.performance.timing;
+          timing.domLoading; //浏览器开始解析 HTML 文档第一批收到的字节
+          timing.domInteractive; // 浏览器完成解析并且所有 HTML 和 DOM 构建完毕
+          timing.domContentLoadedEventStart; //DOM 解析完成后，网页内资源加载开始的时间
+          timing.domContentLoadedEventEnd; // DOM 解析完成后，网页内资源加载完成的时间（如 JS 脚本加载执行完毕）
+          timing.domComplete; //网页上所有资源（图片等）下载完成,且准备就绪的时间
+
+          var performance = window.performance;
+          if (performance) {
+            var navigation = performance.getEntriesByType("navigation")[0],
+            navigationStart = 0;
+            navigation ||
+              (navigationStart = (navigation = performance.timing).navigationStart);
+            var summary = {
+              redirect: {
+                desc: "网页重定向的耗时",
+                value: navigation.redirectEnd - navigation.redirectStart,
+              },
+              appCache: {
+                desc: "检查本地缓存的耗时",
+                value: navigation.domainLookupStart - navigation.fetchStart,
+              },
+              dns: {
+                desc: "DNS查询的耗时",
+                value:
+                  navigation.domainLookupEnd - navigation.domainLookupStart,
+              },
+              TCP: {
+                desc: "TCP连接的耗时",
+                value: navigation.connectEnd - navigation.connectStart,
+              },
+              ttfb: {
+                desc: "从客户端发起请求到接收到响应的时间 / Time To First Byte",
+                value: navigation.responseStart - navigation.requestStart,
+              },
+              contentDownload: {
+                desc: "下载服务端返回数据的时间",
+                value: navigation.responseEnd - navigation.responseStart,
+              },
+              httpTotalTime: {
+                desc: "http请求总耗时",
+                value: navigation.responseEnd - navigation.requestStart,
+              },
+              domContentLoaded: {
+                desc: "dom加载完成的时间",
+                value: navigation.domContentLoadedEventEnd - navigationStart,
+              },
+              loaded: {
+                desc: "页面load的总耗时",
+                value: navigation.loadEventEnd - navigationStart,
+              },
+              idle: {
+                desc: "白屏时间",
+                value: navigation.responseStart - navigationStart
+              },
+              domTree: {
+                desc: "解析DOM树耗时", 
+                value: navigation.domComplete - navigation.domInteractive
+              }
+            };
+            if (Math.random() > 0.1) {
+              var location = window.location,
+                href = location.href,
+                pathname = location.pathname,
+                userAgent = navigator.userAgent,
+                url = href.split("?")[0];
+              axios
+                .post("/monitorPerforence", {
+                  app: "shakespeare-performance",
+                  url: url,
+                  ua: userAgent,
+                  path: pathname,
+                  idle: summary.idle,// 1. 白屏时间
+                  stats_ttfb: summary.ttfb, // 2.发起请求到首次响应时间
+                  stats_domLoaded: summary.domContentLoaded, // 3. dom加载完成的时间
+                  stats_loaded: summary.loaded, // 4. 页面load的总耗时
+                })
+                .then(
+                  (data) => {
+                    console.log(data);
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                )
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+            console && console.log && console.log(summary);
+          }
+        }, 0);
+      });
+    </script>
+  </body>
+</html>

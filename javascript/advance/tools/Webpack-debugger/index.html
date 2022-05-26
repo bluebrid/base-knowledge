@@ -1,0 +1,89 @@
+Html Webpack Plugin:
+<pre>
+  TypeError: Cannot read property 'readJson' of undefined
+  
+  - DescriptionFileUtils.js:13 forEachBail
+    [CodeBeautify]/[enhanced-resolve]/lib/DescriptionFileUtils.js:13:27
+  
+  - forEachBail.js:14 forEachBail
+    [CodeBeautify]/[enhanced-resolve]/lib/forEachBail.js:14:3
+  
+  - DescriptionFileUtils.js:11 findDescriptionFile
+    [CodeBeautify]/[enhanced-resolve]/lib/DescriptionFileUtils.js:11:3
+  
+  - DescriptionFileUtils.js:61 Object.loadDescriptionFile
+    [CodeBeautify]/[enhanced-resolve]/lib/DescriptionFileUtils.js:61:3
+  
+  - DescriptionFilePlugin.js:20 resolver.getHook.tapAsync
+    [CodeBeautify]/[enhanced-resolve]/lib/DescriptionFilePlugin.js:20:25
+  
+  
+  - Hook.js:154 AsyncSeriesBailHook.lazyCompileHook
+    [CodeBeautify]/[tapable]/lib/Hook.js:154:20
+  
+  - Resolver.js:235 Resolver.doResolve
+    [CodeBeautify]/[enhanced-resolve]/lib/Resolver.js:235:16
+  
+  - ParsePlugin.js:27 resolver.getHook.tapAsync
+    [CodeBeautify]/[enhanced-resolve]/lib/ParsePlugin.js:27:13
+  
+  
+  - Hook.js:154 AsyncSeriesBailHook.lazyCompileHook
+    [CodeBeautify]/[tapable]/lib/Hook.js:154:20
+  
+  - Resolver.js:235 Resolver.doResolve
+    [CodeBeautify]/[enhanced-resolve]/lib/Resolver.js:235:16
+  
+  - Resolver.js:155 Resolver.resolve
+    [CodeBeautify]/[enhanced-resolve]/lib/Resolver.js:155:15
+  
+  - NormalModuleFactory.js:416 asyncLib.map
+    [CodeBeautify]/[webpack]/lib/NormalModuleFactory.js:416:14
+  
+  - async.js:2543 arrayEachIndex
+    [CodeBeautify]/[neo-async]/async.js:2543:9
+  
+  - async.js:2897 Object.map
+    [CodeBeautify]/[neo-async]/async.js:2897:9
+  
+  - NormalModuleFactory.js:413 NormalModuleFactory.resolveRequestArray
+    [CodeBeautify]/[webpack]/lib/NormalModuleFactory.js:413:12
+  
+  - NormalModuleFactory.js:194 Array.asyncLib.parallel.callback
+    [CodeBeautify]/[webpack]/lib/NormalModuleFactory.js:194:12
+  
+  - async.js:2512 arrayEachFunc
+    [CodeBeautify]/[neo-async]/async.js:2512:19
+  
+  - async.js:6867 Object.parallel
+    [CodeBeautify]/[neo-async]/async.js:6867:9
+  
+  - NormalModuleFactory.js:191 
+    [CodeBeautify]/[webpack]/lib/NormalModuleFactory.js:191:13
+  
+  - NormalModuleFactory.js:129 
+    [CodeBeautify]/[webpack]/lib/NormalModuleFactory.js:129:4
+  
+  - AutoExternalPlugin.js:29 
+    D:/private/bluebrid/CodeBeautify/plugins/AutoExternalPlugin.js:29:11
+  
+  - ExternalModuleFactoryPlugin.js:28 handleExternal
+    [CodeBeautify]/[webpack]/lib/ExternalModuleFactoryPlugin.js:28:34
+  
+  - ExternalModuleFactoryPlugin.js:103 handleExternals
+    [CodeBeautify]/[webpack]/lib/ExternalModuleFactoryPlugin.js:103:26
+  
+  - ExternalModuleFactoryPlugin.js:65 next
+    [CodeBeautify]/[webpack]/lib/ExternalModuleFactoryPlugin.js:65:43
+  
+  - ExternalModuleFactoryPlugin.js:71 handleExternals
+    [CodeBeautify]/[webpack]/lib/ExternalModuleFactoryPlugin.js:71:7
+  
+  - ExternalModuleFactoryPlugin.js:101 
+    [CodeBeautify]/[webpack]/lib/ExternalModuleFactoryPlugin.js:101:5
+  
+  - NormalModuleFactory.js:396 hooks.beforeResolve.callAsync
+    [CodeBeautify]/[webpack]/lib/NormalModuleFactory.js:396:5
+  
+  
+</pre><script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>

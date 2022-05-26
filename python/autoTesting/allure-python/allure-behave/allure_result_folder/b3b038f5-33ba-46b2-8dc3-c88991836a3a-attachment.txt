@@ -1,0 +1,4 @@
+Feature: Severity
+
+Scenario: Scenario and feature without severity
+  Given simple passed step

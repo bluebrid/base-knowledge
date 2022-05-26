@@ -1,0 +1,54 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Webpack Demo",
+            "program": "${workspaceFolder}/lib/webpack/bin/webpack.js",
+            "args": [
+                "--config", "${workspaceFolder}/webpack.config.js"
+             ],
+             "env" : { "NODE_ENV" : "development"}
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Tapable Demo 1(SyncHook)",
+            "program": "${workspaceFolder}/lib/tapable/demo/1.SyncHook/demo.1.js",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Tapable Demo 2(SyncBailHook)",
+            "program": "${workspaceFolder}/lib/tapable/demo/2.SyncBailHook/demo.1.js",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Tapable Demo 3(SyncWaterfallHook)",
+            "program": "${workspaceFolder}/lib/tapable/demo/3.SyncWaterfallHook/demo.1.js",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Tapable Demo 4(SyncLoopHook)",
+            "program": "${workspaceFolder}/lib/tapable/demo/4.SyncLoopHook/demo.1.js",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Tapable Demo 5(AsyncParallelHook)",
+            "program": "${workspaceFolder}/lib/tapable/demo/5.AsyncParallelHook/demo.1.js",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debugger Tapable Demo 6(AsyncParallelBailHook)",
+            "program": "${workspaceFolder}/lib/tapable/demo/6.AsyncParallelBailHook/demo.1.js",
+        }
+    ]
+}

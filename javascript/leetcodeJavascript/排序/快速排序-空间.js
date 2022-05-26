@@ -1,0 +1,25 @@
+function quickSort(arr) {
+  if (arr.length === 1 || arr.length === 0) {
+    return arr
+  }
+  const left = []
+
+  const right = []
+  const mid = arr[0] // 第一个作为中间数据
+
+  for (let i = 1; i < arr.length; i++) {
+    let num = arr[i]
+    if (num < mid) {
+      left.push(num) // 小的放到左边
+    } else {
+      right.push(num) // 大得放到右边
+    }
+  }
+
+  return [...quickSort(left), mid, ...quickSort(right)]
+}
+
+quickSort.sortName = "快速排序（空间版）"
+const arr = [11,2,442,23,4522,2333 ]
+console.log(quickSort(arr))
+// module.exports = quickSort

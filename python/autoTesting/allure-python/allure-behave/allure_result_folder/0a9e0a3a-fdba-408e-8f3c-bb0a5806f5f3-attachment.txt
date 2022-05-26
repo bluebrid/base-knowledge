@@ -1,0 +1,18 @@
+Feature: Scenario Outline
+
+  Scenario Outline: First scenario outline in feature
+    Given simple passed step with param "<friend>"
+
+    Examples: examples table
+    | friend |
+    | Rick   |
+    | Morty  |
+
+
+  Scenario Outline: Second scenario outline in feature
+    Given simple passed step with param "<hero>"
+
+    Examples: examples table
+    | hero |
+    | Finn |
+    | Jack |

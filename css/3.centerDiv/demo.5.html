@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>垂直居中</title>
+    <style>
+        /*
+        https://www.w3cplus.com/css3/css-secrets/vertical-centering.html
+        值得庆幸的是，如果我们想让元素在视窗中居中，还是有希望的。CSS Values and Units Level 3(https://www.w3.org/TR/css-values-3/#viewport-relative-lengths)定义了一种新的单位，称为相对视窗(viewport-relative)长度单位。
+
+        vw是相对于视窗的宽度。与你预期刚好相反,1vw相当于视窗宽度的1%，而不是100%
+        与vw相似的是，1vh相当于视窗高度的1%
+        如果视窗的宽度小于高度，1vmin等于1vw，反之，如果视窗宽度大于高度，1vmin等于1vh
+        如果视窗的宽度大于高度，1vmax等于1vw，反之，如果视窗宽度小于高度，1vmax等于1vh
+        当然，这种方法有用性是有极限的，因为它只适用于元素在视窗中垂直居中。
+        */
+
+        main {
+            width: 18em;
+            padding: 1em 1.5em;
+            margin: 50vh auto 0;
+            transform: translateY(-50%);
+        }
+
+        /* Base style */
+        main {
+            padding: 1em 1.5em;
+            box-sizing: border-box;
+            background: #655;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 .2em;
+            font-size: 150%;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        body {
+            background: #fb3;
+            font: 100%/1.5 sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Am I centered yet?</h1>
+        <p>Center me, please!</p>
+    </main>
+</body>
+
+</html>

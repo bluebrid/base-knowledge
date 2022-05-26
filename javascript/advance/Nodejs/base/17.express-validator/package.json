@@ -1,0 +1,13 @@
+{
+  "name": "17.express-validator",
+  "version": "0.0.0",
+  "decription": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Ivan Fan <15813849613@126.com> (https://github.com/bluebrid)",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0"
+  }
+}

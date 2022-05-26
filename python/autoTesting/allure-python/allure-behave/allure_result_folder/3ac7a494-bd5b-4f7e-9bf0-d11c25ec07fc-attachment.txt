@@ -1,0 +1,4 @@
+Feature: Scenario
+
+Scenario: Scenario with undefined step
+  Given undefined step

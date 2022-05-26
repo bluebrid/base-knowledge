@@ -1,0 +1,6 @@
+@critical
+Feature: Severity
+
+@minor
+Scenario: Scenario with minor severity in feature with critical severity
+  Given simple passed step

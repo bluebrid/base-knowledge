@@ -1,0 +1,32 @@
+{
+  "name": "react-router-learing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "1.0.11",
+    "husky": "^0.14.3",
+    "lerna": "^2.11.0",
+    "prettier": "^1.12.1",
+    "pretty-quick": "^1.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluebrid/react-router-learing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bluebrid/react-router-learing/issues"
+  },
+  "homepage": "https://github.com/bluebrid/react-router-learing#readme"
+}

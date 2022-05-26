@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Babel Program Demo5 ",
+            "program": "${workspaceFolder}\\node_modules\\@babel\\cli\\bin\\babel.js",
+            "args": [
+                "src/demo/demo.5.js", "--out-file", "dist/demo.5.output.js"
+             ],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Babel Program Demo6 ",
+            "program": "${workspaceFolder}\\node_modules\\@babel\\cli\\bin\\babel.js",
+            "args": [
+                "src/demo/demo.6.js", "--out-file", "dist/demo.6.output.js"
+             ],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Babel Program Demo7",
+            "program": "${workspaceFolder}\\node_modules\\@babel\\cli\\bin\\babel.js",
+            "args": [
+                "src/demo/demo.7.js", "--out-file", "dist/demo.7.output.js"
+             ],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Babel Program Demo8",
+            "program": "${workspaceFolder}\\node_modules\\@babel\\cli\\bin\\babel.js",
+            "args": [
+                "src/demo/demo.8.js", "--out-file", "dist/demo.8.output.js"
+             ],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Babel Program Demo9",
+            "program": "${workspaceFolder}\\node_modules\\@babel\\cli\\bin\\babel.js",
+            "args": [
+                "src/demo/demo.9.js", "--out-file", "dist/demo.9.output.js"
+             ],
+        } 
+    ]
+}

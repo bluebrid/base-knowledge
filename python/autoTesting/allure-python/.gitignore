@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+.tox
+.pytest_cache
+.python-version
+
+*.pyc
+*.egg-info
+
+*/build
+*/dist

@@ -1,0 +1,29 @@
+{
+  "name": "vanilla",
+  "version": "1.0.0",
+  "description": "Simple JS ",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open",
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
+  "author": "islempenywis",
+  "license": "MIT ",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^3.0.0",
+    "const": "^1.0.0",
+    "html-webpack-plugin": "^4.0.1",
+    "react-dev-utils": "^10.2.1",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

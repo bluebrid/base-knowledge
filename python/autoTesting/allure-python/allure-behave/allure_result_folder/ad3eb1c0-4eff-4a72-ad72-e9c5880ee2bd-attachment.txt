@@ -1,0 +1,6 @@
+Feature: Hook
+  Scenario: Scenario with "after feature" hook
+    Given simple passed step
+
+  Scenario: Another scenario with "after feature" hook
+    Given simple passed step

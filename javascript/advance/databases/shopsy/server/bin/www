@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+
+// Dependencies
+const http = require('http');
+const config = require('../config');
+const App = require('../app');
+const mongoose = require('mongoose');
+const redis = require('redis');
+const Sequelize = require('sequelize');
+
+const log = config.logger;
+
+// 启动时，初始化所有的连接
+const sequelize = new Sequelize(config.mysql.options);
+sequelize
+  .authenticate()
+  .then(() => {
+    log.info('Successfully connected to MySQL');
+  })
+  .catch((err) => {
+    log.fatal(err);
+    process.exit(1);
+  });
+// 将对应的连接保存在config配置文件中
+config.mysql.client = sequelize;
+
+mongoose.connect(config.mongodb.dsn)
+  .then(() => {
+    log.info('Successfully connected to MongoDb');
+  });
+
+const redisClient = redis.createClient(config.redis.options);
+redisClient.on('ready', () => {
+  log.info('Successfully connected to Redis');
+});
+config.redis.client = redisClient;
+
+/* Logic to start the application */
+const app = App(config);
+const port = process.env.PORT || '3000';
+app.set('port', port);
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port  ${port}`;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      log.fatal(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      log.fatal(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+const server = http.createServer(app);
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+
+  log.info(`${config.applicationName} listening on ${bind}`);
+}
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);

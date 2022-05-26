@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-display: swap;
+  font-family: "Lato", sans-serif;
+  /* height: 400px; */
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+.app .react-app-code {
+  width: 100%;
+  border-radius: 4px;
+  padding: 0.5rem 0.25rem;
+  margin-bottom: 0;
+}
+button {
+  /* background: #002219; */
+  outline: none;
+  border: 1px solid gray;
+  padding: 4px !important;
+  border-radius: 4px;
+}
+@media (min-width: 500px) {
+  .app .react-app-code {
+    padding: 0.5rem 1rem;
+  }
+}
+.app .language-jsx {
+  font-size: 89%;
+}
+@media (min-width: 500px) {
+  .app .language-jsx {
+    font-size: 100%;
+  }
+}
+
+.react-app {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 1rem;
+  background: rgba(0, 34, 25, 0.2);
+  color: black;
+}
+/* .react-app :first-child {
+  font-size: 3rem;
+} */
+.demo-14,
+.demo-14:first-child {
+  font-size: 16px;
+}
+.react-app > * {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-weight: 300;
+  font-size: 2rem;
+}
+.react-app > * + * {
+  margin-top: 1rem;
+}
+
+.react-app {
+  border: 1px solid gray;
+  margin: 10px;
+  margin-top: 20px;
+  padding: 20px;
+  position: relative;
+}
+.react-app::before {
+  content: attr(data-title);
+  display: block;
+  height: 22px;
+  background: gray;
+  position: absolute;
+  top: -11px;
+  left: 6px;
+  border-radius: 5px;
+  padding: 0px 4px;
+  color: white;
+}
+
+.animate {
+  height: 100px;
+  background: green;
+  margin-bottom: 10px;
+}
+
+.animate .square {
+  height: 100px;
+  width: 100px;
+  background: red;
+  font-size: 16px;
+}
+
+
+.content {
+    height: 100px;
+    background: red;
+}
+#modal .modal-content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(128, 128, 128, .8);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+
+}
+input[type='button'] {
+    width: 100px;
+    line-height: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    text-transform: uppercase;
+    color: red;
+    font-weight: bold;
+    border-radius: 5px;
+    background: #0862ec;
+    margin-top: 10px;
+    outline: none;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+.error-boundary {
+  font-size:12px;
+}

@@ -1,0 +1,4 @@
+Feature: Scenario
+
+Scenario: Scenario with broken step
+  Given broken step

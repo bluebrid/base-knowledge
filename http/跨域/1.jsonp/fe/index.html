@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="JSONP" id="jsonp" />
+    <div id="result"></div>
+    <script>
+        class JSONP {
+            constructor(url, cb) {
+                this.url = url
+                this.cbName = 'jsonp_' + Date.now()
+                this.cb = cb
+                this.init();
+            }
+            init() {
+                if (this.url.indexOf('?') > 0) {
+                    this.url = this.url + '&callback=' + this.cbName
+                } else {
+                    this.url = this.url + '?callback=' + this.cbName
+                }
+                this.createScript()
+                this.createCallback()
+            }
+            createScript() {
+                // mdn 有说 script 标签不受同源策略的限制. 那么, 我们尝试一下用 script 标签引入 http://localhost:8888/ 试试
+                let script = document.createElement('script')
+                script.src = this.url
+                document.body.appendChild(script)
+                // 请求完成后，返回的是： jsonp_1570523960057({"name":"ivan fan","age":18})
+                // jsonp_1570523960057 就是this.cbName , window['jsonp_1570523960057'] 就是这个这个函数，然后有指向的是this.cb, 也就是我们的回调函数
+                script.addEventListener('load', () => { // 这个是异步的， 后与createCallback执行
+                    script.remove();
+                    delete window[this.cbName]
+                })
+            }
+            createCallback() {
+                window[this.cbName] = this.cb;// 将windows 的函数指向我们传递进来的cb
+            }
+        }
+        document.getElementById('jsonp').addEventListener('click', () => {
+            let resut = document.getElementById('result')
+            let API = 'http://localhost:9999/'
+            new JSONP(API, (data) => {
+                resut.innerText = JSON.stringify(data)
+            })
+        })
+    </script>
+</body>
+
+</html>

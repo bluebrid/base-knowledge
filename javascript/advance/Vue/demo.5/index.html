@@ -1,0 +1,29 @@
+<!doctype html>
+<html data-framework="vue">
+  <head>
+    <meta charset="utf-8">
+    <title>Todo</title>
+    <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css@2.0.4/index.css">
+    <script src="https://unpkg.com/director@1.2.8/build/director.js"></script>
+    <style>[v-cloak] { display: none; }</style>
+  </head>
+  <body>
+    <section class="todoapp">
+      <input class="new-todo"
+      autofocus autocomplete="off"
+      placeholder="What needs to be done?"
+      v-model="newTodo"
+     >
+      <!-- <div>{{strLen}}</div> -->
+    </section>
+     
+
+    <script>
+    // for testing
+    if (navigator.userAgent.indexOf('PhantomJS') > -1) localStorage.clear()
+    </script>
+    <!-- Delete ".min" for console warnings in development -->
+    <script src="../vuelib/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
