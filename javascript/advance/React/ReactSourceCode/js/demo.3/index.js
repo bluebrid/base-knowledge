@@ -33,22 +33,22 @@ class App extends React.Component {
   }
 }
 // React 18, 必须使用`createRoot`才能`automatic Batching`
-const root = ReactDOM.createRoot(
-  $root
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// const root = ReactDOM.createRoot(
+//   $root
+// );
+// root.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// );
 
 
-// ReactDOM.render(
-//   React.createElement(App, null),
-//   $root,
-//   () => {
-//     console.log('render done')
-//   });
+ReactDOM.render(
+  React.createElement(App, null),
+  $root,
+  () => {
+    console.log('render done')
+  });
 
 
 

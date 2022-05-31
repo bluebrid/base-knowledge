@@ -6,7 +6,7 @@ function compareVersion(v1, v2) {
   if (!v1) return -1;
   if (!v2) return 1;
   const v1Stack = v1.split('.');
-  const v2Stack = v1..split('.');
+  const v2Stack = v2.split('.');
   const maxLen = Math.max(v1Stack.length, v2Stack.length);
 
   for (let i = 0; i < maxLen; i++) {

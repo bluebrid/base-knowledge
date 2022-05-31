@@ -5,7 +5,6 @@ var Vue = (() => {
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -13,22 +12,16 @@ var Vue = (() => {
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
   };
-  var __reExport = (target, module, copyDefault, desc) => {
-    if (module && typeof module === "object" || typeof module === "function") {
-      for (let key of __getOwnPropNames(module))
-        if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
-          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
     }
-    return target;
+    return to;
   };
-  var __toESM = (module, isNodeMode) => {
-    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
-  };
-  var __toCommonJS = /* @__PURE__ */ ((cache) => {
-    return (module, temp) => {
-      return cache && cache.get(module) || (temp = __reExport(__markAsModule({}), module, 1), cache && cache.set(module, temp), temp);
-    };
-  })(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
   // node_modules/.pnpm/@babel+parser@7.16.4/node_modules/@babel/parser/lib/index.js
   var require_lib = __commonJS({
@@ -16368,203 +16361,6 @@ var Vue = (() => {
     DeprecationTypes6["PRIVATE_APIS"] = "PRIVATE_APIS";
     return DeprecationTypes6;
   })(DeprecationTypes || {});
-  var deprecationData = {
-    ["GLOBAL_MOUNT" /* GLOBAL_MOUNT */]: {
-      message: `The global app bootstrapping API has changed: vm.$mount() and the "el" option have been removed. Use createApp(RootComponent).mount() instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/global-api.html#mounting-app-instance`
-    },
-    ["GLOBAL_MOUNT_CONTAINER" /* GLOBAL_MOUNT_CONTAINER */]: {
-      message: `Vue detected directives on the mount container. In Vue 3, the container is no longer considered part of the template and will not be processed/replaced.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/mount-changes.html`
-    },
-    ["GLOBAL_EXTEND" /* GLOBAL_EXTEND */]: {
-      message: `Vue.extend() has been removed in Vue 3. Use defineComponent() instead.`,
-      link: `https://vuejs.org/api/general.html#definecomponent`
-    },
-    ["GLOBAL_PROTOTYPE" /* GLOBAL_PROTOTYPE */]: {
-      message: `Vue.prototype is no longer available in Vue 3. Use app.config.globalProperties instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/global-api.html#vue-prototype-replaced-by-config-globalproperties`
-    },
-    ["GLOBAL_SET" /* GLOBAL_SET */]: {
-      message: `Vue.set() has been removed as it is no longer needed in Vue 3. Simply use native JavaScript mutations.`
-    },
-    ["GLOBAL_DELETE" /* GLOBAL_DELETE */]: {
-      message: `Vue.delete() has been removed as it is no longer needed in Vue 3. Simply use native JavaScript mutations.`
-    },
-    ["GLOBAL_OBSERVABLE" /* GLOBAL_OBSERVABLE */]: {
-      message: `Vue.observable() has been removed. Use \`import { reactive } from "vue"\` from Composition API instead.`,
-      link: `https://vuejs.org/api/reactivity-core.html#reactive`
-    },
-    ["GLOBAL_PRIVATE_UTIL" /* GLOBAL_PRIVATE_UTIL */]: {
-      message: `Vue.util has been removed. Please refactor to avoid its usage since it was an internal API even in Vue 2.`
-    },
-    ["CONFIG_SILENT" /* CONFIG_SILENT */]: {
-      message: `config.silent has been removed because it is not good practice to intentionally suppress warnings. You can use your browser console's filter features to focus on relevant messages.`
-    },
-    ["CONFIG_DEVTOOLS" /* CONFIG_DEVTOOLS */]: {
-      message: `config.devtools has been removed. To enable devtools for production, configure the __VUE_PROD_DEVTOOLS__ compile-time flag.`,
-      link: `https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags`
-    },
-    ["CONFIG_KEY_CODES" /* CONFIG_KEY_CODES */]: {
-      message: `config.keyCodes has been removed. In Vue 3, you can directly use the kebab-case key names as v-on modifiers.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html`
-    },
-    ["CONFIG_PRODUCTION_TIP" /* CONFIG_PRODUCTION_TIP */]: {
-      message: `config.productionTip has been removed.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/global-api.html#config-productiontip-removed`
-    },
-    ["CONFIG_IGNORED_ELEMENTS" /* CONFIG_IGNORED_ELEMENTS */]: {
-      message: () => {
-        let msg = `config.ignoredElements has been removed.`;
-        if (isRuntimeOnly()) {
-          msg += ` Pass the "isCustomElement" option to @vue/compiler-dom instead.`;
-        } else {
-          msg += ` Use config.isCustomElement instead.`;
-        }
-        return msg;
-      },
-      link: `https://v3-migration.vuejs.org/breaking-changes/global-api.html#config-ignoredelements-is-now-config-iscustomelement`
-    },
-    ["CONFIG_WHITESPACE" /* CONFIG_WHITESPACE */]: {
-      message: `Vue 3 compiler's whitespace option will default to "condense" instead of "preserve". To suppress this warning, provide an explicit value for \`config.compilerOptions.whitespace\`.`
-    },
-    ["CONFIG_OPTION_MERGE_STRATS" /* CONFIG_OPTION_MERGE_STRATS */]: {
-      message: `config.optionMergeStrategies no longer exposes internal strategies. Use custom merge functions instead.`
-    },
-    ["INSTANCE_SET" /* INSTANCE_SET */]: {
-      message: `vm.$set() has been removed as it is no longer needed in Vue 3. Simply use native JavaScript mutations.`
-    },
-    ["INSTANCE_DELETE" /* INSTANCE_DELETE */]: {
-      message: `vm.$delete() has been removed as it is no longer needed in Vue 3. Simply use native JavaScript mutations.`
-    },
-    ["INSTANCE_DESTROY" /* INSTANCE_DESTROY */]: {
-      message: `vm.$destroy() has been removed. Use app.unmount() instead.`,
-      link: `https://vuejs.org/api/application.html#app-unmount`
-    },
-    ["INSTANCE_EVENT_EMITTER" /* INSTANCE_EVENT_EMITTER */]: {
-      message: `vm.$on/$once/$off() have been removed. Use an external event emitter library instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/events-api.html`
-    },
-    ["INSTANCE_EVENT_HOOKS" /* INSTANCE_EVENT_HOOKS */]: {
-      message: (event) => `"${event}" lifecycle events are no longer supported. From templates, use the "vnode" prefix instead of "hook:". For example, @${event} should be changed to @vnode-${event.slice(5)}. From JavaScript, use Composition API to dynamically register lifecycle hooks.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/vnode-lifecycle-events.html`
-    },
-    ["INSTANCE_CHILDREN" /* INSTANCE_CHILDREN */]: {
-      message: `vm.$children has been removed. Consider refactoring your logic to avoid relying on direct access to child components.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/children.html`
-    },
-    ["INSTANCE_LISTENERS" /* INSTANCE_LISTENERS */]: {
-      message: `vm.$listeners has been removed. In Vue 3, parent v-on listeners are included in vm.$attrs and it is no longer necessary to separately use v-on="$listeners" if you are already using v-bind="$attrs". (Note: the Vue 3 behavior only applies if this compat config is disabled)`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/listeners-removed.html`
-    },
-    ["INSTANCE_SCOPED_SLOTS" /* INSTANCE_SCOPED_SLOTS */]: {
-      message: `vm.$scopedSlots has been removed. Use vm.$slots instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/slots-unification.html`
-    },
-    ["INSTANCE_ATTRS_CLASS_STYLE" /* INSTANCE_ATTRS_CLASS_STYLE */]: {
-      message: (componentName) => `Component <${componentName || "Anonymous"}> has \`inheritAttrs: false\` but is relying on class/style fallthrough from parent. In Vue 3, class/style are now included in $attrs and will no longer fallthrough when inheritAttrs is false. If you are already using v-bind="$attrs" on component root it should render the same end result. If you are binding $attrs to a non-root element and expecting class/style to fallthrough on root, you will need to now manually bind them on root via :class="$attrs.class".`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style.html`
-    },
-    ["OPTIONS_DATA_FN" /* OPTIONS_DATA_FN */]: {
-      message: `The "data" option can no longer be a plain object. Always use a function.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/data-option.html`
-    },
-    ["OPTIONS_DATA_MERGE" /* OPTIONS_DATA_MERGE */]: {
-      message: (key) => `Detected conflicting key "${key}" when merging data option values. In Vue 3, data keys are merged shallowly and will override one another.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/data-option.html#mixin-merge-behavior-change`
-    },
-    ["OPTIONS_BEFORE_DESTROY" /* OPTIONS_BEFORE_DESTROY */]: {
-      message: `\`beforeDestroy\` has been renamed to \`beforeUnmount\`.`
-    },
-    ["OPTIONS_DESTROYED" /* OPTIONS_DESTROYED */]: {
-      message: `\`destroyed\` has been renamed to \`unmounted\`.`
-    },
-    ["WATCH_ARRAY" /* WATCH_ARRAY */]: {
-      message: `"watch" option or vm.$watch on an array value will no longer trigger on array mutation unless the "deep" option is specified. If current usage is intended, you can disable the compat behavior and suppress this warning with:
-
-  configureCompat({ ${"WATCH_ARRAY" /* WATCH_ARRAY */}: false })
-`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/watch.html`
-    },
-    ["PROPS_DEFAULT_THIS" /* PROPS_DEFAULT_THIS */]: {
-      message: (key) => `props default value function no longer has access to "this". The compat build only offers access to this.$options.(found in prop "${key}")`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/props-default-this.html`
-    },
-    ["CUSTOM_DIR" /* CUSTOM_DIR */]: {
-      message: (legacyHook, newHook) => `Custom directive hook "${legacyHook}" has been removed. Use "${newHook}" instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/custom-directives.html`
-    },
-    ["V_ON_KEYCODE_MODIFIER" /* V_ON_KEYCODE_MODIFIER */]: {
-      message: `Using keyCode as v-on modifier is no longer supported. Use kebab-case key name modifiers instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html`
-    },
-    ["ATTR_FALSE_VALUE" /* ATTR_FALSE_VALUE */]: {
-      message: (name) => `Attribute "${name}" with v-bind value \`false\` will render ${name}="false" instead of removing it in Vue 3. To remove the attribute, use \`null\` or \`undefined\` instead. If the usage is intended, you can disable the compat behavior and suppress this warning with:
-
-  configureCompat({ ${"ATTR_FALSE_VALUE" /* ATTR_FALSE_VALUE */}: false })
-`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/attribute-coercion.html`
-    },
-    ["ATTR_ENUMERATED_COERCION" /* ATTR_ENUMERATED_COERCION */]: {
-      message: (name, value, coerced) => `Enumerated attribute "${name}" with v-bind value \`${value}\` will ${value === null ? `be removed` : `render the value as-is`} instead of coercing the value to "${coerced}" in Vue 3. Always use explicit "true" or "false" values for enumerated attributes. If the usage is intended, you can disable the compat behavior and suppress this warning with:
-
-  configureCompat({ ${"ATTR_ENUMERATED_COERCION" /* ATTR_ENUMERATED_COERCION */}: false })
-`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/attribute-coercion.html`
-    },
-    ["TRANSITION_CLASSES" /* TRANSITION_CLASSES */]: {
-      message: ``
-    },
-    ["TRANSITION_GROUP_ROOT" /* TRANSITION_GROUP_ROOT */]: {
-      message: `<TransitionGroup> no longer renders a root <span> element by default if no "tag" prop is specified. If you do not rely on the span for styling, you can disable the compat behavior and suppress this warning with:
-
-  configureCompat({ ${"TRANSITION_GROUP_ROOT" /* TRANSITION_GROUP_ROOT */}: false })
-`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/transition-group.html`
-    },
-    ["COMPONENT_ASYNC" /* COMPONENT_ASYNC */]: {
-      message: (comp) => {
-        const name = getComponentName(comp);
-        return `Async component${name ? ` <${name}>` : `s`} should be explicitly created via \`defineAsyncComponent()\` in Vue 3. Plain functions will be treated as functional components in non-compat build. If you have already migrated all async component usage and intend to use plain functions for functional components, you can disable the compat behavior and suppress this warning with:
-
-  configureCompat({ ${"COMPONENT_ASYNC" /* COMPONENT_ASYNC */}: false })
-`;
-      },
-      link: `https://v3-migration.vuejs.org/breaking-changes/async-components.html`
-    },
-    ["COMPONENT_FUNCTIONAL" /* COMPONENT_FUNCTIONAL */]: {
-      message: (comp) => {
-        const name = getComponentName(comp);
-        return `Functional component${name ? ` <${name}>` : `s`} should be defined as a plain function in Vue 3. The "functional" option has been removed. NOTE: Before migrating to use plain functions for functional components, first make sure that all async components usage have been migrated and its compat behavior has been disabled.`;
-      },
-      link: `https://v3-migration.vuejs.org/breaking-changes/functional-components.html`
-    },
-    ["COMPONENT_V_MODEL" /* COMPONENT_V_MODEL */]: {
-      message: (comp) => {
-        const configMsg = `opt-in to Vue 3 behavior on a per-component basis with \`compatConfig: { ${"COMPONENT_V_MODEL" /* COMPONENT_V_MODEL */}: false }\`.`;
-        if (comp.props && (isArray(comp.props) ? comp.props.includes("modelValue") : hasOwn(comp.props, "modelValue"))) {
-          return `Component declares "modelValue" prop, which is Vue 3 usage, but is running under Vue 2 compat v-model behavior. You can ${configMsg}`;
-        }
-        return `v-model usage on component has changed in Vue 3. Component that expects to work with v-model should now use the "modelValue" prop and emit the "update:modelValue" event. You can update the usage and then ${configMsg}`;
-      },
-      link: `https://v3-migration.vuejs.org/breaking-changes/v-model.html`
-    },
-    ["RENDER_FUNCTION" /* RENDER_FUNCTION */]: {
-      message: `Vue 3's render function API has changed. You can opt-in to the new API with:
-
-  configureCompat({ ${"RENDER_FUNCTION" /* RENDER_FUNCTION */}: false })
-
-  (This can also be done per-component via the "compatConfig" option.)`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/render-function-api.html`
-    },
-    ["FILTERS" /* FILTERS */]: {
-      message: `filters have been removed in Vue 3. The "|" symbol will be treated as native JavaScript bitwise OR operator. Use method calls or computed properties instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/filters.html`
-    },
-    ["PRIVATE_APIS" /* PRIVATE_APIS */]: {
-      message: (name) => `"${name}" is a Vue 2 private API that no longer exists in Vue 3. If you are seeing this warning only due to a dependency, you can suppress this warning via { PRIVATE_APIS: 'suppress-warning' }.`
-    }
-  };
   if (false) {
     configureCompat({
       MODE: 3
@@ -16745,7 +16541,7 @@ var Vue = (() => {
   }
   function renderComponentRoot(instance) {
     const {
-      type: Component5,
+      type: Component4,
       vnode,
       proxy,
       withProxy,
@@ -16773,7 +16569,7 @@ var Vue = (() => {
         result = normalizeVNode(render2.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
         fallthroughAttrs = attrs;
       } else {
-        const render3 = Component5;
+        const render3 = Component4;
         if (attrs === props) {
           markAttrsAccessed();
         }
@@ -16785,7 +16581,7 @@ var Vue = (() => {
           slots,
           emit: emit3
         } : { attrs, slots, emit: emit3 }) : render3(props, null));
-        fallthroughAttrs = Component5.props ? attrs : getFunctionalFallthrough(attrs);
+        fallthroughAttrs = Component4.props ? attrs : getFunctionalFallthrough(attrs);
       }
     } catch (err) {
       blockStack.length = 0;
@@ -20919,16 +20715,16 @@ If you want to remount the same app, move your app creation logic into a factory
   function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false) {
     const instance = currentRenderingInstance || currentInstance;
     if (instance) {
-      const Component5 = instance.type;
+      const Component4 = instance.type;
       if (type === COMPONENTS) {
-        const selfName = getComponentName(Component5);
+        const selfName = getComponentName(Component4);
         if (selfName && (selfName === name || selfName === camelize(name) || selfName === capitalize(camelize(name)))) {
-          return Component5;
+          return Component4;
         }
       }
-      const res = resolve(instance[type] || Component5[type], name) || resolve(instance.appContext[type], name);
+      const res = resolve(instance[type] || Component4[type], name) || resolve(instance.appContext[type], name);
       if (!res && maybeSelfReference) {
-        return Component5;
+        return Component4;
       }
       if (warnMissing && !res) {
         const extra = type === COMPONENTS ? `
@@ -21669,24 +21465,24 @@ Component that was made reactive: `, type);
     return setupResult;
   }
   function setupStatefulComponent(instance, isSSR) {
-    const Component5 = instance.type;
+    const Component4 = instance.type;
     if (true) {
-      if (Component5.name) {
-        validateComponentName(Component5.name, instance.appContext.config);
+      if (Component4.name) {
+        validateComponentName(Component4.name, instance.appContext.config);
       }
-      if (Component5.components) {
-        const names = Object.keys(Component5.components);
+      if (Component4.components) {
+        const names = Object.keys(Component4.components);
         for (let i = 0; i < names.length; i++) {
           validateComponentName(names[i], instance.appContext.config);
         }
       }
-      if (Component5.directives) {
-        const names = Object.keys(Component5.directives);
+      if (Component4.directives) {
+        const names = Object.keys(Component4.directives);
         for (let i = 0; i < names.length; i++) {
           validateDirectiveName(names[i]);
         }
       }
-      if (Component5.compilerOptions && isRuntimeOnly()) {
+      if (Component4.compilerOptions && isRuntimeOnly()) {
         warn2(`"compilerOptions" is only supported when using a build of Vue that includes the runtime compiler. Since you are using a runtime-only build, the options should be passed via your build tool config instead.`);
       }
     }
@@ -21695,7 +21491,7 @@ Component that was made reactive: `, type);
     if (true) {
       exposePropsOnRenderContext(instance);
     }
-    const { setup } = Component5;
+    const { setup } = Component4;
     if (setup) {
       const setupContext = instance.setupContext = setup.length > 1 ? createSetupContext(instance) : null;
       setCurrentInstance(instance);
@@ -21758,39 +21554,39 @@ Component that was made reactive: `, type);
   }
   var isRuntimeOnly = () => !compile;
   function finishComponentSetup(instance, isSSR, skipOptions) {
-    const Component5 = instance.type;
+    const Component4 = instance.type;
     if (false) {
       convertLegacyRenderFn(instance);
-      if (Component5.compatConfig) {
-        validateCompatConfig(Component5.compatConfig);
+      if (Component4.compatConfig) {
+        validateCompatConfig(Component4.compatConfig);
       }
     }
     if (!instance.render) {
-      if (!isSSR && compile && !Component5.render) {
-        const template = Component5.template;
+      if (!isSSR && compile && !Component4.render) {
+        const template = Component4.template;
         if (template) {
           if (true) {
             startMeasure(instance, `compile`);
           }
           const { isCustomElement, compilerOptions } = instance.appContext.config;
-          const { delimiters, compilerOptions: componentCompilerOptions } = Component5;
+          const { delimiters, compilerOptions: componentCompilerOptions } = Component4;
           const finalCompilerOptions = extend(extend({
             isCustomElement,
             delimiters
           }, compilerOptions), componentCompilerOptions);
           if (false) {
             finalCompilerOptions.compatConfig = Object.create(globalCompatConfig);
-            if (Component5.compatConfig) {
-              extend(finalCompilerOptions.compatConfig, Component5.compatConfig);
+            if (Component4.compatConfig) {
+              extend(finalCompilerOptions.compatConfig, Component4.compatConfig);
             }
           }
-          Component5.render = compile(template, finalCompilerOptions);
+          Component4.render = compile(template, finalCompilerOptions);
           if (true) {
             endMeasure(instance, `compile`);
           }
         }
       }
-      instance.render = Component5.render || NOOP;
+      instance.render = Component4.render || NOOP;
       if (installWithProxy) {
         installWithProxy(instance);
       }
@@ -21802,8 +21598,8 @@ Component that was made reactive: `, type);
       resetTracking();
       unsetCurrentInstance();
     }
-    if (!Component5.render && instance.render === NOOP && !isSSR) {
-      if (!compile && Component5.template) {
+    if (!Component4.render && instance.render === NOOP && !isSSR) {
+      if (!compile && Component4.template) {
         warn2(`Component provided template option but runtime compilation is not supported in this build of Vue.` + (false ? ` Configure your bundler to alias "vue" to "vue/dist/vue.esm-bundler.js".` : false ? ` Use "vue.esm-browser.js" instead.` : true ? ` Use "vue.global.js" instead.` : ``));
       } else {
         warn2(`Component is missing template or render function.`);
@@ -21879,13 +21675,13 @@ Component that was made reactive: `, type);
   }
   var classifyRE = /(?:^|[-_])(\w)/g;
   var classify = (str) => str.replace(classifyRE, (c) => c.toUpperCase()).replace(/[-_]/g, "");
-  function getComponentName(Component5) {
-    return isFunction(Component5) ? Component5.displayName || Component5.name : Component5.name;
+  function getComponentName(Component4) {
+    return isFunction(Component4) ? Component4.displayName || Component4.name : Component4.name;
   }
-  function formatComponentName(instance, Component5, isRoot = false) {
-    let name = getComponentName(Component5);
-    if (!name && Component5.__file) {
-      const match = Component5.__file.match(/([^/\\]+)\.\w+$/);
+  function formatComponentName(instance, Component4, isRoot = false) {
+    let name = getComponentName(Component4);
+    if (!name && Component4.__file) {
+      const match = Component4.__file.match(/([^/\\]+)\.\w+$/);
       if (match) {
         name = match[1];
       }
@@ -21893,7 +21689,7 @@ Component that was made reactive: `, type);
     if (!name && instance && instance.parent) {
       const inferFromRegistry = (registry) => {
         for (const key in registry) {
-          if (registry[key] === Component5) {
+          if (registry[key] === Component4) {
             return key;
           }
         }
@@ -24124,7 +23920,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
   };
   var isMemberExpression = true ? isMemberExpressionBrowser : isMemberExpressionNode;
   function getInnerRange(loc, offset, length) {
-    false;
     const source = loc.source.slice(offset, offset + length);
     const newLoc = {
       source,
@@ -24132,7 +23927,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
       end: loc.end
     };
     if (length != null) {
-      false;
       newLoc.end = advancePositionWithClone(loc.start, loc.source, offset + length);
     }
     return newLoc;
@@ -24297,44 +24091,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     }
   }
 
-  // packages/compiler-core/src/compat/compatConfig.ts
-  var deprecationData2 = {
-    ["COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */]: {
-      message: `Platform-native elements with "is" prop will no longer be treated as components in Vue 3 unless the "is" value is explicitly prefixed with "vue:".`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/custom-elements-interop.html`
-    },
-    ["COMPILER_V_BIND_SYNC" /* COMPILER_V_BIND_SYNC */]: {
-      message: (key) => `.sync modifier for v-bind has been removed. Use v-model with argument instead. \`v-bind:${key}.sync\` should be changed to \`v-model:${key}\`.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/v-model.html`
-    },
-    ["COMPILER_V_BIND_PROP" /* COMPILER_V_BIND_PROP */]: {
-      message: `.prop modifier for v-bind has been removed and no longer necessary. Vue 3 will automatically set a binding as DOM property when appropriate.`
-    },
-    ["COMPILER_V_BIND_OBJECT_ORDER" /* COMPILER_V_BIND_OBJECT_ORDER */]: {
-      message: `v-bind="obj" usage is now order sensitive and behaves like JavaScript object spread: it will now overwrite an existing non-mergeable attribute that appears before v-bind in the case of conflict. To retain 2.x behavior, move v-bind to make it the first attribute. You can also suppress this warning if the usage is intended.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/v-bind.html`
-    },
-    ["COMPILER_V_ON_NATIVE" /* COMPILER_V_ON_NATIVE */]: {
-      message: `.native modifier for v-on has been removed as is no longer necessary.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/v-on-native-modifier-removed.html`
-    },
-    ["COMPILER_V_IF_V_FOR_PRECEDENCE" /* COMPILER_V_IF_V_FOR_PRECEDENCE */]: {
-      message: `v-if / v-for precedence when used on the same element has changed in Vue 3: v-if now takes higher precedence and will no longer have access to v-for scope variables. It is best to avoid the ambiguity with <template> tags or use a computed property that filters v-for data source.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/v-if-v-for.html`
-    },
-    ["COMPILER_NATIVE_TEMPLATE" /* COMPILER_NATIVE_TEMPLATE */]: {
-      message: `<template> with no special directives will render as a native template element instead of its inner content in Vue 3.`
-    },
-    ["COMPILER_INLINE_TEMPLATE" /* COMPILER_INLINE_TEMPLATE */]: {
-      message: `"inline-template" has been removed in Vue 3.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/inline-template-attribute.html`
-    },
-    ["COMPILER_FILTER" /* COMPILER_FILTERS */]: {
-      message: `filters have been removed in Vue 3. The "|" symbol will be treated as native JavaScript bitwise OR operator. Use method calls or computed properties instead.`,
-      link: `https://v3-migration.vuejs.org/breaking-changes/filters.html`
-    }
-  };
-
   // packages/compiler-core/src/parse.ts
   var decodeRE = /&(gt|lt|amp|apos|quot);/g;
   var decodeMap = {
@@ -24392,7 +24148,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     const ns = parent ? parent.ns : 0 /* HTML */;
     const nodes = [];
     while (!isEnd(context, mode, ancestors)) {
-      false;
       const s = context.source;
       let node = void 0;
       if (mode === 0 /* DATA */ || mode === 1 /* RCDATA */) {
@@ -24502,20 +24257,16 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     nodes.push(node);
   }
   function parseCDATA(context, ancestors) {
-    false;
-    false;
     advanceBy(context, 9);
     const nodes = parseChildren(context, 3 /* CDATA */, ancestors);
     if (context.source.length === 0) {
       emitError(context, 6 /* EOF_IN_CDATA */);
     } else {
-      false;
       advanceBy(context, 3);
     }
     return nodes;
   }
   function parseComment(context) {
-    false;
     const start = getCursor(context);
     let content;
     const match = /--(\!)?>/.exec(context.source);
@@ -24549,7 +24300,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     };
   }
   function parseBogusComment(context) {
-    false;
     const start = getCursor(context);
     const contentStart = context.source[1] === "?" ? 1 : 2;
     let content;
@@ -24568,7 +24318,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     };
   }
   function parseElement(context, ancestors) {
-    false;
     const wasInPre = context.inPre;
     const wasInVPre = context.inVPre;
     const parent = last(ancestors);
@@ -24627,8 +24376,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
   })(TagType || {});
   var isSpecialTemplateDirective = /* @__PURE__ */ makeMap(`if,else,else-if,for,slot`);
   function parseTag(context, type, parent) {
-    false;
-    false;
     const start = getCursor(context);
     const match = /^<\/?([a-z][^\t\r\n\f />]*)/i.exec(context.source);
     const tag = match[1];
@@ -24757,7 +24504,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     return props;
   }
   function parseAttribute(context, nameSet) {
-    false;
     const start = getCursor(context);
     const match = /^[^\t\r\n\f />][^\t\r\n\f />=]*/.exec(context.source);
     const name = match[0];
@@ -24895,7 +24641,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
   }
   function parseInterpolation(context, mode) {
     const [open, close] = context.options.delimiters;
-    false;
     const closeIndex = context.source.indexOf(close, open.length);
     if (closeIndex === -1) {
       emitError(context, 25 /* X_MISSING_INTERPOLATION_END */);
@@ -24929,7 +24674,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
     };
   }
   function parseText(context, mode) {
-    false;
     const endTokens = mode === 3 /* CDATA */ ? ["]]>"] : ["<", context.options.delimiters[0]];
     let endIndex = context.source.length;
     for (let i = 0; i < endTokens.length; i++) {
@@ -24938,7 +24682,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
         endIndex = index;
       }
     }
-    false;
     const start = getCursor(context);
     const content = parseTextData(context, endIndex, mode);
     return {
@@ -24976,7 +24719,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
   }
   function advanceBy(context, numberOfCharacters) {
     const { source } = context;
-    false;
     advancePositionWithMutation(context, source, numberOfCharacters);
     context.source = source.slice(numberOfCharacters);
   }
@@ -25923,19 +25665,14 @@ Make sure to use the production build (*.prod.js) when deploying for production.
         genNodeList(node.body, context, true, false);
         break;
       case 22 /* JS_TEMPLATE_LITERAL */:
-        false;
         break;
       case 23 /* JS_IF_STATEMENT */:
-        false;
         break;
       case 24 /* JS_ASSIGNMENT_EXPRESSION */:
-        false;
         break;
       case 25 /* JS_SEQUENCE_EXPRESSION */:
-        false;
         break;
       case 26 /* JS_RETURN_STATEMENT */:
-        false;
         break;
       case 10 /* IF_BRANCH */:
         break;
@@ -27191,7 +26928,6 @@ Make sure to use the production build (*.prod.js) when deploying for production.
         if (prev && isTemplateNode(prev) && findDir(prev, "if")) {
           children.splice(i, 1);
           i--;
-          false;
           let conditional = dynamicSlots[dynamicSlots.length - 1];
           while (conditional.alternate.type === 19 /* JS_CONDITIONAL_EXPRESSION */) {
             conditional = conditional.alternate;
