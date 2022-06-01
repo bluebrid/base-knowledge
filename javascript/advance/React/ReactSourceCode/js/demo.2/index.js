@@ -44,16 +44,44 @@ class App extends React.Component {
     );
     console.log(this.state.count);
   }
-  onChange() {
-    this.setState({
-      inputValue: this.state.inputValue + 1
-    });
+  onChange(e) {
+    setTimeout(() => {
+      this.setState({
+        inputValue: this.state.inputValue + 1
+      });
+      this.setState({
+        inputValue: this.state.inputValue + 2
+      });
+      this.setState({
+        inputValue: this.state.inputValue + 3,
+        testValue: 111
+      });
+    })
+    // this.setState({
+    //   inputValue: this.state.inputValue + 1
+    // });
+    // this.setState({
+    //   inputValue: this.state.inputValue + 1
+    // });
+    // this.setState({
+    //   inputValue: this.state.inputValue + 1
+    // });
+   
   }
   onClickCapture(e, a, b, c) {
     console.log("onClickCapture");
   }
   componentDidMount() {
-    console.log("========================componentDidMount");
+    // console.log("========================componentDidMount");
+    // this.setState({
+    //   inputValue: this.state.inputValue + 1
+    // });
+    // this.setState({
+    //   inputValue: this.state.inputValue + 2
+    // });
+    // this.setState({
+    //   inputValue: this.state.inputValue + 3
+    // });
   }
   static getDerivedStateFromProps(nextProps, preState) {
     /**
@@ -83,6 +111,7 @@ class App extends React.Component {
     //     <button onClick={this.onClick} key="2">21.Click Me{this.state.count}</button>
     //   </div>
     // )
+    console.log('===========================================================')
     return (
       <div>
         <button onClick={this.onClick} key="1">
