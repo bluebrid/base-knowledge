@@ -21,5 +21,5 @@ function moveZeros(arr) {
     }
     return arr
 }
-const arr = [0, 1, 2,0, 0, 5, 8, 0, 9]
+const arr = [0, 1, 2, 0, 0, 5, 8, 0, 9]
 console.log(moveZeros(arr))
