@@ -23,6 +23,7 @@ import App18 from './18.useSyncExternalStore/App'
 import App19 from './19.useImperativeHandle/App'
 import App20 from './20.useTranstion/App'
 import App21 from './21.useTranstion/App'
+import App22 from './22.newUseState/App'
 import * as serviceWorker from './serviceWorker';
 const root = ReactDOM.createRoot(
   document.getElementById('root')
@@ -49,8 +50,9 @@ root.render(
     {/* <App18 />
     <App19 />
     */}
-    <App20 />
-    <App21 />
+    {/* <App20 /> */}
+    <App22/>
+    {/* <App21 /> */}
   </React.StrictMode>
 );
 // ReactDOM.render(<div>

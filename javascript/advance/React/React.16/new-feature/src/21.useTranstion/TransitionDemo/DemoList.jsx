@@ -32,6 +32,7 @@ function DemoList() {
         type="button"
         onClick={() => {
           setCurrentPage(currentPag === 1 ? 2 : 1)
+          // setResource(fetchMockData(currentPag))
           startTransition(() => {
             setResource(fetchMockData(currentPag))
           })

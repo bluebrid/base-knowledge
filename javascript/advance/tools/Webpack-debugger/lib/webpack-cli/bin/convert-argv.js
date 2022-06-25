@@ -336,7 +336,7 @@ module.exports = function(...args) {
 					} else if (arg === "module-bind-post") {
 						rule.enforce = "post";
 					}
-					options.module.rules.push(rule);
+					options.module.rules.push(rule);				
 				},
 				function() {
 					ensureObject(options, "module");

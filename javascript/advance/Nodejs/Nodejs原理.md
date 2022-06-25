@@ -46,7 +46,7 @@ https://www.npmtrends.com/ajv-vs-joi-vs-validator
 3. Nodejs 要尽量避免**耗时**操作， 因为是单线程，会阻塞后面的响应没法处理
 4. 当我们的项目中存在大量计算的时候，CPU耗时操作的时候，我们需要考虑开启多进程来完成
 5. NodeJS 开发过程中， 错误会引起整个应用的退出， 应用的健壮性值得考虑，尤其是错误的抛出， 以及进程守护是必须需要做的
-6. 单线程是无法利用多核CPU的， 但是像Cluster， child_process，worker_threads 可以解决整个问题
+6. 单线程是无法利用多核CPU的， 但是像Cluster， child_process，worker_threads 可以解决这个问题
 [请问web开发为什么选择nodejs？](http://www.imooc.com/wenda/detail/571232)
 
 

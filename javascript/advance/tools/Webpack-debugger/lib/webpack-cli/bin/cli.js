@@ -413,6 +413,14 @@ For more information, see https://webpack.js.org/api/cli/.`);
 			let compiler;
 			try {
 				console.log('1.============================> 执行webpack 函数去初始化webpack, 返回的是一个Compiler 对象')
+				options = new Proxy(options, {
+					get: function(target, prop, reciver){
+						if (prop === 'rules') {
+							debugger
+						}
+						return Reflect.get(target, prop, reciver)
+					}
+				})
 				compiler = webpack(options);
 			} catch (err) {
 				if (err.name === "WebpackOptionsValidationError") {
@@ -490,6 +498,7 @@ For more information, see https://webpack.js.org/api/cli/.`);
 					});
 					process.stdin.resume();
 				}
+				console.log('  1.9.============================> 开始执行watch')
 				compiler.watch(watchOptions, compilerCallback);
 				if (outputOptions.infoVerbosity !== "none") console.error("\nwebpack is watching the files…\n");
 			} else {
