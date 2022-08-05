@@ -1,3 +1,5 @@
+// https://xiaochen1024.com/courseware/60b4f11ab1aa91002eb53b18/61964326c1553b002e57bf1b
+// https://www.programmercarl.com/0046.%E5%85%A8%E6%8E%92%E5%88%97.html#%E6%80%9D%E8%B7%AF
 var permute = function (nums) {
     const res = [], path = [];
     backtracking(nums, nums.length, []);//调用回溯函数 传入nums，nums长度，used数组
@@ -40,4 +42,4 @@ var permute1 = (nums) => {
 }
 const nums = [1, 2, 3, 4]
 console.log(JSON.stringify(permute1(nums)))
-console.log(JSON.stringify(permute(nums)))
+// console.log(JSON.stringify(permute(nums)))

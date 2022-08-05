@@ -1,0 +1,10 @@
+.container {
+    color: red;
+    background: gray;
+
+
+}
+.container span {
+    color: blue;
+    font-size: 32px;
+}

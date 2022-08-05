@@ -28,7 +28,7 @@ var generateParenthesis = function(n) {
     const res = []
     let track = []
     backtrack(n, n, track, res)
-    return res
+   
     function backtrack(left, right, track, res) {
         // 数量小于0，不合法
         if (left < 0 || right < 0) return
@@ -51,6 +51,7 @@ var generateParenthesis = function(n) {
         backtrack(left, right - 1, [...track], res)
         track.pop()
     }
+    return res
 };
 
-console.log(generateParenthesis1(3))
+console.log(generateParenthesis(3))

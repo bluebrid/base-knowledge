@@ -4,7 +4,7 @@
 <div id="app">
   <section class="todoapp">
     <header class="header">
-      <h1>todos</h1>
+      <!-- <h1>todos</h1> -->
       <input class="new-todo"
               autofocus autocomplete="off"
               placeholder="What needs to be done?"
@@ -53,7 +53,7 @@
 </div>
 
 <script>
-const { createApp, reactive, computed, watchEffect, onMounted, onUnmounted } = Vue
+const { createApp, reactive, computed, watchEffect, onMounted, onBeforeMount, onUnmounted } = Vue
 
 const STORAGE_KEY = 'todos-vuejs-3.x'
 const todoStorage = {
@@ -121,7 +121,9 @@ createApp({
     watchEffect(() => {
       todoStorage.save(state.todos)
     })
-
+    onBeforeMount(() => {
+      console.log('Component is onBeforeMount!')
+    }) 
     onMounted(() => {
       window.addEventListener('hashchange', onHashChange)
       onHashChange()

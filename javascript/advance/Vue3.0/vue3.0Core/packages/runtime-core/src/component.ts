@@ -590,6 +590,7 @@ export function setupComponent(
   initProps(instance, props, isStateful, isSSR)
   initSlots(instance, children)
 
+  console.log('===============执行组件配置的setup')
   const setupResult = isStateful
     ? setupStatefulComponent(instance, isSSR)
     : undefined
@@ -637,6 +638,7 @@ function setupStatefulComponent(
   }
   // 2. call setup()
   const { setup } = Component
+  console.log('判断是否配置了setup')
   if (setup) {
     const setupContext = (instance.setupContext =
       setup.length > 1 ? createSetupContext(instance) : null)

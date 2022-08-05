@@ -1,0 +1,11 @@
+{
+  "name": "memory",
+  "version": "1.0.0",
+  "description": "1. <font color=red>内存泄漏</font>： 是指由于疏忽或者错误造成程序未能释放已经不在使用的内存的情况\r 2. 在V8中，每次GC，是根据<font color=red>root</font>对象(浏览器是：window, Node是： global)依次进行梳理对象的引用\r    ，如果能从Root的引用链到达访问，V8就会将其标记为<font color=red>可到达对象</font>，反之为<font color=red>不可到达对象</font>\r 3. <font color=red>不可到达对象</font>会被V8回收",
+  "main": "demo.1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

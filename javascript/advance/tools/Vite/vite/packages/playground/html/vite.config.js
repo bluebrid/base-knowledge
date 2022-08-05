@@ -1,9 +1,36 @@
 const { resolve } = require('path')
+const MagicString = require('magic-string')
 
 /**
  * @type {import('vite').UserConfig}
  */
 module.exports = {
+  css: {
+    devSourcemap: true,
+    preprocessorOptions: {
+      less: {
+        additionalData: '@color: red;'
+      },
+      styl: {
+        additionalData: (content, filename) => {
+          const ms = new MagicString(content, { filename })
+
+          const willBeReplaced = 'blue-red-mixed'
+          const start = content.indexOf(willBeReplaced)
+          ms.overwrite(start, start + willBeReplaced.length, 'purple')
+
+          const map = ms.generateMap({ hires: true })
+          map.file = filename
+          map.sources = [filename]
+
+          return {
+            content: ms.toString(),
+            map
+          }
+        }
+      }
+    }
+  },
   build: {
     rollupOptions: {
       input: {
@@ -34,26 +61,27 @@ module.exports = {
       transformIndexHtml: {
         enforce: 'pre',
         transform(html, { filename }) {
+          console.log('---------------')
           if (html.includes('/@vite/client')) {
             throw new Error('pre transform applied at wrong time!')
           }
           const head = `
-  <head lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-  </head>`
+            <head lang="en">
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>{{ title }}</title>
+            </head>`
           return `<!DOCTYPE html>
-<html lang="en">${filename.includes('noHead') ? '' : head}
-${
-  filename.includes('noBody')
-    ? html
-    : `<body>
-  ${html}
-</body>`
-}
-</html>
-  `
+            <html lang="en">${filename.includes('noHead') ? '' : head}
+            ${
+              filename.includes('noBody')
+                ? html
+                : `<body>
+              ${html}
+            </body>`
+            }
+            </html>
+              `
         }
       }
     },
@@ -84,14 +112,14 @@ ${
       name: 'combined-transform',
       transformIndexHtml(html) {
         return {
-          html: html.replace('{{ title }}', 'Test HTML transforms'),
+          html: html.replace('{{ title }}', 'Test HTML tran111sforms'),
           tags: [
-            {
-              tag: 'p',
-              attrs: { class: 'inject' },
-              children: 'This is injected',
-              injectTo: 'body'
-            }
+            // {
+            //   tag: 'p',
+            //   attrs: { class: 'inject' },
+            //   children: 'This is injected',
+            //   injectTo: 'body'
+            // }
           ]
         }
       }
@@ -99,16 +127,16 @@ ${
     {
       name: 'serve-only-transform',
       transformIndexHtml(_, ctx) {
-        if (ctx.server) {
-          return [
-            {
-              tag: 'p',
-              attrs: { class: 'server' },
-              children: 'This is injected only during dev',
-              injectTo: 'body'
-            }
-          ]
-        }
+        // if (ctx.server) {
+        //   return [
+        //     {
+        //       tag: 'p',
+        //       attrs: { class: 'server' },
+        //       children: 'This is injected only during dev',
+        //       injectTo: 'body'
+        //     }
+        //   ]
+        // }
       }
     },
     {

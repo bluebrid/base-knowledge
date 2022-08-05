@@ -179,6 +179,7 @@ export function createAppAPI<HostElement>(
   hydrate?: RootHydrateFunction
 ): CreateAppFunction<HostElement> {
   return function createApp(rootComponent, rootProps = null) {
+    console.log('1.创建App 实例的入口')
     if (rootProps != null && !isObject(rootProps)) {
       __DEV__ && warn(`root props passed to app.mount() must be an object.`)
       rootProps = null
@@ -212,6 +213,13 @@ export function createAppAPI<HostElement>(
       },
 
       use(plugin: Plugin, ...options: any[]) {
+        // Plugin 是个函数，或者是一个包含install方法的对象
+        // export type Plugin =
+        // | (PluginInstallFunction & { install?: PluginInstallFunction })
+        // | {
+        //     install: PluginInstallFunction
+        //   }
+
         if (installedPlugins.has(plugin)) {
           __DEV__ && warn(`Plugin has already been applied to target app.`)
         } else if (plugin && isFunction(plugin.install)) {
@@ -279,7 +287,18 @@ export function createAppAPI<HostElement>(
         isHydrate?: boolean,
         isSVG?: boolean
       ): any {
+        // app.mount 在 runtime-dom/src/index 的 createApp中进行了重写
         if (!isMounted) {
+          debugger
+        // 在rootComponent 中已经注入了template 字符串
+          /**
+           * {
+           * directives,
+           * setup,
+           * template
+           * }
+           * 
+           */
           const vnode = createVNode(
             rootComponent as ConcreteComponent,
             rootProps
@@ -298,6 +317,7 @@ export function createAppAPI<HostElement>(
           if (isHydrate && hydrate) {
             hydrate(vnode as VNode<Node, Element>, rootContainer as any)
           } else {
+            // 去进行渲染
             render(vnode, rootContainer, isSVG)
           }
           isMounted = true

@@ -38,10 +38,10 @@ root.render(
   <App6 />
   <App7 />
   <App8 />
-  <App10 />
-  <App11 />
-  <App1101 />
-  <App12 />
+  <App10 />*/}
+  {/* <App11 /> */}
+   <App1101 />
+  {/*<App12 />
   <App13 />
   <App14 />
   <App15 />
@@ -51,7 +51,7 @@ root.render(
     <App19 />
     */}
     {/* <App20 /> */}
-    <App22/>
+    {/* <App22/> */}
     {/* <App21 /> */}
   </React.StrictMode>
 );

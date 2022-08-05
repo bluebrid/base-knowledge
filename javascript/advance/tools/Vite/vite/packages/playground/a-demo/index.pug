@@ -1,0 +1,40 @@
+- 
+  var navigation = [
+    {
+      id: 'pets',
+      link: '#pets',
+      title: 'Pets',
+      type: [
+        {
+          id: 'cat',
+          title: 'cat'
+        },
+        {
+          id: 'dog',
+          title: 'dog'
+        },
+      ]
+    },
+    {
+      id: 'farm_animals',
+      link: '#farm_animals',
+      title: 'Farm Animals',
+      type: [
+        {
+          id: 'cow',
+          title: 'cow'
+        },
+        
+      ]
+    },
+  ]
+  
+nav.navigation
+  ul.navigation__list
+    each item in navigation
+      li.navigation__element
+        a(href=item.link, class='navigation__link--'+item.id).navigation__link=item.title
+        ul.navigation__submenu
+          each item_sub in item.type
+            li.navigation__submenu-element
+              a(href='#'+item_sub.id).navigation__submenu-link=item_sub.title

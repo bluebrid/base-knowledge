@@ -8,19 +8,13 @@ var combine = function (n, k) {
     let res = [];
     const helper = (startIndex, path = []) => {
         if (path.length === k) {
-            res.push([...path])
+            res.push([...path])// 拷贝一份数据，避免其他分支受影响
             return;
         }
         for (let i = startIndex; i <= n; i++) {
-            // if (path.includes(i)) {
-            //     continue
-            // }
-            // if (n - startIndex < k) {
-            //     continue
-            // }
             path.push(i)
             helper(i + 1, path) //下一层递归
-            path.pop()
+            path.pop() //剪枝
         }
     }
     helper(1, [])

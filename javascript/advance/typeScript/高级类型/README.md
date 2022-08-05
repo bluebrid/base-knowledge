@@ -1,0 +1,1 @@
+[TypeScript高级类型入门手册：附大量代码实例（收藏！）](https://mp.weixin.qq.com/s/6__G2MjUMxIr2sObVBLjgg)

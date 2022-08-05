@@ -1,0 +1,23 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "not found: lint-staged",
+      "code": "ENOENT",
+      "stack": "Error: not found: lint-staged\n    at getNotFoundError (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:41702:51)\n    at Function.whichSync [as sync] (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:41779:13)\n    at getCommandAbsolutePathSync (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:43344:44)\n    at default_1 (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:43353:32)\n    at C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:178391:39"
+    }
+  },
+  "2 error pnpm": {
+    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+    "prefix": "D:\\Projects\\base-knowledge-1",
+    "err": {
+      "name": "pnpm",
+      "message": "not found: lint-staged",
+      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+      "stack": "Error: not found: lint-staged\n    at getNotFoundError (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:41702:51)\n    at Function.whichSync [as sync] (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:41779:13)\n    at getCommandAbsolutePathSync (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:43344:44)\n    at default_1 (C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:43353:32)\n    at C:\\Users\\Administrator\\AppData\\Roaming\\nvm\\v16.15.0\\node_modules\\pnpm\\dist\\pnpm.cjs:178391:39"
+    }
+  }
+}

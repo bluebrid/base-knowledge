@@ -362,6 +362,7 @@ function baseCreateRenderer(
     slotScopeIds = null,
     optimized = __DEV__ && isHmrUpdating ? false : !!n2.dynamicChildren
   ) => {
+    // 节点相同
     if (n1 === n2) {
       return
     }
@@ -779,6 +780,7 @@ function baseCreateRenderer(
     optimized,
     start = 0
   ) => {
+    console.log('遍历挂在children到container上')
     for (let i = start; i < children.length; i++) {
       const child = (children[i] = optimized
         ? cloneIfMounted(children[i] as VNode)
@@ -1168,6 +1170,7 @@ function baseCreateRenderer(
           optimized
         )
       } else {
+        console.log('============开始去挂在组件')
         mountComponent(
           n2,
           container,
@@ -1312,6 +1315,7 @@ function baseCreateRenderer(
 
         toggleRecurse(instance, false)
         // beforeMount hook
+        console.log('开始执行onBeforeMount Hook')
         if (bm) {
           invokeArrayFns(bm)
         }
@@ -1377,6 +1381,7 @@ function baseCreateRenderer(
           if (__DEV__) {
             startMeasure(instance, `patch`)
           }
+          console.log('开始去触发组件的真实渲染')
           patch(
             null,
             subTree,
@@ -2306,6 +2311,7 @@ function baseCreateRenderer(
         unmount(container._vnode, null, null, true)
       }
     } else {
+      console.log('进行VNode 的Patch')
       patch(container._vnode || null, vnode, container, null, null, null, isSVG)
     }
     flushPostFlushCbs()

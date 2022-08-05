@@ -18652,6 +18652,7 @@ var Vue = (() => {
   var uid = 0;
   function createAppAPI(render2, hydrate2) {
     return function createApp2(rootComponent, rootProps = null) {
+      console.log("1.\u521B\u5EFAApp \u5B9E\u4F8B\u7684\u5165\u53E3");
       if (rootProps != null && !isObject(rootProps)) {
         warn2(`root props passed to app.mount() must be an object.`);
         rootProps = null;
@@ -18729,6 +18730,7 @@ var Vue = (() => {
         },
         mount(rootContainer, isHydrate, isSVG) {
           if (!isMounted) {
+            debugger;
             const vnode = createVNode(rootComponent, rootProps);
             vnode.appContext = context;
             if (true) {
@@ -19369,6 +19371,7 @@ If you want to remount the same app, move your app creation logic into a factory
       }
     };
     const mountChildren = (children, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, start = 0) => {
+      console.log("\u904D\u5386\u6302\u5728children\u5230container\u4E0A");
       for (let i = start; i < children.length; i++) {
         const child = children[i] = optimized ? cloneIfMounted(children[i]) : normalizeVNode(children[i]);
         patch(null, child, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
@@ -19509,6 +19512,7 @@ If you want to remount the same app, move your app creation logic into a factory
           ;
           parentComponent.ctx.activate(n2, container, anchor, isSVG, optimized);
         } else {
+          console.log("============\u5F00\u59CB\u53BB\u6302\u5728\u7EC4\u4EF6");
           mountComponent(n2, container, anchor, parentComponent, parentSuspense, isSVG, optimized);
         }
       } else {
@@ -19583,6 +19587,7 @@ If you want to remount the same app, move your app creation logic into a factory
           const { bm, m, parent } = instance;
           const isAsyncWrapperVNode = isAsyncWrapper(initialVNode);
           toggleRecurse(instance, false);
+          console.log("\u5F00\u59CB\u6267\u884ConBeforeMount Hook");
           if (bm) {
             invokeArrayFns(bm);
           }
@@ -19627,6 +19632,7 @@ If you want to remount the same app, move your app creation logic into a factory
             if (true) {
               startMeasure(instance, `patch`);
             }
+            console.log("\u5F00\u59CB\u53BB\u89E6\u53D1\u7EC4\u4EF6\u7684\u771F\u5B9E\u6E32\u67D3");
             patch(null, subTree, container, anchor, instance, parentSuspense, isSVG);
             if (true) {
               endMeasure(instance, `patch`);
@@ -20099,6 +20105,7 @@ If you want to remount the same app, move your app creation logic into a factory
           unmount(container._vnode, null, null, true);
         }
       } else {
+        console.log("\u8FDB\u884CVNode \u7684Patch");
         patch(container._vnode || null, vnode, container, null, null, null, isSVG);
       }
       flushPostFlushCbs();
@@ -21460,6 +21467,7 @@ Component that was made reactive: `, type);
     const isStateful = isStatefulComponent(instance);
     initProps(instance, props, isStateful, isSSR);
     initSlots(instance, children);
+    console.log("===============\u6267\u884C\u7EC4\u4EF6\u914D\u7F6E\u7684setup");
     const setupResult = isStateful ? setupStatefulComponent(instance, isSSR) : void 0;
     isInSSRComponentSetup3 = false;
     return setupResult;
@@ -21492,6 +21500,7 @@ Component that was made reactive: `, type);
       exposePropsOnRenderContext(instance);
     }
     const { setup } = Component4;
+    console.log("\u5224\u65AD\u662F\u5426\u914D\u7F6E\u4E86setup");
     if (setup) {
       const setupContext = instance.setupContext = setup.length > 1 ? createSetupContext(instance) : null;
       setCurrentInstance(instance);
@@ -22044,6 +22053,7 @@ Component that was made reactive: `, type);
   var templateContainer = doc && doc.createElement("template");
   var nodeOps = {
     insert: (child, parent, anchor) => {
+      console.log("\u8FD9\u91CC\u662F\u771F\u6B63\u5BF9DOM\u7684\u64CD\u4F5C");
       parent.insertBefore(child, anchor || null);
     },
     remove: (child) => {
@@ -28312,11 +28322,12 @@ Make sure to use the production build (*.prod.js) when deploying for production.
 
   // packages/vue/src/index.ts
   if (true) {
-    console.log("111111111111111");
+    console.log("11111111dddddddddd1111111");
     initDev();
   }
   var compileCache = /* @__PURE__ */ Object.create(null);
   function compileToFunction(template, options) {
+    debugger;
     if (!isString(template)) {
       if (template.nodeType) {
         template = template.innerHTML;
@@ -28337,6 +28348,7 @@ Make sure to use the production build (*.prod.js) when deploying for production.
       }
       template = el ? el.innerHTML : ``;
     }
+    console.log("\u5F00\u59CB\u5C06Template string \u7F16\u8BD1\u6210\u4EE3\u7801");
     const { code } = compile2(template, extend({
       hoistStatic: true,
       onError: true ? onError : void 0,

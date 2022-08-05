@@ -30,6 +30,7 @@ var letterCombinations = function (digits) {
     helper(0, '')
     return res;
 };
+// BFS
 var letterCombinations1 = (digits) => {
     if (digits.length == 0) return [];
     const map = {
