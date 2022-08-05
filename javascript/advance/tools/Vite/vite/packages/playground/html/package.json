@@ -7,14 +7,11 @@
     "build": "vite build",
     "debug": "node --inspect-brk ../../vite/bin/vite",
     "preview": "vite preview"
-<<<<<<< HEAD
   },
   "devDependencies": {
     "less": "^4.1.2",
     "magic-string": "^0.25.7",
     "sass": "^1.43.4",
     "stylus": "^0.55.0"
-=======
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   }
 }

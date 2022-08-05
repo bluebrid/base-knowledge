@@ -1,8 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-<<<<<<< HEAD
 # npx lint-staged
-=======
-npx lint-staged
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
+ß

@@ -8,10 +8,7 @@ const templateContainer = doc && doc.createElement('template')
 
 export const nodeOps: Omit<RendererOptions<Node, Element>, 'patchProp'> = {
   insert: (child, parent, anchor) => {
-<<<<<<< HEAD
     console.log('这里是真正对DOM的操作')
-=======
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     parent.insertBefore(child, anchor || null)
   },
 

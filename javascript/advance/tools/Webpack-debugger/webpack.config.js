@@ -37,11 +37,7 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css'
         }),
-<<<<<<< HEAD
         new MyPlugin(),
-=======
-        // new MyPlugin(),
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
         new CustomLogerPlugin(),
         new firstPlugin(),
         // new InlinePlugin({

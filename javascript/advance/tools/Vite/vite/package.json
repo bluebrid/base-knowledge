@@ -31,12 +31,8 @@
     "build-plugin-vue": "cd packages/plugin-vue && npm run build",
     "build-plugin-react": "cd packages/plugin-react && npm run build",
     "ci-build-vite": "cd packages/vite && npm run ci-build",
-<<<<<<< HEAD
     "ci-docs": "run-s build-vite build-plugin-vue build-docs",
     "demo": "cd packages/playground/a-demo && npm run debug"
-=======
-    "ci-docs": "run-s build-vite build-plugin-vue build-docs"
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.22.2",

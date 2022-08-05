@@ -1,9 +1,5 @@
 import fs from 'fs'
-<<<<<<< HEAD
 import type { Plugin, ViteDevServer } from '../../vite/src/node'
-=======
-import type { Plugin, ViteDevServer } from 'vite'
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 import { createFilter } from '@rollup/pluginutils'
 import type {
   SFCBlock,

@@ -9,13 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@rollup/pluginutils": "^4.2.1",
     "lodash-es": "^4.17.21",
     "slash": "^4.0.0",
-=======
-    "lodash-es": "^4.17.21",
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     "vue": "^3.2.25"
   },
   "devDependencies": {

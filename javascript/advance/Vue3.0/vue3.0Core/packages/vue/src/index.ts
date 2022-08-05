@@ -8,11 +8,7 @@ import { isString, NOOP, generateCodeFrame, extend } from '@vue/shared'
 import { InternalRenderFunction } from 'packages/runtime-core/src/component'
 
 if (__DEV__) {
-<<<<<<< HEAD
   console.log('11111111dddddddddd1111111')
-=======
-  console.log('111111111111111')
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   initDev()
 }
 
@@ -22,10 +18,7 @@ function compileToFunction(
   template: string | HTMLElement,
   options?: CompilerOptions
 ): RenderFunction {
-<<<<<<< HEAD
   debugger
-=======
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   if (!isString(template)) {
     if (template.nodeType) {
       template = template.innerHTML
@@ -52,11 +45,7 @@ function compileToFunction(
     // by the server, the template should not contain any user data.
     template = el ? el.innerHTML : ``
   }
-<<<<<<< HEAD
   console.log('开始将Template string 编译成代码')
-=======
-
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   const { code } = compile(
     template,
     extend(

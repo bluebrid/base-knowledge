@@ -3,11 +3,7 @@
  * @param {number} n
  * @return {string[]}
  */
-<<<<<<< HEAD
 const generateParenthesis1 = (n) => {
-=======
-const generateParenthesis = (n) => {
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     const res = []; // 输出的结果数组
     const generate = (str, left, right) => {
         if (str.length == 2 * n) { // 字符串构建完成
@@ -26,7 +22,6 @@ const generateParenthesis = (n) => {
     return res;
 };
 
-<<<<<<< HEAD
 //思路：当左括号剩下的多，说明字符串中的左括号数量少于右括号，不合法，对字符串尝试添加左括号，然后回溯，尝试添加右括号，然后尝试回溯
 var generateParenthesis = function(n) {
     if (n == 0) return []
@@ -59,6 +54,4 @@ var generateParenthesis = function(n) {
     return res
 };
 
-=======
->>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 console.log(generateParenthesis(3))
