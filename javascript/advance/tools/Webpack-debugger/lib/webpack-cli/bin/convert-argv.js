@@ -336,7 +336,11 @@ module.exports = function(...args) {
 					} else if (arg === "module-bind-post") {
 						rule.enforce = "post";
 					}
+<<<<<<< HEAD
 					options.module.rules.push(rule);				
+=======
+					options.module.rules.push(rule);
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 				},
 				function() {
 					ensureObject(options, "module");

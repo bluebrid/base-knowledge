@@ -1,10 +1,14 @@
 const { resolve } = require('path')
+<<<<<<< HEAD
 const MagicString = require('magic-string')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 
 /**
  * @type {import('vite').UserConfig}
  */
 module.exports = {
+<<<<<<< HEAD
   css: {
     devSourcemap: true,
     preprocessorOptions: {
@@ -31,6 +35,8 @@ module.exports = {
       }
     }
   },
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   build: {
     rollupOptions: {
       input: {
@@ -61,11 +67,15 @@ module.exports = {
       transformIndexHtml: {
         enforce: 'pre',
         transform(html, { filename }) {
+<<<<<<< HEAD
           console.log('---------------')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
           if (html.includes('/@vite/client')) {
             throw new Error('pre transform applied at wrong time!')
           }
           const head = `
+<<<<<<< HEAD
             <head lang="en">
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,6 +92,24 @@ module.exports = {
             }
             </html>
               `
+=======
+  <head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+  </head>`
+          return `<!DOCTYPE html>
+<html lang="en">${filename.includes('noHead') ? '' : head}
+${
+  filename.includes('noBody')
+    ? html
+    : `<body>
+  ${html}
+</body>`
+}
+</html>
+  `
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
         }
       }
     },
@@ -112,6 +140,7 @@ module.exports = {
       name: 'combined-transform',
       transformIndexHtml(html) {
         return {
+<<<<<<< HEAD
           html: html.replace('{{ title }}', 'Test HTML tran111sforms'),
           tags: [
             // {
@@ -120,6 +149,16 @@ module.exports = {
             //   children: 'This is injected',
             //   injectTo: 'body'
             // }
+=======
+          html: html.replace('{{ title }}', 'Test HTML transforms'),
+          tags: [
+            {
+              tag: 'p',
+              attrs: { class: 'inject' },
+              children: 'This is injected',
+              injectTo: 'body'
+            }
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
           ]
         }
       }
@@ -127,6 +166,7 @@ module.exports = {
     {
       name: 'serve-only-transform',
       transformIndexHtml(_, ctx) {
+<<<<<<< HEAD
         // if (ctx.server) {
         //   return [
         //     {
@@ -137,6 +177,18 @@ module.exports = {
         //     }
         //   ]
         // }
+=======
+        if (ctx.server) {
+          return [
+            {
+              tag: 'p',
+              attrs: { class: 'server' },
+              children: 'This is injected only during dev',
+              injectTo: 'body'
+            }
+          ]
+        }
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       }
     },
     {

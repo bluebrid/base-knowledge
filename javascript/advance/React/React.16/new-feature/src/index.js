@@ -23,7 +23,10 @@ import App18 from './18.useSyncExternalStore/App'
 import App19 from './19.useImperativeHandle/App'
 import App20 from './20.useTranstion/App'
 import App21 from './21.useTranstion/App'
+<<<<<<< HEAD
 import App22 from './22.newUseState/App'
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 import * as serviceWorker from './serviceWorker';
 const root = ReactDOM.createRoot(
   document.getElementById('root')
@@ -38,10 +41,17 @@ root.render(
   <App6 />
   <App7 />
   <App8 />
+<<<<<<< HEAD
   <App10 />*/}
   {/* <App11 /> */}
    <App1101 />
   {/*<App12 />
+=======
+  <App10 />
+  <App11 />
+  <App1101 />
+  <App12 />
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   <App13 />
   <App14 />
   <App15 />
@@ -50,9 +60,14 @@ root.render(
     {/* <App18 />
     <App19 />
     */}
+<<<<<<< HEAD
     {/* <App20 /> */}
     {/* <App22/> */}
     {/* <App21 /> */}
+=======
+    <App20 />
+    <App21 />
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   </React.StrictMode>
 );
 // ReactDOM.render(<div>

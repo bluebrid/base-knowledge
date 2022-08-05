@@ -413,6 +413,7 @@ For more information, see https://webpack.js.org/api/cli/.`);
 			let compiler;
 			try {
 				console.log('1.============================> 执行webpack 函数去初始化webpack, 返回的是一个Compiler 对象')
+<<<<<<< HEAD
 				options = new Proxy(options, {
 					get: function(target, prop, reciver){
 						if (prop === 'rules') {
@@ -421,6 +422,8 @@ For more information, see https://webpack.js.org/api/cli/.`);
 						return Reflect.get(target, prop, reciver)
 					}
 				})
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 				compiler = webpack(options);
 			} catch (err) {
 				if (err.name === "WebpackOptionsValidationError") {
@@ -498,7 +501,10 @@ For more information, see https://webpack.js.org/api/cli/.`);
 					});
 					process.stdin.resume();
 				}
+<<<<<<< HEAD
 				console.log('  1.9.============================> 开始执行watch')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 				compiler.watch(watchOptions, compilerCallback);
 				if (outputOptions.infoVerbosity !== "none") console.error("\nwebpack is watching the files…\n");
 			} else {

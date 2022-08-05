@@ -16,7 +16,11 @@ function App() {
           </button>
         </p>
         <p>
+<<<<<<< HEAD
           Edit1 <code>App.tsx</code> and save to test HMR updates.
+=======
+          Edit <code>App.tsx</code> and save to test HMR updates.
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
         </p>
         <p>
           <a

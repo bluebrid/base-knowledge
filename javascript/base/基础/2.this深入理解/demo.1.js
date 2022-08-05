@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const User1 = {
     count1: 1,
     address: {
@@ -25,3 +26,22 @@ User.address.getCount()
 const address = User.address;
 address.getCount()
 
+=======
+class Foo {
+    sayThis() {
+        console.log(this); // 这里的 `this` 指向谁？
+    }
+
+    exec(cb) {
+        cb();
+    }
+
+    render() {
+        this.sayThis()
+        this.exec(this.sayThis);
+    }
+}
+
+var foo = new Foo();
+foo.render();
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d

@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+<<<<<<< HEAD
     "build": "vite build -w",
+=======
+    "build": "vite build",
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     "debug": "node --inspect-brk ../../vite/bin/vite",
     "preview": "vite preview"
   }

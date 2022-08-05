@@ -2,7 +2,11 @@ https://www.cnblogs.com/echolun/p/15510770.html
 
 1. setState(updater, cb), updater 可以是Object,也可以是function 
 2. setState 后要想获取最新的状态，只能在cb或者componentDidUpdate 中获取
+<<<<<<< HEAD
 3. setState设置成异步： react在渲染前， 会有意的进行等待， 知道所有在组件的事件处理函数调用，setState都完成后，再最终的this.state进行变更
+=======
+3. setState设置成异步： react在渲染钱， 会有意的进行等待， 知道所有在组件的事件处理函数调用，setState都完成后，再最终的this.state进行变更
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 这样可以避免不必要的重新渲染，来提升性能
 4. 如果updater 是一个function , react 依旧做了批量合并处理如：
 ```jsx

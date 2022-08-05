@@ -1,0 +1,247 @@
+[
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
+      "location": "features/Todo.feature:5",
+      "name": "\u5f85\u529e\u6e05\u5355\u529f\u80fd",
+      "status": "failed",
+      "steps": [
+        {
+          "keyword": "When",
+          "location": "features/Todo.feature:6",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:6"
+          },
+          "name": "\u6253\u5f00\u7f51\u7ad9",
+          "result": {
+            "duration": 10.471647024154663,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "And",
+          "location": "features/Todo.feature:7",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:12"
+          },
+          "name": "\u52a0\u8f7dcookies",
+          "result": {
+            "duration": 2.920220375061035,
+            "status": "passed"
+          },
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:10",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/homeSteps.py:67"
+          },
+          "name": "\u70b9\u51fb\"\u5f85\u529e\u6e05\u5355\"\u6309\u94ae",
+          "result": {
+            "duration": 0.3762855529785156,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:11",
+          "match": {
+            "arguments": [
+              {
+                "value": "\u53ea\u7528\u8fd9\u4e00\u4e2a"
+              }
+            ],
+            "location": "features/steps/todoSteps.py:8"
+          },
+          "name": "\u68c0\u67e5\u9ed8\u8ba4\u7684\u6e05\u5355\u7c7b\u578b\u662f\u5426\u4e3a\"\u53ea\u7528\u8fd9\u4e00\u4e2a\"",
+          "result": {
+            "duration": 1.9689455032348633,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:12",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:13"
+          },
+          "name": "\u5148\u5220\u9664\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 0.016407489776611328,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:13",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:53"
+          },
+          "name": "\u70b9\u51fb\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879\u6309\u94ae",
+          "result": {
+            "duration": 0.33437442779541016,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:14",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:58"
+          },
+          "name": "\u9a8c\u8bc1\u6dfb\u52a0\u4e8b\u9879\u5931\u8d25\u4fe1\u606f",
+          "result": {
+            "duration": 7.872084856033325,
+            "status": "passed"
+          },
+          "step_type": "then",
+          "table": {
+            "headings": [
+              "title",
+              "detail",
+              "date",
+              "errorMsg",
+              "assertMsg"
+            ],
+            "rows": [
+              [
+                "",
+                "",
+                "",
+                "\u8bf7\u8f93\u5165\u5f85\u529e\u6e05\u5355\u6807\u9898",
+                "\u6807\u9898:'{}', \u8be6\u60c5:'{}', \u65f6\u95f4:'{}',\u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "",
+                "",
+                "2019-12-31",
+                "\u8bf7\u8f93\u5165\u5f85\u529e\u6e05\u5355\u6807\u9898",
+                "\u6807\u9898:'{}', \u8be6\u60c5:'{}', \u65f6\u95f4:'{}',\u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "",
+                "",
+                "\u8bf7\u8f93\u5165\u5f85\u529e\u6e05\u5355\u65e5\u671f",
+                "\u6807\u9898:'{}', \u8be6\u60c5:'{}', \u65f6\u95f4:'{}',\u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "",
+                "2019-1221",
+                "\u7f51\u7edc\u5f02\u5e38",
+                "\u6807\u9898:'{}', \u8be6\u60c5:'{}', \u65f6\u95f4:'{}',\u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ],
+              [
+                "abc",
+                "",
+                "2019-12-41",
+                "\u7f51\u7edc\u5f02\u5e38",
+                "\u6807\u9898:'{}', \u8be6\u60c5:'{}', \u65f6\u95f4:'{}',\u9519\u8bef\u6d88\u606f\u5e94\u8be5\u4e3a'{}', \u4f46\u662f\u663e\u793a\u7684\u662f'{}'"
+              ]
+            ]
+          }
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:21",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:66"
+          },
+          "name": "\u4eceexcel\u8bfb\u53d6\u6570\u636e\u6dfb\u52a0\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 10.88068151473999,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:22",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:85"
+          },
+          "name": "\u68c0\u67e5\u662f\u5f85\u529e\u4e8b\u9879\u6dfb\u52a0\u6210\u529f",
+          "result": {
+            "duration": 0.0,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:23",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:27"
+          },
+          "name": "\u5b8c\u6210\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 7.670578479766846,
+            "status": "passed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:24",
+          "match": {
+            "arguments": [],
+            "location": "features/steps/todoSteps.py:93"
+          },
+          "name": "\u5220\u9664\u7b2c\u4e00\u4e2a\u5df2\u5b8c\u6210\u7684\u5f85\u529e\u4e8b\u9879",
+          "result": {
+            "duration": 1.3335986137390137,
+            "error_message": "Assertion Failed: \u5220\u9664\u4e86\u4e00\u4e2a\u5df2\u7ecf\u5b8c\u6210\u7684\u5f85\u529e\u4e8b\u9879, \u5e94\u8be5\u8fd8\u5269\u4e0b8\u4e2a\u5f85\u529e\u4e8b\u9879",
+            "status": "failed"
+          },
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:25",
+          "name": "\u8fd8\u539f\u6240\u6709\u7684\u5f85\u529e\u4e8b\u9879",
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:26",
+          "name": "\u8df3\u8f6c\u5230\u9996\u9875",
+          "step_type": "then"
+        },
+        {
+          "keyword": "Then",
+          "location": "features/Todo.feature:27",
+          "name": "\u9000\u51fa\u767b\u5f55",
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "features/Todo.feature:3",
+  "name": "\u6d4b\u8bd5\u5f85\u529e\u6e05\u5355\u529f\u80fd",
+  "status": "failed",
+  "tags": [
+    "skip",
+    "tag2"
+  ]
+}
+]

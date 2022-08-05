@@ -11593,7 +11593,10 @@
         }
        */
       var update = createUpdate(expirationTime);
+<<<<<<< HEAD
       debugger
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       update.payload = payload;
       /**
        * payload 也就是setState传入的对象，如：
@@ -21486,7 +21489,10 @@
         }
       }
      */
+<<<<<<< HEAD
     // debugger
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     // 这些放的执行都是在上面的batchedUpdates$1的try 语句中， 在这个地方return,则会直接执行finally 的逻辑。
     // 因为在setState 中主要是将要变更的state 存放在
     if (isBatchingUpdates) {
@@ -21916,7 +21922,10 @@
   // the reconciler.
   function batchedUpdates$1(fn, a) {
     var previousIsBatchingUpdates = isBatchingUpdates;
+<<<<<<< HEAD
      // debugger
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     isBatchingUpdates = true;
     try {
       return fn(a);

@@ -1,4 +1,5 @@
 https://github.com/qq449245884/xiaozhi/issues/60
+<<<<<<< HEAD
 https://github.com/qq449245884/xiaozhi/issues/55
 
 ## 箭头函数
@@ -10,3 +11,6 @@ https://github.com/qq449245884/xiaozhi/issues/55
 5. 箭头函数没有自己的arguments
 6. 箭头函数没有prototype
 8. 箭头函数不能用作Generator函数，不能使用yeild关键字
+=======
+https://github.com/qq449245884/xiaozhi/issues/55
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d

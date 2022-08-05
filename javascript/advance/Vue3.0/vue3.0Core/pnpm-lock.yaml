@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 lockfileVersion: 5.4
+=======
+lockfileVersion: 5.3
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 
 importers:
 
@@ -53,7 +57,11 @@ importers:
       yorkie: ^2.0.0
     devDependencies:
       '@babel/types': 7.16.0
+<<<<<<< HEAD
       '@esbuild-plugins/node-modules-polyfill': 0.1.4_esbuild@0.14.42
+=======
+      '@esbuild-plugins/node-modules-polyfill': 0.1.4_esbuild@0.14.11
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       '@microsoft/api-extractor': 7.19.2
       '@rollup/plugin-commonjs': 18.1.0_rollup@2.38.5
       '@rollup/plugin-json': 4.1.0_rollup@2.38.5
@@ -63,7 +71,11 @@ importers:
       '@types/jest': 27.0.3
       '@types/node': 16.11.12
       '@types/puppeteer': 5.4.4
+<<<<<<< HEAD
       '@typescript-eslint/parser': 4.33.0_nv27fge2mo5alj7g7fxbwkxkv4
+=======
+      '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.3
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       '@vue/reactivity': link:packages/reactivity
       '@vue/runtime-core': link:packages/runtime-core
       '@vue/runtime-dom': link:packages/runtime-dom
@@ -72,7 +84,11 @@ importers:
       conventional-changelog-cli: 2.1.1
       csstype: 3.0.10
       enquirer: 2.3.6
+<<<<<<< HEAD
       esbuild: registry.npmmirror.com/esbuild/0.14.42
+=======
+      esbuild: 0.14.11
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       eslint: 7.32.0
       execa: 4.1.0
       fs-extra: 9.1.0
@@ -89,11 +105,19 @@ importers:
       rollup-plugin-node-globals: 1.4.0
       rollup-plugin-polyfill-node: 0.6.2_rollup@2.38.5
       rollup-plugin-terser: 7.0.2_rollup@2.38.5
+<<<<<<< HEAD
       rollup-plugin-typescript2: 0.27.3_hy7rxf7gc4jjepk3b2thhgkety
       semver: 7.3.5
       serve: 12.0.1
       todomvc-app-css: 2.4.1
       ts-jest: 27.1.1_oalxtikf2fzkuq443wkm3llumy
+=======
+      rollup-plugin-typescript2: 0.27.3_rollup@2.38.5+typescript@4.5.3
+      semver: 7.3.5
+      serve: 12.0.1
+      todomvc-app-css: 2.4.1
+      ts-jest: 27.1.1_305b6a4a69ca4f1a88855b62d81fc1b0
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       tslib: 2.3.1
       typescript: 4.5.3
       vite: 2.7.12
@@ -246,7 +270,11 @@ importers:
       vite: ^2.7.1
       vue: 3.2.31
     dependencies:
+<<<<<<< HEAD
       '@vue/repl': 0.4.8_vue@packages+vue
+=======
+      '@vue/repl': 0.4.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       file-saver: 2.0.5
       jszip: 3.7.1
       vue: link:../vue
@@ -475,8 +503,11 @@ packages:
     resolution: {integrity: sha512-6V0qdPUaiVHH3RtZeLIsc+6pDhbYzHR8ogA8w+f+Wc77DuXto19g2QUwveINoS34Uw+W8/hQDGJCx+i4n7xcng==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+<<<<<<< HEAD
     dependencies:
       '@babel/types': registry.npmmirror.com/@babel/types/7.16.0
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
 
   /@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.16.0:
     resolution: {integrity: sha512-tycmZxkGfZaxhMRbXlPXuVFpdWlXpir2W4AMhSJgRKzk/eDlIXOhb2LHWoLpDF7TEHylV5zNhykX6KAgHJmTNw==}
@@ -635,12 +666,20 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
+<<<<<<< HEAD
   /@esbuild-plugins/node-modules-polyfill/0.1.4_esbuild@0.14.42:
+=======
+  /@esbuild-plugins/node-modules-polyfill/0.1.4_esbuild@0.14.11:
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     resolution: {integrity: sha512-uZbcXi0zbmKC/050p3gJnne5Qdzw8vkXIv+c2BW0Lsc1ji1SkrxbKPUy5Efr0blbTu1SL8w4eyfpnSdPg3G0Qg==}
     peerDependencies:
       esbuild: '*'
     dependencies:
+<<<<<<< HEAD
       esbuild: registry.npmmirror.com/esbuild/0.14.42
+=======
+      esbuild: 0.14.11
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       escape-string-regexp: 4.0.0
       rollup-plugin-node-polyfills: 0.2.1
     dev: true
@@ -805,7 +844,11 @@ packages:
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
       glob: 7.2.0
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       istanbul-lib-coverage: 3.2.0
       istanbul-lib-instrument: 4.0.3
       istanbul-lib-report: 3.0.0
@@ -829,7 +872,11 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       callsites: 3.1.0
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       source-map: 0.6.1
     dev: true
 
@@ -848,7 +895,11 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/test-result': 27.4.2
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-haste-map: 27.4.4
       jest-runtime: 27.4.4
     transitivePeerDependencies:
@@ -865,7 +916,11 @@ packages:
       chalk: 4.1.2
       convert-source-map: 1.8.0
       fast-json-stable-stringify: 2.1.0
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-haste-map: 27.4.4
       jest-regex-util: 27.4.0
       jest-util: 27.4.2
@@ -1201,7 +1256,19 @@ packages:
       '@types/yargs-parser': 20.2.1
     dev: true
 
+<<<<<<< HEAD
   /@typescript-eslint/parser/4.33.0_nv27fge2mo5alj7g7fxbwkxkv4:
+=======
+  /@types/yauzl/2.9.2:
+    resolution: {integrity: sha512-8uALY5LTvSuHgloDVUvWP3pIauILm+8/0pDMokuDYIoNsOkSwd5AiHBTSEJjKTDcZr5z8UpgOWZkxBF4iJftoA==}
+    requiresBuild: true
+    dependencies:
+      '@types/node': 16.11.12
+    dev: true
+    optional: true
+
+  /@typescript-eslint/parser/4.33.0_eslint@7.32.0+typescript@4.5.3:
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     resolution: {integrity: sha512-ZohdsbXadjGBSK0/r+d87X0SBmKzOq4/S5nzK6SBgJspFo9/CUDJ7hjayuze+JK7CZQLDMroqytp7pOcFKTxZA==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -1277,12 +1344,19 @@ packages:
     engines: {node: '>= 0.12.0'}
     dev: true
 
+<<<<<<< HEAD
   /@vue/repl/0.4.8_vue@packages+vue:
     resolution: {integrity: sha512-MP4xVHMuInTQEo6b3Q8OQF3R4fTrfFzWqQl157/S6hOnPDW3b05pMisC2RRubp+scHzR/1M+OnCNCRfpAHzPGg==}
     peerDependencies:
       vue: ^3.2.13
     dependencies:
       vue: link:packages\vue
+=======
+  /@vue/repl/0.4.8:
+    resolution: {integrity: sha512-MP4xVHMuInTQEo6b3Q8OQF3R4fTrfFzWqQl157/S6hOnPDW3b05pMisC2RRubp+scHzR/1M+OnCNCRfpAHzPGg==}
+    peerDependencies:
+      vue: ^3.2.13
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: false
 
   /@zeit/schemas/2.6.0:
@@ -1318,7 +1392,11 @@ packages:
   /acorn-globals/6.0.0:
     resolution: {integrity: sha512-ZQl7LOWaF5ePqqcX4hLuv/bLXYQNfNWw2c0/yX/TsPRKamzHcTGQnlCjHT3TsmkOUVEPS3crCxiPfdzE/Trlhg==}
     dependencies:
+<<<<<<< HEAD
       acorn: registry.npmmirror.com/acorn/7.4.1
+=======
+      acorn: 7.4.1
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       acorn-walk: 7.2.0
     dev: true
 
@@ -1347,6 +1425,15 @@ packages:
     hasBin: true
     dev: true
 
+<<<<<<< HEAD
+=======
+  /acorn/8.6.0:
+    resolution: {integrity: sha512-U1riIR+lBSNi3IbxtaHOIKdH8sLFv3NYfNv8sg7ZsNhcfl4HF2++BfqqrNAxoCLQW1iiylOj76ecnaUxz+z9yw==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: true
+
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   /add-stream/1.0.0:
     resolution: {integrity: sha1-anmQQ3ynNtXhKI25K9MmbV9csqo=}
     dev: true
@@ -1513,7 +1600,11 @@ packages:
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 27.4.0_@babel+core@7.16.0
       chalk: 4.1.2
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       slash: 3.0.0
     transitivePeerDependencies:
       - supports-color
@@ -1864,7 +1955,11 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
+<<<<<<< HEAD
       fsevents: registry.npmmirror.com/fsevents/2.3.2
+=======
+      fsevents: 2.3.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /chownr/1.1.4:
@@ -2020,8 +2115,11 @@ packages:
       on-headers: 1.0.2
       safe-buffer: 5.1.2
       vary: 1.1.2
+<<<<<<< HEAD
     transitivePeerDependencies:
       - supports-color
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /concat-map/0.0.1:
@@ -2349,11 +2447,14 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+<<<<<<< HEAD
     peerDependencies:
       supports-color: '*'
     peerDependenciesMeta:
       supports-color:
         optional: true
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dependencies:
       ms: 2.0.0
     dev: true
@@ -2587,11 +2688,295 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
+<<<<<<< HEAD
+=======
+  /esbuild-android-arm64/0.13.15:
+    resolution: {integrity: sha512-m602nft/XXeO8YQPUDVoHfjyRVPdPgjyyXOxZ44MK/agewFFkPa8tUo6lAzSWh5Ui5PB4KR9UIFTSBKh/RrCmg==}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-android-arm64/0.14.11:
+    resolution: {integrity: sha512-6iHjgvMnC/SzDH8TefL+/3lgCjYWwAd1LixYfmz/TBPbDQlxcuSkX0yiQgcJB9k+ibZ54yjVXziIwGdlc+6WNw==}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-darwin-64/0.13.15:
+    resolution: {integrity: sha512-ihOQRGs2yyp7t5bArCwnvn2Atr6X4axqPpEdCFPVp7iUj4cVSdisgvEKdNR7yH3JDjW6aQDw40iQFoTqejqxvQ==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-darwin-64/0.14.11:
+    resolution: {integrity: sha512-olq84ikh6TiBcrs3FnM4eR5VPPlcJcdW8BnUz/lNoEWYifYQ+Po5DuYV1oz1CTFMw4k6bQIZl8T3yxL+ZT2uvQ==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-darwin-arm64/0.13.15:
+    resolution: {integrity: sha512-i1FZssTVxUqNlJ6cBTj5YQj4imWy3m49RZRnHhLpefFIh0To05ow9DTrXROTE1urGTQCloFUXTX8QfGJy1P8dQ==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-darwin-arm64/0.14.11:
+    resolution: {integrity: sha512-Jj0ieWLREPBYr/TZJrb2GFH8PVzDqiQWavo1pOFFShrcmHWDBDrlDxPzEZ67NF/Un3t6sNNmeI1TUS/fe1xARg==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-freebsd-64/0.13.15:
+    resolution: {integrity: sha512-G3dLBXUI6lC6Z09/x+WtXBXbOYQZ0E8TDBqvn7aMaOCzryJs8LyVXKY4CPnHFXZAbSwkCbqiPuSQ1+HhrNk7EA==}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-freebsd-64/0.14.11:
+    resolution: {integrity: sha512-C5sT3/XIztxxz/zwDjPRHyzj/NJFOnakAanXuyfLDwhwupKPd76/PPHHyJx6Po6NI6PomgVp/zi6GRB8PfrOTA==}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-freebsd-arm64/0.13.15:
+    resolution: {integrity: sha512-KJx0fzEDf1uhNOZQStV4ujg30WlnwqUASaGSFPhznLM/bbheu9HhqZ6mJJZM32lkyfGJikw0jg7v3S0oAvtvQQ==}
+    cpu: [arm64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-freebsd-arm64/0.14.11:
+    resolution: {integrity: sha512-y3Llu4wbs0bk4cwjsdAtVOesXb6JkdfZDLKMt+v1U3tOEPBdSu6w8796VTksJgPfqvpX22JmPLClls0h5p+L9w==}
+    cpu: [arm64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-32/0.13.15:
+    resolution: {integrity: sha512-ZvTBPk0YWCLMCXiFmD5EUtB30zIPvC5Itxz0mdTu/xZBbbHJftQgLWY49wEPSn2T/TxahYCRDWun5smRa0Tu+g==}
+    cpu: [ia32]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-32/0.14.11:
+    resolution: {integrity: sha512-Cg3nVsxArjyLke9EuwictFF3Sva+UlDTwHIuIyx8qpxRYAOUTmxr2LzYrhHyTcGOleLGXUXYsnUVwKqnKAgkcg==}
+    cpu: [ia32]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-64/0.13.15:
+    resolution: {integrity: sha512-eCKzkNSLywNeQTRBxJRQ0jxRCl2YWdMB3+PkWFo2BBQYC5mISLIVIjThNtn6HUNqua1pnvgP5xX0nHbZbPj5oA==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-64/0.14.11:
+    resolution: {integrity: sha512-oeR6dIrrojr8DKVrxtH3xl4eencmjsgI6kPkDCRIIFwv4p+K7ySviM85K66BN01oLjzthpUMvBVfWSJkBLeRbg==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-arm/0.13.15:
+    resolution: {integrity: sha512-wUHttDi/ol0tD8ZgUMDH8Ef7IbDX+/UsWJOXaAyTdkT7Yy9ZBqPg8bgB/Dn3CZ9SBpNieozrPRHm0BGww7W/jA==}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-arm/0.14.11:
+    resolution: {integrity: sha512-vcwskfD9g0tojux/ZaTJptJQU3a7YgTYsptK1y6LQ/rJmw7U5QJvboNawqM98Ca3ToYEucfCRGbl66OTNtp6KQ==}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-arm64/0.13.15:
+    resolution: {integrity: sha512-bYpuUlN6qYU9slzr/ltyLTR9YTBS7qUDymO8SV7kjeNext61OdmqFAzuVZom+OLW1HPHseBfJ/JfdSlx8oTUoA==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-arm64/0.14.11:
+    resolution: {integrity: sha512-+e6ZCgTFQYZlmg2OqLkg1jHLYtkNDksxWDBWNtI4XG4WxuOCUErLqfEt9qWjvzK3XBcCzHImrajkUjO+rRkbMg==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-mips64le/0.13.15:
+    resolution: {integrity: sha512-KlVjIG828uFPyJkO/8gKwy9RbXhCEUeFsCGOJBepUlpa7G8/SeZgncUEz/tOOUJTcWMTmFMtdd3GElGyAtbSWg==}
+    cpu: [mips64el]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-mips64le/0.14.11:
+    resolution: {integrity: sha512-Rrs99L+p54vepmXIb87xTG6ukrQv+CzrM8eoeR+r/OFL2Rg8RlyEtCeshXJ2+Q66MXZOgPJaokXJZb9snq28bw==}
+    cpu: [mips64el]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-ppc64le/0.13.15:
+    resolution: {integrity: sha512-h6gYF+OsaqEuBjeesTBtUPw0bmiDu7eAeuc2OEH9S6mV9/jPhPdhOWzdeshb0BskRZxPhxPOjqZ+/OqLcxQwEQ==}
+    cpu: [ppc64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-ppc64le/0.14.11:
+    resolution: {integrity: sha512-JyzziGAI0D30Vyzt0HDihp4s1IUtJ3ssV2zx9O/c+U/dhUHVP2TmlYjzCfCr2Q6mwXTeloDcLS4qkyvJtYptdQ==}
+    cpu: [ppc64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-s390x/0.14.11:
+    resolution: {integrity: sha512-DoThrkzunZ1nfRGoDN6REwmo8ZZWHd2ztniPVIR5RMw/Il9wiWEYBahb8jnMzQaSOxBsGp0PbyJeVLTUatnlcw==}
+    cpu: [s390x]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-netbsd-64/0.13.15:
+    resolution: {integrity: sha512-3+yE9emwoevLMyvu+iR3rsa+Xwhie7ZEHMGDQ6dkqP/ndFzRHkobHUKTe+NCApSqG5ce2z4rFu+NX/UHnxlh3w==}
+    cpu: [x64]
+    os: [netbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-netbsd-64/0.14.11:
+    resolution: {integrity: sha512-12luoRQz+6eihKYh1zjrw0CBa2aw3twIiHV/FAfjh2NEBDgJQOY4WCEUEN+Rgon7xmLh4XUxCQjnwrvf8zhACw==}
+    cpu: [x64]
+    os: [netbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-openbsd-64/0.13.15:
+    resolution: {integrity: sha512-wTfvtwYJYAFL1fSs8yHIdf5GEE4NkbtbXtjLWjM3Cw8mmQKqsg8kTiqJ9NJQe5NX/5Qlo7Xd9r1yKMMkHllp5g==}
+    cpu: [x64]
+    os: [openbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-openbsd-64/0.14.11:
+    resolution: {integrity: sha512-l18TZDjmvwW6cDeR4fmizNoxndyDHamGOOAenwI4SOJbzlJmwfr0jUgjbaXCUuYVOA964siw+Ix+A+bhALWg8Q==}
+    cpu: [x64]
+    os: [openbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-sunos-64/0.13.15:
+    resolution: {integrity: sha512-lbivT9Bx3t1iWWrSnGyBP9ODriEvWDRiweAs69vI+miJoeKwHWOComSRukttbuzjZ8r1q0mQJ8Z7yUsDJ3hKdw==}
+    cpu: [x64]
+    os: [sunos]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-sunos-64/0.14.11:
+    resolution: {integrity: sha512-bmYzDtwASBB8c+0/HVOAiE9diR7+8zLm/i3kEojUH2z0aIs6x/S4KiTuT5/0VKJ4zk69kXel1cNWlHBMkmavQg==}
+    cpu: [x64]
+    os: [sunos]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-32/0.13.15:
+    resolution: {integrity: sha512-fDMEf2g3SsJ599MBr50cY5ve5lP1wyVwTe6aLJsM01KtxyKkB4UT+fc5MXQFn3RLrAIAZOG+tHC+yXObpSn7Nw==}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-32/0.14.11:
+    resolution: {integrity: sha512-J1Ys5hMid8QgdY00OBvIolXgCQn1ARhYtxPnG6ESWNTty3ashtc4+As5nTrsErnv8ZGUcWZe4WzTP/DmEVX1UQ==}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-64/0.13.15:
+    resolution: {integrity: sha512-9aMsPRGDWCd3bGjUIKG/ZOJPKsiztlxl/Q3C1XDswO6eNX/Jtwu4M+jb6YDH9hRSUflQWX0XKAfWzgy5Wk54JQ==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-64/0.14.11:
+    resolution: {integrity: sha512-h9FmMskMuGeN/9G9+LlHPAoiQk9jlKDUn9yA0MpiGzwLa82E7r1b1u+h2a+InprbSnSLxDq/7p5YGtYVO85Mlg==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-arm64/0.13.15:
+    resolution: {integrity: sha512-zzvyCVVpbwQQATaf3IG8mu1IwGEiDxKkYUdA4FpoCHi1KtPa13jeScYDjlW0Qh+ebWzpKfR2ZwvqAQkSWNcKjA==}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-arm64/0.14.11:
+    resolution: {integrity: sha512-dZp7Krv13KpwKklt9/1vBFBMqxEQIO6ri7Azf8C+ob4zOegpJmha2XY9VVWP/OyQ0OWk6cEeIzMJwInRZrzBUQ==}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   /esbuild/0.13.15:
     resolution: {integrity: sha512-raCxt02HBKv8RJxE8vkTSCXGIyKHdEdGfUmiYb8wnabnaEmHzyW7DCHb5tEN0xU8ryqg5xw54mcwnYkC4x3AIw==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
+<<<<<<< HEAD
       esbuild-android-arm64: registry.npmmirror.com/esbuild-android-arm64/0.13.15
       esbuild-darwin-64: registry.npmmirror.com/esbuild-darwin-64/0.13.15
       esbuild-darwin-arm64: registry.npmmirror.com/esbuild-darwin-arm64/0.13.15
@@ -2609,6 +2994,50 @@ packages:
       esbuild-windows-32: registry.npmmirror.com/esbuild-windows-32/0.13.15
       esbuild-windows-64: registry.npmmirror.com/esbuild-windows-64/0.13.15
       esbuild-windows-arm64: registry.npmmirror.com/esbuild-windows-arm64/0.13.15
+=======
+      esbuild-android-arm64: 0.13.15
+      esbuild-darwin-64: 0.13.15
+      esbuild-darwin-arm64: 0.13.15
+      esbuild-freebsd-64: 0.13.15
+      esbuild-freebsd-arm64: 0.13.15
+      esbuild-linux-32: 0.13.15
+      esbuild-linux-64: 0.13.15
+      esbuild-linux-arm: 0.13.15
+      esbuild-linux-arm64: 0.13.15
+      esbuild-linux-mips64le: 0.13.15
+      esbuild-linux-ppc64le: 0.13.15
+      esbuild-netbsd-64: 0.13.15
+      esbuild-openbsd-64: 0.13.15
+      esbuild-sunos-64: 0.13.15
+      esbuild-windows-32: 0.13.15
+      esbuild-windows-64: 0.13.15
+      esbuild-windows-arm64: 0.13.15
+    dev: true
+
+  /esbuild/0.14.11:
+    resolution: {integrity: sha512-xZvPtVj6yecnDeFb3KjjCM6i7B5TCAQZT77kkW/CpXTMnd6VLnRPKrUB1XHI1pSq6a4Zcy3BGueQ8VljqjDGCg==}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      esbuild-android-arm64: 0.14.11
+      esbuild-darwin-64: 0.14.11
+      esbuild-darwin-arm64: 0.14.11
+      esbuild-freebsd-64: 0.14.11
+      esbuild-freebsd-arm64: 0.14.11
+      esbuild-linux-32: 0.14.11
+      esbuild-linux-64: 0.14.11
+      esbuild-linux-arm: 0.14.11
+      esbuild-linux-arm64: 0.14.11
+      esbuild-linux-mips64le: 0.14.11
+      esbuild-linux-ppc64le: 0.14.11
+      esbuild-linux-s390x: 0.14.11
+      esbuild-netbsd-64: 0.14.11
+      esbuild-openbsd-64: 0.14.11
+      esbuild-sunos-64: 0.14.11
+      esbuild-windows-32: 0.14.11
+      esbuild-windows-64: 0.14.11
+      esbuild-windows-arm64: 0.14.11
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /escalade/3.1.1:
@@ -2641,7 +3070,11 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
+<<<<<<< HEAD
       source-map: registry.npmmirror.com/source-map/0.6.1
+=======
+      source-map: 0.6.1
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /eslint-scope/5.1.1:
@@ -2879,7 +3312,11 @@ packages:
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
+<<<<<<< HEAD
       '@types/yauzl': registry.npmmirror.com/@types/yauzl/2.9.2
+=======
+      '@types/yauzl': 2.9.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3006,7 +3443,11 @@ packages:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
     engines: {node: '>=6 <7 || >=8'}
     dependencies:
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jsonfile: 4.0.0
       universalify: 0.1.2
     dev: true
@@ -3015,7 +3456,11 @@ packages:
     resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
     engines: {node: '>=6 <7 || >=8'}
     dependencies:
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jsonfile: 4.0.0
       universalify: 0.1.2
     dev: true
@@ -3034,6 +3479,17 @@ packages:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
     dev: true
 
+<<<<<<< HEAD
+=======
+  /fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   /function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
     dev: true
@@ -3215,7 +3671,11 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
+<<<<<<< HEAD
       uglify-js: registry.npmmirror.com/uglify-js/3.14.4
+=======
+      uglify-js: 3.14.4
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /hard-rejection/2.1.0:
@@ -3816,7 +4276,11 @@ packages:
       ci-info: 3.3.0
       deepmerge: 4.2.2
       glob: 7.2.0
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-circus: 27.4.4
       jest-environment-jsdom: 27.4.4
       jest-environment-node: 27.4.4
@@ -3909,7 +4373,11 @@ packages:
       '@types/node': 16.11.12
       anymatch: 3.1.2
       fb-watchman: 2.0.1
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-regex-util: 27.4.0
       jest-serializer: 27.4.0
       jest-util: 27.4.2
@@ -3917,7 +4385,11 @@ packages:
       micromatch: 4.0.4
       walker: 1.0.8
     optionalDependencies:
+<<<<<<< HEAD
       fsevents: registry.npmmirror.com/fsevents/2.3.2
+=======
+      fsevents: 2.3.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /jest-jasmine2/27.4.4:
@@ -3972,7 +4444,11 @@ packages:
       '@jest/types': 27.4.2
       '@types/stack-utils': 2.0.1
       chalk: 4.1.2
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       micromatch: 4.0.4
       pretty-format: 27.4.2
       slash: 3.0.0
@@ -4021,7 +4497,11 @@ packages:
     dependencies:
       '@jest/types': 27.4.2
       chalk: 4.1.2
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-haste-map: 27.4.4
       jest-pnp-resolver: 1.2.2_jest-resolve@27.4.4
       jest-util: 27.4.2
@@ -4044,7 +4524,11 @@ packages:
       chalk: 4.1.2
       emittery: 0.8.1
       exit: 0.1.2
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-docblock: 27.4.0
       jest-environment-jsdom: 27.4.4
       jest-environment-node: 27.4.4
@@ -4082,7 +4566,11 @@ packages:
       execa: 5.1.1
       exit: 0.1.2
       glob: 7.2.0
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-haste-map: 27.4.4
       jest-message-util: 27.4.2
       jest-mock: 27.4.2
@@ -4103,7 +4591,11 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@types/node': 16.11.12
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /jest-snapshot/27.4.4:
@@ -4123,7 +4615,11 @@ packages:
       babel-preset-current-node-syntax: 1.0.1_@babel+core@7.16.0
       chalk: 4.1.2
       expect: 27.4.2
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       jest-diff: 27.4.2
       jest-get-type: 27.4.0
       jest-haste-map: 27.4.4
@@ -4146,7 +4642,11 @@ packages:
       '@types/node': 16.11.12
       chalk: 4.1.2
       ci-info: 3.3.0
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       picomatch: 2.3.0
     dev: true
 
@@ -4244,7 +4744,11 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.5
+<<<<<<< HEAD
       acorn: registry.npmmirror.com/acorn/8.6.0
+=======
+      acorn: 8.6.0
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
@@ -4324,7 +4828,11 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /jsonfile/6.1.0:
@@ -4332,7 +4840,11 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /jsonparse/1.3.1:
@@ -4520,7 +5032,11 @@ packages:
     resolution: {integrity: sha1-L19Fq5HjMhYjT9U62rZo607AmTs=}
     engines: {node: '>=4'}
     dependencies:
+<<<<<<< HEAD
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.8
+=======
+      graceful-fs: 4.2.8
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       parse-json: 4.0.0
       pify: 3.0.0
       strip-bom: 3.0.0
@@ -5772,11 +6288,18 @@ packages:
 
   /rollup-plugin-polyfill-node/0.6.2_rollup@2.38.5:
     resolution: {integrity: sha512-gMCVuR0zsKq0jdBn8pSXN1Ejsc458k2QsFFvQdbHoM0Pot5hEnck+pBP/FDwFS6uAi77pD3rDTytsaUStsOMlA==}
+<<<<<<< HEAD
     peerDependencies:
       rollup: ^1.20.0 || ^2.0.0
     dependencies:
       '@rollup/plugin-inject': 4.0.3_rollup@2.38.5
       rollup: 2.38.5
+=======
+    dependencies:
+      '@rollup/plugin-inject': 4.0.3_rollup@2.38.5
+    transitivePeerDependencies:
+      - rollup
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /rollup-plugin-terser/7.0.2_rollup@2.38.5:
@@ -5789,9 +6312,17 @@ packages:
       rollup: 2.38.5
       serialize-javascript: 4.0.0
       terser: 5.10.0
+<<<<<<< HEAD
     dev: true
 
   /rollup-plugin-typescript2/0.27.3_hy7rxf7gc4jjepk3b2thhgkety:
+=======
+    transitivePeerDependencies:
+      - acorn
+    dev: true
+
+  /rollup-plugin-typescript2/0.27.3_rollup@2.38.5+typescript@4.5.3:
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     resolution: {integrity: sha512-gmYPIFmALj9D3Ga1ZbTZAKTXq1JKlTQBtj299DXhqYz9cL3g/AQfUvbb2UhH+Nf++cCq941W2Mv7UcrcgLzJJg==}
     peerDependencies:
       rollup: '>=1.26.3'
@@ -5817,7 +6348,11 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
+<<<<<<< HEAD
       fsevents: registry.npmmirror.com/fsevents/2.3.2
+=======
+      fsevents: 2.3.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /rollup/2.61.1:
@@ -5825,7 +6360,11 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
+<<<<<<< HEAD
       fsevents: registry.npmmirror.com/fsevents/2.3.2
+=======
+      fsevents: 2.3.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /run-parallel/1.2.0:
@@ -5927,8 +6466,11 @@ packages:
       compression: 1.7.3
       serve-handler: 6.1.3
       update-check: 1.5.2
+<<<<<<< HEAD
     transitivePeerDependencies:
       - supports-color
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /set-immediate-shim/1.0.1:
@@ -6321,11 +6863,19 @@ packages:
     resolution: {integrity: sha512-AMmF99DMfEDiRJfxfY5jj5wNH/bYO09cniSqhfoyxc8sFoYIgkJy86G04UoZU5VjlpnplVu0K6Tx6E9b5+DlHA==}
     engines: {node: '>=10'}
     hasBin: true
+<<<<<<< HEAD
+=======
+    peerDependencies:
+      acorn: ^8.5.0
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     peerDependenciesMeta:
       acorn:
         optional: true
     dependencies:
+<<<<<<< HEAD
       acorn: registry.npmmirror.com/acorn/8.6.0
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       commander: 2.20.3
       source-map: 0.7.3
       source-map-support: 0.5.21
@@ -6419,7 +6969,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+<<<<<<< HEAD
   /ts-jest/27.1.1_oalxtikf2fzkuq443wkm3llumy:
+=======
+  /ts-jest/27.1.1_305b6a4a69ca4f1a88855b62d81fc1b0:
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     resolution: {integrity: sha512-Ds0VkB+cB+8g2JUmP/GKWndeZcCKrbe6jzolGrVWdqVUFByY/2KDHqxJ7yBSon7hDB1TA4PXxjfZ+JjzJisvgA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -6442,7 +6996,11 @@ packages:
     dependencies:
       '@types/jest': 27.0.3
       bs-logger: 0.2.6
+<<<<<<< HEAD
       esbuild: registry.npmmirror.com/esbuild/0.14.42
+=======
+      esbuild: 0.14.11
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       fast-json-stable-stringify: 2.1.0
       jest: 27.4.4
       jest-util: 27.4.2
@@ -6544,6 +7102,17 @@ packages:
     hasBin: true
     dev: true
 
+<<<<<<< HEAD
+=======
+  /uglify-js/3.14.4:
+    resolution: {integrity: sha512-AbiSR44J0GoCeV81+oxcy/jDOElO2Bx3d0MfQCUShq7JRXaM4KtQopZsq2vFv8bCq2yMaGrw1FgygUd03RyRDA==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
   /unbox-primitive/1.0.1:
     resolution: {integrity: sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw==}
     dependencies:
@@ -6643,7 +7212,11 @@ packages:
       resolve: 1.20.0
       rollup: 2.61.1
     optionalDependencies:
+<<<<<<< HEAD
       fsevents: registry.npmmirror.com/fsevents/2.3.2
+=======
+      fsevents: 2.3.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /vite/2.7.12:
@@ -6662,12 +7235,20 @@ packages:
       stylus:
         optional: true
     dependencies:
+<<<<<<< HEAD
       esbuild: registry.npmmirror.com/esbuild/0.13.15
+=======
+      esbuild: 0.13.15
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       postcss: 8.4.5
       resolve: 1.20.0
       rollup: 2.61.1
     optionalDependencies:
+<<<<<<< HEAD
       fsevents: registry.npmmirror.com/fsevents/2.3.2
+=======
+      fsevents: 2.3.2
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     dev: true
 
   /vlq/0.2.3:
@@ -6940,6 +7521,7 @@ packages:
       lodash.isequal: 4.5.0
       validator: 13.7.0
     optionalDependencies:
+<<<<<<< HEAD
       commander: registry.npmmirror.com/commander/2.20.3
     dev: true
 
@@ -7478,3 +8060,7 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+=======
+      commander: 2.20.3
+    dev: true
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d

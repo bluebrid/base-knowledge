@@ -362,7 +362,10 @@ function baseCreateRenderer(
     slotScopeIds = null,
     optimized = __DEV__ && isHmrUpdating ? false : !!n2.dynamicChildren
   ) => {
+<<<<<<< HEAD
     // 节点相同
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     if (n1 === n2) {
       return
     }
@@ -780,7 +783,10 @@ function baseCreateRenderer(
     optimized,
     start = 0
   ) => {
+<<<<<<< HEAD
     console.log('遍历挂在children到container上')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
     for (let i = start; i < children.length; i++) {
       const child = (children[i] = optimized
         ? cloneIfMounted(children[i] as VNode)
@@ -1170,7 +1176,10 @@ function baseCreateRenderer(
           optimized
         )
       } else {
+<<<<<<< HEAD
         console.log('============开始去挂在组件')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
         mountComponent(
           n2,
           container,
@@ -1315,7 +1324,10 @@ function baseCreateRenderer(
 
         toggleRecurse(instance, false)
         // beforeMount hook
+<<<<<<< HEAD
         console.log('开始执行onBeforeMount Hook')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
         if (bm) {
           invokeArrayFns(bm)
         }
@@ -1381,7 +1393,10 @@ function baseCreateRenderer(
           if (__DEV__) {
             startMeasure(instance, `patch`)
           }
+<<<<<<< HEAD
           console.log('开始去触发组件的真实渲染')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
           patch(
             null,
             subTree,
@@ -2311,7 +2326,10 @@ function baseCreateRenderer(
         unmount(container._vnode, null, null, true)
       }
     } else {
+<<<<<<< HEAD
       console.log('进行VNode 的Patch')
+=======
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
       patch(container._vnode || null, vnode, container, null, null, null, isSVG)
     }
     flushPostFlushCbs()

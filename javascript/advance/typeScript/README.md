@@ -6,6 +6,10 @@
 [类型体操](https://zhuanlan.zhihu.com/p/427309936)
 [类型体操](https://juejin.cn/post/7077868567810539550)
 
+<<<<<<< HEAD
 [7.3W 播放量的 TS 动画版进阶教程合集来了！](https://juejin.cn/post/7095547569777934367#heading-6)
 
 [TypeScript高级类型入门手册：附大量代码实例（收藏！）](https://mp.weixin.qq.com/s/6__G2MjUMxIr2sObVBLjgg)
+=======
+[7.3W 播放量的 TS 动画版进阶教程合集来了！](https://juejin.cn/post/7095547569777934367#heading-6)
+>>>>>>> 4f53eb28995bf2dc1a153acfe52032358032600d
