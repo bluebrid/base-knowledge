@@ -87,6 +87,7 @@ module.exports = {
     },
     {
       name: 'string-transform',
+      enforce: 'post',
       transformIndexHtml(html) {
         return html.replace('Hello', 'Transformed')
       }

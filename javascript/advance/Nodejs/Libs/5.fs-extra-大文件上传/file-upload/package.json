@@ -20,17 +20,6 @@
   "bugs": {
     "url": "https://github.com/yeyan1996/file-upload/issues"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,vue,ts,tsx}": [
-      "npm run lint:js",
-      "git add"
-    ]
-  },
   "homepage": "https://github.com/yeyan1996/file-upload#readme",
   "dependencies": {
     "core-js": "^3.4.3",

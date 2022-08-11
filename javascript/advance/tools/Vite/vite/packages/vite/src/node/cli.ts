@@ -89,7 +89,7 @@ cli
       })
 
       if (!server.httpServer) {
-        throw new Error('HTTP server not available')
+        throw new Error('HTTP server not available ---11')
       }
 
       await server.listen()
@@ -98,7 +98,7 @@ cli
 
       info(
         colors.cyan(`\n  vite v${require('vite/package.json').version}`) +
-          colors.green(` dev server running at:\n`),
+          colors.green(` dev server running at1:\n`),
         {
           clear: !server.config.logger.hasWarned
         }

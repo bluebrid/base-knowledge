@@ -82,15 +82,5 @@
     "start": "node build/start.js --debug-template",
     "serve": "node build/dev-server.js",
     "lint": "eslint --ext .jsx,.js src/ --fix"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

@@ -54,15 +54,5 @@
     "last 3 versions",
     "not ie <= 8",
     "iOS > 8"
-  ],
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  }
+  ]
 }

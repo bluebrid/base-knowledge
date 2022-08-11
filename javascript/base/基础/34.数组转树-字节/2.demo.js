@@ -34,4 +34,4 @@ function toTree(data) {
   return res
 }
 
-console.log(toTree(data))
+console.log(JSON.stringify(toTree(data)))

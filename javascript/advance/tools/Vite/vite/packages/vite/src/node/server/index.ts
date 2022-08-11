@@ -56,7 +56,7 @@ import type { OptimizedDeps } from '../optimizer'
 import { resolveHostname } from '../utils'
 import { searchForWorkspaceRoot } from './searchRoot'
 import { CLIENT_DIR } from '../constants'
-import type { Logger } from '../logger'
+import { createLogger, Logger } from '../logger'
 import { printCommonServerUrls } from '../logger'
 import { performance } from 'perf_hooks'
 import { invalidatePackageData } from '../packages'
@@ -498,6 +498,7 @@ export async function createServer(
   const postHooks: ((() => void) | void)[] = []
   for (const plugin of config.plugins) {
     if (plugin.configureServer) {
+      createLogger().info('============开始注册configureServer插件')
       postHooks.push(await plugin.configureServer(server))
     }
   }

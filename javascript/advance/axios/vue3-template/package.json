@@ -20,12 +20,6 @@
     "lint": "eslint src --fix --ext .js,.ts,.jsx,.tsx,.vue && prettier --write --ignore-unknown",
     "commit": "cz"
   },
-  "lint-staged": {
-    "*.{vue,js,ts,tsx,jsx}": [
-      "eslint --fix",
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "dependencies": {
     "animate.css": "^4.1.1",
     "axios": "^0.26.0",

@@ -127,23 +127,7 @@
     "client"
   ],
   "homepage": "https://github.com/webpack/webpack-dev-server#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "license": "MIT",
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{css,md,json,yml}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "main": "lib/Server.js",
   "name": "webpack-dev-server",
   "peerDependencies": {

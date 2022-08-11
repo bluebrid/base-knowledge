@@ -54,21 +54,6 @@
   "dependencies": {
     "tslib": "^1.9.3"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.ts": [
-      "prettier --parser=typescript --write",
-      "git add"
-    ]
-  },
   "jest": {
     "verbose": true,
     "setupFiles": [

@@ -126,11 +126,6 @@
     "SECURITY.md"
   ],
   "homepage": "https://github.com/webpack/webpack",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "jest": {
     "forceExit": true,
     "setupFilesAfterEnv": [
@@ -180,11 +175,6 @@
     ]
   },
   "license": "MIT",
-  "lint-staged": {
-    "*.js|{lib,setup,bin,hot,buildin,tooling,schemas}/**/*.js|test/*.js|{test,examples}/**/webpack.config.js}": [
-      "eslint --cache"
-    ]
-  },
   "main": "lib/webpack.js",
   "name": "webpack",
   "repository": {

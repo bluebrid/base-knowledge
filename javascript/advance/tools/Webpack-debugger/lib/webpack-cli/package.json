@@ -123,12 +123,6 @@
     "scripts"
   ],
   "homepage": "https://github.com/webpack/webpack-cli#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "jest": {
     "testPathIgnorePatterns": [
       "^.+\\.(ts)?$",
@@ -153,16 +147,6 @@
     "bundler"
   ],
   "license": "MIT",
-  "lint-staged": {
-    "{packages,bin}/**/!(__testfixtures__)/**.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "{packages,bin}/**/!(__testfixtures__)/**.ts": [
-      "tslint --fix",
-      "git add"
-    ]
-  },
   "main": "./bin/cli.js",
   "name": "webpack-cli",
   "nyc": {

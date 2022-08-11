@@ -42,6 +42,7 @@ module.exports = {
   ],
   server: {
     port: 8080,
+    open: true,
     hmr: {
       overlay: false
     }

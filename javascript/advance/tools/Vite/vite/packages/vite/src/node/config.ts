@@ -333,6 +333,7 @@ export async function resolveConfig(
       return p.apply === command
     }
   }) as Plugin[]
+  logger.info('===============开始配置三种不同类型的插件')
   const [prePlugins, normalPlugins, postPlugins] =
     sortUserPlugins(rawUserPlugins)
 
