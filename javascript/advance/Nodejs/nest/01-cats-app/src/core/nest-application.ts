@@ -80,7 +80,7 @@ export class NestApplication
     private readonly appOptions: NestApplicationOptions = {},
   ) {
     super(container);
-    console.log('-----------');
+    this.logger.debug('实例化NestApplication对象')
     this.selectContextModule();
     this.registerHttpServer();
 
@@ -161,7 +161,7 @@ export class NestApplication
   public async init(): Promise<this> {
     this.applyOptions();
     await this.httpAdapter?.init();
-    console.log('-------------init1');
+    this.logger.debug('开始初始化NestApplication')
     const useBodyParser =
       this.appOptions && this.appOptions.bodyParser !== false;
     useBodyParser && this.registerParserMiddleware();
@@ -184,6 +184,7 @@ export class NestApplication
   }
 
   public async registerRouter() {
+    this.logger.debug('registerRouter: 注册路由')
     await this.registerMiddleware(this.httpAdapter);
 
     const prefix = this.config.getGlobalPrefix();

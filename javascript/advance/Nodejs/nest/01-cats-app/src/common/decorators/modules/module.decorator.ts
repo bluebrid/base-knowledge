@@ -1,3 +1,4 @@
+import { Logger } from '../../../common';
 import { ModuleMetadata } from '../../interfaces/modules/module-metadata.interface';
 import { validateModuleKeys } from '../../utils/validate-module-keys.util';
 
@@ -18,7 +19,7 @@ import { validateModuleKeys } from '../../utils/validate-module-keys.util';
 export function Module(metadata: ModuleMetadata): ClassDecorator {
   const propsKeys = Object.keys(metadata);
   validateModuleKeys(propsKeys);
-
+  // new Logger('Module').debug('针对Module进行注解')
   return (target: Function) => {
     for (const property in metadata) {
       if (metadata.hasOwnProperty(property)) {

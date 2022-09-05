@@ -86,9 +86,11 @@ export class RoutesResolver implements Resolver {
       const { metatype } = instanceWrapper;
 
       const host = this.getHostMetadata(metatype);
+     
       const routerPaths = this.routerExplorer.extractRouterPath(
         metatype as Type<any>,
       );
+      this.logger.debug(`解析Controller 路由:${routerPaths}`)
       const controllerVersion = this.getVersionMetadata(metatype);
       const controllerName = metatype.name;
 

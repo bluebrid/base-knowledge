@@ -434,7 +434,7 @@ export async function createServer(
     _forceOptimizeOnRestart: false,
     _pendingRequests: new Map()
   }
-
+  createLogger().info('给server注册transformIndexHtml事件')
   server.transformIndexHtml = createDevHtmlTransformFn(server)
 
   exitProcess = async () => {

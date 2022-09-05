@@ -196,7 +196,7 @@ export class ConsoleLogger implements LoggerService {
         contextMessage,
         timestampDiff,
       );
-
+      // console.log(formattedMessage)
       process[writeStreamType ?? 'stdout'].write(formattedMessage);
     });
   }

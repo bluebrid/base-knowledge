@@ -9,3 +9,4 @@
 [7.3W 播放量的 TS 动画版进阶教程合集来了！](https://juejin.cn/post/7095547569777934367#heading-6)
 
 [TypeScript高级类型入门手册：附大量代码实例（收藏！）](https://mp.weixin.qq.com/s/6__G2MjUMxIr2sObVBLjgg)
+[TS 类型体操还能这么玩，太秀了！](https://juejin.cn/post/7128832787846529037)

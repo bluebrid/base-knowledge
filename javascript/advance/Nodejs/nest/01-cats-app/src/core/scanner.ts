@@ -2,6 +2,7 @@ import {
   DynamicModule,
   flatten,
   ForwardReference,
+  Logger,
   Provider,
 } from '@nestjs/common';
 import {
@@ -60,7 +61,9 @@ interface ApplicationProviderWrapper {
 export class DependenciesScanner {
   private readonly applicationProvidersApplyMap: ApplicationProviderWrapper[] =
     [];
-
+  private readonly logger = new Logger(DependenciesScanner.name, {
+      timestamp: true,
+    });
   constructor(
     private readonly container: NestContainer,
     private readonly metadataScanner: MetadataScanner,
@@ -86,6 +89,7 @@ export class DependenciesScanner {
     scope: Type<unknown>[] = [],
     ctxRegistry: (ForwardReference | DynamicModule | Type<unknown>)[] = [],
   ): Promise<Module[]> {
+    this.logger.debug('scanForModules,并插入Module')
     const moduleInstance = await this.insertModule(moduleDefinition, scope);
     moduleDefinition =
       moduleDefinition instanceof Promise
@@ -159,6 +163,7 @@ export class DependenciesScanner {
     modules: Map<string, Module> = this.container.getModules(),
   ) {
     for (const [token, { metatype }] of modules) {
+    this.logger.debug('扫描处理Imports, Provider, Controllers, Exports:',metatype.name )
       await this.reflectImports(metatype, token, metatype.name);
       this.reflectProviders(metatype, token);
       this.reflectControllers(metatype, token);

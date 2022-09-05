@@ -102,7 +102,9 @@ export class RouterExplorer {
     routePathMetadata: RoutePathMetadata,
   ) {
     const { instance } = instanceWrapper;
+    
     const routerPaths = this.scanForPaths(instance);
+    this.logger.debug(`开始扫描Controller 里面的路由: ${JSON.stringify(routerPaths)}`)
     this.applyPathsToRouterProxy(
       applicationRef,
       routerPaths,
@@ -132,7 +134,7 @@ export class RouterExplorer {
     const instancePrototype = isUndefined(prototype)
       ? Object.getPrototypeOf(instance)
       : prototype;
-
+    this.logger.debug('开始扫描路由Path')
     return this.metadataScanner.scanFromPrototype<Controller, RouteDefinition>(
       instance,
       instancePrototype,
@@ -211,9 +213,7 @@ export class RouterExplorer {
     } = routeDefinition;
 
     const { instance } = instanceWrapper;
-    const routerMethodRef = this.routerMethodFactory
-      .get(router, requestMethod)
-      .bind(router);
+   
 
     const isRequestScoped = !instanceWrapper.isDependencyTreeStatic();
     const proxy = isRequestScoped
@@ -252,10 +252,16 @@ export class RouterExplorer {
       }
 
       routePathMetadata.methodPath = path;
+      
       const pathsToRegister = this.routePathFactory.create(
         routePathMetadata,
         requestMethod,
       );
+      this.logger.debug(`解析路由完整路径:${JSON.stringify(pathsToRegister)}`)
+      const routerMethodRef = this.routerMethodFactory
+      .get(router, requestMethod)
+      .bind(router);
+      this.logger.debug('这里重写了Router对应的方法，如果Get,Post，对应的routeHandler为Nestjs的统一拦截器')
       pathsToRegister.forEach(path => routerMethodRef(path, routeHandler));
 
       const pathsToLog = this.routePathFactory.create(

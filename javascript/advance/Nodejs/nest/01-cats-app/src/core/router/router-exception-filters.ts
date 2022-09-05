@@ -1,4 +1,4 @@
-import { HttpServer } from '@nestjs/common';
+import { HttpServer, Logger } from '@nestjs/common';
 import { EXCEPTION_FILTERS_METADATA } from '@nestjs/common/constants';
 import { Controller } from '@nestjs/common/interfaces/controllers/controller.interface';
 import { isEmpty } from '@nestjs/common/utils/shared.utils';
@@ -28,7 +28,7 @@ export class RouterExceptionFilters extends BaseExceptionFilterContext {
     inquirerId?: string,
   ): ExceptionsHandler {
     this.moduleContext = moduleKey;
-
+    new Logger(RouterExceptionFilters.name).debug('设置Router Exception 所有的Filter')
     const exceptionHandler = new ExceptionsHandler(this.applicationRef);
     const filters = this.createContext(
       instance,

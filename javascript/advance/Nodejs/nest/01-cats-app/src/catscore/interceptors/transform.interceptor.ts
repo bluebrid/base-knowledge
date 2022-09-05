@@ -3,14 +3,13 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from '@nestjs/common';
+} from '../../common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Response<T> {
   data: T;
 }
-
 @Injectable()
 export class TransformInterceptor<T>
   implements NestInterceptor<T, Response<T>>

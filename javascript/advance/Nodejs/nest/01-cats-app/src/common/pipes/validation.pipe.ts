@@ -1,4 +1,5 @@
 import { iterate } from 'iterare';
+import {Logger} from '../../common'
 import { types } from 'util';
 import { Optional } from '../decorators';
 import { Injectable } from '../decorators/core';
@@ -45,7 +46,7 @@ export class ValidationPipe implements PipeTransform<any> {
   protected expectedType: Type<any>;
   protected exceptionFactory: (errors: ValidationError[]) => any;
   protected validateCustomDecorators: boolean;
-
+  private logger: Logger;
   constructor(@Optional() options?: ValidationPipeOptions) {
     options = options || {};
     const {
@@ -57,7 +58,8 @@ export class ValidationPipe implements PipeTransform<any> {
       validateCustomDecorators,
       ...validatorOptions
     } = options;
-    console.log('111111111111111')
+    this.logger = new Logger(ValidationPipe.name)
+    this.logger.debug('开始初始化ValidationPipe')
     this.isTransformEnabled = !!transform;
     this.validatorOptions = validatorOptions;
     this.transformOptions = transformOptions;
@@ -130,6 +132,7 @@ export class ValidationPipe implements PipeTransform<any> {
     }
 
     const errors = await this.validate(entity, this.validatorOptions);
+    this.logger.debug(`ValidationPipe Result ${JSON.stringify(errors)}`)
     if (errors.length > 0) {
       throw await this.exceptionFactory(errors);
     }

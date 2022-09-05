@@ -70,14 +70,15 @@ export class NestFactoryStatic {
     const [httpServer, appOptions] = this.isHttpServer(serverOrOptions)
       ? [serverOrOptions, options]
       : [this.createHttpAdapter(), serverOrOptions];
-
+    this.logger.debug('applicationConfig,初始化所有的配置')
     const applicationConfig = new ApplicationConfig();
+    this.logger.debug('初始化NestContainer容器')
     const container = new NestContainer(applicationConfig);
     this.setAbortOnError(serverOrOptions, options);
     this.registerLoggerConfiguration(appOptions);
 
     await this.initialize(module, container, applicationConfig, httpServer);
-
+    
     const instance = new NestApplication(
       container,
       httpServer,
@@ -85,6 +86,7 @@ export class NestFactoryStatic {
       appOptions,
     );
     const target = this.createNestInstance(instance);
+    this.logger.debug('将NestApplication实例进行Proxy代理处理')
     return this.createAdapterProxy<T>(target, httpServer);
   }
 
@@ -246,10 +248,11 @@ export class NestFactoryStatic {
   }
 
   private createHttpAdapter<T = any>(httpServer?: T): AbstractHttpAdapter {
+    this.logger.debug('加载Node服务适配器，默认是Express')
     const { ExpressAdapter } = loadAdapter(
       '@nestjs/platform-express',
       'HTTP',
-      () => require('@nestjs/platform-express'),
+      () => require('../platform-express'),
     );
     return new ExpressAdapter(httpServer);
   }

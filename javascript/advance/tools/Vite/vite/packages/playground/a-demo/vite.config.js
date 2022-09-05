@@ -1,5 +1,6 @@
 const { resolve } = require('path')
 const { AddErudaPlugin } = require('./scripts/addErudaPlugin')
+const {AllPlugin} = require('./scripts/allPlugins')
 const { AddStylesPlugin } = require('./scripts/addStylesPlugin')
 const { AddScriptsPlugin } = require('./scripts/addScriptsPlugin')
 const handlebars = require('./scripts/handlebarsPlugin')
@@ -8,6 +9,7 @@ const { CustomHmrPlugin } = require('./scripts/customHmrPlugin')
 const { PugTransformerPlugin } = require('./scripts/pugTransformerPlugin')
 const { markdownTransformerPlugin } = require('./scripts/markdownTransformerPlugin')
 const {CoffeescriptTransformerPlugin} = require('./scripts/coffeescriptTransformerPlugin')
+import Inspect from 'vite-plugin-inspect'
 
 module.exports = {
   css: {
@@ -28,6 +30,8 @@ module.exports = {
     }
   },
   plugins: [
+    Inspect(),// __inspect
+    AllPlugin(),
     PugTransformerPlugin(),
     markdownTransformerPlugin(),
     AddStylesPlugin,

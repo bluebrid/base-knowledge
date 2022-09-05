@@ -1,4 +1,4 @@
-import { NestInterceptor, Type } from '@nestjs/common';
+import { Logger, NestInterceptor, Type } from '@nestjs/common';
 import {
   CallHandler,
   ContextType,
@@ -34,6 +34,7 @@ export class InterceptorsConsumer {
         const handler: CallHandler = {
           handle: () => fromPromise(nextFn(i + 1)()).pipe(mergeAll()),
         };
+        new Logger().debug(`开始拦截器: ${interceptors[i].constructor.name}`)
         return interceptors[i].intercept(context, handler);
       };
     return nextFn()();

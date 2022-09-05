@@ -42,6 +42,7 @@ if (debugIndex > 0) {
 
 function start() {
   require('../dist/node/cli')
+  // require('../src/node/cli')
 }
 
 if (profileIndex > 0) {

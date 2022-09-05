@@ -1,3 +1,4 @@
+import { Logger } from '../../common/services/logger.service';
 import { ExceptionsHandler } from '../exceptions/exceptions-handler';
 import { ExecutionContextHost } from '../helpers/execution-context-host';
 
@@ -12,6 +13,7 @@ export class RouterProxy {
     targetCallback: RouterProxyCallback,
     exceptionsHandler: ExceptionsHandler,
   ) {
+    new Logger(RouterProxy.name).debug('路由代理，路由都从这里入口')
     return async <TRequest, TResponse>(
       req: TRequest,
       res: TResponse,
@@ -21,6 +23,7 @@ export class RouterProxy {
         await targetCallback(req, res, next);
       } catch (e) {
         const host = new ExecutionContextHost([req, res, next]);
+        new Logger(RouterProxy.name).debug('try catch 路由的错误，并且执行Filters')
         exceptionsHandler.next(e, host);
       }
     };

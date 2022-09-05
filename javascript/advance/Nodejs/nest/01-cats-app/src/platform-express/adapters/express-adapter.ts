@@ -51,6 +51,7 @@ export class ExpressAdapter extends AbstractHttpAdapter {
 
   constructor(instance?: any) {
     super(instance || express());
+    this.logger.debug('实例化Express')
   }
 
   public reply(response: any, body: any, statusCode?: number) {
@@ -92,6 +93,7 @@ export class ExpressAdapter extends AbstractHttpAdapter {
         },
       );
     }
+    this.logger.debug('Request请求结束。。。reply')
     return isObject(body) ? response.json(body) : response.send(String(body));
   }
 
@@ -204,6 +206,10 @@ export class ExpressAdapter extends AbstractHttpAdapter {
       );
       return;
     }
+    this.logger.debug('利用http.createServer创建一个Node服务, this.getInstance返回的是一个函数，也就是Express createApplication 的函数')
+    // var app = function(req, res, next) {
+    //   app.handle(req, res, next);
+    // };
     this.httpServer = http.createServer(this.getInstance());
   }
 

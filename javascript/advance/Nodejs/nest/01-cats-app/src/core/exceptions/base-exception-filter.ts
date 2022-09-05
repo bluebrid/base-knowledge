@@ -26,7 +26,7 @@ export class BaseExceptionFilter<T = any> implements ExceptionFilter<T> {
     const applicationRef =
       this.applicationRef ||
       (this.httpAdapterHost && this.httpAdapterHost.httpAdapter);
-
+    new Logger('BaseExceptionFilter').debug('捕获BaseExceptionFilter异常')
     if (!(exception instanceof HttpException)) {
       return this.handleUnknownError(exception, host, applicationRef);
     }

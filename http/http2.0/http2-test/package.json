@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@dao42/d42paas-front": "^0.9.60",
     "express": "^4.16.4",
     "mime": "^2.3.1"
   }

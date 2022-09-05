@@ -13,7 +13,7 @@ import {
   resolveHtmlTransforms,
   traverseHtml
 } from '../../plugins/html'
-import type { ResolvedConfig, ViteDevServer } from '../..'
+import { createLogger, ResolvedConfig, ViteDevServer } from '../..'
 import { send } from '../send'
 import { CLIENT_PUBLIC_PATH, FS_PREFIX } from '../../constants'
 import {
@@ -36,6 +36,7 @@ export function createDevHtmlTransformFn(
 ): (url: string, html: string, originalUrl: string) => Promise<string> {
   const [preHooks, postHooks] = resolveHtmlTransforms(server.config.plugins)
   return (url: string, html: string, originalUrl: string): Promise<string> => {
+    createLogger().info('开始执行： applyHtmlTransforms')
     return applyHtmlTransforms(html, [...preHooks, devHtmlHook, ...postHooks], {
       path: url,
       filename: getHtmlFilename(url, server),

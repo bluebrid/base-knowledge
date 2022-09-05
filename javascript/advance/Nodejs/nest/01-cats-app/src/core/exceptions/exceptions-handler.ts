@@ -1,4 +1,4 @@
-import { HttpException, Type } from '@nestjs/common';
+import { HttpException, Logger, Type } from '@nestjs/common';
 import { ExceptionFilterMetadata } from '@nestjs/common/interfaces/exceptions/exception-filter-metadata.interface';
 import { ArgumentsHost } from '@nestjs/common/interfaces/features/arguments-host.interface';
 import { isEmpty } from '@nestjs/common/utils/shared.utils';
@@ -37,6 +37,7 @@ export class ExceptionsHandler extends BaseExceptionFilter {
         !exceptionMetatypes.length || exceptionMetatypes.some(isInstanceOf);
       return typeExists;
     });
+    new Logger('ExceptionsHandler').debug('执行异常filter')
     filter && filter.func(exception, ctx);
     return !!filter;
   }
