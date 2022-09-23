@@ -1,0 +1,22 @@
+.section .useTransition {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .type_button {
+    display: flex;
+    background-color: gray;
+    line-height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    // height: 20px;
+    padding: 8px;
+    &.type_button_checked {
+      background-color: red;
+    }
+  }
+}
