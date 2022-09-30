@@ -3,7 +3,7 @@ console.log("1");
 
 setTimeout(function () {
   // 宏2
-  console.log("2");
+  console.log("2-------");
   process.nextTick(function () {
     // 微2
     console.log("3");
@@ -23,7 +23,7 @@ process.nextTick(function () {
 });
 new Promise(function (resolve) {
   // 宏 1
-  console.log("7");
+  console.log("7------");
   resolve();
 }).then(function () {
   // 微1
