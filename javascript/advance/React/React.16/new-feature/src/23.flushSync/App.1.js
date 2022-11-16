@@ -8,6 +8,10 @@ export default  function App() {
     setCount( count + 1);
     setCount( count + 1);
     setFlag(f => !f);
+    // 使用回调函数， 下一次会立即拿到最新的值，但是render 只会一次
+    // setCount((count) => count + 1);
+    // setCount((count) => count + 1);
+    // setCount((count) => count + 1);
   }
   useEffect(() => {
     console.log(count)

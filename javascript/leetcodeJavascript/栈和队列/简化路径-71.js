@@ -30,4 +30,4 @@ let simplifyPath = function (path) {
   return res
 }
 
-console.log(simplifyPath("/home/"))
+console.log(simplifyPath("//home/"))

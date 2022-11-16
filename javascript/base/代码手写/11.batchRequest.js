@@ -13,7 +13,7 @@ function batchRequest(urls, limit) {
     })
   }
   const requestsUrl = Array.isArray(urls) ? urls : [urls]
-  const runQueues = []
+  const runQueues = [] // 用来记忆运行中的队列， 超过limit 则不应该添加新的
   let index = -1;
   return new Promise((resolve, reject) => {
     const results = new Array(requestsUrl.length)
@@ -27,6 +27,7 @@ function batchRequest(urls, limit) {
           let tempIndex = runQueues.length - 1
           !function (tempIndex) {
             fetcher(request).then((val) => {
+              console.log(val)
               results[index] = val
               runQueues.splice(tempIndex, 1)
               if (!requestsUrl.length) {

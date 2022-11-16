@@ -8,21 +8,33 @@ export default  function App() {
   const [flag, setFlag] = useState(false);
 
   function handleClick() {
+    // setCount((count) => count + 1);
+    // setCount((count) => count + 1);
+    // setCount((count) => count + 1);
+    // 使用对象进行setState, 只会更新一次
+    // flushSync(() => {
+    //   setCount(count + 1);
+    // });
+    // flushSync(() => {
+    //   setCount(count + 1);
+    // });
+    // flushSync(() => {
+    //   setCount(count + 1);
+    // });
+    // 会Render 更新三次，并且每次都是最新的值
     flushSync(() => {
-      setCount(count + 1);
+      setCount((count) => count + 1);
     });
     flushSync(() => {
-      setCount(count + 1);
+      setCount((count) => count + 1);
     });
     flushSync(() => {
-      setCount(count + 1);
+      setCount((count) => count + 1);
     });
-    // React has updated the DOM by now
+    
     flushSync(() => {
-      // console.log(count)
       setFlag(f => !f);
     });
-    // React has updated the DOM by now
   }
   
   useEffect(() => {

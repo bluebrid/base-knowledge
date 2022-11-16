@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /**
  * https://www.jianshu.com/p/b3d07860b778
  * https://www.cnblogs.com/ldld/p/11107305.html

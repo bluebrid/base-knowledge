@@ -40,3 +40,7 @@ let merge = function (arr1, m, arr2, n) {
   }
 };
 // @lc code=end
+
+// @after-stub-for-debug-begin
+module.exports = merge;
+// @after-stub-for-debug-end

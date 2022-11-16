@@ -1,7 +1,7 @@
 const createFetch =  ( opts = {}) => {
     const abortController = new AbortController()
     const signal = abortController.signal
-    const timeSpan = 50000
+    const timeSpan = 500
     const request = () => {
         const baseUrl = 'https://cataas.com/api'
         const paramTags =['fail','gif']

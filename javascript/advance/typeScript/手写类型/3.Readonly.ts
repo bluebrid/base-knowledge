@@ -1,12 +1,12 @@
-type MyReadonly <T> = {
+type MyReadonly1 <T> = {
     readonly [K in keyof T]: T[K]
 }
-interface Todo1 {
+interface Todo111 {
     title: string;
 }
 
-const todo: MyReadonly<Todo1> = {
+const todo22: MyReadonly1<Todo111> = {
     title: "Delete inactive users",
 };
 
-todo.title = "Hello";
+todo22.title = "Hello";
