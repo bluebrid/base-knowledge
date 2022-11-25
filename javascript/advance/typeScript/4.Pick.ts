@@ -1,6 +1,17 @@
-const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
-type TupleToObject<T extends readonly string[]> = {
-  [K in T[number]]: K
+type MyPick1<T, P extends keyof T> = {
+  [K in P]: T[K]
+}
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type result = TupleToObject<typeof tuple> 
+type TodoPreview11 = MyPick1<Todo, "title" | "completed">;
+
+const t1: TodoPreview11 = {
+  title: "Clean room",
+  completed: false,
+};
+
+t1;

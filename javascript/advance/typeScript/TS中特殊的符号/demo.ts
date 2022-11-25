@@ -12,3 +12,6 @@ function C() { console.log('C was called'); return "foo";}
 
 console.log(A() ?? C());
 console.log(B() ?? C());
+
+const d = 1_11_22
+console.log(d)

@@ -22,6 +22,7 @@ import App16 from './16.react-query/App';
 import App17 from './17.hooks/App';
 import App18 from './18.useSyncExternalStore/App';
 import App181 from './18.useSyncExternalStore/App.1'
+import App182 from './18.useSyncExternalStore/App.2'
 import App19 from './19.useImperativeHandle/App';
 import App20 from './20.useTranstion/App';
 import App21 from './21.useTranstion/App';
@@ -55,6 +56,7 @@ root.render(
     <App17 />*/}
     <App18 />
     <App181 />
+    <App182 />
     <App19 />  
 
     {/* <App20 /> */}

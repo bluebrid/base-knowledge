@@ -19,6 +19,11 @@ const rootReducer = combineReducers({ number:numberReducer  })
 const store = createStore(rootReducer,{ number:1  })
 
 export default function App(){
+    //   export function useSyncExternalStore<Snapshot>(
+    //     subscribe: (onStoreChange: () => void) => () => void,
+    //     getSnapshot: () => Snapshot,
+    //     getServerSnapshot?: () => Snapshot,
+    // ): Snapshot;
     /* 订阅外部数据源 */
     // https://juejin.cn/post/7118937685653192735?share_token=b06ac11f-deff-4304-b8d3-eff06d9a5302#heading-7
     const state = useSyncExternalStore(store.subscribe,() => store.getState().number)
