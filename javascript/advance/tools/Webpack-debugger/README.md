@@ -37,7 +37,7 @@ webpack 构建流程是一个串行过程， 从启动到结束会经历如下�
 7. 利用webpack-parallel-uglify-plugin 增强代码的压缩速度
 8. 利用Dllplugin 和DllReferencePlugin 去分离第三方代码
 9. 配置loader缓存，因为我们每次构建执行的时候都会把所有的文件都重复编译一遍，这样的工作是可以缓存下来的，大部分loader都提供了cache的配置项babel-loader?cacheDirectory=true
-10. 如果loader没有配置loader , 可以用第三方的loader-cache插件
+10. 如果loader没有配置cache , 可以用第三方的loader-cache插件
 11. 利用webpack-bundle-analyzer 进行分析打包后的文件
 12. 利用externals来配置哪些文件不需要打包到bundle中，但是又可以在代码中用import 的方法导入库， externals: {jquery: 'jQuery'}, 在代码中同样可以用import $ from 'jquery' 来导入脚本。
 13. 关于tree-shaking, 有个坑，要想让他生效，生成的代码必须是ES6的代码模块， 则需要在.babelrc 文件中配置， modules: false.

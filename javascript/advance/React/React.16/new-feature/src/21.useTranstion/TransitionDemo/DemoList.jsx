@@ -19,6 +19,7 @@ function UserList({ resource }) {
   );
 }
 /**
+ * 
  * https://segmentfault.com/a/1190000042189201
  * useTransition 返回一个延迟响应的状态，可以设置最长延迟时间timeoutMs。如果给定的timeoutMs内未完成，它将会强制更新。
  * 与useDeferredValue的不同： useDeferredValue是处理一段逻辑，而useTransition是产生一个新状态。

@@ -16,7 +16,12 @@ const http = require('http')
  */
 const PORT = 9999
 const allowOrigin = ['http://127.0.0.1:8080', 'http://localhost:8080', 'https://www.baidu.com']
-
+ /*
+                1. 如果携带了自定义的请求头部，肯定不是简单请求
+                2. 如果请求方法不是HEAD, GET, POST 这三个之一肯定不是简单请求
+                3. 请求头部只能是:Accept, Accept-Language, Content-Language, Last-Event-ID
+                4. Content-Type: 如果不是:application/x-www-form-urlencodeed, multipart/form-data, text/plain 中的一个肯定不是简单请求
+                */
 const server = http.createServer((request, response) => {
     const { method, headers: { origin, cookie } } = request
     if (allowOrigin.includes(origin)) {
