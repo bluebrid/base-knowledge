@@ -1,0 +1,14 @@
+{
+  "name": "module-federation",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "app1",
+      "app2"
+    ]
+  },
+  "scripts": {},
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
