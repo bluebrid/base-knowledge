@@ -1,13 +1,16 @@
 import { Logger, ValidationPipe } from './common';
 import {  HttpAdapterHost, NestFactory } from './core';
 import { AppModule } from './app.module';
+import { ValidateInputPipe } from './demoCore/pipes/validate.pipe';
+
 import { AllExceptionsFilter } from './catCommon/filters/all-exceptions.filter';
 const logger = new Logger('bootstrap')
 async function bootstrap() {
   const app = await NestFactory.create(AppModule,{
   
   });
-  app.setGlobalPrefix('demo')
+  app.setGlobalPrefix('api/v1')
+  app.useGlobalPipes(new ValidateInputPipe());
   app.useGlobalPipes(new ValidationPipe());
   const adapterHost = app.get(HttpAdapterHost)
   app.useGlobalFilters(new AllExceptionsFilter(adapterHost));
@@ -26,15 +29,15 @@ async function bootstrap() {
   await app.listen(3000);
  
   logger.log(`Application is running on: ${await app.getUrl()}`);
-  let count = 0;
+  // let count = 0;
   
-  const id = setInterval(() => {
-    if (count > 5) {
-      clearInterval(id)
-      throw new Error(`interval error`)
-    }
-    count ++
-  }, 1000)
+  // const id = setInterval(() => {
+  //   if (count > 5) {
+  //     clearInterval(id)
+  //     throw new Error(`interval error`)
+  //   }
+  //   count ++
+  // }, 1000)
   
 }
 process.on('uncaughtException', (e) => {
