@@ -36,6 +36,7 @@ export class InstanceLoader {
   }
 
   private async createInstances(modules: Map<string, Module>) {
+    this.logger.debug('这里开始去创建所有的Providers,Injectables, Controllers 实例Instances')
     await Promise.all(
       [...modules.values()].map(async moduleRef => {
         await this.createInstancesOfProviders(moduleRef);

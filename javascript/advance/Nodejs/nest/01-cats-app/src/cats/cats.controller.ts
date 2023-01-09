@@ -12,6 +12,11 @@ import { TimeoutInterceptor } from "./interceptors/timeout.interceptor";
 @Controller(["cats", "index"])
 @UseInterceptors(DemoLoggingInterceptor, TimeoutInterceptor)
 export class CatsController {
+  // private readonly catsService: CatsService;
+  // constructor(catsService: CatsService) {
+  //   this.catsService = catsService
+  // }
+  // 这个写法是上面四行代码的简写
   constructor(private readonly catsService: CatsService) {}
 
   @Post()

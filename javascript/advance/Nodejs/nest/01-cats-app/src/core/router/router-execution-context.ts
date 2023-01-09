@@ -364,6 +364,7 @@ export class RouterExecutionContext {
     contextType?: TContext
   ): (args: any[]) => Promise<void> | null {
     const canActivateFn = async (args: any[]) => {
+      this.logger.debug('开始去遍历消费所有的Guards')
       const canActivate = await this.guardsConsumer.tryActivate<TContext>(
         guards,
         args,
@@ -372,6 +373,26 @@ export class RouterExecutionContext {
         contextType
       );
       if (!canActivate) {
+        this.logger.debug('如果有任何一个Guard没通过， 则直接跑出异常，在路由的catch中捕获，Filter进行处理，可以定义全局处理')
+        // export class RouterProxy {
+        //   public createProxy(
+        //     targetCallback: RouterProxyCallback,
+        //     exceptionsHandler: ExceptionsHandler,
+        //   ) {
+        //     new Logger(RouterProxy.name).debug('路由代理，路由都从这里入口')
+        //     return async <TRequest, TResponse>(
+        //       req: TRequest,
+        //       res: TResponse,
+        //       next: () => void,
+        //     ) => {
+        //       try {
+        //         await targetCallback(req, res, next);
+        //       } catch (e) {
+        //         const host = new ExecutionContextHost([req, res, next]);
+        //         new Logger(RouterProxy.name).debug('try catch 路由的错误，并且执行Filters')
+        //         exceptionsHandler.next(e, host);
+        //       }
+        //     };
         throw new ForbiddenException(FORBIDDEN_MESSAGE);
       }
     };
@@ -456,6 +477,14 @@ export class RouterExecutionContext {
     }
     return async <TResult, TResponse>(result: TResult, res: TResponse) => {
       result = await this.responseController.transformToResult(result);
+      this.logger.debug('这里调用responseController.apply ,其实也就是调用applicationRef（Express Adapter 的 reply 方法去响应请求')
+      // public async apply<TInput = any, TResponse = any>(
+      //   result: TInput,
+      //   response: TResponse,
+      //   httpStatusCode?: number,
+      // ) {
+      //   return this.applicationRef.reply(response, result, httpStatusCode);
+      // }
       !isResponseHandled &&
         (await this.responseController.apply(result, res, httpStatusCode));
     };

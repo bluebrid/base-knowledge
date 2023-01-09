@@ -9,6 +9,12 @@ import { CatsService } from './cats.service';
 // export class CatsModule {}
 export class CatsModule {
   constructor() {
-    console.log('==========')
+    console.log('==========constructor')
+  }
+  onModuleInit() {
+    console.log('===========onModuleInit')
+  }
+  onApplicationBootstrap() {
+    console.log('=============onApplicationBootstrap')
   }
 }

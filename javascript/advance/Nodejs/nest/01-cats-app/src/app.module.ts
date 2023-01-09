@@ -6,6 +6,7 @@ import { DatabaseModule } from './demoCore/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { UsersModule } from './modules/users/users.module';
+import { Demo } from './cats/demo.module';
 // Module 只支持如下四种Meta
 // export const MODULE_METADATA = {
 //   IMPORTS: 'imports',
@@ -21,7 +22,8 @@ import { UsersModule } from './modules/users/users.module';
     AuthModule,
     PostsModule,
     CoreModule,
-    CatsModule],
+    CatsModule,
+    Demo],
 })
 export class AppModule {}
 // const imports = Reflect.getMetadata('imports', AppModule)

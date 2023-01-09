@@ -82,6 +82,7 @@ export class RoutesResolver implements Resolver {
     modulePath: string,
     applicationRef: HttpServer,
   ) {
+    this.logger.debug(`registerRouters 路由${moduleName}:${JSON.stringify(routes)}`)
     routes.forEach(instanceWrapper => {
       const { metatype } = instanceWrapper;
 

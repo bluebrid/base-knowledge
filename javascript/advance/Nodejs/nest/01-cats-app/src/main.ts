@@ -1,4 +1,4 @@
-import { Logger, ValidationPipe } from './common';
+import { Logger, RequestMethod, ValidationPipe } from './common';
 import {  HttpAdapterHost, NestFactory } from './core';
 import { AppModule } from './app.module';
 import { ValidateInputPipe } from './demoCore/pipes/validate.pipe';
@@ -9,8 +9,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule,{
   
   });
-  app.setGlobalPrefix('api/v1')
-  app.useGlobalPipes(new ValidateInputPipe());
+  // app.setGlobalPrefix('api/v1', {
+  //   exclude: [{
+  //     path: 'cats',
+  //     method: RequestMethod.GET
+  //   }]
+  // })
+  app.setGlobalPrefix('api/v1', {
+    exclude: ['cats(\/)?','cats(\/.+)?']
+  })
+  const pipe = new ValidateInputPipe()
+  app.useGlobalPipes(pipe);
   app.useGlobalPipes(new ValidationPipe());
   const adapterHost = app.get(HttpAdapterHost)
   app.useGlobalFilters(new AllExceptionsFilter(adapterHost));

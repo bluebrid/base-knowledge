@@ -216,6 +216,26 @@ export class RouterExplorer {
    
 
     const isRequestScoped = !instanceWrapper.isDependencyTreeStatic();
+    this.logger.debug('这里调用createCallbackProxy，最终proxy 返回的是，如下一个方法 ')
+    // public createProxy(
+    //   targetCallback: RouterProxyCallback,
+    //   exceptionsHandler: ExceptionsHandler,
+    // ) {
+    //   new Logger(RouterProxy.name).debug('路由代理，路由都从这里入口')
+    //   return async <TRequest, TResponse>(
+    //     req: TRequest,
+    //     res: TResponse,
+    //     next: () => void,
+    //   ) => {
+    //     try {
+    //       await targetCallback(req, res, next);
+    //     } catch (e) {
+    //       const host = new ExecutionContextHost([req, res, next]);
+    //       new Logger(RouterProxy.name).debug('try catch 路由的错误，并且执行Filters')
+    //       exceptionsHandler.next(e, host);
+    //     }
+    //   };
+    // }
     const proxy = isRequestScoped
       ? this.createRequestScopedHandler(
           instanceWrapper,
@@ -261,9 +281,24 @@ export class RouterExplorer {
       const routerMethodRef = this.routerMethodFactory
       .get(router, requestMethod)
       .bind(router);
-      this.logger.debug('这里重写了Router对应的方法，如果Get,Post，对应的routeHandler为Nestjs的统一拦截器')
+      this.logger.debug('!!!!!!!这里重写了Router对应的方法，如果Get,Post，对应的routeHandler为Nestjs的统一拦截器')
+      this.logger.debug('这里将不同的路由转发到对应的Adapter上去处理，routeHandler 就是上面的proxy 获取的结果')
       pathsToRegister.forEach(path => routerMethodRef(path, routeHandler));
-
+      this.logger.debug('下面是Express路由的处理，route[method].apply(route, slice.call(arguments, 1)); 是apply 上面的Proxy 方法 ')
+      // methods.forEach(function(method){
+      //   app[method] = function(path){
+      //     if (method === 'get' && arguments.length === 1) {
+      //       // app.get(setting)
+      //       return this.set(path);
+      //     }
+      
+      //     this.lazyrouter();
+      
+      //     var route = this._router.route(path);
+      //     route[method].apply(route, slice.call(arguments, 1));
+      //     return this;
+      //   };
+      // });
       const pathsToLog = this.routePathFactory.create(
         {
           ...routePathMetadata,
