@@ -20,4 +20,4 @@ const objA: ExcludeObjType = {
     lastName:"fan"
 }
 const obja: ExcludeType= 'firstName'
-type T1 = Exclude<"a"| "c" , "a" | "b">;
+type T1 = MyExclude1<"a"| "c"| "d" , "a" | "b">;

@@ -1,17 +1,17 @@
 type NonNullableType = string | number | null | undefined;
-
-function showType(args: NonNullable<NonNullableType>) {
+type MyNonNullable<T> = T & {}
+function showType11(args: MyNonNullable<NonNullableType>) {
     console.log(args);
 }
 
-showType('test');
+showType11('test');
 // Output: "test"
 
-showType(1);
+showType11(1);
 // Output: 1
 
-showType(null);
+showType11(null);
 // Error: Argument of type 'null' is not assignable to parameter of type 'string | number'.
 
-showType(undefined);
+showType11(undefined);
 // Error: Argument of type 'undefined' is not assignable to parameter of type 'string | number'.

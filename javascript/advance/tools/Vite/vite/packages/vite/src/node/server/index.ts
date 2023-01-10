@@ -499,7 +499,7 @@ export async function createServer(
   const postHooks: ((() => void) | void)[] = []
   for (const plugin of config.plugins) {
     if (plugin.configureServer) {
-      createLogger().info('============开始注册configureServer插件')
+      createLogger().info(colors.cyan('============开始注册configureServer插件'))
       postHooks.push(await plugin.configureServer(server))
     }
   }

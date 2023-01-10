@@ -10,3 +10,5 @@
 
 [TypeScript高级类型入门手册：附大量代码实例（收藏！）](https://mp.weixin.qq.com/s/6__G2MjUMxIr2sObVBLjgg)
 [TS 类型体操还能这么玩，太秀了！](https://juejin.cn/post/7128832787846529037)
+
+[会写 TypeScript 但你真的会 TS 编译配置吗？](https://mp.weixin.qq.com/s/lMYTo5aSbHtzMeqKTTuS6w)

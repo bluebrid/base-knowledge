@@ -12,3 +12,6 @@ type Func<T> =
     : 'unexpected value type';
 type foo = Func<'foo'>
 type a = Func<1>
+
+// http://www.qb5200.com/article/406129.html
+// https://www.typescriptlang.org/docs/handbook/2/conditional-types.html
