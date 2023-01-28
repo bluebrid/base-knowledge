@@ -12,3 +12,6 @@
 [TS 类型体操还能这么玩，太秀了！](https://juejin.cn/post/7128832787846529037)
 
 [会写 TypeScript 但你真的会 TS 编译配置吗？](https://mp.weixin.qq.com/s/lMYTo5aSbHtzMeqKTTuS6w)
+
+[接近天花板的TS类型体操，看懂你就能玩转TS了](https://juejin.cn/post/7061556434692997156)
+[精读《type challenges - easy》](https://cloud.tencent.com/developer/article/2020277)
