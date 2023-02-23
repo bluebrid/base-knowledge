@@ -1,4 +1,5 @@
-// JavaScript 实现一个带并发限制的异步调度器 Scheduler，保证同时运行的任务最多有两个。完善代码中 Scheduler类，使得以下程序能正确输出。
+// JavaScript 实现一个带并发限制的异步调度器 Scheduler，
+// 保证同时运行的任务最多有两个。完善代码中 Scheduler类，使得以下程序能正确输出。
 // https://juejin.cn/post/6970642160676765732
 
 class Scheduler {
@@ -36,7 +37,9 @@ const timeout = (time) => new Promise(resolve => {
 })
 const scheduler = new Scheduler()
 const addTask = (time, order) => {
-  scheduler.add(() => timeout(time)).then(() => console.log(order))
+  scheduler
+  .add(() => timeout(time))
+  .then(() => console.log(order))
 }
 addTask(400, 4)
 addTask(200, 2)

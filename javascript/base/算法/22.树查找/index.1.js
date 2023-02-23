@@ -32,7 +32,7 @@ var preorderTraversal = function (root, res = []) {
   return res;
 };
 // 1 2 3 4 3 5
-console.log(preorderTraversal(root))
+console.log('preOrder:',preorderTraversal(root))
 //中序遍历:
 var inorderTraversal = function (root, res = []) {
   if (!root) return res;
@@ -41,7 +41,7 @@ var inorderTraversal = function (root, res = []) {
   inorderTraversal(root.right, res);
   return res;
 };
-console.log(inorderTraversal(root))
+console.log('inOrder', inorderTraversal(root))
 //后序遍历:
 var postorderTraversal = function (root, res = []) {
   if (!root) return res;
@@ -50,5 +50,5 @@ var postorderTraversal = function (root, res = []) {
   res.push(root.val);
   return res;
 };
-console.log(postorderTraversal(root))
+console.log('postOrder',postorderTraversal(root))
 

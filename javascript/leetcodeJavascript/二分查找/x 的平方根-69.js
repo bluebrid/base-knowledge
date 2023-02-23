@@ -21,5 +21,5 @@ let mySqrt = function (x) {
 
   return ans
 };
-
+console.log(mySqrt(196));
 console.log(mySqrt(200));

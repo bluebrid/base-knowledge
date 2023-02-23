@@ -8,37 +8,35 @@ class TreeNode {
 
 const findTreeByVal = (root, val) => {
   if (!root) {
-    return false
+    return false;
   }
   const find = (tree) => {
     if (!tree) {
-      return false
+      return false;
     }
     if (tree.val === val) {
-      return true
+      return true;
     }
     const left = tree.left;
     const right = tree.right;
-    const l = find(left)
+    const l = find(left);
     if (l) {
-      return true
+      return true;
     }
-    const r = find(right)
+    const r = find(right);
     if (r) {
       return true;
     }
-    return false
+    return false;
+  };
+  return find(root);
+};
 
-  }
-  return find(root)
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.left.left.left = new TreeNode(6);
 
-}
-
-const root = new TreeNode(1)
-root.left = new TreeNode(2)
-root.right = new TreeNode(3)
-root.left.left = new TreeNode(4)
-root.left.right = new TreeNode(5)
-root.left.left.left = new TreeNode(6)
-
-console.log(findTreeByVal(root, 2))
+console.log(findTreeByVal(root, 2));
