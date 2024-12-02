@@ -51,7 +51,7 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "jsdom": "^16.2.0",
-    "mocha": "^7.1.0",
+    "mocha": "^10.2.0",
     "prettier": "^1.19.1"
   }
 }
