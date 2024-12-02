@@ -28,7 +28,7 @@
     "koa-views": "^6.2.3",
     "marked": "^1.1.0",
     "md5": "^2.2.1",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.9.16",
     "mongoose-autopopulate": "^0.12.2",
     "request": "^2.88.2",
